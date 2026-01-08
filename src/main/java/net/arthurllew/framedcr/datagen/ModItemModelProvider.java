@@ -20,7 +20,7 @@ public class ModItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
         blockItem(FramedConquestBlocks.FRAMED_PILLAR, "_1");
-        blockItem(FramedConquestBlocks.FRAMED_BALUSTRADE, "_xz");
+        blockItem(FramedConquestBlocks.FRAMED_BALUSTRADE, "_y");
     }
 
     private ItemModelBuilder simpleItem(DeferredItem<? extends Item> item) {

@@ -23,7 +23,6 @@ public class FramedConquestBlocks {
      */
     public static final DeferredBlock<FramedPillar> FRAMED_PILLAR = registerFramedBlock(
             "framed_pillar", FramedPillar::new);
-
     /**
      * Framed CR balustrade.
      */

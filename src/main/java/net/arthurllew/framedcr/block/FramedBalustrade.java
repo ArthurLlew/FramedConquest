@@ -1,8 +1,6 @@
 package net.arthurllew.framedcr.block;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.UnmodifiableIterator;
 import net.arthurllew.framedcr.block.type.CustomBlockType;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.Direction;
