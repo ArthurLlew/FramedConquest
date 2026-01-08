@@ -1,0 +1,17 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "framedcr:block/framed_balustrade_xz",
+      "y": 90,
+      "uvlock": true
+    },
+    "axis=y": {
+      "model": "framedcr:block/framed_balustrade_y",
+      "uvlock": true
+    },
+    "axis=z": {
+      "model": "framedcr:block/framed_balustrade_xz",
+      "uvlock": true
+    }
+  }
+}
