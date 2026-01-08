@@ -4,7 +4,11 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import net.arthurllew.framedcr.block.FramedBalustrade;
 import net.arthurllew.framedcr.block.FramedPillar;
+import net.arthurllew.framedcr.block.FramedTwoMeterArch;
+import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -22,6 +26,7 @@ import xfacthd.framedblocks.common.data.shapes.SplitShapeGenerator;
 import xfacthd.framedblocks.common.data.facepreds.FullFacePredicates;
 import xfacthd.framedblocks.common.data.skippreds.SideSkipPredicates;
 import xfacthd.framedblocks.common.data.conpreds.ConnectionPredicates;
+import xfacthd.framedblocks.common.data.skippreds.stairs.StairsSkipPredicate;
 
 import java.util.Locale;
 import java.util.Objects;
@@ -38,10 +43,25 @@ public enum CustomBlockType implements IBlockType {
             SideSkipPredicate.FALSE,
             ConnectionPredicate.FULL_EDGE),
     FRAMED_BALUSTRADE(true, false, false, true, true,
-            true, false, false,ConTexMode.FULL_FACE,
+            true, false, false, ConTexMode.FULL_FACE,
             FramedBalustrade::generateShapes,
             FullFacePredicate.FALSE,
             SideSkipPredicate.FALSE,
+            ConnectionPredicate.FULL_EDGE),
+    FRAMED_TWO_METER_ARCH(true, false, false, true, true,
+            true, false, false, ConTexMode.FULL_FACE,
+            FramedTwoMeterArch::generateShapes,
+            (state, dir) -> {
+                if (dir == Direction.UP) {
+                    return state.getValue(BlockStateProperties.HALF) == Half.TOP;
+                } else if (dir == Direction.DOWN) {
+                    return state.getValue(BlockStateProperties.HALF) == Half.BOTTOM;
+                } else {
+                    Direction facing = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
+                    return facing == dir;
+                }
+            },
+            new StairsSkipPredicate(),
             ConnectionPredicate.FULL_EDGE);
 
     /**

@@ -37,8 +37,9 @@ public class ModBlockLootTables extends FramedBlockLootSubProvider {
                                                 .apply(SetItemCountFunction.setCount(
                                                         PillarLootNumberProvider.INSTANCE))))));
 
-        // Drop with camo
+        // Drop self and camo
         this.dropSelfWithCamo(FramedConquestBlocks.FRAMED_BALUSTRADE.value());
+        this.dropSelfWithCamo(FramedConquestBlocks.FRAMED_TWO_METER_ARCH.value());
     }
 
     @Override

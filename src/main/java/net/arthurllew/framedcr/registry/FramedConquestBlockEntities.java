@@ -22,6 +22,7 @@ public class FramedConquestBlockEntities {
             BLOCK_ENTITIES.register("framed_block", () ->
                     BlockEntityType.Builder.of(FramedConquestBlockEntity::new,
                             FramedConquestBlocks.FRAMED_PILLAR.get(),
-                            FramedConquestBlocks.FRAMED_BALUSTRADE.get()
+                            FramedConquestBlocks.FRAMED_BALUSTRADE.get(),
+                            FramedConquestBlocks.FRAMED_TWO_METER_ARCH.get()
                     ).build(null));
 }

@@ -4,6 +4,7 @@ import net.arthurllew.framedcr.FramedConquest;
 import net.arthurllew.framedcr.block.CustomFramedBlock;
 import net.arthurllew.framedcr.block.FramedBalustrade;
 import net.arthurllew.framedcr.block.FramedPillar;
+import net.arthurllew.framedcr.block.FramedTwoMeterArch;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -28,6 +29,11 @@ public class FramedConquestBlocks {
      */
     public static final DeferredBlock<FramedBalustrade> FRAMED_BALUSTRADE = registerBlock(
             "framed_balustrade", FramedBalustrade::new);
+    /**
+     * Framed CR two meter arch.
+     */
+    public static final DeferredBlock<FramedTwoMeterArch> FRAMED_TWO_METER_ARCH = registerBlock(
+            "framed_two_meter_arch", FramedTwoMeterArch::new);
 
     /**
      * Registers block and its item.
