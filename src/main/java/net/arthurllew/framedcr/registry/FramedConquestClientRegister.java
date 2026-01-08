@@ -9,6 +9,8 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+import net.neoforged.neoforge.registries.DeferredBlock;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import xfacthd.framedblocks.api.block.render.FramedBlockColor;
 import xfacthd.framedblocks.api.model.wrapping.RegisterModelWrappersEvent;
 import xfacthd.framedblocks.api.model.wrapping.WrapHelper;
@@ -36,7 +38,9 @@ public class FramedConquestClientRegister {
      */
     @SubscribeEvent
     static void registerModelWrappers(RegisterModelWrappersEvent event) {
-        WrapHelper.wrap(FramedConquestBlocks.FRAMED_PILLAR, RemappedFramedGeometry::new, WrapHelper.IGNORE_DEFAULT);
+        for (DeferredHolder<Block, ? extends Block> block : FramedConquestBlocks.BLOCKS.getEntries()) {
+            WrapHelper.wrap(block, RemappedFramedGeometry::new, WrapHelper.IGNORE_DEFAULT);
+        }
     }
 
     /**

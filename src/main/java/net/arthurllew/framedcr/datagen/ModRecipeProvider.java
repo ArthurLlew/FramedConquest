@@ -25,5 +25,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
     protected void buildRecipes(RecipeOutput recipeOutput) {
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(FBContent.BLOCK_FRAMED_CUBE.value().asItem()),
                 RecipeCategory.DECORATIONS, FramedConquestBlocks.FRAMED_PILLAR.get(), 3);
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(FBContent.BLOCK_FRAMED_CUBE.value().asItem()),
+                RecipeCategory.DECORATIONS, FramedConquestBlocks.FRAMED_BALUSTRADE.get(), 1);
     }
 }

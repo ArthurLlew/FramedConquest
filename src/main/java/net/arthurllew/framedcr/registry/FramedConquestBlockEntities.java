@@ -19,8 +19,9 @@ public class FramedConquestBlockEntities {
      * Framed CR block entity.
      */
     public static final Supplier<BlockEntityType<FramedConquestBlockEntity>> FRAMED_CONQUEST_BLOCK_ENTITY =
-            BLOCK_ENTITIES.register("framed_tile", () ->
+            BLOCK_ENTITIES.register("framed_block", () ->
                     BlockEntityType.Builder.of(FramedConquestBlockEntity::new,
-                            FramedConquestBlocks.FRAMED_PILLAR.get()
+                            FramedConquestBlocks.FRAMED_PILLAR.get(),
+                            FramedConquestBlocks.FRAMED_BALUSTRADE.get()
                     ).build(null));
 }

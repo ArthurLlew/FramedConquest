@@ -2,10 +2,11 @@ package net.arthurllew.framedcr.registry;
 
 import net.arthurllew.framedcr.FramedConquest;
 import net.arthurllew.framedcr.block.CustomFramedBlock;
+import net.arthurllew.framedcr.block.FramedBalustrade;
 import net.arthurllew.framedcr.block.FramedPillar;
-import net.arthurllew.framedcr.block.entity.FramedConquestBlockEntity;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -22,6 +23,25 @@ public class FramedConquestBlocks {
      */
     public static final DeferredBlock<FramedPillar> FRAMED_PILLAR = registerFramedBlock(
             "framed_pillar", FramedPillar::new);
+
+    /**
+     * Framed CR balustrade.
+     */
+    public static final DeferredBlock<FramedBalustrade> FRAMED_BALUSTRADE = registerBlock(
+            "framed_balustrade", FramedBalustrade::new);
+
+    /**
+     * Registers block and its item.
+     * @param name block id.
+     * @param block block supplier.
+     * @return registered block.
+     * @param <T> block type.
+     */
+    private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block) {
+        DeferredBlock<T> reg = BLOCKS.register(name, block);
+        FramedConquestItems.ITEMS.register(name, () -> new BlockItem(reg.get(), new Item.Properties()));
+        return reg;
+    }
 
     /**
      * Registers framed block and its item.

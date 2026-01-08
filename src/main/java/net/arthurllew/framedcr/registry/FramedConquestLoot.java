@@ -7,7 +7,6 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.storage.loot.providers.number.LootNumberProviderType;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import xfacthd.framedblocks.common.data.loot.LayeredCubeAdditionalItemCountNumberProvider;
 
 public class FramedConquestLoot {
     /**

@@ -1,8 +1,6 @@
 package net.arthurllew.framedcr.block;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.UnmodifiableIterator;
 import net.arthurllew.framedcr.block.type.CustomBlockType;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.Direction;
@@ -30,7 +28,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public class FramedPillar extends CustomFramedBlock {
     /**
-     * Block bounding box.
+     * Block bounding shape.
      */
     protected static final VoxelShape[] SHAPE = new VoxelShape[]{
             Block.box(6.0F, 0.0F, 6.0F, 10.0F, 16.0F, 10.0F),
@@ -102,22 +100,9 @@ public class FramedPillar extends CustomFramedBlock {
     }
 
     /**
-     * Shape generation.
+     * Produces pairs (block state, shape).
      */
-    public static class ShapeGen {
-        /**
-         * Dumps shapes of this block.
-         */
-        public static ShapeProvider generate(ImmutableList<BlockState> states) {
-            ImmutableMap.Builder<BlockState, VoxelShape> builder = ImmutableMap.builder();
-
-            BlockState state;
-            for(UnmodifiableIterator<BlockState> var2 = states.iterator(); var2.hasNext();
-                builder.put(state, SHAPE[state.getValue(LAYERS) - 1])) {
-                    state = var2.next();
-            }
-
-            return ShapeProvider.of(builder.build());
-        }
+    public static ShapeProvider generateShapes(ImmutableList<BlockState> states) {
+        return generateShapes(states, (state) -> SHAPE[state.getValue(LAYERS) - 1]);
     }
 }

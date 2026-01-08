@@ -2,6 +2,7 @@ package net.arthurllew.framedcr.block.type;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
+import net.arthurllew.framedcr.block.FramedBalustrade;
 import net.arthurllew.framedcr.block.FramedPillar;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.BooleanOp;
@@ -32,8 +33,14 @@ import java.util.Objects;
 public enum CustomBlockType implements IBlockType {
     FRAMED_PILLAR(true, false, false, true, true,
             true, false, false, ConTexMode.FULL_FACE,
-            FramedPillar.ShapeGen::generate,
+            FramedPillar::generateShapes,
             (state, dir) -> state.getValue(FramedPillar.LAYERS) == 4,
+            SideSkipPredicate.FALSE,
+            ConnectionPredicate.FULL_EDGE),
+    FRAMED_BALUSTRADE(true, false, false, true, true,
+            true, false, false,ConTexMode.FULL_FACE,
+            FramedBalustrade::generateShapes,
+            FullFacePredicate.FALSE,
             SideSkipPredicate.FALSE,
             ConnectionPredicate.FULL_EDGE);
 

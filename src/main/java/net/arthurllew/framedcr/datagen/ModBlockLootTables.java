@@ -25,7 +25,7 @@ public class ModBlockLootTables extends FramedBlockLootSubProvider {
 
     @Override
     public void generate() {
-        // Drop with custom count + drops camo
+        // Drop with camo + custom count
         this.add(FramedConquestBlocks.FRAMED_PILLAR.value(),
                 LootTable.lootTable()
                         .withPool(this.createDropWithCamoPool(FramedConquestBlocks.FRAMED_PILLAR.value()))
@@ -36,6 +36,9 @@ public class ModBlockLootTables extends FramedBlockLootSubProvider {
                                         LootItem.lootTableItem(FramedConquestBlocks.FRAMED_PILLAR.value())))
                                                 .apply(SetItemCountFunction.setCount(
                                                         PillarLootNumberProvider.INSTANCE))))));
+
+        // Drop with camo
+        this.dropSelfWithCamo(FramedConquestBlocks.FRAMED_BALUSTRADE.value());
     }
 
     @Override

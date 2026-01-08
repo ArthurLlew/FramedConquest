@@ -23,6 +23,8 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        this.tag(BlockTags.MINEABLE_WITH_AXE).add(FramedConquestBlocks.FRAMED_PILLAR.get());
+        this.tag(BlockTags.MINEABLE_WITH_AXE)
+                .add(FramedConquestBlocks.FRAMED_PILLAR.get())
+                .add(FramedConquestBlocks.FRAMED_BALUSTRADE.get());
     }
 }

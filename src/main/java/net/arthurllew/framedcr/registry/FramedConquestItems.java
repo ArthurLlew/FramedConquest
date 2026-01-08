@@ -29,5 +29,6 @@ public class FramedConquestItems {
                     .icon(() -> new ItemStack(FramedConquestBlocks.FRAMED_PILLAR.get()))
                     .displayItems((parameters, output) -> {
                         output.accept(FramedConquestBlocks.FRAMED_PILLAR.get());
+                        output.accept(FramedConquestBlocks.FRAMED_BALUSTRADE.get());
                     }).build());
 }
