@@ -1,10 +1,7 @@
 package net.arthurllew.framedcr.registry;
 
 import net.arthurllew.framedcr.FramedConquest;
-import net.arthurllew.framedcr.block.CustomFramedBlock;
-import net.arthurllew.framedcr.block.FramedBalustrade;
-import net.arthurllew.framedcr.block.FramedPillar;
-import net.arthurllew.framedcr.block.FramedTwoMeterArch;
+import net.arthurllew.framedcr.block.*;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -34,6 +31,11 @@ public class FramedConquestBlocks {
      */
     public static final DeferredBlock<FramedTwoMeterArch> FRAMED_TWO_METER_ARCH = registerBlock(
             "framed_two_meter_arch", FramedTwoMeterArch::new);
+    /**
+     * Framed CR two meter arch half.
+     */
+    public static final DeferredBlock<FramedTwoMeterArchHalf> FRAMED_TWO_METER_ARCH_HALF = registerBlock(
+            "framed_two_meter_arch_half", FramedTwoMeterArchHalf::new);
 
     /**
      * Registers block and its item.

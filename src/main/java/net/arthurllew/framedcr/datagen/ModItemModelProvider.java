@@ -22,6 +22,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         blockItem(FramedConquestBlocks.FRAMED_PILLAR, "_1");
         blockItem(FramedConquestBlocks.FRAMED_BALUSTRADE, "_y");
         blockItem(FramedConquestBlocks.FRAMED_TWO_METER_ARCH, "");
+        blockItem(FramedConquestBlocks.FRAMED_TWO_METER_ARCH_HALF, "_right");
     }
 
     private ItemModelBuilder simpleItem(DeferredItem<? extends Item> item) {

@@ -24,6 +24,7 @@ import xfacthd.framedblocks.api.type.IBlockType;
 import xfacthd.framedblocks.common.data.BlockType;
 import xfacthd.framedblocks.common.data.shapes.SplitShapeGenerator;
 import xfacthd.framedblocks.common.data.facepreds.FullFacePredicates;
+import xfacthd.framedblocks.common.data.shapes.stairs.standard.HalfStairsShapes;
 import xfacthd.framedblocks.common.data.skippreds.SideSkipPredicates;
 import xfacthd.framedblocks.common.data.conpreds.ConnectionPredicates;
 import xfacthd.framedblocks.common.data.skippreds.stairs.StairsSkipPredicate;
@@ -62,6 +63,12 @@ public enum CustomBlockType implements IBlockType {
                 }
             },
             new StairsSkipPredicate(),
+            ConnectionPredicate.FULL_EDGE),
+    FRAMED_TWO_METER_ARCH_HALF(true, false, false, true, true,
+            true, false, false, ConTexMode.FULL_FACE,
+            HalfStairsShapes::generate,
+            FullFacePredicate.FALSE,
+            SideSkipPredicate.FALSE,
             ConnectionPredicate.FULL_EDGE);
 
     /**

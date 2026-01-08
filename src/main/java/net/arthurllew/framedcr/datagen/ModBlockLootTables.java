@@ -40,6 +40,7 @@ public class ModBlockLootTables extends FramedBlockLootSubProvider {
         // Drop self and camo
         this.dropSelfWithCamo(FramedConquestBlocks.FRAMED_BALUSTRADE.value());
         this.dropSelfWithCamo(FramedConquestBlocks.FRAMED_TWO_METER_ARCH.value());
+        this.dropSelfWithCamo(FramedConquestBlocks.FRAMED_TWO_METER_ARCH_HALF.value());
     }
 
     @Override

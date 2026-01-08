@@ -29,5 +29,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 RecipeCategory.DECORATIONS, FramedConquestBlocks.FRAMED_BALUSTRADE.get(), 1);
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(FBContent.BLOCK_FRAMED_CUBE.value().asItem()),
                 RecipeCategory.DECORATIONS, FramedConquestBlocks.FRAMED_TWO_METER_ARCH.get(), 1);
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(FBContent.BLOCK_FRAMED_CUBE.value().asItem()),
+                RecipeCategory.DECORATIONS, FramedConquestBlocks.FRAMED_TWO_METER_ARCH_HALF.get(), 1);
     }
 }

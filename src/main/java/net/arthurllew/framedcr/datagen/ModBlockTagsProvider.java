@@ -26,6 +26,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         this.tag(BlockTags.MINEABLE_WITH_AXE)
                 .add(FramedConquestBlocks.FRAMED_PILLAR.get())
                 .add(FramedConquestBlocks.FRAMED_BALUSTRADE.get())
-                .add(FramedConquestBlocks.FRAMED_TWO_METER_ARCH.get());
+                .add(FramedConquestBlocks.FRAMED_TWO_METER_ARCH.get())
+                .add(FramedConquestBlocks.FRAMED_TWO_METER_ARCH_HALF.get());
     }
 }

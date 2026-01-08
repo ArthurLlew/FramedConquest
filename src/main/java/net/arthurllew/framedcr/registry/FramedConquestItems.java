@@ -31,5 +31,6 @@ public class FramedConquestItems {
                         output.accept(FramedConquestBlocks.FRAMED_PILLAR.get());
                         output.accept(FramedConquestBlocks.FRAMED_BALUSTRADE.get());
                         output.accept(FramedConquestBlocks.FRAMED_TWO_METER_ARCH.get());
+                        output.accept(FramedConquestBlocks.FRAMED_TWO_METER_ARCH_HALF.get());
                     }).build());
 }
