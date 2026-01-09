@@ -285,10 +285,6 @@ public enum CustomBlockType implements IBlockType {
     }
 
     public int compareTo(IBlockType other) {
-        if (other instanceof BlockType type) {
-            return this.compareTo(type);
-        } else {
-            return 1;
-        }
+        return other instanceof CustomBlockType type ? this.compareTo(type) : 1;
     }
 }
