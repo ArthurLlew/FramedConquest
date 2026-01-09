@@ -35,10 +35,12 @@ public class FramedPillar extends CustomFramedBlock {
             Block.box(4.0F, 0.0F, 4.0F, 12.0F, 16.0F, 12.0F),
             Block.box(2.0F, 0.0F, 2.0F, 14.0F, 16.0F, 14.0F)};
 
+    private static final int MAX_LAYERS = 3;
+    
     /**
      * Layers property.
      */
-    public static final IntegerProperty LAYERS = IntegerProperty.create("layer", 1, SHAPE.length);
+    public static final IntegerProperty LAYERS = IntegerProperty.create("layer", 1, MAX_LAYERS);
 
     /**
      * Constructor.
@@ -55,12 +57,11 @@ public class FramedPillar extends CustomFramedBlock {
 
     /// See [FramedLayeredCubeBlock].
     protected boolean canBeReplaced(BlockState state, BlockPlaceContext context) {
-        int layers = state.getValue(LAYERS);
-        Direction facing = context.getClickedFace();
-        if (layers < SHAPE.length && context.getItemInHand().is(this.asItem())) {
-            if (!(context instanceof DirectionalPlaceContext) && context.replacingClickedOnBlock()) {
+        if (state.getValue(LAYERS) < MAX_LAYERS && context.getItemInHand().is(this.asItem())) {
+            if (context instanceof DirectionalPlaceContext || !context.replacingClickedOnBlock()) {
                 return true;
             } else {
+                Direction facing = context.getClickedFace();
                 return facing != Direction.UP && facing != Direction.DOWN;
             }
         } else {
@@ -76,7 +77,7 @@ public class FramedPillar extends CustomFramedBlock {
                         BlockState prevState = modCtx.getLevel().getBlockState(modCtx.getClickedPos());
                         if (prevState.is(this)) {
                             int layers = prevState.getValue(LAYERS);
-                            return prevState.setValue(LAYERS, Math.min(SHAPE.length, layers + 1));
+                            return prevState.setValue(LAYERS, Math.min(MAX_LAYERS, layers + 1));
                         } else {
                             return state;
                         }
