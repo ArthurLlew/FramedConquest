@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "down=false,up=false": {
+      "model": "framedcr:block/framed_small_window_updown"
+    },
+    "down=false,up=true": {
+      "model": "framedcr:block/framed_small_window_down"
+    },
+    "down=true,up=false": {
+      "model": "framedcr:block/framed_small_window_up"
+    },
+    "down=true,up=true": {
+      "model": "framedcr:block/framed_small_window"
+    }
+  }
+}

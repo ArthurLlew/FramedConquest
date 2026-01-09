@@ -47,6 +47,16 @@ public class FramedConquestBlocks {
     public static final DeferredBlock<FramedSmallArchHalf> FRAMED_SMALL_ARCH_HALF = registerBlock(
             "framed_small_arch_half", FramedSmallArchHalf::new);
     /**
+     * Framed CR small window.
+     */
+    public static final DeferredBlock<FramedSmallWindow> FRAMED_SMALL_WINDOW = registerBlock(
+            "framed_small_window", FramedSmallWindow::new);
+    /**
+     * Framed CR small window half.
+     */
+    public static final DeferredBlock<FramedSmallWindowHalf> FRAMED_SMALL_WINDOW_HALF = registerBlock(
+            "framed_small_window_half", FramedSmallWindowHalf::new);
+    /**
      * Framed CR two meter arch.
      */
     public static final DeferredBlock<FramedTwoMeterArch> FRAMED_TWO_METER_ARCH = registerBlock(
