@@ -26,7 +26,7 @@ public class FramedConquestItems {
     public static final Supplier<CreativeModeTab> BETA_DECO_ITEM_GROUP =
             CREATIVE_MODE_TABS.register("memento_beta", () -> CreativeModeTab.builder()
                     .title(Component.translatable("itemgroup." + FramedConquest.MODID + ".items"))
-                    .icon(() -> new ItemStack(FramedConquestBlocks.FRAMED_PILLAR.get()))
+                    .icon(() -> new ItemStack(FramedConquestBlocks.FRAMED_BALUSTRADE.get()))
                     .displayItems((parameters, output) -> {
                         output.accept(FramedConquestBlocks.FRAMED_PILLAR.get());
                         output.accept(FramedConquestBlocks.FRAMED_BALUSTRADE.get());
