@@ -34,6 +34,7 @@ public class FramedPillar extends CustomFramedBlock {
             Block.box(6.0F, 0.0F, 6.0F, 10.0F, 16.0F, 10.0F),
             Block.box(4.0F, 0.0F, 4.0F, 12.0F, 16.0F, 12.0F),
             Block.box(2.0F, 0.0F, 2.0F, 14.0F, 16.0F, 14.0F)};
+
     /**
      * Layers property.
      */

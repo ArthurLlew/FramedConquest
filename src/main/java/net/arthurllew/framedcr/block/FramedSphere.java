@@ -102,11 +102,12 @@ public class FramedSphere extends CustomFramedBlock {
      * Produces pairs (block state, shape).
      */
     public static ShapeProvider generateShapes(ImmutableList<BlockState> states) {
-        return generateShapes(states, (state) -> switch (state.getValue(TYPE).toString()) {
-            case "egg" -> EGG;
-            case "small" -> SMALL;
-            case "large" -> LARGE;
-            default -> throw new IllegalStateException();
-        });
+        return generateShapes(states, (state) ->
+                switch (state.getValue(TYPE).toString()) {
+                    case "egg" -> EGG;
+                    case "small" -> SMALL;
+                    case "large" -> LARGE;
+                    default -> throw new IllegalStateException();
+                });
     }
 }
