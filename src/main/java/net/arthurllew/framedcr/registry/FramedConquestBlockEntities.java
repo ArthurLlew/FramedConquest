@@ -2,7 +2,9 @@ package net.arthurllew.framedcr.registry;
 
 import net.arthurllew.framedcr.FramedConquest;
 import net.arthurllew.framedcr.block.entity.FramedConquestBlockEntity;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -21,10 +23,6 @@ public class FramedConquestBlockEntities {
     public static final Supplier<BlockEntityType<FramedConquestBlockEntity>> FRAMED_CONQUEST_BLOCK_ENTITY =
             BLOCK_ENTITIES.register("framed_block", () ->
                     BlockEntityType.Builder.of(FramedConquestBlockEntity::new,
-                            FramedConquestBlocks.FRAMED_PILLAR.get(),
-                            FramedConquestBlocks.FRAMED_BALUSTRADE.get(),
-                            FramedConquestBlocks.FRAMED_ARROWSLIT.get(),
-                            FramedConquestBlocks.FRAMED_TWO_METER_ARCH.get(),
-                            FramedConquestBlocks.FRAMED_TWO_METER_ARCH_HALF.get()
+                            FramedConquestBlocks.BLOCKS.getEntries().stream().map(Holder::value).toArray(Block[]::new)
                     ).build(null));
 }

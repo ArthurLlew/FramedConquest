@@ -1,10 +1,13 @@
 package net.arthurllew.framedcr.registry;
 
 import net.arthurllew.framedcr.FramedConquest;
+import net.arthurllew.framedcr.block.CustomFramedBlock;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
@@ -28,10 +31,13 @@ public class FramedConquestItems {
                     .title(Component.translatable("itemgroup." + FramedConquest.MODID + ".items"))
                     .icon(() -> new ItemStack(FramedConquestBlocks.FRAMED_BALUSTRADE.get()))
                     .displayItems((parameters, output) -> {
-                        output.accept(FramedConquestBlocks.FRAMED_PILLAR.get());
-                        output.accept(FramedConquestBlocks.FRAMED_BALUSTRADE.get());
-                        output.accept(FramedConquestBlocks.FRAMED_ARROWSLIT.get());
-                        output.accept(FramedConquestBlocks.FRAMED_TWO_METER_ARCH.get());
-                        output.accept(FramedConquestBlocks.FRAMED_TWO_METER_ARCH_HALF.get());
+                        for (Block block : FramedConquestBlocks.BLOCKS.getEntries()
+                                .stream().map(Holder::value).toArray(Block[]::new)) {
+                            if (block instanceof CustomFramedBlock framedBlock) {
+                                if (framedBlock.getCustomBlockType().hasBlockItem()) {
+                                    output.accept(block);
+                                }
+                            }
+                        }
                     }).build());
 }
