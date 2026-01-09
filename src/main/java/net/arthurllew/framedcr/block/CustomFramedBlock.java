@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.UnmodifiableIterator;
 import net.arthurllew.framedcr.block.entity.FramedConquestBlockEntity;
+import net.arthurllew.framedcr.block.type.CustomBlockType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -11,7 +12,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import xfacthd.framedblocks.api.block.AbstractFramedBlock;
 import xfacthd.framedblocks.api.block.IFramedBlock;
 import xfacthd.framedblocks.api.shapes.ShapeProvider;
-import xfacthd.framedblocks.api.type.IBlockType;
 import xfacthd.framedblocks.common.block.FramedBlock;
 
 import java.util.function.Function;
@@ -24,14 +24,14 @@ public abstract class CustomFramedBlock extends AbstractFramedBlock {
     /**
      * Simplified constructor.
      */
-    protected CustomFramedBlock(IBlockType blockType) {
+    protected CustomFramedBlock(CustomBlockType blockType) {
         super(blockType, IFramedBlock.createProperties(blockType));
     }
 
     /**
      * Constructor.
      */
-    protected CustomFramedBlock(IBlockType blockType, UnaryOperator<Properties> propertyModifier) {
+    protected CustomFramedBlock(CustomBlockType blockType, UnaryOperator<Properties> propertyModifier) {
         super(blockType, propertyModifier);
     }
 
@@ -68,5 +68,12 @@ public abstract class CustomFramedBlock extends AbstractFramedBlock {
 
         // Build
         return ShapeProvider.of(builder.build());
+    }
+
+    /**
+     * @return this block type.
+     */
+    public CustomBlockType getCustomBlockType() {
+        return (CustomBlockType) this.getBlockType();
     }
 }

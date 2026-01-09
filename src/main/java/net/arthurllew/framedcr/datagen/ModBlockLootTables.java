@@ -1,5 +1,6 @@
 package net.arthurllew.framedcr.datagen;
 
+import net.arthurllew.framedcr.block.CustomFramedBlock;
 import net.arthurllew.framedcr.loot.PillarLootNumberProvider;
 import net.arthurllew.framedcr.registry.FramedConquestBlocks;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -12,6 +13,7 @@ import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import xfacthd.framedblocks.api.datagen.loot.FramedBlockLootSubProvider;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -28,20 +30,23 @@ public class ModBlockLootTables extends FramedBlockLootSubProvider {
         // Drop with camo + custom count
         this.add(FramedConquestBlocks.FRAMED_PILLAR.value(),
                 LootTable.lootTable()
-                        .withPool(this.createDropWithCamoPool(FramedConquestBlocks.FRAMED_PILLAR.value()))
-                        .withPool(this.applyExplosionCondition(FramedConquestBlocks.FRAMED_PILLAR.value(),
+                        .withPool(this.createDropWithCamoPool(FramedConquestBlocks.FRAMED_PILLAR.get()))
+                        .withPool(this.applyExplosionCondition(FramedConquestBlocks.FRAMED_PILLAR.get(),
                                 LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
                                 .add(((LootPoolSingletonContainer.Builder<?>)this.applyExplosionDecay(
-                                        FramedConquestBlocks.FRAMED_PILLAR.value(),
-                                        LootItem.lootTableItem(FramedConquestBlocks.FRAMED_PILLAR.value())))
+                                        FramedConquestBlocks.FRAMED_PILLAR.get(),
+                                        LootItem.lootTableItem(FramedConquestBlocks.FRAMED_PILLAR.get())))
                                                 .apply(SetItemCountFunction.setCount(
                                                         PillarLootNumberProvider.INSTANCE))))));
 
-        // Drop self and camo
-        this.dropSelfWithCamo(FramedConquestBlocks.FRAMED_BALUSTRADE.value());
-        this.dropSelfWithCamo(FramedConquestBlocks.FRAMED_ARROWSLIT.value());
-        this.dropSelfWithCamo(FramedConquestBlocks.FRAMED_TWO_METER_ARCH.value());
-        this.dropSelfWithCamo(FramedConquestBlocks.FRAMED_TWO_METER_ARCH_HALF.value());
+        // Generate "drop self and camo" loot table for every block using custom block type
+        for (DeferredHolder<Block, ? extends Block> block : FramedConquestBlocks.BLOCKS.getEntries()) {
+            if (block.get() instanceof CustomFramedBlock framedBlock) {
+                if (!framedBlock.getCustomBlockType().hasSpecialLootTable()) {
+                    this.dropSelfWithCamo(block.get());
+                }
+            }
+        }
     }
 
     @Override

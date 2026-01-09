@@ -1,15 +1,14 @@
 package net.arthurllew.framedcr.block.type;
 
-import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import net.arthurllew.framedcr.block.FramedArrowslit;
 import net.arthurllew.framedcr.block.FramedBalustrade;
 import net.arthurllew.framedcr.block.FramedPillar;
 import net.arthurllew.framedcr.block.FramedTwoMeterArch;
+import net.arthurllew.framedcr.datagen.ModBlockLootTables;
+import net.arthurllew.framedcr.datagen.ModItemModelProvider;
+import net.arthurllew.framedcr.datagen.ModRecipeProvider;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.shapes.BooleanOp;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.fml.loading.FMLEnvironment;
 import xfacthd.framedblocks.api.predicate.contex.ConTexMode;
 import xfacthd.framedblocks.api.predicate.contex.ConnectionPredicate;
@@ -41,14 +40,16 @@ public enum CustomBlockType implements IBlockType {
             FramedPillar::generateShapes,
             FramedPillar::fullFacePredicate,
             SideSkipPredicate.FALSE,
-            ConnectionPredicate.FULL_EDGE),
+            ConnectionPredicate.FULL_EDGE,
+            "_1", 3, true),
     FRAMED_BALUSTRADE(true, false, false, true, true,
             true, false, false,
             ConTexMode.FULL_FACE,
             FramedBalustrade::generateShapes,
             FullFacePredicate.FALSE,
             SideSkipPredicate.FALSE,
-            ConnectionPredicate.FULL_EDGE),
+            ConnectionPredicate.FULL_EDGE,
+            "_y"),
     FRAMED_ARROWSLIT(true, false, false, true, true,
             true, false, false,
             ConTexMode.FULL_FACE,
@@ -69,7 +70,8 @@ public enum CustomBlockType implements IBlockType {
             HalfStairsShapes::generate,
             FullFacePredicate.FALSE,
             SideSkipPredicate.FALSE,
-            ConnectionPredicate.FULL_EDGE);
+            ConnectionPredicate.FULL_EDGE,
+            "_right");
 
     /**
      * Unique ID.
@@ -114,30 +116,18 @@ public enum CustomBlockType implements IBlockType {
     private final FullFacePredicate fullFacePredicate;
     private final SideSkipPredicate sideSkipPredicate;
     private final ConnectionPredicate connectionPredicates;
-
-    CustomBlockType(boolean canOcclude, boolean specialHitbox, boolean specialTile, boolean waterloggable,
-                    boolean blockItem, boolean allowIntangible, boolean doubleBlock, boolean lockable,
-                    ConTexMode minCTMode,
-                    FullFacePredicate fullFacePredicate,
-                    SideSkipPredicate sideSkipPredicate,
-                    ConnectionPredicate connectionPredicates) {
-        this(canOcclude, specialHitbox, specialTile, waterloggable, blockItem, allowIntangible, doubleBlock,
-                lockable, minCTMode, ShapeGenerator.EMPTY,
-                fullFacePredicate, sideSkipPredicate, connectionPredicates);
-    }
-
-    CustomBlockType(boolean canOcclude, boolean specialHitbox, boolean specialTile, boolean waterloggable,
-                    boolean blockItem, boolean allowIntangible, boolean doubleBlock, boolean lockable,
-                    ConTexMode minCTMode, VoxelShape shape,
-                    FullFacePredicate fullFacePredicate,
-                    SideSkipPredicate sideSkipPredicate,
-                    ConnectionPredicate connectionPredicates) {
-        this(canOcclude, specialHitbox, specialTile, waterloggable, blockItem, allowIntangible, doubleBlock,
-                lockable, minCTMode, ShapeGenerator.singleShape(shape),
-                fullFacePredicate, sideSkipPredicate, connectionPredicates);
-        Preconditions.checkArgument(!waterloggable || !Shapes.joinUnoptimized(shape, Shapes.block(),
-                BooleanOp.NOT_SAME).isEmpty(), "Blocks with full cube shape can't be waterloggable");
-    }
+    /**
+     * Block model variation ending to be used by item model (see {@link ModItemModelProvider}).
+     */
+    private final String modelVariantForItem;
+    /**
+     * How many blocks will be crafted with stonecutting recipe (see {@link ModRecipeProvider}).
+     */
+    private final int craftingCount;
+    /**
+     * Determines block loot table (see {@link ModBlockLootTables}).
+     */
+    private final boolean hasSpecialLootTable;
 
     CustomBlockType(boolean canOcclude, boolean specialHitbox, boolean specialTile, boolean waterloggable,
                     boolean blockItem, boolean allowIntangible, boolean doubleBlock, boolean lockable,
@@ -145,6 +135,42 @@ public enum CustomBlockType implements IBlockType {
                     FullFacePredicate fullFacePredicate,
                     SideSkipPredicate sideSkipPredicate,
                     ConnectionPredicate connectionPredicates) {
+        this(canOcclude, specialHitbox, specialTile, waterloggable, blockItem, allowIntangible, doubleBlock, lockable,
+                minCTMode, shapeGen, fullFacePredicate, sideSkipPredicate, connectionPredicates,
+                "", 1, false);
+    }
+
+    CustomBlockType(boolean canOcclude, boolean specialHitbox, boolean specialTile, boolean waterloggable,
+                    boolean blockItem, boolean allowIntangible, boolean doubleBlock, boolean lockable,
+                    ConTexMode minCTMode, ShapeGenerator shapeGen,
+                    FullFacePredicate fullFacePredicate,
+                    SideSkipPredicate sideSkipPredicate,
+                    ConnectionPredicate connectionPredicates,
+                    String modelVariantForItem) {
+        this(canOcclude, specialHitbox, specialTile, waterloggable, blockItem, allowIntangible, doubleBlock, lockable,
+                minCTMode, shapeGen, fullFacePredicate, sideSkipPredicate, connectionPredicates,
+                modelVariantForItem, 1, false);
+    }
+
+    CustomBlockType(boolean canOcclude, boolean specialHitbox, boolean specialTile, boolean waterloggable,
+                    boolean blockItem, boolean allowIntangible, boolean doubleBlock, boolean lockable,
+                    ConTexMode minCTMode, ShapeGenerator shapeGen,
+                    FullFacePredicate fullFacePredicate,
+                    SideSkipPredicate sideSkipPredicate,
+                    ConnectionPredicate connectionPredicates,
+                    int craftingCount, boolean hasSpecialLootTable) {
+        this(canOcclude, specialHitbox, specialTile, waterloggable, blockItem, allowIntangible, doubleBlock, lockable,
+                minCTMode, shapeGen, fullFacePredicate, sideSkipPredicate, connectionPredicates,
+                "", craftingCount, hasSpecialLootTable);
+    }
+
+    CustomBlockType(boolean canOcclude, boolean specialHitbox, boolean specialTile, boolean waterloggable,
+                    boolean blockItem, boolean allowIntangible, boolean doubleBlock, boolean lockable,
+                    ConTexMode minCTMode, ShapeGenerator shapeGen,
+                    FullFacePredicate fullFacePredicate,
+                    SideSkipPredicate sideSkipPredicate,
+                    ConnectionPredicate connectionPredicates,
+                    String modelVariantForItem, int craftingCount, boolean hasSpecialLootTable) {
         this.name = this.toString().toLowerCase(Locale.ROOT);
         this.canOcclude = canOcclude;
         this.specialHitbox = specialHitbox;
@@ -162,6 +188,22 @@ public enum CustomBlockType implements IBlockType {
         this.fullFacePredicate = fullFacePredicate;
         this.sideSkipPredicate = sideSkipPredicate;
         this.connectionPredicates = connectionPredicates;
+
+        this.modelVariantForItem = modelVariantForItem;
+        this.craftingCount = craftingCount;
+        this.hasSpecialLootTable = hasSpecialLootTable;
+    }
+
+    public String modelVariantForItem() {
+        return this.modelVariantForItem;
+    }
+
+    public int craftingCount() {
+        return this.craftingCount;
+    }
+
+    public boolean hasSpecialLootTable() {
+        return this.hasSpecialLootTable;
     }
 
     public boolean canOccludeWithSolidCamo() {
