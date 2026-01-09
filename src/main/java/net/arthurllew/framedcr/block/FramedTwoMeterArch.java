@@ -41,7 +41,7 @@ public class FramedTwoMeterArch extends CustomFramedBlock {
     public static final VoxelShape TOP_OCTET_SE = Block.box(8.0F, 8.0F, 8.0F, 16.0F, 16.0F, 16.0F);
 
     /// See [StairBlock].
-    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+    public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     /// See [StairBlock].
     public static final EnumProperty<Half> HALF = BlockStateProperties.HALF;
 

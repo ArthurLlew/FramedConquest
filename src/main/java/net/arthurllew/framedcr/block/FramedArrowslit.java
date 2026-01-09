@@ -49,7 +49,7 @@ public class FramedArrowslit extends CustomFramedBlock {
     public static final VoxelShape SOUTH_SHAPE = Shapes.or(Shapes.or(SOUTH_FR, SOUTH_FL), Shapes.or(SOUTH_SR, SOUTH_SL));
 
     /// See [StairBlock].
-    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+    public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
     /**
      * Constructor.
