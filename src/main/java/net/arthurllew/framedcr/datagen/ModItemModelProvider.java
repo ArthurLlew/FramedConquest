@@ -21,6 +21,7 @@ public class ModItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
         blockItem(FramedConquestBlocks.FRAMED_PILLAR, "_1");
         blockItem(FramedConquestBlocks.FRAMED_BALUSTRADE, "_y");
+        blockItem(FramedConquestBlocks.FRAMED_ARROWSLIT, "");
         blockItem(FramedConquestBlocks.FRAMED_TWO_METER_ARCH, "");
         blockItem(FramedConquestBlocks.FRAMED_TWO_METER_ARCH_HALF, "_right");
     }

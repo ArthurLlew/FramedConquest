@@ -23,12 +23,19 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
     @Override
     protected void buildRecipes(RecipeOutput recipeOutput) {
+        // Pillar
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(FBContent.BLOCK_FRAMED_CUBE.value().asItem()),
                 RecipeCategory.DECORATIONS, FramedConquestBlocks.FRAMED_PILLAR.get(), 3);
+        // Balustrade
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(FBContent.BLOCK_FRAMED_CUBE.value().asItem()),
                 RecipeCategory.DECORATIONS, FramedConquestBlocks.FRAMED_BALUSTRADE.get(), 1);
+        // Arrowslit
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(FBContent.BLOCK_FRAMED_CUBE.value().asItem()),
+                RecipeCategory.DECORATIONS, FramedConquestBlocks.FRAMED_ARROWSLIT.get(), 1);
+        // Two meter arch
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(FBContent.BLOCK_FRAMED_CUBE.value().asItem()),
                 RecipeCategory.DECORATIONS, FramedConquestBlocks.FRAMED_TWO_METER_ARCH.get(), 1);
+        // Two meter arch half
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(FBContent.BLOCK_FRAMED_CUBE.value().asItem()),
                 RecipeCategory.DECORATIONS, FramedConquestBlocks.FRAMED_TWO_METER_ARCH_HALF.get(), 1);
     }

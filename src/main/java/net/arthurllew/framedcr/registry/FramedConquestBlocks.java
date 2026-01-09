@@ -27,6 +27,11 @@ public class FramedConquestBlocks {
     public static final DeferredBlock<FramedBalustrade> FRAMED_BALUSTRADE = registerBlock(
             "framed_balustrade", FramedBalustrade::new);
     /**
+     * Framed CR arrowslit.
+     */
+    public static final DeferredBlock<FramedArrowslit> FRAMED_ARROWSLIT = registerBlock(
+            "framed_arrowslit", FramedArrowslit::new);
+    /**
      * Framed CR two meter arch.
      */
     public static final DeferredBlock<FramedTwoMeterArch> FRAMED_TWO_METER_ARCH = registerBlock(

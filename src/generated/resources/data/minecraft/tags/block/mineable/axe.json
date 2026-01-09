@@ -2,6 +2,7 @@
   "values": [
     "framedcr:framed_pillar",
     "framedcr:framed_balustrade",
+    "framedcr:framed_arrowslit",
     "framedcr:framed_two_meter_arch",
     "framedcr:framed_two_meter_arch_half"
   ]

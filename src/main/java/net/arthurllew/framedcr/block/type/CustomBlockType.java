@@ -2,6 +2,7 @@ package net.arthurllew.framedcr.block.type;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
+import net.arthurllew.framedcr.block.FramedArrowslit;
 import net.arthurllew.framedcr.block.FramedBalustrade;
 import net.arthurllew.framedcr.block.FramedPillar;
 import net.arthurllew.framedcr.block.FramedTwoMeterArch;
@@ -46,6 +47,12 @@ public enum CustomBlockType implements IBlockType {
     FRAMED_BALUSTRADE(true, false, false, true, true,
             true, false, false, ConTexMode.FULL_FACE,
             FramedBalustrade::generateShapes,
+            FullFacePredicate.FALSE,
+            SideSkipPredicate.FALSE,
+            ConnectionPredicate.FULL_EDGE),
+    FRAMED_ARROWSLIT(true, false, false, true, true,
+            true, false, false, ConTexMode.FULL_FACE,
+            FramedArrowslit::generateShapes,
             FullFacePredicate.FALSE,
             SideSkipPredicate.FALSE,
             ConnectionPredicate.FULL_EDGE),

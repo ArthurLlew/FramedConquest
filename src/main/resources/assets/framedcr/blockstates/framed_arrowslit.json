@@ -1,0 +1,23 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "framedcr:block/framed_arrowslit",
+      "uvlock": true
+    },
+    "facing=west": {
+      "model": "framedcr:block/framed_arrowslit",
+      "y": 270,
+      "uvlock": true
+    },
+    "facing=south": {
+      "model": "framedcr:block/framed_arrowslit",
+      "y": 180,
+      "uvlock": true
+    },
+    "facing=east": {
+      "model": "framedcr:block/framed_arrowslit",
+      "y": 90,
+      "uvlock": true
+    }
+  }
+}
