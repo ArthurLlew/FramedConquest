@@ -1,0 +1,80 @@
+{
+  "variants": {
+    "facing=north,layer=1": {
+      "model": "framedcr:block/framed_quarter_vertical_1",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=north,layer=2": {
+      "model": "framedcr:block/framed_quarter_vertical_2",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=north,layer=3": {
+      "model": "framedcr:block/framed_quarter_vertical_4",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=north,layer=4": {
+      "model": "framedcr:block/framed_quarter_vertical_6",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=west,layer=1": {
+      "model": "framedcr:block/framed_quarter_vertical_1",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=west,layer=2": {
+      "model": "framedcr:block/framed_quarter_vertical_2",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=west,layer=3": {
+      "model": "framedcr:block/framed_quarter_vertical_4",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=west,layer=4": {
+      "model": "framedcr:block/framed_quarter_vertical_6",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=south,layer=1": {
+      "model": "framedcr:block/framed_quarter_vertical_1",
+      "uvlock": true
+    },
+    "facing=south,layer=2": {
+      "model": "framedcr:block/framed_quarter_vertical_2",
+      "uvlock": true
+    },
+    "facing=south,layer=3": {
+      "model": "framedcr:block/framed_quarter_vertical_4",
+      "uvlock": true
+    },
+    "facing=south,layer=4": {
+      "model": "framedcr:block/framed_quarter_vertical_6",
+      "uvlock": true
+    },
+    "facing=east,layer=1": {
+      "model": "framedcr:block/framed_quarter_vertical_1",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=east,layer=2": {
+      "model": "framedcr:block/framed_quarter_vertical_2",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=east,layer=3": {
+      "model": "framedcr:block/framed_quarter_vertical_4",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=east,layer=4": {
+      "model": "framedcr:block/framed_quarter_vertical_6",
+      "uvlock": true,
+      "y": 270
+    }
+  }
+}

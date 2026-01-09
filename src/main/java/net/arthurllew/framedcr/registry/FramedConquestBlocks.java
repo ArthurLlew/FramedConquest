@@ -66,6 +66,21 @@ public class FramedConquestBlocks {
      */
     public static final DeferredBlock<FramedTwoMeterArchHalf> FRAMED_TWO_METER_ARCH_HALF = registerBlock(
             "framed_two_meter_arch_half", FramedTwoMeterArchHalf::new);
+    /**
+     * Framed CR sphere.
+     */
+    public static final DeferredBlock<FramedCornerVertical> FRAMED_CORNER_VERTICAL = registerFramedBlock(
+            "framed_corner_vertical", FramedCornerVertical::new);
+    /**
+     * Framed CR sphere.
+     */
+    public static final DeferredBlock<FramedQuarterHorizontal> FRAMED_QUARTER_HORIZONTAL = registerFramedBlock(
+            "framed_quarter_horizontal", FramedQuarterHorizontal::new);
+    /**
+     * Framed CR sphere.
+     */
+    public static final DeferredBlock<FramedQuarterVertical> FRAMED_QUARTER_VERTICAL = registerFramedBlock(
+            "framed_quarter_vertical", FramedQuarterVertical::new);
 
     /**
      * Registers block and its item.

@@ -104,7 +104,31 @@ public enum CustomBlockType implements IBlockType {
             FullFacePredicate.FALSE,
             SideSkipPredicate.FALSE,
             ConnectionPredicate.FULL_EDGE,
-            "_right");
+            "_right"),
+    FRAMED_CORNER_VERTICAL(true, false, false, true, true,
+            true, false, false,
+            ConTexMode.FULL_FACE,
+            FramedCornerVertical::generateShapes,
+            FullFacePredicate.FALSE,
+            SideSkipPredicate.FALSE,
+            ConnectionPredicate.FULL_EDGE,
+            "_1"),
+    FRAMED_QUARTER_HORIZONTAL(true, false, false, true, true,
+            true, false, false,
+            ConTexMode.FULL_FACE,
+            FramedQuarterHorizontal::generateShapes,
+            FullFacePredicate.FALSE,
+            SideSkipPredicate.FALSE,
+            ConnectionPredicate.FULL_EDGE,
+            "_2"),
+    FRAMED_QUARTER_VERTICAL(true, false, false, true, true,
+            true, false, false,
+            ConTexMode.FULL_FACE,
+            FramedQuarterVertical::generateShapes,
+            FullFacePredicate.FALSE,
+            SideSkipPredicate.FALSE,
+            ConnectionPredicate.FULL_EDGE,
+            "_1");
 
     /**
      * Unique ID.

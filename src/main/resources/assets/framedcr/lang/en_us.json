@@ -8,5 +8,8 @@
   "block.framedcr.framed_small_arch": "Framed Small Arch",
   "block.framedcr.framed_small_arch_half": "Framed Small Arch Half",
   "block.framedcr.framed_two_meter_arch": "Framed Two Meter Arch",
-  "block.framedcr.framed_two_meter_arch_half": "Framed Two Meter Arch Half"
+  "block.framedcr.framed_two_meter_arch_half": "Framed Two Meter Arch Half",
+  "block.framedcr.framed_corner_vertical": "Framed Corner Vertical",
+  "block.framedcr.framed_quarter_horizontal": "Framed Quarter Horizontal",
+  "block.framedcr.framed_quarter_vertical": "Framed Quarter Vertical"
 }
