@@ -4,6 +4,8 @@ import com.google.common.collect.ImmutableList;
 import net.arthurllew.framedcr.block.shape.SphereShape;
 import net.arthurllew.framedcr.block.type.CustomBlockType;
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -15,6 +17,9 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import xfacthd.framedblocks.api.block.FramedProperties;
 import xfacthd.framedblocks.api.block.PlacementStateBuilder;
 import xfacthd.framedblocks.api.shapes.ShapeProvider;
+import xfacthd.framedblocks.common.FBContent;
+import xfacthd.framedblocks.common.block.cube.FramedLayeredCubeBlock;
+import xfacthd.framedblocks.common.item.FramedSpecialBlockItem;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -25,6 +30,7 @@ public class FramedSphere extends CustomFramedBlock {
     private static final VoxelShape SMALL = Shapes.or(Block.box(4.0F, 1.0F, 4.0F, 12.0F, 9.0F, 12.0F), Block.box(5.5F, 0.0F, 5.5F, 10.5F, 1.0F, 10.5F), Block.box(5.5F, 9.0F, 5.5F, 10.5F, 10.0F, 10.5F), Block.box(3.0F, 2.5F, 5.5F, 4.0F, 7.5F, 10.5F), Block.box(12.0F, 2.5F, 5.5F, 13.0F, 7.5F, 10.5F), Block.box(5.5F, 2.5F, 12.0F, 10.5F, 7.5F, 13.0F), Block.box(5.5F, 2.5F, 2.9999, 10.5F, 7.5F, 3.9999));
     private static final VoxelShape LARGE = Shapes.or(Block.box(1.64, 1.59, 1.64, 14.36, 14.31, 14.36), Block.box(4.025, 3.975, 0.04979, 11.975, 11.925, 1.63979), Block.box(4.025, 0.0F, 4.025, 11.975, 1.59, 11.975), Block.box(4.025, 14.31, 4.025, 11.975, 15.9, 11.975), Block.box(0.05, 3.975, 4.025, 1.64, 11.925, 11.975), Block.box(14.36, 3.975, 4.025, 15.95, 11.925, 11.975), Block.box(4.025, 3.975, 14.36, 11.975, 11.925, 15.95));
     private static final VoxelShape EGG = Shapes.or(Block.box(6.0F, 15.0F, 6.0F, 10.0F, 16.0F, 10.0F), Block.box(5.0F, 14.0F, 5.0F, 11.0F, 15.0F, 11.0F), Block.box(5.0F, 13.0F, 5.0F, 11.0F, 14.0F, 11.0F), Block.box(3.0F, 11.0F, 3.0F, 13.0F, 13.0F, 13.0F), Block.box(2.0F, 8.0F, 2.0F, 14.0F, 11.0F, 14.0F), Block.box(1.0F, 3.0F, 1.0F, 15.0F, 8.0F, 15.0F), Block.box(2.0F, 1.0F, 2.0F, 14.0F, 3.0F, 14.0F), Block.box(3.0F, 0.0F, 3.0F, 13.0F, 1.0F, 13.0F));
+
     /**
      * Sphere shape property.
      */
@@ -74,6 +80,22 @@ public class FramedSphere extends CustomFramedBlock {
                 })
                 .withWater()
                 .build();
+    }
+
+    /**
+     * Block item is created inside class to add extra functionality
+     * (see {@link FramedLayeredCubeBlock} and {@link FBContent}).
+     * If not done in this manner, the block will lose camo and
+     * ultimately break in behavior, when changing state on
+     * block item usage.
+     */
+    public BlockItem createBlockItem() {
+        return new FramedSpecialBlockItem.Single(this, new Item.Properties()) {
+            protected @org.jetbrains.annotations.Nullable BlockState getReplacementState(BlockPlaceContext ctx,
+                                                                                         BlockState originalState) {
+                return FramedSphere.this.getStateForPlacement(ctx);
+            }
+        };
     }
 
     /**

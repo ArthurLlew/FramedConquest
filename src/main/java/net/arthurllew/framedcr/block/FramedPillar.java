@@ -93,7 +93,8 @@ public class FramedPillar extends CustomFramedBlock {
      */
     public BlockItem createBlockItem() {
         return new FramedSpecialBlockItem.Single(this, new Item.Properties()) {
-            protected @org.jetbrains.annotations.Nullable BlockState getReplacementState(BlockPlaceContext ctx, BlockState originalState) {
+            protected @org.jetbrains.annotations.Nullable BlockState getReplacementState(BlockPlaceContext ctx,
+                                                                                         BlockState originalState) {
                 return FramedPillar.this.getStateForPlacement(ctx);
             }
         };
