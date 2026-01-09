@@ -12,7 +12,9 @@ import xfacthd.framedblocks.api.model.geometry.Geometry;
 import xfacthd.framedblocks.api.model.quad.QuadData;
 import xfacthd.framedblocks.api.model.quad.QuadModifier;
 import xfacthd.framedblocks.api.model.wrapping.GeometryFactory;
+import xfacthd.framedblocks.client.model.FramedBlockModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RemappedFramedGeometry extends Geometry {
@@ -34,27 +36,35 @@ public class RemappedFramedGeometry extends Geometry {
     }
 
     /**
-     * Called by API to get camo model quads.
+     * Called by API to get camo model quads (see {@link FramedBlockModel}).
      */
     public void transformQuad(QuadMap quadMap, BakedQuad quad) {
         Direction quadDir = quad.getDirection();
 
-        // Get all cullable original quads, corresponding to current direction
+        // Remap all cullable original quads, corresponding to current direction
         List<BakedQuad> originalQuads = originalModel.getQuads(state, quadDir, new LegacyRandomSource(0),
                 ModelData.EMPTY, null);
+        remapQuads(quadMap, quad, originalQuads, quadDir);
 
-        // Add all uncullable original quads, corresponding to current direction
-        for(BakedQuad originalQuad : originalModel.getQuads(state, null, new LegacyRandomSource(0), ModelData.EMPTY, null)) {
-            if (originalQuad.getDirection() == quadDir) {
-                originalQuads.add(originalQuad);
-            }
+        // Remap all uncullable original quads, corresponding to current direction
+        originalQuads = new ArrayList<>();
+        for(BakedQuad originalQuad : originalModel.getQuads(state, null, new LegacyRandomSource(0),
+                ModelData.EMPTY, null)) {
+                    if (originalQuad.getDirection() == quadDir) {
+                        originalQuads.add(originalQuad);
+                    }
         }
+        remapQuads(quadMap, quad, originalQuads, null);
+    }
 
-        // For each quad apply remapping, copy tint index (for ability to change color)
-        // and then export (save as a camo model quad)
+    /**
+     * For each quad in a list apply remapping, copy tint index (for ability to change color)
+     * and then export (save as a camo model quad) with provided direction.
+     */
+    protected void remapQuads(QuadMap quadMap, BakedQuad quad, List<BakedQuad> originalQuads, Direction dir) {
         for(BakedQuad originalQuad : originalQuads) {
             QuadModifier.of(originalQuad).tintIndex(quad.getTintIndex()).apply(remap(new QuadData(quad)))
-                    .export(quadMap.get(quadDir));
+                    .export(quadMap.get(dir));
         }
     }
 
@@ -85,11 +95,6 @@ public class RemappedFramedGeometry extends Geometry {
                 data.uv(i,
                         (u - originalSprite.getU0()) * uScaling + newSprite.getU0(),
                         (v - originalSprite.getV0()) * vScaling + newSprite.getV0());
-
-                // Update color
-                for (int c = 0; c < 4; c++) {
-                    data.color(i, c, newData.color(i, c));
-                }
             }
 
             // Return success
@@ -101,6 +106,15 @@ public class RemappedFramedGeometry extends Geometry {
      * Forces API to use JSON model when placing empty framed block.
      */
     public boolean forceUngeneratedBaseModel() {
+        return true;
+    }
+
+    /**
+     * Forces API to call {@link RemappedFramedGeometry::transformQuad} for all camo model faces regardless of
+     * culling predicate. This is important, because models like "two meter arch" have complex geometry, that
+     * does not match culling predicate.
+     */
+    public boolean transformAllQuads() {
         return true;
     }
 }
