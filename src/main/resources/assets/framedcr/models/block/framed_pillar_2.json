@@ -1,4 +1,5 @@
 {
+  "credit": "Made with Blockbench",
   "parent": "block/block",
   "render_type": "minecraft:cutout",
   "textures": {
@@ -6,38 +7,15 @@
     "particle": "#all"
   },
   "elements": [
-    {
-      "from": [
-        4,
-        0,
-        4
-      ],
-      "to": [
-        12,
-        16,
-        12
-      ],
+    {   "from": [ 4, 0, 4 ],
+      "to": [ 12, 16, 12 ],
       "faces": {
-        "down": {
-          "texture": "#all",
-          "cullface": "down"
-        },
-        "up": {
-          "texture": "#all",
-          "cullface": "up"
-        },
-        "north": {
-          "texture": "#all"
-        },
-        "south": {
-          "texture": "#all"
-        },
-        "west": {
-          "texture": "#all"
-        },
-        "east": {
-          "texture": "#all"
-        }
+        "down":  { "texture": "#all", "cullface": "down" },
+        "up":    { "texture": "#all", "cullface": "up" },
+        "north": { "texture": "#all" },
+        "south": { "texture": "#all" },
+        "west":  { "texture": "#all" },
+        "east":  { "texture": "#all" }
       },
       "__comment": "Center post"
     }
