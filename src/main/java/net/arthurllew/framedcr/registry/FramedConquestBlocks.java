@@ -37,6 +37,16 @@ public class FramedConquestBlocks {
     public static final DeferredBlock<FramedSphere> FRAMED_SPHERE = registerBlock(
             "framed_sphere", FramedSphere::new);
     /**
+     * Framed CR small arch.
+     */
+    public static final DeferredBlock<FramedSmallArch> FRAMED_SMALL_ARCH = registerBlock(
+            "framed_small_arch", FramedSmallArch::new);
+    /**
+     * Framed CR small arch half.
+     */
+    public static final DeferredBlock<FramedSmallArchHalf> FRAMED_SMALL_ARCH_HALF = registerBlock(
+            "framed_small_arch_half", FramedSmallArchHalf::new);
+    /**
      * Framed CR two meter arch.
      */
     public static final DeferredBlock<FramedTwoMeterArch> FRAMED_TWO_METER_ARCH = registerBlock(

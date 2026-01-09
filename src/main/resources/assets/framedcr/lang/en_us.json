@@ -5,6 +5,8 @@
   "block.framedcr.framed_balustrade": "Framed Balustrade",
   "block.framedcr.framed_arrowslit": "Framed Arrowslit",
   "block.framedcr.framed_sphere": "Framed Sphere",
+  "block.framedcr.framed_small_arch": "Framed Small Arch",
+  "block.framedcr.framed_small_arch_half": "Framed Small Arch Half",
   "block.framedcr.framed_two_meter_arch": "Framed Two Meter Arch",
   "block.framedcr.framed_two_meter_arch_half": "Framed Two Meter Arch Half"
 }
