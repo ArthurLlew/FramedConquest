@@ -6,10 +6,7 @@ import net.arthurllew.framedcr.block.FramedArrowslit;
 import net.arthurllew.framedcr.block.FramedBalustrade;
 import net.arthurllew.framedcr.block.FramedPillar;
 import net.arthurllew.framedcr.block.FramedTwoMeterArch;
-import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -39,40 +36,36 @@ import java.util.Objects;
  */
 public enum CustomBlockType implements IBlockType {
     FRAMED_PILLAR(true, false, false, true, true,
-            true, false, false, ConTexMode.FULL_FACE,
+            true, false, false,
+            ConTexMode.FULL_FACE,
             FramedPillar::generateShapes,
-            (state, dir) -> state.getValue(FramedPillar.LAYERS) == 4,
+            FramedPillar::fullFacePredicate,
             SideSkipPredicate.FALSE,
             ConnectionPredicate.FULL_EDGE),
     FRAMED_BALUSTRADE(true, false, false, true, true,
-            true, false, false, ConTexMode.FULL_FACE,
+            true, false, false,
+            ConTexMode.FULL_FACE,
             FramedBalustrade::generateShapes,
             FullFacePredicate.FALSE,
             SideSkipPredicate.FALSE,
             ConnectionPredicate.FULL_EDGE),
     FRAMED_ARROWSLIT(true, false, false, true, true,
-            true, false, false, ConTexMode.FULL_FACE,
+            true, false, false,
+            ConTexMode.FULL_FACE,
             FramedArrowslit::generateShapes,
             FullFacePredicate.FALSE,
             SideSkipPredicate.FALSE,
             ConnectionPredicate.FULL_EDGE),
     FRAMED_TWO_METER_ARCH(true, false, false, true, true,
-            true, false, false, ConTexMode.FULL_FACE,
+            true, false, false,
+            ConTexMode.FULL_FACE,
             FramedTwoMeterArch::generateShapes,
-            (state, dir) -> {
-                if (dir == Direction.UP) {
-                    return state.getValue(BlockStateProperties.HALF) == Half.TOP;
-                } else if (dir == Direction.DOWN) {
-                    return state.getValue(BlockStateProperties.HALF) == Half.BOTTOM;
-                } else {
-                    Direction facing = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
-                    return facing == dir;
-                }
-            },
+            FramedTwoMeterArch::fullFacePredicate,
             new StairsSkipPredicate(),
             ConnectionPredicate.FULL_EDGE),
     FRAMED_TWO_METER_ARCH_HALF(true, false, false, true, true,
-            true, false, false, ConTexMode.FULL_FACE,
+            true, false, false,
+            ConTexMode.FULL_FACE,
             HalfStairsShapes::generate,
             FullFacePredicate.FALSE,
             SideSkipPredicate.FALSE,

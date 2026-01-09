@@ -108,4 +108,18 @@ public class FramedTwoMeterArch extends CustomFramedBlock {
                     };
                 });
     }
+
+    /**
+     * @return whether this block should cull face in given direction.
+     */
+    public static boolean fullFacePredicate(BlockState state, Direction dir) {
+        if (dir == Direction.UP) {
+            return state.getValue(BlockStateProperties.HALF) == Half.TOP;
+        } else if (dir == Direction.DOWN) {
+            return state.getValue(BlockStateProperties.HALF) == Half.BOTTOM;
+        } else {
+            Direction facing = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
+            return facing == dir;
+        }
+    }
 }
