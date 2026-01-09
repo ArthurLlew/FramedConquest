@@ -1,10 +1,7 @@
 package net.arthurllew.framedcr.block.type;
 
 import com.google.common.collect.ImmutableList;
-import net.arthurllew.framedcr.block.FramedArrowslit;
-import net.arthurllew.framedcr.block.FramedBalustrade;
-import net.arthurllew.framedcr.block.FramedPillar;
-import net.arthurllew.framedcr.block.FramedTwoMeterArch;
+import net.arthurllew.framedcr.block.*;
 import net.arthurllew.framedcr.datagen.ModBlockLootTables;
 import net.arthurllew.framedcr.datagen.ModItemModelProvider;
 import net.arthurllew.framedcr.datagen.ModRecipeProvider;
@@ -57,6 +54,14 @@ public enum CustomBlockType implements IBlockType {
             FullFacePredicate.FALSE,
             SideSkipPredicate.FALSE,
             ConnectionPredicate.FULL_EDGE),
+    FRAMED_SPHERE(true, false, false, true, true,
+            true, false, false,
+            ConTexMode.FULL_FACE,
+            FramedSphere::generateShapes,
+            FullFacePredicate.FALSE,
+            SideSkipPredicate.FALSE,
+            ConnectionPredicate.FULL_EDGE,
+            "_dragonegg"),
     FRAMED_TWO_METER_ARCH(true, false, false, true, true,
             true, false, false,
             ConTexMode.FULL_FACE,
@@ -150,18 +155,6 @@ public enum CustomBlockType implements IBlockType {
         this(canOcclude, specialHitbox, specialTile, waterloggable, blockItem, allowIntangible, doubleBlock, lockable,
                 minCTMode, shapeGen, fullFacePredicate, sideSkipPredicate, connectionPredicates,
                 modelVariantForItem, 1, false);
-    }
-
-    CustomBlockType(boolean canOcclude, boolean specialHitbox, boolean specialTile, boolean waterloggable,
-                    boolean blockItem, boolean allowIntangible, boolean doubleBlock, boolean lockable,
-                    ConTexMode minCTMode, ShapeGenerator shapeGen,
-                    FullFacePredicate fullFacePredicate,
-                    SideSkipPredicate sideSkipPredicate,
-                    ConnectionPredicate connectionPredicates,
-                    int craftingCount, boolean hasSpecialLootTable) {
-        this(canOcclude, specialHitbox, specialTile, waterloggable, blockItem, allowIntangible, doubleBlock, lockable,
-                minCTMode, shapeGen, fullFacePredicate, sideSkipPredicate, connectionPredicates,
-                "", craftingCount, hasSpecialLootTable);
     }
 
     CustomBlockType(boolean canOcclude, boolean specialHitbox, boolean specialTile, boolean waterloggable,

@@ -32,6 +32,11 @@ public class FramedConquestBlocks {
     public static final DeferredBlock<FramedArrowslit> FRAMED_ARROWSLIT = registerBlock(
             "framed_arrowslit", FramedArrowslit::new);
     /**
+     * Framed CR sphere.
+     */
+    public static final DeferredBlock<FramedSphere> FRAMED_SPHERE = registerBlock(
+            "framed_sphere", FramedSphere::new);
+    /**
      * Framed CR two meter arch.
      */
     public static final DeferredBlock<FramedTwoMeterArch> FRAMED_TWO_METER_ARCH = registerBlock(

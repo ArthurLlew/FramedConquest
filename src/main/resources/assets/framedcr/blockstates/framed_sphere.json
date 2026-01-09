@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=egg": {
+      "model": "framedcr:block/framed_sphere_dragonegg"
+    },
+    "type=large": {
+      "model": "framedcr:block/framed_sphere"
+    },
+    "type=small": {
+      "model": "framedcr:block/framed_sphere_small"
+    }
+  }
+}
