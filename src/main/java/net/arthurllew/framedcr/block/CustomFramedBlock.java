@@ -6,8 +6,6 @@ import com.google.common.collect.UnmodifiableIterator;
 import net.arthurllew.framedcr.block.entity.FramedConquestBlockEntity;
 import net.arthurllew.framedcr.block.type.CustomBlockType;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -82,23 +80,5 @@ public abstract class CustomFramedBlock extends AbstractFramedBlock {
      */
     public CustomBlockType getCustomBlockType() {
         return (CustomBlockType) this.getBlockType();
-    }
-
-    @Deprecated
-    public static Direction getHitVecHorizontalAxisDirection(Direction facing, BlockPos pos, BlockPlaceContext context) {
-        switch (facing) {
-            case NORTH -> {
-                return !(context.getClickLocation().x - (double)pos.getX() > (double)0.5F) ? facing.getClockWise() : facing;
-            }
-            case SOUTH -> {
-                return !(context.getClickLocation().x - (double)pos.getX() < (double)0.5F) ? facing.getClockWise() : facing;
-            }
-            case EAST -> {
-                return !(context.getClickLocation().z - (double)pos.getZ() > (double)0.5F) ? facing.getClockWise() : facing;
-            }
-            default -> {
-                return !(context.getClickLocation().z - (double)pos.getZ() < (double)0.5F) ? facing.getClockWise() : facing;
-            }
-        }
     }
 }

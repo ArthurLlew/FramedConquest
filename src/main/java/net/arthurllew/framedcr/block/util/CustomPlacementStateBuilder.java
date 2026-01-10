@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.Half;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import org.jetbrains.annotations.Nullable;
 import xfacthd.framedblocks.api.block.PlacementStateBuilder;
 
@@ -35,7 +36,7 @@ public class CustomPlacementStateBuilder<T extends CustomPlacementStateBuilder<T
      */
     public final T withShapeIsCycledCheck() {
         if (this.state != null) {
-            BlockState prevState = ctx.getLevel().getBlockState(ctx.getClickedPos());
+            BlockState prevState = this.ctx.getLevel().getBlockState(this.ctx.getClickedPos());
             this.state = prevState.is(this.block) ? null : this.state;
         }
 
@@ -47,9 +48,9 @@ public class CustomPlacementStateBuilder<T extends CustomPlacementStateBuilder<T
      */
     public final T withArchFacing() {
         if (this.state != null) {
-            Direction facing = ctx.getClickedFace();
+            Direction facing = this.ctx.getClickedFace();
             if (facing == Direction.UP || facing == Direction.DOWN) {
-                facing = this.getFacingFromUpDown(ctx);
+                facing = this.getArchFacing(this.ctx);
             }
 
             this.state = this.state.setValue(BlockStateProperties.HORIZONTAL_FACING, facing);
@@ -59,11 +60,11 @@ public class CustomPlacementStateBuilder<T extends CustomPlacementStateBuilder<T
     }
 
     /**
-     * @return horizontal direction derived from clicked location.
+     * @return arch direction derived from clicked location.
      */
-    private Direction getFacingFromUpDown(BlockPlaceContext context) {
+    private Direction getArchFacing(BlockPlaceContext context) {
         Direction horizontalFacing = context.getHorizontalDirection();
-        BlockPos pos = ctx.getClickedPos();
+        BlockPos pos = this.ctx.getClickedPos();
 
         return switch (horizontalFacing) {
             case EAST -> !(context.getClickLocation().z - (double) pos.getZ() > 0.5D)
@@ -75,6 +76,37 @@ public class CustomPlacementStateBuilder<T extends CustomPlacementStateBuilder<T
             case NORTH -> !(context.getClickLocation().x - (double) pos.getX() > 0.5D)
                     ? horizontalFacing.getClockWise() : horizontalFacing.getCounterClockWise();
             default -> throw new IllegalStateException();
+        };
+    }
+
+    /**
+     * Calculates quarter-like block facing.
+     */
+    public final T withQuarterFacing() {
+        if (this.state != null) {
+            BlockPos blockpos = this.ctx.getClickedPos();
+
+            this.state = this.state
+                    .setValue(BlockStateProperties.HORIZONTAL_FACING,
+                            getQuarterFacing(this.ctx.getHorizontalDirection().getOpposite(), blockpos, this.ctx));
+        }
+
+        return this.self();
+    }
+
+    /**
+     * @return quarter direction derived from clicked location.
+     */
+    private static Direction getQuarterFacing(Direction facing, BlockPos pos, BlockPlaceContext context) {
+        return switch (facing) {
+            case NORTH -> !(context.getClickLocation().x - (double)pos.getX() > 0.5D)
+                    ? facing.getClockWise() : facing;
+            case SOUTH -> !(context.getClickLocation().x - (double)pos.getX() < 0.5D)
+                    ? facing.getClockWise() : facing;
+            case EAST -> !(context.getClickLocation().z - (double)pos.getZ() > 0.5D)
+                    ? facing.getClockWise() : facing;
+            default -> !(context.getClickLocation().z - (double)pos.getZ() < 0.5D)
+                    ? facing.getClockWise() : facing;
         };
     }
 
@@ -95,10 +127,10 @@ public class CustomPlacementStateBuilder<T extends CustomPlacementStateBuilder<T
      */
     public final T withTopBottom() {
         if (this.state != null) {
-            Direction facing = ctx.getClickedFace();
+            Direction facing = this.ctx.getClickedFace();
             Half upDown = facing == Direction.DOWN
-                    || facing != Direction.UP && ctx.getClickLocation().y
-                    - (double)ctx.getClickedPos().getY() > 0.5D ? Half.TOP : Half.BOTTOM;
+                    || facing != Direction.UP && this.ctx.getClickLocation().y
+                    - (double)this.ctx.getClickedPos().getY() > 0.5D ? Half.TOP : Half.BOTTOM;
 
             this.state = this.state.setValue(BlockStateProperties.HALF, upDown);
         }
@@ -111,8 +143,8 @@ public class CustomPlacementStateBuilder<T extends CustomPlacementStateBuilder<T
      */
     public final T withUpDown(Function<BlockState, Boolean> canConnectTo) {
         if (this.state != null) {
-            BlockGetter level = ctx.getLevel();
-            BlockPos blockpos = ctx.getClickedPos();
+            BlockGetter level = this.ctx.getLevel();
+            BlockPos blockpos = this.ctx.getClickedPos();
             BlockPos up = blockpos.above();
             BlockPos down = blockpos.below();
             BlockState BlockStateUp = level.getBlockState(up);
@@ -120,6 +152,18 @@ public class CustomPlacementStateBuilder<T extends CustomPlacementStateBuilder<T
             this.state = state
                     .setValue(BlockStateProperties.UP, canConnectTo.apply(BlockStateUp))
                     .setValue(BlockStateProperties.DOWN, canConnectTo.apply(BlockStateDown));
+        }
+
+        return this.self();
+    }
+
+    /**
+     * @return placement block state for block with layers.
+     */
+    public final T withLayerUpdate(IntegerProperty layerProperty, int maxLayers) {
+        if (this.state != null) {
+            int layers = this.state.getValue(layerProperty);
+            this.state = this.state.setValue(layerProperty, Math.min(maxLayers, layers + 1));
         }
 
         return this.self();

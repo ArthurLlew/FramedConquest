@@ -2,13 +2,12 @@ package net.arthurllew.framedcr.block;
 
 import com.google.common.collect.ImmutableList;
 import net.arthurllew.framedcr.block.type.CustomBlockType;
+import net.arthurllew.framedcr.block.util.BlockUtils;
 import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.item.context.DirectionalPlaceContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -18,7 +17,6 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import xfacthd.framedblocks.api.block.FramedProperties;
-import xfacthd.framedblocks.api.block.PlacementStateBuilder;
 import xfacthd.framedblocks.api.shapes.ShapeProvider;
 import xfacthd.framedblocks.common.FBContent;
 import xfacthd.framedblocks.common.block.cube.FramedLayeredCubeBlock;
@@ -73,17 +71,12 @@ public class FramedCornerVertical extends CustomFramedBlock {
      */
     @Override
     protected boolean canBeReplaced(BlockState state, BlockPlaceContext context) {
-        if (state.getValue(LAYERS) < MAX_LAYERS && context.getItemInHand().is(this.asItem())) {
-            if (context instanceof DirectionalPlaceContext || !context.replacingClickedOnBlock()) {
-                return true;
-            } else {
-                Direction clickedFacing = context.getClickedFace();
-                Direction facing = state.getValue(FACING);
-                return clickedFacing == facing || clickedFacing == facing.getCounterClockWise();
-            }
-        } else {
-            return false;
-        }
+        return BlockUtils.canLayeredBlockBeReplaced(LAYERS, MAX_LAYERS, this, state, context,
+                () -> {
+                    Direction clickedFacing = context.getClickedFace();
+                    Direction facing = state.getValue(FACING);
+                    return clickedFacing == facing || clickedFacing == facing.getCounterClockWise();
+                });
     }
 
     /**
@@ -91,21 +84,7 @@ public class FramedCornerVertical extends CustomFramedBlock {
      */
     @Override
     public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
-        return PlacementStateBuilder.of(this, context)
-                .withCustom((state, modCtx) -> {
-                    BlockState prevState = modCtx.getLevel().getBlockState(modCtx.getClickedPos());
-                    if (prevState.is(this)) {
-                        int layers = prevState.getValue(LAYERS);
-                        return prevState.setValue(LAYERS, Math.min(MAX_LAYERS, layers + 1));
-                    } else {
-                        BlockPos blockpos = context.getClickedPos();
-                        return this.defaultBlockState()
-                                .setValue(FACING, getHitVecHorizontalAxisDirection(
-                                        context.getHorizontalDirection().getOpposite(), blockpos, context));
-                    }
-                })
-                .withWater()
-                .build();
+        return BlockUtils.getLayeredQuarterBlockStateForPlacement(LAYERS, MAX_LAYERS, this, context);
     }
 
     /**
@@ -118,8 +97,7 @@ public class FramedCornerVertical extends CustomFramedBlock {
     @Override
     public BlockItem createBlockItem() {
         return new FramedSpecialBlockItem.Single(this, new Item.Properties()) {
-            protected @org.jetbrains.annotations.Nullable BlockState getReplacementState(BlockPlaceContext ctx,
-                                                                                         BlockState originalState) {
+            protected @Nullable BlockState getReplacementState(BlockPlaceContext ctx, BlockState originalState) {
                 return FramedCornerVertical.this.getStateForPlacement(ctx);
             }
         };
