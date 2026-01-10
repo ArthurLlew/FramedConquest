@@ -22,26 +22,26 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class FramedArrowslit extends CustomFramedBlock {
-    public static final VoxelShape EAST_FR = Block.box(0.0F, 0.0F, 9.0F, 1.0F, 16.0F, 13.0F);
-    public static final VoxelShape EAST_FL = Block.box(0.0F, 0.0F, 3.0F, 1.0F, 16.0F, 7.0F);
-    public static final VoxelShape EAST_SR = Block.box(0.0F, 0.0F, 13.0F, 8.0F, 16.0F, 16.0F);
-    public static final VoxelShape EAST_SL = Block.box(0.0F, 0.0F, 0.0F, 8.0F, 16.0F, 3.0F);
-    public static final VoxelShape EAST_SHAPE = Shapes.or(Shapes.or(EAST_FR, EAST_FL), Shapes.or(EAST_SR, EAST_SL));
-    public static final VoxelShape WEST_FR = Block.box(15.0F, 0.0F, 9.0F, 16.0F, 16.0F, 13.0F);
-    public static final VoxelShape WEST_FL = Block.box(15.0F, 0.0F, 3.0F, 16.0F, 16.0F, 7.0F);
-    public static final VoxelShape WEST_SR = Block.box(8.0F, 0.0F, 13.0F, 16.0F, 16.0F, 16.0F);
-    public static final VoxelShape WEST_SL = Block.box(8.0F, 0.0F, 0.0F, 16.0F, 16.0F, 3.0F);
-    public static final VoxelShape WEST_SHAPE = Shapes.or(Shapes.or(WEST_FR, WEST_FL), Shapes.or(WEST_SR, WEST_SL));
-    public static final VoxelShape NORTH_FR = Block.box(9.0F, 0.0F, 15.0F, 13.0F, 16.0F, 16.0F);
-    public static final VoxelShape NORTH_FL = Block.box(3.0F, 0.0F, 15.0F, 7.0F, 16.0F, 16.0F);
-    public static final VoxelShape NORTH_SR = Block.box(13.0F, 0.0F, 8.0F, 16.0F, 16.0F, 16.0F);
-    public static final VoxelShape NORTH_SL = Block.box(0.0F, 0.0F, 8.0F, 3.0F, 16.0F, 16.0F);
-    public static final VoxelShape NORTH_SHAPE = Shapes.or(Shapes.or(NORTH_FR, NORTH_FL), Shapes.or(NORTH_SR, NORTH_SL));
-    public static final VoxelShape SOUTH_FR = Block.box(9.0F, 0.0F, 0.0F, 13.0F, 16.0F, 1.0F);
-    public static final VoxelShape SOUTH_FL = Block.box(3.0F, 0.0F, 0.0F, 7.0F, 16.0F, 1.0F);
-    public static final VoxelShape SOUTH_SR = Block.box(13.0F, 0.0F, 0.0F, 16.0F, 16.0F, 8.0F);
-    public static final VoxelShape SOUTH_SL = Block.box(0.0F, 0.0F, 0.0F, 3.0F, 16.0F, 8.0F);
-    public static final VoxelShape SOUTH_SHAPE = Shapes.or(Shapes.or(SOUTH_FR, SOUTH_FL), Shapes.or(SOUTH_SR, SOUTH_SL));
+    private static final VoxelShape EAST_FR = Block.box(0.0F, 0.0F, 9.0F, 1.0F, 16.0F, 13.0F);
+    private static final VoxelShape EAST_FL = Block.box(0.0F, 0.0F, 3.0F, 1.0F, 16.0F, 7.0F);
+    private static final VoxelShape EAST_SR = Block.box(0.0F, 0.0F, 13.0F, 8.0F, 16.0F, 16.0F);
+    private static final VoxelShape EAST_SL = Block.box(0.0F, 0.0F, 0.0F, 8.0F, 16.0F, 3.0F);
+    private static final VoxelShape EAST_SHAPE = Shapes.or(Shapes.or(EAST_FR, EAST_FL), Shapes.or(EAST_SR, EAST_SL));
+    private static final VoxelShape WEST_FR = Block.box(15.0F, 0.0F, 9.0F, 16.0F, 16.0F, 13.0F);
+    private static final VoxelShape WEST_FL = Block.box(15.0F, 0.0F, 3.0F, 16.0F, 16.0F, 7.0F);
+    private static final VoxelShape WEST_SR = Block.box(8.0F, 0.0F, 13.0F, 16.0F, 16.0F, 16.0F);
+    private static final VoxelShape WEST_SL = Block.box(8.0F, 0.0F, 0.0F, 16.0F, 16.0F, 3.0F);
+    private static final VoxelShape WEST_SHAPE = Shapes.or(Shapes.or(WEST_FR, WEST_FL), Shapes.or(WEST_SR, WEST_SL));
+    private static final VoxelShape NORTH_FR = Block.box(9.0F, 0.0F, 15.0F, 13.0F, 16.0F, 16.0F);
+    private static final VoxelShape NORTH_FL = Block.box(3.0F, 0.0F, 15.0F, 7.0F, 16.0F, 16.0F);
+    private static final VoxelShape NORTH_SR = Block.box(13.0F, 0.0F, 8.0F, 16.0F, 16.0F, 16.0F);
+    private static final VoxelShape NORTH_SL = Block.box(0.0F, 0.0F, 8.0F, 3.0F, 16.0F, 16.0F);
+    private static final VoxelShape NORTH_SHAPE = Shapes.or(Shapes.or(NORTH_FR, NORTH_FL), Shapes.or(NORTH_SR, NORTH_SL));
+    private static final VoxelShape SOUTH_FR = Block.box(9.0F, 0.0F, 0.0F, 13.0F, 16.0F, 1.0F);
+    private static final VoxelShape SOUTH_FL = Block.box(3.0F, 0.0F, 0.0F, 7.0F, 16.0F, 1.0F);
+    private static final VoxelShape SOUTH_SR = Block.box(13.0F, 0.0F, 0.0F, 16.0F, 16.0F, 8.0F);
+    private static final VoxelShape SOUTH_SL = Block.box(0.0F, 0.0F, 0.0F, 3.0F, 16.0F, 8.0F);
+    private static final VoxelShape SOUTH_SHAPE = Shapes.or(Shapes.or(SOUTH_FR, SOUTH_FL), Shapes.or(SOUTH_SR, SOUTH_SL));
 
     /// See [StairBlock].
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;

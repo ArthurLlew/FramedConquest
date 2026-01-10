@@ -24,20 +24,20 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class FramedBalustrade extends CustomFramedBlock {
-    public static final VoxelShape XZ_BASE = Block.box(2.0F, 0.0F, 2.0F, 14.0F, 4.0F, 14.0F);
-    public static final VoxelShape X_LOWER = Block.box(3.0F, 4.0F, 4.0F, 13.0F, 5.0F, 12.0F);
-    public static final VoxelShape X_MIDDLE = Block.box(4.0F, 5.0F, 6.0F, 12.0F, 10.0F, 10.0F);
-    public static final VoxelShape X_TOP = Block.box(0.0F, 10.0F, 3.0F, 16.0F, 16.0F, 13.0F);
-    public static final VoxelShape Z_LOWER = Block.box(4.0F, 4.0F, 3.0F, 12.0F, 5.0F, 13.0F);
-    public static final VoxelShape Z_MIDDLE = Block.box(6.0F, 5.0F, 4.0F, 10.0F, 10.0F, 12.0F);
-    public static final VoxelShape Z_TOP = Block.box(3.0F, 10.0F, 0.0F, 13.0F, 16.0F, 16.0F);
-    public static final VoxelShape X_AXIS_AABB = Shapes.or(XZ_BASE, Shapes.or(X_LOWER, Shapes.or(X_MIDDLE, X_TOP)));
-    public static final VoxelShape Z_AXIS_AABB = Shapes.or(XZ_BASE, Shapes.or(Z_LOWER, Shapes.or(Z_MIDDLE, Z_TOP)));
-    public static final VoxelShape Y_BASE = Block.box(2.0F, 0.0F, 2.0F, 14.0F, 4.0F, 14.0F);
-    public static final VoxelShape Y_LOWER = Block.box(3.0F, 4.0F, 3.0F, 13.0F, 5.0F, 13.0F);
-    public static final VoxelShape Y_MIDDLE = Block.box(4.0F, 5.0F, 4.0F, 12.0F, 11.0F, 12.0F);
-    public static final VoxelShape Y_TOP = Block.box(2.0F, 11.0F, 2.0F, 14.0F, 16.0F, 14.0F);
-    public static final VoxelShape Y_AXIS_AABB = Shapes.or(Y_BASE, Shapes.or(Y_LOWER, Shapes.or(Y_MIDDLE, Y_TOP)));
+    private static final VoxelShape XZ_BASE = Block.box(2.0F, 0.0F, 2.0F, 14.0F, 4.0F, 14.0F);
+    private static final VoxelShape X_LOWER = Block.box(3.0F, 4.0F, 4.0F, 13.0F, 5.0F, 12.0F);
+    private static final VoxelShape X_MIDDLE = Block.box(4.0F, 5.0F, 6.0F, 12.0F, 10.0F, 10.0F);
+    private static final VoxelShape X_TOP = Block.box(0.0F, 10.0F, 3.0F, 16.0F, 16.0F, 13.0F);
+    private static final VoxelShape Z_LOWER = Block.box(4.0F, 4.0F, 3.0F, 12.0F, 5.0F, 13.0F);
+    private static final VoxelShape Z_MIDDLE = Block.box(6.0F, 5.0F, 4.0F, 10.0F, 10.0F, 12.0F);
+    private static final VoxelShape Z_TOP = Block.box(3.0F, 10.0F, 0.0F, 13.0F, 16.0F, 16.0F);
+    private static final VoxelShape X_AXIS_AABB = Shapes.or(XZ_BASE, Shapes.or(X_LOWER, Shapes.or(X_MIDDLE, X_TOP)));
+    private static final VoxelShape Z_AXIS_AABB = Shapes.or(XZ_BASE, Shapes.or(Z_LOWER, Shapes.or(Z_MIDDLE, Z_TOP)));
+    private static final VoxelShape Y_BASE = Block.box(2.0F, 0.0F, 2.0F, 14.0F, 4.0F, 14.0F);
+    private static final VoxelShape Y_LOWER = Block.box(3.0F, 4.0F, 3.0F, 13.0F, 5.0F, 13.0F);
+    private static final VoxelShape Y_MIDDLE = Block.box(4.0F, 5.0F, 4.0F, 12.0F, 11.0F, 12.0F);
+    private static final VoxelShape Y_TOP = Block.box(2.0F, 11.0F, 2.0F, 14.0F, 16.0F, 14.0F);
+    private static final VoxelShape Y_AXIS_AABB = Shapes.or(Y_BASE, Shapes.or(Y_LOWER, Shapes.or(Y_MIDDLE, Y_TOP)));
 
     /**
      * Constructor.

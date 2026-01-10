@@ -26,14 +26,14 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class FramedQuarterHorizontal extends CustomFramedBlock {
-    public static final VoxelShape[] BOTTOM_SOUTH_SHAPE = new VoxelShape[]{Block.box(0.0F, 0.0F, 0.0F, 16.0F, 4.0F, 4.0F), Block.box(0.0F, 0.0F, 0.0F, 16.0F, 8.0F, 8.0F), Block.box(0.0F, 0.0F, 0.0F, 16.0F, 12.0F, 12.0F)};
-    public static final VoxelShape[] BOTTOM_NORTH_SHAPE = new VoxelShape[]{Block.box(0.0F, 0.0F, 12.0F, 16.0F, 4.0F, 16.0F), Block.box(0.0F, 0.0F, 8.0F, 16.0F, 8.0F, 16.0F), Block.box(0.0F, 0.0F, 4.0F, 16.0F, 12.0F, 16.0F)};
-    public static final VoxelShape[] BOTTOM_WEST_SHAPE = new VoxelShape[]{Block.box(12.0F, 0.0F, 0.0F, 16.0F, 4.0F, 16.0F), Block.box(8.0F, 0.0F, 0.0F, 16.0F, 8.0F, 16.0F), Block.box(4.0F, 0.0F, 0.0F, 16.0F, 12.0F, 16.0F)};
-    public static final VoxelShape[] BOTTOM_EAST_SHAPE = new VoxelShape[]{Block.box(0.0F, 0.0F, 0.0F, 4.0F, 4.0F, 16.0F), Block.box(0.0F, 0.0F, 0.0F, 8.0F, 8.0F, 16.0F), Block.box(0.0F, 0.0F, 0.0F, 12.0F, 12.0F, 16.0F)};
-    public static final VoxelShape[] TOP_SOUTH_SHAPE = new VoxelShape[]{Block.box(0.0F, 12.0F, 0.0F, 16.0F, 16.0F, 4.0F), Block.box(0.0F, 8.0F, 0.0F, 16.0F, 16.0F, 8.0F), Block.box(0.0F, 4.0F, 0.0F, 16.0F, 16.0F, 12.0F)};
-    public static final VoxelShape[] TOP_NORTH_SHAPE = new VoxelShape[]{Block.box(0.0F, 12.0F, 12.0F, 16.0F, 16.0F, 16.0F), Block.box(0.0F, 8.0F, 8.0F, 16.0F, 16.0F, 16.0F), Block.box(0.0F, 4.0F, 4.0F, 16.0F, 16.0F, 16.0F)};
-    public static final VoxelShape[] TOP_WEST_SHAPE = new VoxelShape[]{Block.box(12.0F, 12.0F, 0.0F, 16.0F, 16.0F, 16.0F), Block.box(8.0F, 8.0F, 0.0F, 16.0F, 16.0F, 16.0F), Block.box(4.0F, 4.0F, 0.0F, 16.0F, 16.0F, 16.0F)};
-    public static final VoxelShape[] TOP_EAST_SHAPE = new VoxelShape[]{Block.box(0.0F, 12.0F, 0.0F, 4.0F, 16.0F, 16.0F), Block.box(0.0F, 8.0F, 0.0F, 8.0F, 16.0F, 16.0F), Block.box(0.0F, 4.0F, 0.0F, 12.0F, 16.0F, 16.0F)};
+    private static final VoxelShape[] BOTTOM_SOUTH_SHAPE = new VoxelShape[]{Block.box(0.0F, 0.0F, 0.0F, 16.0F, 4.0F, 4.0F), Block.box(0.0F, 0.0F, 0.0F, 16.0F, 8.0F, 8.0F), Block.box(0.0F, 0.0F, 0.0F, 16.0F, 12.0F, 12.0F)};
+    private static final VoxelShape[] BOTTOM_NORTH_SHAPE = new VoxelShape[]{Block.box(0.0F, 0.0F, 12.0F, 16.0F, 4.0F, 16.0F), Block.box(0.0F, 0.0F, 8.0F, 16.0F, 8.0F, 16.0F), Block.box(0.0F, 0.0F, 4.0F, 16.0F, 12.0F, 16.0F)};
+    private static final VoxelShape[] BOTTOM_WEST_SHAPE = new VoxelShape[]{Block.box(12.0F, 0.0F, 0.0F, 16.0F, 4.0F, 16.0F), Block.box(8.0F, 0.0F, 0.0F, 16.0F, 8.0F, 16.0F), Block.box(4.0F, 0.0F, 0.0F, 16.0F, 12.0F, 16.0F)};
+    private static final VoxelShape[] BOTTOM_EAST_SHAPE = new VoxelShape[]{Block.box(0.0F, 0.0F, 0.0F, 4.0F, 4.0F, 16.0F), Block.box(0.0F, 0.0F, 0.0F, 8.0F, 8.0F, 16.0F), Block.box(0.0F, 0.0F, 0.0F, 12.0F, 12.0F, 16.0F)};
+    private static final VoxelShape[] TOP_SOUTH_SHAPE = new VoxelShape[]{Block.box(0.0F, 12.0F, 0.0F, 16.0F, 16.0F, 4.0F), Block.box(0.0F, 8.0F, 0.0F, 16.0F, 16.0F, 8.0F), Block.box(0.0F, 4.0F, 0.0F, 16.0F, 16.0F, 12.0F)};
+    private static final VoxelShape[] TOP_NORTH_SHAPE = new VoxelShape[]{Block.box(0.0F, 12.0F, 12.0F, 16.0F, 16.0F, 16.0F), Block.box(0.0F, 8.0F, 8.0F, 16.0F, 16.0F, 16.0F), Block.box(0.0F, 4.0F, 4.0F, 16.0F, 16.0F, 16.0F)};
+    private static final VoxelShape[] TOP_WEST_SHAPE = new VoxelShape[]{Block.box(12.0F, 12.0F, 0.0F, 16.0F, 16.0F, 16.0F), Block.box(8.0F, 8.0F, 0.0F, 16.0F, 16.0F, 16.0F), Block.box(4.0F, 4.0F, 0.0F, 16.0F, 16.0F, 16.0F)};
+    private static final VoxelShape[] TOP_EAST_SHAPE = new VoxelShape[]{Block.box(0.0F, 12.0F, 0.0F, 4.0F, 16.0F, 16.0F), Block.box(0.0F, 8.0F, 0.0F, 8.0F, 16.0F, 16.0F), Block.box(0.0F, 4.0F, 0.0F, 12.0F, 16.0F, 16.0F)};
 
     private static final int MAX_LAYERS = 3;
 
