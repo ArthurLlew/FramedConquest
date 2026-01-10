@@ -36,7 +36,7 @@ public class FramedSphere extends CustomFramedBlock {
     /**
      * Sphere shape property.
      */
-    public static final EnumProperty<SphereShape> TYPE = EnumProperty.create("type", SphereShape.class);
+    public static final EnumProperty<SphereShape> TYPE = EnumProperty.create("shape", SphereShape.class);
 
     /**
      * Constructor.
