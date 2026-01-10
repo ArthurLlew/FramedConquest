@@ -1,0 +1,11 @@
+{
+    "loader": "neoforge:obj",
+    "model": "framedcr:models/block/obj/generic_round_arch_2.obj",
+    "mtl_override": "framedcr:models/block/obj/generic_arch.mtl",
+    "ambientToFullbright": true,
+    "flip_v": true,
+    "textures": {
+        "particle": "framedblocks:block/framed_block",
+        "keystones": "framedblocks:block/framed_block"
+    }
+}

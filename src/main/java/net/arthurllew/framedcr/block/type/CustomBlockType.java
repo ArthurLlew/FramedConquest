@@ -136,6 +136,14 @@ public enum CustomBlockType implements IBlockType {
             FullFacePredicate.FALSE,
             SideSkipPredicate.FALSE,
             ConnectionPredicate.FULL_EDGE,
+            "_1"),
+    FRAMED_ARCH_FACADE(true, false, false, true, true,
+            true, false, false,
+            ConTexMode.FULL_FACE,
+            FramedArch::generateShapes,
+            FullFacePredicate.FALSE,
+            SideSkipPredicate.FALSE,
+            ConnectionPredicate.FULL_EDGE,
             "_1");
 
     /**

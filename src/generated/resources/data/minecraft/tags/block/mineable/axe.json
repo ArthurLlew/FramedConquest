@@ -13,6 +13,14 @@
     "framedcr:framed_corner_vertical",
     "framedcr:framed_quarter_horizontal",
     "framedcr:framed_quarter_vertical",
-    "framedcr:framed_gothic_arch"
+    "framedcr:framed_gothic_arch",
+    "framedcr:framed_gothic_arch_smooth",
+    "framedcr:framed_gothic_brick_arch",
+    "framedcr:framed_round_arch",
+    "framedcr:framed_round_arch_smooth",
+    "framedcr:framed_round_brick_arch",
+    "framedcr:framed_segmental_arch",
+    "framedcr:framed_segmental_arch_smooth",
+    "framedcr:framed_segmental_brick_arch"
   ]
 }

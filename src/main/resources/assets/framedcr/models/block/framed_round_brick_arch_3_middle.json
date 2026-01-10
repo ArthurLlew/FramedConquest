@@ -1,0 +1,15 @@
+{
+    "loader": "neoforge:obj",
+    "model": "framedcr:models/block/obj/generic_brick_round_arch_3_middle.obj",
+    "mtl_override": "framedcr:models/block/obj/brick_arch.mtl",
+    "ambientToFullbright": true,
+    "flip_v": true,
+    "textures": {
+        "particle": "framedcr:block/1_basic_refined/1_stone/1_clay/framed_brick_arch/1",
+        "keystones": "framedcr:block/1_basic_refined/1_stone/1_clay/framed_brick_arch/keystones",
+        "underside1": "framedcr:block/1_basic_refined/1_stone/1_clay/framed_brick_arch/1",
+        "underside2": "framedcr:block/1_basic_refined/1_stone/1_clay/framed_brick_arch/2",
+        "underside3": "framedcr:block/1_basic_refined/1_stone/1_clay/framed_brick_arch/3",
+        "mortar": "framedcr:block/1_basic_refined/1_stone/1_clay/framed_brick_arch/mortar"
+    }
+}

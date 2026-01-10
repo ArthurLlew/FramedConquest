@@ -12,5 +12,13 @@
   "block.framedcr.framed_corner_vertical": "Framed Corner Vertical",
   "block.framedcr.framed_quarter_horizontal": "Framed Quarter Horizontal",
   "block.framedcr.framed_quarter_vertical": "Framed Quarter Vertical",
-  "block.framedcr.framed_gothic_arch": "Framed Gothic Arch"
+  "block.framedcr.framed_gothic_arch": "Framed Gothic Arch",
+  "block.framedcr.framed_gothic_arch_smooth": "Framed Gothic Arch Smooth",
+  "block.framedcr.framed_gothic_brick_arch": "Framed Gothic Brick Arch",
+  "block.framedcr.framed_round_arch": "Framed Round Arch",
+  "block.framedcr.framed_round_arch_smooth": "Framed Round Arch Smooth",
+  "block.framedcr.framed_round_brick_arch": "Framed Round Brick Arch",
+  "block.framedcr.framed_segmental_arch": "Framed Segmental Arch",
+  "block.framedcr.framed_segmental_arch_smooth": "Framed Segmental Arch Smooth",
+  "block.framedcr.framed_segmental_brick_arch": "Framed Segmental Brick Arch"
 }

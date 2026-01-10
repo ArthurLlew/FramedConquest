@@ -1,0 +1,13 @@
+{
+    "loader": "neoforge:obj",
+    "model": "framedcr:models/block/obj/smooth_segmental_arch_3.obj",
+    "emissive_ambient": true,
+    "flip_v": true,
+    "textures": {
+        "particle": "framedblocks:block/framed_block",
+        "keystones": "framedblocks:block/framed_block",
+        "underside1": "framedblocks:block/framed_block",
+        "underside2": "framedblocks:block/framed_block",
+        "underside3": "framedblocks:block/framed_block"
+    }
+}

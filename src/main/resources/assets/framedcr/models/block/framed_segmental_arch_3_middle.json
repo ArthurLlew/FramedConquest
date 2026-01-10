@@ -1,0 +1,12 @@
+{
+    "loader": "neoforge:obj",
+    "model": "framedcr:models/block/obj/generic_segmental_arch_3_middle.obj",
+    "mtl_override": "framedcr:models/block/obj/generic_arch.mtl",
+    "ambientToFullbright": true,
+    "flip_v": true,
+    "textures": {
+        "particle": "framedblocks:block/framed_block",
+        "arch2": "framedblocks:block/framed_block",
+        "keystones": "framedblocks:block/framed_block"
+    }
+}
