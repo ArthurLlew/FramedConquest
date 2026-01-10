@@ -140,7 +140,7 @@ public enum CustomBlockType implements IBlockType {
     FRAMED_ARCH_FACADE(true, false, false, true, true,
             true, false, false,
             ConTexMode.FULL_FACE,
-            FramedArch::generateShapes,
+            FramedArchFacade::generateShapes,
             FullFacePredicate.FALSE,
             SideSkipPredicate.FALSE,
             ConnectionPredicate.FULL_EDGE,

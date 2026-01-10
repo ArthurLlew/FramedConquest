@@ -61,6 +61,12 @@ public class FramedConquestBlocks {
             "framed_segmental_arch_smooth", FramedArch::new);
     public static final DeferredBlock<FramedArch> FRAMED_SEGMENTAL_BRICK_ARCH = registerBlock(
             "framed_segmental_brick_arch", FramedArch::new);
+    public static final DeferredBlock<FramedArchFacade> FRAMED_GOTHIC_ARCH_FACADE = registerBlock(
+            "framed_gothic_arch_facade", FramedArchFacade::new);
+    public static final DeferredBlock<FramedArchFacade> FRAMED_ROUND_ARCH_FACADE = registerBlock(
+            "framed_round_arch_facade", FramedArchFacade::new);
+    public static final DeferredBlock<FramedArchFacade> FRAMED_SEGMENTAL_ARCH_FACADE = registerBlock(
+            "framed_segmental_arch_facade", FramedArchFacade::new);
 
     /**
      * Registers block and its item.

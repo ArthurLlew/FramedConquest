@@ -1,0 +1,272 @@
+package net.arthurllew.framedcr.block;
+
+import com.google.common.collect.ImmutableList;
+import net.arthurllew.framedcr.block.shape.ArchFacadeShape;
+import net.arthurllew.framedcr.block.type.CustomBlockType;
+import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.Half;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import xfacthd.framedblocks.api.block.FramedProperties;
+import xfacthd.framedblocks.api.block.PlacementStateBuilder;
+import xfacthd.framedblocks.api.shapes.ShapeProvider;
+
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+
+@MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
+public class FramedArchFacade extends CustomFramedBlock {
+    private static final VoxelShape EAST_SHAPE = Block.box(0.0F, 0.0F, 0.0F, 8.0F, 16.0F, 16.0F);
+    private static final VoxelShape WEST_SHAPE = Block.box(8.0F, 0.0F, 0.0F, 16.0F, 16.0F, 16.0F);
+    private static final VoxelShape SOUTH_SHAPE = Block.box(0.0F, 0.0F, 0.0F, 16.0F, 16.0F, 8.0F);
+    private static final VoxelShape NORTH_SHAPE = Block.box(0.0F, 0.0F, 8.0F, 16.0F, 16.0F, 16.0F);
+    private static final VoxelShape ARCH_NORTH_R_SHAPE = Shapes.or(Block.box(0.0F, 8.0F, 8.0F, 16.0F, 16.0F, 16.0F), Block.box(0.0F, 0.0F, 8.0F, 8.0F, 8.0F, 16.0F));
+    private static final VoxelShape ARCH_NORTH_L_SHAPE = Shapes.or(Block.box(8.0F, 0.0F, 8.0F, 16.0F, 16.0F, 16.0F), Block.box(0.0F, 8.0F, 8.0F, 8.0F, 16.0F, 16.0F));
+    private static final VoxelShape ARCH_WEST_L_SHAPE = Shapes.or(Block.box(8.0F, 8.0F, 0.0F, 16.0F, 16.0F, 16.0F), Block.box(8.0F, 0.0F, 8.0F, 16.0F, 8.0F, 16.0F));
+    private static final VoxelShape ARCH_WEST_R_SHAPE = Shapes.or(Block.box(8.0F, 0.0F, 0.0F, 16.0F, 16.0F, 8.0F), Block.box(8.0F, 8.0F, 8.0F, 16.0F, 16.0F, 16.0F));
+    private static final VoxelShape ARCH_EAST_R_SHAPE = Shapes.or(Block.box(0.0F, 8.0F, 0.0F, 8.0F, 16.0F, 16.0F), Block.box(0.0F, 0.0F, 0.0F, 8.0F, 8.0F, 8.0F));
+    private static final VoxelShape ARCH_EAST_L_SHAPE = Shapes.or(Block.box(0.0F, 0.0F, 8.0F, 8.0F, 16.0F, 16.0F), Block.box(0.0F, 8.0F, 0.0F, 8.0F, 16.0F, 8.0F));
+    private static final VoxelShape ARCH_SOUTH_L_SHAPE = Shapes.or(Block.box(0.0F, 8.0F, 0.0F, 16.0F, 16.0F, 8.0F), Block.box(8.0F, 0.0F, 0.0F, 16.0F, 8.0F, 8.0F));
+    private static final VoxelShape ARCH_SOUTH_R_SHAPE = Shapes.or(Block.box(0.0F, 0.0F, 0.0F, 8.0F, 16.0F, 8.0F), Block.box(8.0F, 8.0F, 0.0F, 16.0F, 16.0F, 8.0F));
+    private static final VoxelShape ARCH_MIDDLE_SOUTH_SHAPE = Block.box(0.0F, 8.0F, 0.0F, 16.0F, 16.0F, 8.0F);
+    private static final VoxelShape ARCH_MIDDLE_NORTH_SHAPE = Block.box(0.0F, 8.0F, 8.0F, 16.0F, 16.0F, 16.0F);
+    private static final VoxelShape ARCH_MIDDLE_WEST_SHAPE = Block.box(8.0F, 8.0F, 0.0F, 16.0F, 16.0F, 16.0F);
+    private static final VoxelShape ARCH_MIDDLE_EAST_SHAPE = Block.box(0.0F, 8.0F, 0.0F, 8.0F, 16.0F, 16.0F);
+    private static final VoxelShape ARCH_NORTH_R_BOTTOM_SHAPE = Shapes.or(Block.box(0.0F, 0.0F, 8.0F, 16.0F, 8.0F, 16.0F), Block.box(0.0F, 8.0F, 8.0F, 8.0F, 16.0F, 16.0F));
+    private static final VoxelShape ARCH_NORTH_L_BOTTOM_SHAPE = Shapes.or(Block.box(8.0F, 0.0F, 8.0F, 16.0F, 16.0F, 16.0F), Block.box(0.0F, 0.0F, 8.0F, 8.0F, 8.0F, 16.0F));
+    private static final VoxelShape ARCH_WEST_L_BOTTOM_SHAPE = Shapes.or(Block.box(8.0F, 0.0F, 0.0F, 16.0F, 8.0F, 16.0F), Block.box(8.0F, 8.0F, 8.0F, 16.0F, 16.0F, 16.0F));
+    private static final VoxelShape ARCH_WEST_R_BOTTOM_SHAPE = Shapes.or(Block.box(8.0F, 0.0F, 0.0F, 16.0F, 16.0F, 8.0F), Block.box(8.0F, 0.0F, 8.0F, 16.0F, 8.0F, 16.0F));
+    private static final VoxelShape ARCH_EAST_R_BOTTOM_SHAPE = Shapes.or(Block.box(0.0F, 0.0F, 0.0F, 8.0F, 8.0F, 16.0F), Block.box(0.0F, 8.0F, 0.0F, 8.0F, 16.0F, 8.0F));
+    private static final VoxelShape ARCH_EAST_L_BOTTOM_SHAPE = Shapes.or(Block.box(0.0F, 0.0F, 8.0F, 8.0F, 16.0F, 16.0F), Block.box(0.0F, 0.0F, 0.0F, 8.0F, 8.0F, 8.0F));
+    private static final VoxelShape ARCH_SOUTH_L_BOTTOM_SHAPE = Shapes.or(Block.box(0.0F, 0.0F, 0.0F, 16.0F, 8.0F, 8.0F), Block.box(8.0F, 8.0F, 0.0F, 16.0F, 16.0F, 8.0F));
+    private static final VoxelShape ARCH_SOUTH_R_BOTTOM_SHAPE = Shapes.or(Block.box(0.0F, 0.0F, 0.0F, 8.0F, 16.0F, 8.0F), Block.box(8.0F, 0.0F, 0.0F, 16.0F, 8.0F, 8.0F));
+    private static final VoxelShape ARCH_MIDDLE_SOUTH_BOTTOM_SHAPE = Block.box(0.0F, 0.0F, 0.0F, 16.0F, 8.0F, 8.0F);
+    private static final VoxelShape ARCH_MIDDLE_NORTH_BOTTOM_SHAPE = Block.box(0.0F, 0.0F, 8.0F, 16.0F, 8.0F, 16.0F);
+    private static final VoxelShape ARCH_MIDDLE_WEST_BOTTOM_SHAPE = Block.box(8.0F, 0.0F, 0.0F, 16.0F, 8.0F, 16.0F);
+    private static final VoxelShape ARCH_MIDDLE_EAST_BOTTOM_SHAPE = Block.box(0.0F, 0.0F, 0.0F, 8.0F, 8.0F, 16.0F);
+
+
+    /**
+     * Arch shape property.
+     */
+    public static final EnumProperty<ArchFacadeShape> TYPE = EnumProperty.create("shape", ArchFacadeShape.class);
+    /**
+     * Horizontal direction property.
+     */
+    public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+    /**
+     * Top/bottom location property.
+     */
+    public static final EnumProperty<Half> HALF = BlockStateProperties.HALF;
+
+    /**
+     * Constructor.
+     */
+    public FramedArchFacade() {
+        super(CustomBlockType.FRAMED_ARCH_FACADE);
+        this.registerDefaultState(this.stateDefinition.any()
+                .setValue(TYPE, ArchFacadeShape.ONE)
+                .setValue(FACING, Direction.NORTH)
+                .setValue(HALF, Half.TOP));
+    }
+
+    /**
+     * Appends block state attributes.
+     */
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder);
+        builder.add(TYPE, FACING, HALF, FramedProperties.SOLID, BlockStateProperties.WATERLOGGED);
+    }
+
+    /**
+     * @return empty shape.
+     */
+    public VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+        return Shapes.empty();
+    }
+
+    /**
+     * @return empty shape.
+     */
+    public VoxelShape getOcclusionShape(BlockState state, BlockGetter world, BlockPos pos) {
+        return Shapes.empty();
+    }
+
+    /**
+     * @return empty shape.
+     */
+    public VoxelShape getVisualShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+        return Shapes.empty();
+    }
+
+    /**
+     * @return whether a block can be replaced by the other one.
+     */
+    protected boolean canBeReplaced(BlockState state, BlockPlaceContext context) {
+        return context.getItemInHand().is(this.asItem())
+                && context.getPlayer() != null
+                && !context.getPlayer().isCrouching();
+    }
+
+    /**
+     * @return block state that should be placed in the world depending on provided context.
+     */
+    @Nullable
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        return PlacementStateBuilder.of(this, context)
+                .withCustom((state, modCtx) -> {
+                    // Check whether the block shape is being cycled
+                    BlockState prevState = context.getLevel().getBlockState(context.getClickedPos());
+                    if (prevState.is(this)) {
+                        return null;
+                    }
+
+                    BlockPos pos = context.getClickedPos();
+                    Direction facing = context.getClickedFace();
+                    if (facing == Direction.UP || facing == Direction.DOWN) {
+                        facing = this.getFacingFromUpDown(context, pos);
+                    }
+
+                    ArchFacadeShape shape = ArchFacadeShape.ONE;
+                    Half upDown = facing == Direction.DOWN
+                            || facing != Direction.UP && context.getClickLocation().y
+                            - (double)context.getClickedPos().getY() > 0.5D ? Half.TOP : Half.BOTTOM;
+                    return this.defaultBlockState()
+                            .setValue(TYPE, shape)
+                            .setValue(FACING, facing)
+                            .setValue(HALF, upDown);
+                })
+                .withWater()
+                .build();
+    }
+
+    /**
+     * @return horizontal direction derived from clicked location.
+     */
+    private Direction getFacingFromUpDown(BlockPlaceContext context, BlockPos pos) {
+        Direction horizontalFacing = context.getHorizontalDirection();
+        return switch (horizontalFacing) {
+            case EAST -> !(context.getClickLocation().z - (double) pos.getZ() > 0.5D)
+                    ? horizontalFacing.getClockWise() : horizontalFacing.getCounterClockWise();
+            case SOUTH -> !(context.getClickLocation().x - (double) pos.getX() < 0.5D)
+                    ? horizontalFacing.getClockWise() : horizontalFacing.getCounterClockWise();
+            case WEST -> !(context.getClickLocation().z - (double) pos.getZ() < 0.5D)
+                    ? horizontalFacing.getClockWise() : horizontalFacing.getCounterClockWise();
+            case NORTH -> !(context.getClickLocation().x - (double) pos.getX() > 0.5D)
+                    ? horizontalFacing.getClockWise() : horizontalFacing.getCounterClockWise();
+            default -> throw new IllegalStateException();
+        };
+    }
+
+    /**
+     * Called when item is used on this block.
+     */
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
+                                              Player player, InteractionHand hand, BlockHitResult hitResult) {
+        if (!player.getAbilities().mayBuild) {
+            return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
+        } else if (stack.getItem() == this.asItem()) {
+            level.setBlock(pos, state.cycle(TYPE), 3);
+            return ItemInteractionResult.SUCCESS;
+        } else {
+            return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
+        }
+    }
+
+    /**
+     * Produces pairs (block state, shape).
+     */
+    public static ShapeProvider generateShapes(ImmutableList<BlockState> states) {
+        return generateShapes(states, (state) -> {
+            if (state.getValue(HALF) == Half.TOP) {
+                if (state.getValue(TYPE) == ArchFacadeShape.ONE) {
+                    return switch (state.getValue(FACING)) {
+                        case NORTH -> NORTH_SHAPE;
+                        case SOUTH -> SOUTH_SHAPE;
+                        case EAST -> EAST_SHAPE;
+                        case WEST -> WEST_SHAPE;
+                        default -> throw new IllegalStateException();
+                    };
+                } else if (state.getValue(TYPE) != ArchFacadeShape.TWO_L && state.getValue(TYPE) != ArchFacadeShape.THREE_L) {
+                    if (state.getValue(TYPE) != ArchFacadeShape.TWO_R && state.getValue(TYPE) != ArchFacadeShape.THREE_R) {
+                        return switch (state.getValue(FACING)) {
+                            case NORTH -> ARCH_MIDDLE_NORTH_SHAPE;
+                            case SOUTH -> ARCH_MIDDLE_SOUTH_SHAPE;
+                            case EAST -> ARCH_MIDDLE_EAST_SHAPE;
+                            case WEST -> ARCH_MIDDLE_WEST_SHAPE;
+                            default -> throw new IllegalStateException();
+                        };
+                    } else {
+                        return switch (state.getValue(FACING)) {
+                            case NORTH -> ARCH_NORTH_R_SHAPE;
+                            case SOUTH -> ARCH_SOUTH_R_SHAPE;
+                            case EAST -> ARCH_EAST_R_SHAPE;
+                            case WEST -> ARCH_WEST_R_SHAPE;
+                            default -> throw new IllegalStateException();
+                        };
+                    }
+                } else {
+                    return switch (state.getValue(FACING)) {
+                        case NORTH -> ARCH_NORTH_L_SHAPE;
+                        case SOUTH -> ARCH_SOUTH_L_SHAPE;
+                        case EAST -> ARCH_EAST_L_SHAPE;
+                        case WEST -> ARCH_WEST_L_SHAPE;
+                        default -> throw new IllegalStateException();
+                    };
+                }
+            } else if (state.getValue(TYPE) == ArchFacadeShape.ONE) {
+                return switch (state.getValue(FACING)) {
+                    case NORTH -> NORTH_SHAPE;
+                    case SOUTH -> SOUTH_SHAPE;
+                    case EAST -> EAST_SHAPE;
+                    case WEST -> WEST_SHAPE;
+                    default -> throw new IllegalStateException();
+                };
+            } else if (state.getValue(TYPE) != ArchFacadeShape.TWO_L && state.getValue(TYPE) != ArchFacadeShape.THREE_L) {
+                if (state.getValue(TYPE) != ArchFacadeShape.TWO_R && state.getValue(TYPE) != ArchFacadeShape.THREE_R) {
+                    return switch (state.getValue(FACING)) {
+                        case NORTH -> ARCH_MIDDLE_NORTH_BOTTOM_SHAPE;
+                        case SOUTH -> ARCH_MIDDLE_SOUTH_BOTTOM_SHAPE;
+                        case EAST -> ARCH_MIDDLE_EAST_BOTTOM_SHAPE;
+                        case WEST -> ARCH_MIDDLE_WEST_BOTTOM_SHAPE;
+                        default -> throw new IllegalStateException();
+                    };
+                } else {
+                    return switch (state.getValue(FACING)) {
+                        case NORTH -> ARCH_NORTH_R_BOTTOM_SHAPE;
+                        case SOUTH -> ARCH_SOUTH_R_BOTTOM_SHAPE;
+                        case EAST -> ARCH_EAST_R_BOTTOM_SHAPE;
+                        case WEST -> ARCH_WEST_R_BOTTOM_SHAPE;
+                        default -> throw new IllegalStateException();
+                    };
+                }
+            } else {
+                return switch (state.getValue(FACING)) {
+                    case NORTH -> ARCH_NORTH_L_BOTTOM_SHAPE;
+                    case SOUTH -> ARCH_SOUTH_L_BOTTOM_SHAPE;
+                    case EAST -> ARCH_EAST_L_BOTTOM_SHAPE;
+                    case WEST -> ARCH_WEST_L_BOTTOM_SHAPE;
+                    default -> throw new IllegalStateException();
+                };
+            }
+        });
+    }
+}
