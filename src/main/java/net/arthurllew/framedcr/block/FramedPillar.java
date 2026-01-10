@@ -97,11 +97,4 @@ public class FramedPillar extends CustomFramedBlock {
     public static ShapeProvider generateShapes(ImmutableList<BlockState> states) {
         return generateShapes(states, (state) -> SHAPE[state.getValue(LAYERS) - 1]);
     }
-
-    /**
-     * @return whether this block should cull face in given direction.
-     */
-    public static boolean fullFacePredicate(BlockState state, Direction dir) {
-        return state.getValue(FramedPillar.LAYERS) == 4;
-    }
 }

@@ -35,7 +35,7 @@ public enum CustomBlockType implements IBlockType {
             true, false, false,
             ConTexMode.FULL_FACE,
             FramedPillar::generateShapes,
-            FramedPillar::fullFacePredicate,
+            FullFacePredicate.FALSE,
             SideSkipPredicate.FALSE,
             ConnectionPredicate.FULL_EDGE,
             "_1", 3, true),
