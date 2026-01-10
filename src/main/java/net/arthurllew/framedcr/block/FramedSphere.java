@@ -4,14 +4,21 @@ import com.google.common.collect.ImmutableList;
 import net.arthurllew.framedcr.block.shape.SphereShape;
 import net.arthurllew.framedcr.block.type.CustomBlockType;
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import xfacthd.framedblocks.api.block.FramedProperties;
@@ -56,7 +63,9 @@ public class FramedSphere extends CustomFramedBlock {
      * @return whether a block can be replaced by the other one.
      */
     protected boolean canBeReplaced(BlockState state, BlockPlaceContext context) {
-        return context.getItemInHand().is(this.asItem());
+        return context.getItemInHand().is(this.asItem())
+                && context.getPlayer() != null
+                && !context.getPlayer().isCrouching();
     }
 
     /**
@@ -65,37 +74,27 @@ public class FramedSphere extends CustomFramedBlock {
     @Nullable
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         return PlacementStateBuilder.of(this, context)
-                .withCustom((state, modCtx) -> {
-                    BlockState prevState = modCtx.getLevel().getBlockState(modCtx.getClickedPos());
-                    if (prevState.is(this)) {
-                        // Cycle through shapes
-                        return prevState.setValue(TYPE, switch (prevState.getValue(TYPE)) {
-                            case SphereShape.LARGE -> SphereShape.SMALL;
-                            case SphereShape.SMALL -> SphereShape.EGG;
-                            case SphereShape.EGG -> SphereShape.LARGE;
-                        });
-                    } else {
-                        return state;
-                    }
+                .withCustom((state, modCtx) ->{
+                    BlockState prevState = context.getLevel().getBlockState(context.getClickedPos());
+                    return prevState.is(this) ? null : this.defaultBlockState();
                 })
                 .withWater()
                 .build();
     }
 
     /**
-     * Block item is created inside class to add extra functionality
-     * (see {@link FramedLayeredCubeBlock} and {@link FBContent}).
-     * If not done in this manner, the block will lose camo and
-     * ultimately break in behavior, when changing state on
-     * block item usage.
+     * Called when item is used on this block.
      */
-    public BlockItem createBlockItem() {
-        return new FramedSpecialBlockItem.Single(this, new Item.Properties()) {
-            protected @org.jetbrains.annotations.Nullable BlockState getReplacementState(BlockPlaceContext ctx,
-                                                                                         BlockState originalState) {
-                return FramedSphere.this.getStateForPlacement(ctx);
-            }
-        };
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
+                                              Player player, InteractionHand hand, BlockHitResult hitResult) {
+        if (!player.getAbilities().mayBuild) {
+            return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
+        } else if (stack.getItem() == this.asItem()) {
+            level.setBlock(pos, state.cycle(TYPE), 3);
+            return ItemInteractionResult.SUCCESS;
+        } else {
+            return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
+        }
     }
 
     /**
