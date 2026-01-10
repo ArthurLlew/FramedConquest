@@ -2,11 +2,11 @@ package net.arthurllew.framedcr.block;
 
 import com.google.common.collect.ImmutableList;
 import net.arthurllew.framedcr.block.type.CustomBlockType;
+import net.arthurllew.framedcr.block.util.CustomPlacementStateBuilder;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -17,7 +17,6 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import xfacthd.framedblocks.api.block.FramedProperties;
-import xfacthd.framedblocks.api.block.PlacementStateBuilder;
 import xfacthd.framedblocks.api.shapes.ShapeProvider;
 
 import javax.annotation.Nullable;
@@ -79,18 +78,8 @@ public class FramedSmallWindow extends CustomFramedBlock {
      */
     @Nullable
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return PlacementStateBuilder.of(this, context)
-                .withCustom((state, modCtx) -> {
-                    BlockGetter iblockreader = context.getLevel();
-                    BlockPos blockpos = context.getClickedPos();
-                    BlockPos up = blockpos.above();
-                    BlockPos down = blockpos.below();
-                    BlockState BlockStateUp = iblockreader.getBlockState(up);
-                    BlockState BlockStateDown = iblockreader.getBlockState(down);
-                    return state
-                            .setValue(UP, this.canConnectTo(BlockStateUp))
-                            .setValue(DOWN, this.canConnectTo(BlockStateDown));
-                })
+        return CustomPlacementStateBuilder.of(this, context)
+                .withUpDown(this::canConnectTo)
                 .withWater()
                 .build();
     }

@@ -55,8 +55,7 @@ public class FramedBalustrade extends CustomFramedBlock {
     /// See [FramedPillarBlock].
     public @Nullable BlockState getStateForPlacement(BlockPlaceContext ctx) {
         return PlacementStateBuilder.of(this, ctx)
-                .withCustom((state, modCtx) ->
-                        state.setValue(BlockStateProperties.AXIS, modCtx.getClickedFace().getAxis()))
+                .withClickedAxis()
                 .withWater()
                 .build();
     }

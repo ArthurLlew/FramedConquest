@@ -3,6 +3,7 @@ package net.arthurllew.framedcr.block;
 import com.google.common.collect.ImmutableList;
 import net.arthurllew.framedcr.block.shape.ArchShape;
 import net.arthurllew.framedcr.block.type.CustomBlockType;
+import net.arthurllew.framedcr.block.util.CustomPlacementStateBuilder;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -24,7 +25,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import xfacthd.framedblocks.api.block.FramedProperties;
-import xfacthd.framedblocks.api.block.PlacementStateBuilder;
 import xfacthd.framedblocks.api.shapes.ShapeProvider;
 
 import javax.annotation.Nullable;
@@ -98,52 +98,19 @@ public class FramedArch extends CustomFramedBlock {
      */
     @Nullable
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return PlacementStateBuilder.of(this, context)
-                .withCustom((state, modCtx) -> {
-                    // Check whether the block shape is being cycled
-                    BlockState prevState = context.getLevel().getBlockState(context.getClickedPos());
-                    if (prevState.is(this)) {
-                        return null;
-                    }
-
-                    BlockPos pos = context.getClickedPos();
-                    Direction facing = context.getClickedFace();
-                    if (facing == Direction.UP || facing == Direction.DOWN) {
-                        facing = this.getFacingFromUpDown(context, pos);
-                    }
-
-                    return this.defaultBlockState().setValue(FACING, facing).setValue(TYPE, ArchShape.ONE);
-                })
+        return CustomPlacementStateBuilder.of(this, context)
+                .withShapeIsCycledCheck()
+                .withArchFacing()
                 .withWater()
                 .build();
     }
 
     /**
-     * @return horizontal direction derived from clicked location.
-     */
-    private Direction getFacingFromUpDown(BlockPlaceContext context, BlockPos pos) {
-        Direction horizontalFacing = context.getHorizontalDirection();
-        return switch (horizontalFacing) {
-            case EAST -> !(context.getClickLocation().z - (double) pos.getZ() > 0.5D)
-                    ? horizontalFacing.getClockWise() : horizontalFacing.getCounterClockWise();
-            case SOUTH -> !(context.getClickLocation().x - (double) pos.getX() < 0.5D)
-                    ? horizontalFacing.getClockWise() : horizontalFacing.getCounterClockWise();
-            case WEST -> !(context.getClickLocation().z - (double) pos.getZ() < 0.5D)
-                    ? horizontalFacing.getClockWise() : horizontalFacing.getCounterClockWise();
-            case NORTH -> !(context.getClickLocation().x - (double) pos.getX() > 0.5D)
-                    ? horizontalFacing.getClockWise() : horizontalFacing.getCounterClockWise();
-            default -> throw new IllegalStateException();
-        };
-    }
-
-    /**
-     * Called when item is used on this block.
+     * Called when an item is used on this block.
      */
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
                                               Player player, InteractionHand hand, BlockHitResult hitResult) {
-        if (!player.getAbilities().mayBuild) {
-            return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
-        } else if (stack.getItem() == this.asItem()) {
+        if (player.getAbilities().mayBuild && stack.getItem() == this.asItem()) {
             level.setBlock(pos, state.cycle(TYPE), 3);
             return ItemInteractionResult.SUCCESS;
         } else {

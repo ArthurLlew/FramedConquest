@@ -3,6 +3,7 @@ package net.arthurllew.framedcr.block;
 import com.google.common.collect.ImmutableList;
 import net.arthurllew.framedcr.block.shape.SphereShape;
 import net.arthurllew.framedcr.block.type.CustomBlockType;
+import net.arthurllew.framedcr.block.util.CustomPlacementStateBuilder;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
@@ -20,7 +21,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import xfacthd.framedblocks.api.block.FramedProperties;
-import xfacthd.framedblocks.api.block.PlacementStateBuilder;
 import xfacthd.framedblocks.api.shapes.ShapeProvider;
 
 import javax.annotation.Nullable;
@@ -68,23 +68,18 @@ public class FramedSphere extends CustomFramedBlock {
      */
     @Nullable
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return PlacementStateBuilder.of(this, context)
-                .withCustom((state, modCtx) ->{
-                    BlockState prevState = context.getLevel().getBlockState(context.getClickedPos());
-                    return prevState.is(this) ? null : this.defaultBlockState();
-                })
+        return CustomPlacementStateBuilder.of(this, context)
+                .withShapeIsCycledCheck()
                 .withWater()
                 .build();
     }
 
     /**
-     * Called when item is used on this block.
+     * Called when an item is used on this block.
      */
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
                                               Player player, InteractionHand hand, BlockHitResult hitResult) {
-        if (!player.getAbilities().mayBuild) {
-            return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
-        } else if (stack.getItem() == this.asItem()) {
+        if (player.getAbilities().mayBuild && stack.getItem() == this.asItem()) {
             level.setBlock(pos, state.cycle(TYPE), 3);
             return ItemInteractionResult.SUCCESS;
         } else {

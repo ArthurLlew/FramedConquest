@@ -63,8 +63,7 @@ public class FramedArrowslit extends CustomFramedBlock {
     @Nullable
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         return PlacementStateBuilder.of(this, context)
-                .withCustom((state, modCtx) -> this.defaultBlockState()
-                        .setValue(FACING, context.getHorizontalDirection().getOpposite()))
+                .withHorizontalFacing(true)
                 .withWater()
                 .build();
     }

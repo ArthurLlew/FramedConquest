@@ -2,9 +2,8 @@ package net.arthurllew.framedcr.block;
 
 import com.google.common.collect.ImmutableList;
 import net.arthurllew.framedcr.block.type.CustomBlockType;
+import net.arthurllew.framedcr.block.util.CustomPlacementStateBuilder;
 import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -13,7 +12,6 @@ import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import xfacthd.framedblocks.api.block.FramedProperties;
-import xfacthd.framedblocks.api.block.PlacementStateBuilder;
 import xfacthd.framedblocks.api.shapes.ShapeProvider;
 
 import javax.annotation.Nullable;
@@ -60,17 +58,9 @@ public class FramedSmallArchHalf extends CustomFramedBlock {
      */
     @Nullable
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return PlacementStateBuilder.of(this, context)
-                .withCustom((state, modCtx) -> {
-                    Direction direction = context.getClickedFace();
-                    BlockPos blockpos = context.getClickedPos();
-                    return this.defaultBlockState()
-                            .setValue(FACING, context.getHorizontalDirection())
-                            .setValue(HALF, direction == Direction.DOWN
-                                    || direction != Direction.UP
-                                    && context.getClickLocation().y - (double)blockpos.getY() > 0.5D
-                                    ? Half.TOP : Half.BOTTOM);
-                })
+        return CustomPlacementStateBuilder.of(this, context)
+                .withHorizontalFacing()
+                .withTopBottom()
                 .withWater()
                 .build();
     }
