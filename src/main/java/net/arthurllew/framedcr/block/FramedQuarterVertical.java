@@ -57,6 +57,7 @@ public class FramedQuarterVertical extends CustomFramedBlock {
     /**
      * Appends block state attributes.
      */
+    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
         builder.add(FACING, LAYERS, FramedProperties.SOLID, BlockStateProperties.WATERLOGGED);
@@ -65,6 +66,7 @@ public class FramedQuarterVertical extends CustomFramedBlock {
     /**
      * @return whether a block can be replaced by the other one.
      */
+    @Override
     protected boolean canBeReplaced(BlockState state, BlockPlaceContext context) {
         if (state.getValue(LAYERS) < MAX_LAYERS && context.getItemInHand().is(this.asItem())) {
             if (context instanceof DirectionalPlaceContext || !context.replacingClickedOnBlock()) {
@@ -82,8 +84,8 @@ public class FramedQuarterVertical extends CustomFramedBlock {
     /**
      * @return block state that should be placed in the world depending on provided context.
      */
-    @Nullable
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
+    @Override
+    public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
         return PlacementStateBuilder.of(this, context)
                 .withCustom((state, modCtx) -> {
                     BlockState prevState = modCtx.getLevel().getBlockState(modCtx.getClickedPos());
@@ -108,6 +110,7 @@ public class FramedQuarterVertical extends CustomFramedBlock {
      * ultimately break in behavior, when changing state on
      * block item usage.
      */
+    @Override
     public BlockItem createBlockItem() {
         return new FramedSpecialBlockItem.Single(this, new Item.Properties()) {
             protected @org.jetbrains.annotations.Nullable BlockState getReplacementState(BlockPlaceContext ctx,

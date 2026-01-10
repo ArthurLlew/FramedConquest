@@ -21,10 +21,12 @@ public enum SphereShape implements StringRepresentable {
         this.name = name;
     }
 
+    @Override
     public String toString() {
         return this.name;
     }
 
+    @Override
     public String getSerializedName() {
         return this.name;
     }

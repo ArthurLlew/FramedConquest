@@ -50,12 +50,14 @@ public class FramedPillar extends CustomFramedBlock {
     }
 
     /// See [FramedLayeredCubeBlock].
+    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
         builder.add(LAYERS, FramedProperties.SOLID, BlockStateProperties.WATERLOGGED);
     }
 
     /// See [FramedLayeredCubeBlock].
+    @Override
     protected boolean canBeReplaced(BlockState state, BlockPlaceContext context) {
         if (state.getValue(LAYERS) < MAX_LAYERS && context.getItemInHand().is(this.asItem())) {
             if (context instanceof DirectionalPlaceContext || !context.replacingClickedOnBlock()) {
@@ -70,8 +72,8 @@ public class FramedPillar extends CustomFramedBlock {
     }
 
     /// See [FramedLayeredCubeBlock].
-    @Nullable
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
+    @Override
+    public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
         return PlacementStateBuilder.of(this, context)
                 .withCustom((state, modCtx) -> {
                         BlockState prevState = modCtx.getLevel().getBlockState(modCtx.getClickedPos());
@@ -93,6 +95,7 @@ public class FramedPillar extends CustomFramedBlock {
      * ultimately break in behavior, when changing state on
      * block item usage.
      */
+    @Override
     public BlockItem createBlockItem() {
         return new FramedSpecialBlockItem.Single(this, new Item.Properties()) {
             protected @org.jetbrains.annotations.Nullable BlockState getReplacementState(BlockPlaceContext ctx,

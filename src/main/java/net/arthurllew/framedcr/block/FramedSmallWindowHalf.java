@@ -82,6 +82,7 @@ public class FramedSmallWindowHalf extends CustomFramedBlock {
     /**
      * Appends block state attributes.
      */
+    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
         builder.add(UP, DOWN, FACING, FramedProperties.SOLID, BlockStateProperties.WATERLOGGED);
@@ -90,8 +91,8 @@ public class FramedSmallWindowHalf extends CustomFramedBlock {
     /**
      * @return block state that should be placed in the world depending on provided context.
      */
-    @Nullable
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
+    @Override
+    public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
         return CustomPlacementStateBuilder.of(this, context)
                 .withUpDown(this::canConnectTo)
                 .withHorizontalFacing(true)
@@ -102,6 +103,7 @@ public class FramedSmallWindowHalf extends CustomFramedBlock {
     /**
      * @return new block state after the neighbor was updated.
      */
+    @Override
     public BlockState updateShape(BlockState state, Direction facing, BlockState facingState,
                                   LevelAccessor level, BlockPos pos, BlockPos facingPos) {
         return super.updateShape(state, facing, facingState, level, pos, facingPos)

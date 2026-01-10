@@ -48,6 +48,7 @@ public class FramedSmallArchHalf extends CustomFramedBlock {
     /**
      * Appends block state attributes.
      */
+    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
         builder.add(FACING, HALF, FramedProperties.SOLID, BlockStateProperties.WATERLOGGED);
@@ -56,8 +57,8 @@ public class FramedSmallArchHalf extends CustomFramedBlock {
     /**
      * @return block state that should be placed in the world depending on provided context.
      */
-    @Nullable
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
+    @Override
+    public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
         return CustomPlacementStateBuilder.of(this, context)
                 .withHorizontalFacing()
                 .withTopBottom()

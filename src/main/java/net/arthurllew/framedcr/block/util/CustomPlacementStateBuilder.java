@@ -14,14 +14,17 @@ import xfacthd.framedblocks.api.block.PlacementStateBuilder;
 import java.util.function.Function;
 
 public class CustomPlacementStateBuilder<T extends CustomPlacementStateBuilder<T>> extends PlacementStateBuilder<T> {
+    /// See [PlacementStateBuilder].
     protected CustomPlacementStateBuilder(Block block, @Nullable BlockState state, BlockPlaceContext ctx) {
         super(block, state, ctx);
     }
 
+    /// See [PlacementStateBuilder].
     public static CustomPlacementStateBuilder<?> of(Block block, BlockPlaceContext ctx) {
         return of(block, block.defaultBlockState(), ctx);
     }
 
+    /// See [PlacementStateBuilder].
     public static CustomPlacementStateBuilder<?> of(Block block, @Nullable BlockState state, BlockPlaceContext ctx) {
         return new CustomPlacementStateBuilder<>(block, state, ctx);
     }

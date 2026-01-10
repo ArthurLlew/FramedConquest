@@ -51,14 +51,15 @@ public class FramedTwoMeterArch extends CustomFramedBlock {
     }
 
     /// See [StairBlock].
+    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
         builder.add(FACING, HALF, FramedProperties.SOLID, BlockStateProperties.WATERLOGGED);
     }
 
     /// See [StairBlock].
-    @Nullable
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
+    @Override
+    public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
         return CustomPlacementStateBuilder.of(this, context)
                 .withHorizontalFacing()
                 .withTopBottom()
@@ -67,11 +68,13 @@ public class FramedTwoMeterArch extends CustomFramedBlock {
     }
 
     /// See [StairBlock].
+    @Override
     protected BlockState rotate(BlockState state, Rotation rot) {
         return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
     }
 
     /// See [StairBlock].
+    @Override
     protected BlockState mirror(BlockState state, Mirror mirror) {
         return state.setValue(FACING, mirror.mirror(state.getValue(FACING)));
     }

@@ -33,6 +33,7 @@ public class FramedTwoMeterArchHalf extends CustomFramedBlock {
     }
 
     /// See [FramedHalfStairsBlock].
+    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
         builder.add(FramedProperties.FACING_HOR, FramedProperties.TOP, PropertyHolder.RIGHT,
@@ -40,8 +41,8 @@ public class FramedTwoMeterArchHalf extends CustomFramedBlock {
     }
 
     /// See [FramedHalfStairsBlock].
-    @Nullable
-    public BlockState getStateForPlacement(BlockPlaceContext ctx) {
+    @Override
+    public @Nullable BlockState getStateForPlacement(BlockPlaceContext ctx) {
         return ExtPlacementStateBuilder.of(this, ctx)
                 .withTargetOrHorizontalFacing()
                 .withTop()
@@ -51,6 +52,7 @@ public class FramedTwoMeterArchHalf extends CustomFramedBlock {
     }
 
     /// See [FramedHalfStairsBlock].
+    @Override
     public BlockState rotate(BlockState state, Direction face, Rotation rot) {
         Direction dir = state.getValue(FramedProperties.FACING_HOR);
         if (Utils.isY(face)) {
@@ -64,11 +66,13 @@ public class FramedTwoMeterArchHalf extends CustomFramedBlock {
     }
 
     /// See [FramedHalfStairsBlock].
+    @Override
     protected BlockState rotate(BlockState state, Rotation rot) {
         return this.rotate(state, Direction.UP, rot);
     }
 
     /// See [FramedHalfStairsBlock].
+    @Override
     protected BlockState mirror(BlockState state, Mirror mirror) {
         if (mirror == Mirror.NONE) {
             return state;
@@ -83,6 +87,7 @@ public class FramedTwoMeterArchHalf extends CustomFramedBlock {
     }
 
     /// See [FramedHalfStairsBlock].
+    @Override
     public BlockState getItemModelSource() {
         return this.defaultBlockState()
                 .setValue(FramedProperties.FACING_HOR, Direction.SOUTH)
@@ -90,6 +95,7 @@ public class FramedTwoMeterArchHalf extends CustomFramedBlock {
     }
 
     /// See [FramedHalfStairsBlock].
+    @Override
     public BlockState getJadeRenderState(BlockState state) {
         return this.defaultBlockState()
                 .setValue(FramedProperties.FACING_HOR, Direction.SOUTH);

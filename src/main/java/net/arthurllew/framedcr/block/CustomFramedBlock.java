@@ -37,10 +37,14 @@ public abstract class CustomFramedBlock extends AbstractFramedBlock {
         super(blockType, propertyModifier);
     }
 
+    /// See [AbstractFramedBlock].
+    @Override
     public BlockState getItemModelSource() {
         return this.defaultBlockState();
     }
 
+    /// See [AbstractFramedBlock].
+    @Override
     public BlockState getJadeRenderState(BlockState state) {
         return this.defaultBlockState();
     }
@@ -48,6 +52,7 @@ public abstract class CustomFramedBlock extends AbstractFramedBlock {
     /**
      * @return block entity to spawn.
      */
+    @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new FramedConquestBlockEntity(pos, state);
     }
@@ -79,6 +84,7 @@ public abstract class CustomFramedBlock extends AbstractFramedBlock {
         return (CustomBlockType) this.getBlockType();
     }
 
+    @Deprecated
     public static Direction getHitVecHorizontalAxisDirection(Direction facing, BlockPos pos, BlockPlaceContext context) {
         switch (facing) {
             case NORTH -> {

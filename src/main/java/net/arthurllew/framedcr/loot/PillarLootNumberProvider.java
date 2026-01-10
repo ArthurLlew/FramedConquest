@@ -31,6 +31,7 @@ public class PillarLootNumberProvider implements NumberProvider {
     /**
      * @return loot count.
      */
+    @Override
     public float getFloat(LootContext ctx) {
         BlockState state = ctx.getParam(LootContextParams.BLOCK_STATE);
         return state.hasProperty(FramedPillar.LAYERS) ? (float)(state.getValue(FramedPillar.LAYERS) - 1) : 0.0F;
@@ -39,6 +40,7 @@ public class PillarLootNumberProvider implements NumberProvider {
     /**
      * @return provider type.
      */
+    @Override
     public LootNumberProviderType getType() {
         return FramedConquestLoot.FRAMED_PILLAR_ITEM_COUNT_PROVIDER.value();
     }

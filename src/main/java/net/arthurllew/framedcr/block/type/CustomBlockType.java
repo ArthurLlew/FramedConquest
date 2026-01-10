@@ -267,30 +267,37 @@ public enum CustomBlockType implements IBlockType {
         return this.hasSpecialLootTable;
     }
 
+    @Override
     public boolean canOccludeWithSolidCamo() {
         return this.canOcclude;
     }
 
+    @Override
     public boolean hasSpecialHitbox() {
         return this.specialHitbox;
     }
 
+    @Override
     public FullFacePredicate getFullFacePredicate() {
         return fullFacePredicate;
     }
 
+    @Override
     public SideSkipPredicate getSideSkipPredicate() {
         return sideSkipPredicate;
     }
 
+    @Override
     public ConnectionPredicate getConnectionPredicate() {
         return connectionPredicates;
     }
 
+    @Override
     public ShapeProvider generateShapes(ImmutableList<BlockState> states) {
         return !FMLEnvironment.production ? new ReloadableShapeProvider(this.shapeGen, states) : this.shapeGen.generate(states);
     }
 
+    @Override
     public ShapeProvider generateOcclusionShapes(ImmutableList<BlockState> states, ShapeProvider shapes) {
         if (this.separateOcclusionShapes) {
             SplitShapeGenerator splitShapeGen = (SplitShapeGenerator)this.shapeGen;
@@ -305,46 +312,57 @@ public enum CustomBlockType implements IBlockType {
         }
     }
 
+    @Override
     public boolean hasSpecialTile() {
         return this.specialTile;
     }
 
+    @Override
     public boolean hasBlockItem() {
         return this.blockItem;
     }
 
+    @Override
     public boolean supportsWaterLogging() {
         return this.waterloggable;
     }
 
+    @Override
     public boolean supportsConnectedTextures() {
         return this.supportsCT;
     }
 
+    @Override
     public ConTexMode getMinimumConTexMode() {
         return this.minCTMode;
     }
 
+    @Override
     public boolean allowMakingIntangible() {
         return this.allowIntangible;
     }
 
+    @Override
     public boolean isDoubleBlock() {
         return this.doubleBlock;
     }
 
+    @Override
     public boolean consumesTwoCamosInCamoApplicationRecipe() {
         return this.doubleBlock;
     }
 
+    @Override
     public boolean canLockState() {
         return this.lockable;
     }
 
+    @Override
     public String getName() {
         return this.name;
     }
 
+    @Override
     public int compareTo(IBlockType other) {
         return other instanceof CustomBlockType type ? this.compareTo(type) : 1;
     }

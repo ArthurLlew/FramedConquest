@@ -54,14 +54,15 @@ public class FramedArrowslit extends CustomFramedBlock {
     }
 
     /// See [StairBlock].
+    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
         builder.add(FACING, FramedProperties.SOLID, BlockStateProperties.WATERLOGGED);
     }
 
     /// See [StairBlock].
-    @Nullable
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
+    @Override
+    public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
         return PlacementStateBuilder.of(this, context)
                 .withHorizontalFacing(true)
                 .withWater()

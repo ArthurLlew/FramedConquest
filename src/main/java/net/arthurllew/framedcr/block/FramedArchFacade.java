@@ -90,6 +90,7 @@ public class FramedArchFacade extends CustomFramedBlock {
     /**
      * Appends block state attributes.
      */
+    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
         builder.add(TYPE, FACING, HALF, FramedProperties.SOLID, BlockStateProperties.WATERLOGGED);
@@ -98,6 +99,7 @@ public class FramedArchFacade extends CustomFramedBlock {
     /**
      * @return empty shape.
      */
+    @Override
     public VoxelShape getCollisionShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
         return Shapes.empty();
     }
@@ -105,6 +107,7 @@ public class FramedArchFacade extends CustomFramedBlock {
     /**
      * @return empty shape.
      */
+    @Override
     public VoxelShape getOcclusionShape(BlockState state, BlockGetter world, BlockPos pos) {
         return Shapes.empty();
     }
@@ -112,6 +115,7 @@ public class FramedArchFacade extends CustomFramedBlock {
     /**
      * @return empty shape.
      */
+    @Override
     public VoxelShape getVisualShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
         return Shapes.empty();
     }
@@ -119,6 +123,7 @@ public class FramedArchFacade extends CustomFramedBlock {
     /**
      * @return whether a block can be replaced by the other one.
      */
+    @Override
     protected boolean canBeReplaced(BlockState state, BlockPlaceContext context) {
         return context.getItemInHand().is(this.asItem())
                 && context.getPlayer() != null
@@ -128,8 +133,8 @@ public class FramedArchFacade extends CustomFramedBlock {
     /**
      * @return block state that should be placed in the world depending on provided context.
      */
-    @Nullable
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
+    @Override
+    public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
         return CustomPlacementStateBuilder.of(this, context)
                 .withShapeIsCycledCheck()
                 .withArchFacing()
@@ -141,6 +146,7 @@ public class FramedArchFacade extends CustomFramedBlock {
     /**
      * Called when an item is used on this block.
      */
+    @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
                                               Player player, InteractionHand hand, BlockHitResult hitResult) {
         if (player.getAbilities().mayBuild && stack.getItem() == this.asItem()) {

@@ -38,6 +38,7 @@ public class RemappedFramedGeometry extends Geometry {
     /**
      * Called by API to get camo model quads (see {@link FramedBlockModel}).
      */
+    @Override
     public void transformQuad(QuadMap quadMap, BakedQuad quad) {
         Direction quadDir = quad.getDirection();
 
@@ -71,7 +72,7 @@ public class RemappedFramedGeometry extends Geometry {
     /**
      * Remaps original quad to new one.
      */
-    public static QuadModifier.Modifier remap(QuadData newData) {
+    protected QuadModifier.Modifier remap(QuadData newData) {
         return (data) -> {
             // Get texture sprites
             TextureAtlasSprite originalSprite = data.quad().getSprite();

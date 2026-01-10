@@ -57,6 +57,7 @@ public class FramedSphere extends CustomFramedBlock {
     /**
      * @return whether a block can be replaced by the other one.
      */
+    @Override
     protected boolean canBeReplaced(BlockState state, BlockPlaceContext context) {
         return context.getItemInHand().is(this.asItem())
                 && context.getPlayer() != null
@@ -66,8 +67,8 @@ public class FramedSphere extends CustomFramedBlock {
     /**
      * @return block state that should be placed in the world depending on provided context.
      */
-    @Nullable
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
+    @Override
+    public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
         return CustomPlacementStateBuilder.of(this, context)
                 .withShapeIsCycledCheck()
                 .withWater()
@@ -77,6 +78,7 @@ public class FramedSphere extends CustomFramedBlock {
     /**
      * Called when an item is used on this block.
      */
+    @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
                                               Player player, InteractionHand hand, BlockHitResult hitResult) {
         if (player.getAbilities().mayBuild && stack.getItem() == this.asItem()) {
