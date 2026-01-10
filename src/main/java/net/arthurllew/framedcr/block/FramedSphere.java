@@ -8,8 +8,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
@@ -24,9 +22,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import xfacthd.framedblocks.api.block.FramedProperties;
 import xfacthd.framedblocks.api.block.PlacementStateBuilder;
 import xfacthd.framedblocks.api.shapes.ShapeProvider;
-import xfacthd.framedblocks.common.FBContent;
-import xfacthd.framedblocks.common.block.cube.FramedLayeredCubeBlock;
-import xfacthd.framedblocks.common.item.FramedSpecialBlockItem;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
