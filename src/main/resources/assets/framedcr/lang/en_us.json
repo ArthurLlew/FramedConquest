@@ -7,6 +7,8 @@
   "block.framedcr.framed_sphere": "Framed Sphere",
   "block.framedcr.framed_small_arch": "Framed Small Arch",
   "block.framedcr.framed_small_arch_half": "Framed Small Arch Half",
+  "block.framedcr.framed_small_window": "Framed Small Window",
+  "block.framedcr.framed_small_window_half": "Framed Small Window Half",
   "block.framedcr.framed_two_meter_arch": "Framed Two Meter Arch",
   "block.framedcr.framed_two_meter_arch_half": "Framed Two Meter Arch Half",
   "block.framedcr.framed_corner_vertical": "Framed Corner Vertical",
@@ -20,5 +22,11 @@
   "block.framedcr.framed_round_brick_arch": "Framed Round Brick Arch",
   "block.framedcr.framed_segmental_arch": "Framed Segmental Arch",
   "block.framedcr.framed_segmental_arch_smooth": "Framed Segmental Arch Smooth",
-  "block.framedcr.framed_segmental_brick_arch": "Framed Segmental Brick Arch"
+  "block.framedcr.framed_segmental_brick_arch": "Framed Segmental Brick Arch",
+  "block.framedcr.framed_gothic_arch_facade": "Framed Gothic Arch Facade",
+  "block.framedcr.framed_round_arch_facade": "Framed Round Arch Facade",
+  "block.framedcr.framed_segmental_arch_facade": "Framed Segmental Arch Facade",
+  "block.framedcr.framed_gothic_brick_arch_facade": "Framed Gothic Brick Arch Facade",
+  "block.framedcr.framed_round_brick_arch_facade": "Framed Round Brick Arch Facade",
+  "block.framedcr.framed_segmental_brick_arch_facade": "Framed Segmental Brick Arch Facade"
 }

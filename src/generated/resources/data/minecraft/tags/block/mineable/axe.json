@@ -24,6 +24,9 @@
     "framedcr:framed_segmental_brick_arch",
     "framedcr:framed_gothic_arch_facade",
     "framedcr:framed_round_arch_facade",
-    "framedcr:framed_segmental_arch_facade"
+    "framedcr:framed_segmental_arch_facade",
+    "framedcr:framed_gothic_brick_arch_facade",
+    "framedcr:framed_round_brick_arch_facade",
+    "framedcr:framed_segmental_brick_arch_facade"
   ]
 }
