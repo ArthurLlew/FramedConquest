@@ -3,6 +3,7 @@ package net.arthurllew.framedcr.block;
 import com.google.common.collect.ImmutableList;
 import net.arthurllew.framedcr.block.type.CustomBlockType;
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Mirror;
@@ -53,6 +54,8 @@ public class FramedArrowslit extends CustomFramedBlock {
      */
     public FramedArrowslit() {
         super(CustomBlockType.FRAMED_ARROWSLIT);
+        this.registerDefaultState(this.stateDefinition.any()
+                .setValue(FACING, Direction.NORTH));
     }
 
     /// See [StairBlock].

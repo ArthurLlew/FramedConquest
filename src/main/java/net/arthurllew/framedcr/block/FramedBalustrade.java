@@ -50,6 +50,8 @@ public class FramedBalustrade extends CustomFramedBlock {
      */
     public FramedBalustrade() {
         super(CustomBlockType.FRAMED_BALUSTRADE);
+        this.registerDefaultState(this.stateDefinition.any()
+                .setValue(AXIS, Direction.Axis.Y));
     }
 
     /// See [FramedPillarBlock].

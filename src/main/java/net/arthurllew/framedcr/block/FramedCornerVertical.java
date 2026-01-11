@@ -56,6 +56,7 @@ public class FramedCornerVertical extends CustomFramedBlock {
     public FramedCornerVertical() {
         super(CustomBlockType.FRAMED_CORNER_VERTICAL);
         this.registerDefaultState(this.stateDefinition.any()
+                .setValue(FACING, Direction.NORTH)
                 .setValue(LAYERS, 1));
     }
 

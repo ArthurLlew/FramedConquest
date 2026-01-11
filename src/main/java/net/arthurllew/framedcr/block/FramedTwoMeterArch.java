@@ -46,6 +46,9 @@ public class FramedTwoMeterArch extends CustomFramedBlock {
      */
     public FramedTwoMeterArch() {
         super(CustomBlockType.FRAMED_TWO_METER_ARCH);
+        this.registerDefaultState(this.stateDefinition.any()
+                .setValue(FACING, Direction.NORTH)
+                .setValue(HALF, Half.TOP));
     }
 
     /// See [StairBlock].

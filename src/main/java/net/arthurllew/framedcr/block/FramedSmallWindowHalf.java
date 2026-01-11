@@ -58,6 +58,10 @@ public class FramedSmallWindowHalf extends CustomFramedBlock {
     private static final VoxelShape UPDOWN_EAST_SHAPE = Shapes.or(EAST_SHAPE, Shapes.or(TOP_EAST, BOTTOM_EAST));
 
     /**
+     * Horizontal direction property.
+     */
+    public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+    /**
      * Up connection property.
      */
     public static final BooleanProperty UP = BlockStateProperties.UP;
@@ -65,10 +69,6 @@ public class FramedSmallWindowHalf extends CustomFramedBlock {
      * Down connection property.
      */
     public static final BooleanProperty DOWN = BlockStateProperties.DOWN;
-    /**
-     * Horizontal direction property.
-     */
-    public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
     /**
      * Constructor.
@@ -96,8 +96,8 @@ public class FramedSmallWindowHalf extends CustomFramedBlock {
     @Override
     public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
         return CustomPlacementStateBuilder.of(this, context)
-                .withUpDown(this::canConnectTo)
                 .withHorizontalFacing(true)
+                .withUpDown(this::canConnectTo)
                 .withWater()
                 .build();
     }

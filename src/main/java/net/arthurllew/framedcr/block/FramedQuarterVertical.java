@@ -51,6 +51,7 @@ public class FramedQuarterVertical extends CustomFramedBlock {
     public FramedQuarterVertical() {
         super(CustomBlockType.FRAMED_QUARTER_VERTICAL);
         this.registerDefaultState(this.stateDefinition.any()
+                .setValue(FACING, Direction.NORTH)
                 .setValue(LAYERS, 1));
     }
 

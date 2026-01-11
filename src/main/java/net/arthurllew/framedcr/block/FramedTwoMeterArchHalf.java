@@ -28,7 +28,8 @@ public class FramedTwoMeterArchHalf extends CustomFramedBlock {
     public FramedTwoMeterArchHalf() {
         super(CustomBlockType.FRAMED_TWO_METER_ARCH_HALF);
         this.registerDefaultState(this.defaultBlockState()
-                .setValue(FramedProperties.TOP, false)
+                .setValue(FramedProperties.FACING_HOR, Direction.NORTH)
+                .setValue(FramedProperties.TOP, true)
                 .setValue(PropertyHolder.RIGHT, false));
     }
 
