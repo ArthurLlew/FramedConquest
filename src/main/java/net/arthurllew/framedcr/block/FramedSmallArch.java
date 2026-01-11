@@ -2,11 +2,13 @@ package net.arthurllew.framedcr.block;
 
 import com.google.common.collect.ImmutableList;
 import net.arthurllew.framedcr.block.type.CustomBlockType;
+import net.arthurllew.framedcr.block.util.BlockUtils;
 import net.arthurllew.framedcr.block.util.CustomPlacementStateBuilder;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -60,6 +62,14 @@ public class FramedSmallArch extends CustomFramedBlock {
                 .withTopBottom()
                 .withWater()
                 .build();
+    }
+
+    /**
+     * @return rotated block state.
+     */
+    @Override
+    protected BlockState rotate(BlockState state, Rotation rotation) {
+        return BlockUtils.rotateAxis(state, rotation, AXIS);
     }
 
     /**

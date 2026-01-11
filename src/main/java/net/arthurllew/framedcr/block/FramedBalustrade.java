@@ -2,6 +2,7 @@ package net.arthurllew.framedcr.block;
 
 import com.google.common.collect.ImmutableList;
 import net.arthurllew.framedcr.block.type.CustomBlockType;
+import net.arthurllew.framedcr.block.util.BlockUtils;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -10,13 +11,13 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 import xfacthd.framedblocks.api.block.FramedProperties;
 import xfacthd.framedblocks.api.block.PlacementStateBuilder;
 import xfacthd.framedblocks.api.shapes.ShapeProvider;
-import xfacthd.framedblocks.api.util.Utils;
 import xfacthd.framedblocks.common.block.pillar.FramedPillarBlock;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -40,6 +41,11 @@ public class FramedBalustrade extends CustomFramedBlock {
     private static final VoxelShape Y_AXIS_AABB = Shapes.or(Y_BASE, Shapes.or(Y_LOWER, Shapes.or(Y_MIDDLE, Y_TOP)));
 
     /**
+     * Horizontal axis property.
+     */
+    public static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.AXIS;
+    
+    /**
      * Constructor.
      */
     public FramedBalustrade() {
@@ -50,7 +56,7 @@ public class FramedBalustrade extends CustomFramedBlock {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(BlockStateProperties.AXIS, FramedProperties.SOLID, BlockStateProperties.WATERLOGGED);
+        builder.add(AXIS, FramedProperties.SOLID, BlockStateProperties.WATERLOGGED);
     }
 
     /// See [FramedPillarBlock].
@@ -62,34 +68,24 @@ public class FramedBalustrade extends CustomFramedBlock {
                 .build();
     }
 
-    /// See [FramedPillarBlock].
+    /**
+     * @return rotated block state.
+     */
     @Override
-    public BlockState rotate(BlockState state, Direction side, Rotation rot) {
-        return rot != Rotation.NONE ? state.cycle(BlockStateProperties.AXIS) : state;
-    }
-
-    /// See [FramedPillarBlock].
-    @Override
-    protected BlockState rotate(BlockState state, Rotation rot) {
-        Direction.Axis axis = state.getValue(BlockStateProperties.AXIS);
-        if (axis != Direction.Axis.Y && rot != Rotation.NONE && rot != Rotation.CLOCKWISE_180) {
-            axis = Utils.nextAxisNotEqualTo(axis, Direction.Axis.Y);
-            return state.setValue(BlockStateProperties.AXIS, axis);
-        } else {
-            return state;
-        }
+    protected BlockState rotate(BlockState state, Rotation rotation) {
+        return BlockUtils.rotateAxis(state, rotation, AXIS);
     }
 
     /// See [FramedPillarBlock].
     @Override
     public BlockState getItemModelSource() {
-        return this.defaultBlockState().setValue(BlockStateProperties.AXIS, Direction.Axis.Y);
+        return this.defaultBlockState().setValue(AXIS, Direction.Axis.Y);
     }
 
     /// See [FramedPillarBlock].
     @Override
     public BlockState getJadeRenderState(BlockState state) {
-        return this.defaultBlockState().setValue(BlockStateProperties.AXIS, Direction.Axis.Y);
+        return this.defaultBlockState().setValue(AXIS, Direction.Axis.Y);
     }
 
     /**
@@ -97,7 +93,7 @@ public class FramedBalustrade extends CustomFramedBlock {
      */
     public static ShapeProvider generateShapes(ImmutableList<BlockState> states) {
         return generateShapes(states, (state) ->
-                switch (state.getValue(BlockStateProperties.AXIS)) {
+                switch (state.getValue(AXIS)) {
                     case X -> X_AXIS_AABB;
                     case Y -> Y_AXIS_AABB;
                     case Z -> Z_AXIS_AABB;

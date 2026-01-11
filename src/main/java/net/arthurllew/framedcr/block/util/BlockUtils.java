@@ -1,9 +1,12 @@
 package net.arthurllew.framedcr.block.util;
 
+import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.DirectionalPlaceContext;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 
 import javax.annotation.Nullable;
@@ -55,5 +58,19 @@ public class BlockUtils {
                         .withQuarterFacing()
                         .withWater()
                         .build());
+    }
+
+    /**
+     * @return rotated block with AXIS property.
+     */
+    public static BlockState rotateAxis(BlockState state, Rotation rotation, EnumProperty<Direction.Axis> axis) {
+        return switch (rotation) {
+            case COUNTERCLOCKWISE_90, CLOCKWISE_90 -> switch (state.getValue(axis)) {
+                case X -> state.setValue(axis, Direction.Axis.Z);
+                case Z -> state.setValue(axis, Direction.Axis.X);
+                default -> state;
+            };
+            default -> state;
+        };
     }
 }
