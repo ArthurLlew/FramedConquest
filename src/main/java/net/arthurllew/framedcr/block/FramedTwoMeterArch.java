@@ -96,11 +96,11 @@ public class FramedTwoMeterArch extends CustomFramedBlock {
      */
     public static boolean fullFacePredicate(BlockState state, Direction dir) {
         if (dir == Direction.UP) {
-            return state.getValue(BlockStateProperties.HALF) == Half.TOP;
+            return state.getValue(HALF) == Half.TOP;
         } else if (dir == Direction.DOWN) {
-            return state.getValue(BlockStateProperties.HALF) == Half.BOTTOM;
+            return state.getValue(HALF) == Half.BOTTOM;
         } else {
-            Direction facing = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
+            Direction facing = state.getValue(FACING);
             return facing == dir;
         }
     }

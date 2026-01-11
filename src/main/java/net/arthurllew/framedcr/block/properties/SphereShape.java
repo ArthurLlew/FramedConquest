@@ -1,4 +1,4 @@
-package net.arthurllew.framedcr.block.shape;
+package net.arthurllew.framedcr.block.properties;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.util.StringRepresentable;
@@ -10,17 +10,14 @@ import javax.annotation.ParametersAreNonnullByDefault;
  */
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public enum ArchFacadeShape implements StringRepresentable {
-    ONE("one"),
-    TWO_L("two_l"),
-    TWO_R("two_r"),
-    THREE_L("three_l"),
-    THREE_R("three_r"),
-    THREE_MIDDLE("three_middle");
+public enum SphereShape implements StringRepresentable {
+    EGG("egg"),
+    SMALL("small"),
+    LARGE("large");
 
     private final String name;
 
-    ArchFacadeShape(String name) {
+    SphereShape(String name) {
         this.name = name;
     }
 

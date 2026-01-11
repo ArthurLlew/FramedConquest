@@ -1,4 +1,4 @@
-package net.arthurllew.framedcr.block.shape;
+package net.arthurllew.framedcr.block.properties;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.util.StringRepresentable;

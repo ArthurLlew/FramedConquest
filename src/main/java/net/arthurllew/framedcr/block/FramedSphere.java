@@ -1,7 +1,7 @@
 package net.arthurllew.framedcr.block;
 
 import com.google.common.collect.ImmutableList;
-import net.arthurllew.framedcr.block.shape.SphereShape;
+import net.arthurllew.framedcr.block.properties.SphereShape;
 import net.arthurllew.framedcr.block.type.CustomBlockType;
 import net.arthurllew.framedcr.block.util.CustomPlacementStateBuilder;
 import net.minecraft.MethodsReturnNonnullByDefault;
