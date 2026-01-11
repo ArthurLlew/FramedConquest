@@ -89,14 +89,6 @@ public class FramedTwoMeterArchHalf extends CustomFramedBlock {
 
     /// See [FramedHalfStairsBlock].
     @Override
-    public BlockState getItemModelSource() {
-        return this.defaultBlockState()
-                .setValue(FramedProperties.FACING_HOR, Direction.SOUTH)
-                .setValue(PropertyHolder.RIGHT, true);
-    }
-
-    /// See [FramedHalfStairsBlock].
-    @Override
     public BlockState getJadeRenderState(BlockState state) {
         return this.defaultBlockState()
                 .setValue(FramedProperties.FACING_HOR, Direction.SOUTH);
