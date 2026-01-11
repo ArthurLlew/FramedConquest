@@ -15,6 +15,7 @@ import xfacthd.framedblocks.api.block.IFramedBlock;
 import xfacthd.framedblocks.api.shapes.ShapeProvider;
 import xfacthd.framedblocks.common.block.FramedBlock;
 
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
@@ -39,10 +40,13 @@ public abstract class CustomFramedBlock extends AbstractFramedBlock {
         super(blockType, propertyModifier);
     }
 
-    /// See [AbstractFramedBlock].
+    /**
+     * May override block item model using provided block state.
+     * @return {@code null} meaning that an already existing item model will be used.
+     */
     @Override
-    public BlockState getItemModelSource() {
-        return this.defaultBlockState();
+    public @Nullable BlockState getItemModelSource() {
+        return null;
     }
 
     /// See [AbstractFramedBlock].
