@@ -3,20 +3,20 @@
   "parent": "block/block",
   "render_type": "minecraft:cutout",
   "textures": {
-    "all": "framedblocks:block/framed_block",
-    "particle": "#all"
+    "particle": "framedblocks:block/framed_block",
+    "all": "framedblocks:block/framed_block"
   },
   "elements": [
     {
       "from": [0, 0, 0],
       "to": [16, 12, 12],
       "faces": {
-        "north": {"uv": [0, 4, 16, 16], "texture": "#all"},
-        "east": {"uv": [4, 4, 16, 16], "texture": "#all"},
+        "north": {"uv": [0, 4, 16, 16], "texture": "#all", "cullface": "north"},
+        "east": {"uv": [4, 4, 16, 16], "texture": "#all", "cullface": "east"},
         "south": {"uv": [0, 4, 16, 16], "texture": "#all"},
-        "west": {"uv": [0, 4, 12, 16], "texture": "#all"},
+        "west": {"uv": [0, 4, 12, 16], "texture": "#all", "cullface": "west"},
         "up": {"uv": [0, 0, 16, 12], "texture": "#all"},
-        "down": {"uv": [0, 4, 16, 16], "texture": "#all"}
+        "down": {"uv": [0, 4, 16, 16], "texture": "#all", "cullface": "down"}
       }
     }
   ],

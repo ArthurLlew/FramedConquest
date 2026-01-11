@@ -3,34 +3,28 @@
   "parent": "block/block",
   "render_type": "minecraft:cutout",
   "textures": {
-    "all": "framedblocks:block/framed_block",
-    "particle": "#all"
+    "particle": "framedblocks:block/framed_block",
+    "all": "framedblocks:block/framed_block"
   },
   "elements": [
     {
-      "name": "Element",
       "from": [0, 0, 0],
       "to": [4, 16, 4],
       "faces": {
-        "north": {"uv": [11.5, 0, 16, 16], "texture": "#all"},
+        "north": {"uv": [11.5, 0, 16, 16], "texture": "#all", "cullface": "north"},
         "east": {"uv": [11.5, 0, 16, 16], "texture": "#all"},
         "south": {"uv": [0, 0, 4.5, 16], "texture": "#all"},
-        "west": {"uv": [0, 0, 4.5, 16], "texture": "#all"},
-        "up": {"uv": [0, 0, 4, 4], "texture": "#all"},
-        "down": {"uv": [0, 12, 4, 16], "texture": "#all"}
+        "west": {"uv": [0, 0, 4.5, 16], "texture": "#all", "cullface": "west"}
       }
     },
     {
-      "name": "Element",
       "from": [12, 0, 0],
       "to": [16, 16, 4],
       "faces": {
-        "north": {"uv": [0, 0, 4, 16], "texture": "#all"},
-        "east": {"uv": [12, 0, 16, 16], "texture": "#all"},
+        "north": {"uv": [0, 0, 4, 16], "texture": "#all", "cullface": "north"},
+        "east": {"uv": [12, 0, 16, 16], "texture": "#all", "cullface": "east"},
         "south": {"uv": [12, 0, 16, 16], "texture": "#all"},
-        "west": {"uv": [0, 0, 4, 16], "texture": "#all"},
-        "up": {"uv": [12, 0, 16, 4], "texture": "#all"},
-        "down": {"uv": [12, 12, 16, 16], "texture": "#all"}
+        "west": {"uv": [0, 0, 4, 16], "texture": "#all"}
       }
     }
   ]
