@@ -14,6 +14,8 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -91,25 +93,15 @@ public class FramedRailing extends CustomFramedBlock {
     }
 
     /**
-     * @return whether a block can be replaced by the other one.
+     * @return block state that should be placed in the world depending on provided context.
      */
     @Override
     public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
-        if (this.getCustomBlockType() == CustomBlockType.FRAMED_RAILING)
-        {
-            return CustomPlacementStateBuilder.of(this, context)
-                    .withShapeIsCycledCheck()
-                    .withHorizontalFacing(true)
-                    .withWater()
-                    .build();
-        }
-        else {
-            return CustomPlacementStateBuilder.of(this, context)
-                    .withShapeIsCycledCheck()
-                    .withQuarterFacing()
-                    .withWater()
-                    .build();
-        }
+        return CustomPlacementStateBuilder.of(this, context)
+                .withShapeIsCycledCheck()
+                .withHorizontalFacing(true)
+                .withWater()
+                .build();
     }
 
     /**
@@ -127,6 +119,22 @@ public class FramedRailing extends CustomFramedBlock {
         } else {
             return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
         }
+    }
+
+    /**
+     * @return rotated block state.
+     */
+    @Override
+    protected BlockState rotate(BlockState state, Rotation rotation) {
+        return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
+    }
+
+    /**
+     * @return mirrored block state.
+     */
+    @Override
+    protected BlockState mirror(BlockState state, Mirror mirror) {
+        return state.setValue(FACING, mirror.mirror(state.getValue(FACING)));
     }
 
     /**

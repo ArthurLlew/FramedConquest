@@ -74,10 +74,10 @@ public class FramedConquestBlocks {
             "framed_segmental_brick_arch_facade", FramedArchFacade::new);
     public static final DeferredBlock<FramedRailing> FRAMED_RAILING_1 = registerBlock(
             "framed_railing_1", FramedRailing::new);
-    public static final DeferredBlock<FramedRailing> FRAMED_RAILING_1_BEAM = registerBlock(
-            "framed_railing_1_beam", FramedRailing::new);
-    public static final DeferredBlock<FramedRailing> FRAMED_RAILING_1_SLOPE = registerBlock(
-            "framed_railing_1_slope", FramedRailing::new);
+    public static final DeferredBlock<FramedRailingSlope> FRAMED_RAILING_1_BEAM = registerBlock(
+            "framed_railing_1_beam", FramedRailingSlope::new);
+    public static final DeferredBlock<FramedRailingSlope> FRAMED_RAILING_1_SLOPE = registerBlock(
+            "framed_railing_1_slope", FramedRailingSlope::new);
     public static final DeferredBlock<FramedRailingCorner> FRAMED_RAILING_1_CORNER = registerBlock(
             "framed_railing_1_corner", FramedRailingCorner::new);
 
