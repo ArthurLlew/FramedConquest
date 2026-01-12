@@ -8,7 +8,6 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
-import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -46,7 +45,9 @@ public class FramedArrowslit extends CustomFramedBlock {
     private static final VoxelShape SOUTH_SL = Block.box(0.0F, 0.0F, 0.0F, 3.0F, 16.0F, 8.0F);
     private static final VoxelShape SOUTH_SHAPE = Shapes.or(Shapes.or(SOUTH_FR, SOUTH_FL), Shapes.or(SOUTH_SR, SOUTH_SL));
 
-    /// See [StairBlock].
+    /**
+     * Horizontal direction property.
+     */
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
     /**
@@ -58,14 +59,18 @@ public class FramedArrowslit extends CustomFramedBlock {
                 .setValue(FACING, Direction.NORTH));
     }
 
-    /// See [StairBlock].
+    /**
+     * Appends block state attributes.
+     */
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
         builder.add(FACING, FramedProperties.SOLID, BlockStateProperties.WATERLOGGED);
     }
 
-    /// See [StairBlock].
+    /**
+     * @return whether a block can be replaced by the other one.
+     */
     @Override
     public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
         return PlacementStateBuilder.of(this, context)
