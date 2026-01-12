@@ -28,5 +28,9 @@
   "block.framedcr.framed_segmental_arch_facade": "Framed Segmental Arch Facade",
   "block.framedcr.framed_gothic_brick_arch_facade": "Framed Gothic Brick Arch Facade",
   "block.framedcr.framed_round_brick_arch_facade": "Framed Round Brick Arch Facade",
-  "block.framedcr.framed_segmental_brick_arch_facade": "Framed Segmental Brick Arch Facade"
+  "block.framedcr.framed_segmental_brick_arch_facade": "Framed Segmental Brick Arch Facade",
+  "block.framedcr.framed_railing_1": "Framed Railing 1",
+  "block.framedcr.framed_railing_1_beam": "Framed Railing 1 Beam",
+  "block.framedcr.framed_railing_1_slope": "Framed Railing 1 Slope",
+  "block.framedcr.framed_railing_1_corner": "Framed Railing 1 Corner"
 }
