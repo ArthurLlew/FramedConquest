@@ -80,6 +80,24 @@ public class FramedConquestBlocks {
             "framed_railing_1_slope", FramedRailingSlope::new);
     public static final DeferredBlock<FramedRailingCorner> FRAMED_RAILING_1_CORNER = registerBlock(
             "framed_railing_1_corner", FramedRailingCorner::new);
+    public static final DeferredBlock<FramedRailing> FRAMED_RAILING_2 = registerBlock(
+            "framed_railing_2", FramedRailing::new);
+    public static final DeferredBlock<FramedRailingSlope> FRAMED_RAILING_2_SLOPE = registerBlock(
+            "framed_railing_2_slope", FramedRailingSlope::new);
+    public static final DeferredBlock<FramedRailingCorner> FRAMED_RAILING_2_CORNER = registerBlock(
+            "framed_railing_2_corner", FramedRailingCorner::new);
+    public static final DeferredBlock<FramedRailing> FRAMED_RAILING_3 = registerBlock(
+            "framed_railing_3", FramedRailing::new);
+    public static final DeferredBlock<FramedRailingSlope> FRAMED_RAILING_3_SLOPE = registerBlock(
+            "framed_railing_3_slope", FramedRailingSlope::new);
+    public static final DeferredBlock<FramedRailingCorner> FRAMED_RAILING_3_CORNER = registerBlock(
+            "framed_railing_3_corner", FramedRailingCorner::new);
+    public static final DeferredBlock<FramedRailing> FRAMED_RAILING_4 = registerBlock(
+            "framed_railing_4", FramedRailing::new);
+    public static final DeferredBlock<FramedRailingSlope> FRAMED_RAILING_4_SLOPE = registerBlock(
+            "framed_railing_4_slope", FramedRailingSlope::new);
+    public static final DeferredBlock<FramedRailingCorner> FRAMED_RAILING_4_CORNER = registerBlock(
+            "framed_railing_4_corner", FramedRailingCorner::new);
 
     /**
      * Registers block and its item.

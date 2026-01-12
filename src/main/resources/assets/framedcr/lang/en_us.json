@@ -32,5 +32,14 @@
   "block.framedcr.framed_railing_1": "Framed Railing 1",
   "block.framedcr.framed_railing_1_beam": "Framed Railing 1 Beam",
   "block.framedcr.framed_railing_1_slope": "Framed Railing 1 Slope",
-  "block.framedcr.framed_railing_1_corner": "Framed Railing 1 Corner"
+  "block.framedcr.framed_railing_1_corner": "Framed Railing 1 Corner",
+  "block.framedcr.framed_railing_2": "Framed Railing 2",
+  "block.framedcr.framed_railing_2_slope": "Framed Railing 2 Slope",
+  "block.framedcr.framed_railing_2_corner": "Framed Railing 2 Corner",
+  "block.framedcr.framed_railing_3": "Framed Railing 3",
+  "block.framedcr.framed_railing_3_slope": "Framed Railing 3 Slope",
+  "block.framedcr.framed_railing_3_corner": "Framed Railing 3 Corner",
+  "block.framedcr.framed_railing_4": "Framed Railing 4",
+  "block.framedcr.framed_railing_4_slope": "Framed Railing 4 Slope",
+  "block.framedcr.framed_railing_4_corner": "Framed Railing 4 Corner"
 }

@@ -1,0 +1,72 @@
+{
+  "variants": {
+    "facing=north,half=top,right=false": {
+      "model": "framedcr:block/framed_railing_2_slope_l",
+      "y": 90
+    },
+    "facing=west,half=top,right=false": {
+      "model": "framedcr:block/framed_railing_2_slope_l"
+    },
+    "facing=south,half=top,right=false": {
+      "model": "framedcr:block/framed_railing_2_slope_l",
+      "y": 270
+    },
+    "facing=east,half=top,right=false": {
+      "model": "framedcr:block/framed_railing_2_slope_l",
+      "y": 180
+    },
+    "facing=north,half=bottom,right=false": {
+      "model": "framedcr:block/framed_railing_2_slope_l",
+      "y": 90,
+      "x": 180
+    },
+    "facing=west,half=bottom,right=false": {
+      "model": "framedcr:block/framed_railing_2_slope_l",
+      "x": 180
+    },
+    "facing=south,half=bottom,right=false": {
+      "model": "framedcr:block/framed_railing_2_slope_l",
+      "y": 270,
+      "x": 180
+    },
+    "facing=east,half=bottom,right=false": {
+      "model": "framedcr:block/framed_railing_2_slope_l",
+      "y": 180,
+      "x": 180
+    },
+    "facing=north,half=top,right=true": {
+      "model": "framedcr:block/framed_railing_2_slope_r",
+      "y": 270
+    },
+    "facing=west,half=top,right=true": {
+      "model": "framedcr:block/framed_railing_2_slope_r",
+      "y": 180
+    },
+    "facing=south,half=top,right=true": {
+      "model": "framedcr:block/framed_railing_2_slope_r",
+      "y": 90
+    },
+    "facing=east,half=top,right=true": {
+      "model": "framedcr:block/framed_railing_2_slope_r"
+    },
+    "facing=north,half=bottom,right=true": {
+      "model": "framedcr:block/framed_railing_2_slope_r",
+      "y": 270,
+      "x": 180
+    },
+    "facing=west,half=bottom,right=true": {
+      "model": "framedcr:block/framed_railing_2_slope_r",
+      "y": 180,
+      "x": 180
+    },
+    "facing=south,half=bottom,right=true": {
+      "model": "framedcr:block/framed_railing_2_slope_r",
+      "y": 90,
+      "x": 180
+    },
+    "facing=east,half=bottom,right=true": {
+      "model": "framedcr:block/framed_railing_2_slope_r",
+      "x": 180
+    }
+  }
+}
