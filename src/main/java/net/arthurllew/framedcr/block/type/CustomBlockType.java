@@ -156,7 +156,7 @@ public enum CustomBlockType implements IBlockType {
     FRAMED_RAILING_CORNER(true, false, false, true, true,
             true, false, false,
             ConTexMode.FULL_FACE,
-            FramedRailing::generateCornerShapes,
+            FramedRailingCorner::generateCornerShapes,
             FullFacePredicate.FALSE,
             SideSkipPredicate.FALSE,
             ConnectionPredicate.FULL_EDGE);

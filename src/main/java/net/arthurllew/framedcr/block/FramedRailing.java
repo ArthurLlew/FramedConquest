@@ -49,22 +49,18 @@ public class FramedRailing extends CustomFramedBlock {
     /**
      * Constructor.
      */
-    private FramedRailing(CustomBlockType blockType) {
+    public FramedRailing() {
+        this(CustomBlockType.FRAMED_RAILING);
+    }
+
+    /**
+     * Constructor for extensions.
+     */
+    protected FramedRailing(CustomBlockType blockType) {
         super(blockType);
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(FACING, Direction.NORTH)
                 .setValue(HALF, Half.TOP));
-    }
-
-    /**
-     * Throws {@link IllegalArgumentException} if {@link CustomBlockType} is incorrect.
-     * @return instance of {@link FramedRailing}
-     */
-    public static FramedRailing of (CustomBlockType blockType) {
-        if (blockType != CustomBlockType.FRAMED_RAILING && blockType != CustomBlockType.FRAMED_RAILING_CORNER)
-            throw new IllegalArgumentException();
-
-        return new FramedRailing(blockType);
     }
 
     /**
@@ -142,19 +138,6 @@ public class FramedRailing extends CustomFramedBlock {
             case WEST -> WEST_SHAPE;
             case SOUTH -> SOUTH_SHAPE;
             case EAST -> EAST_SHAPE;
-            default -> throw new IllegalStateException();
-        });
-    }
-
-    /**
-     * Produces pairs (block state, shape).
-     */
-    public static ShapeProvider generateCornerShapes(ImmutableList<BlockState> states) {
-        return generateShapes(states, (state) -> switch (state.getValue(FACING)) {
-            case NORTH -> Shapes.or(NORTH_SHAPE, WEST_SHAPE);
-            case WEST -> Shapes.or(WEST_SHAPE, SOUTH_SHAPE);
-            case SOUTH -> Shapes.or(SOUTH_SHAPE, EAST_SHAPE);
-            case EAST -> Shapes.or(EAST_SHAPE, NORTH_SHAPE);
             default -> throw new IllegalStateException();
         });
     }

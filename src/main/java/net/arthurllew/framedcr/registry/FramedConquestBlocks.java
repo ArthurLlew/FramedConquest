@@ -74,13 +74,13 @@ public class FramedConquestBlocks {
     public static final DeferredBlock<FramedArchFacade> FRAMED_SEGMENTAL_BRICK_ARCH_FACADE = registerBlock(
             "framed_segmental_brick_arch_facade", FramedArchFacade::new);
     public static final DeferredBlock<FramedRailing> FRAMED_RAILING_1 = registerBlock(
-            "framed_railing_1", () -> FramedRailing.of(CustomBlockType.FRAMED_RAILING));
+            "framed_railing_1", FramedRailing::new);
     public static final DeferredBlock<FramedRailing> FRAMED_RAILING_1_BEAM = registerBlock(
-            "framed_railing_1_beam", () -> FramedRailing.of(CustomBlockType.FRAMED_RAILING));
+            "framed_railing_1_beam", FramedRailing::new);
     public static final DeferredBlock<FramedRailing> FRAMED_RAILING_1_SLOPE = registerBlock(
-            "framed_railing_1_slope", () -> FramedRailing.of(CustomBlockType.FRAMED_RAILING));
-    public static final DeferredBlock<FramedRailing> FRAMED_RAILING_1_CORNER = registerBlock(
-            "framed_railing_1_corner", () -> FramedRailing.of(CustomBlockType.FRAMED_RAILING_CORNER));
+            "framed_railing_1_slope", FramedRailing::new);
+    public static final DeferredBlock<FramedRailingCorner> FRAMED_RAILING_1_CORNER = registerBlock(
+            "framed_railing_1_corner", FramedRailingCorner::new);
 
     /**
      * Registers block and its item.
