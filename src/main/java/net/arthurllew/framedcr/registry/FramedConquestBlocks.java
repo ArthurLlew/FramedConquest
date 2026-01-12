@@ -2,6 +2,7 @@ package net.arthurllew.framedcr.registry;
 
 import net.arthurllew.framedcr.FramedConquest;
 import net.arthurllew.framedcr.block.*;
+import net.arthurllew.framedcr.block.type.CustomBlockType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -72,6 +73,14 @@ public class FramedConquestBlocks {
             "framed_round_brick_arch_facade", FramedArchFacade::new);
     public static final DeferredBlock<FramedArchFacade> FRAMED_SEGMENTAL_BRICK_ARCH_FACADE = registerBlock(
             "framed_segmental_brick_arch_facade", FramedArchFacade::new);
+    public static final DeferredBlock<FramedRailing> FRAMED_RAILING_1 = registerBlock(
+            "framed_railing_1", () -> FramedRailing.of(CustomBlockType.FRAMED_RAILING));
+    public static final DeferredBlock<FramedRailing> FRAMED_RAILING_1_BEAM = registerBlock(
+            "framed_railing_1_beam", () -> FramedRailing.of(CustomBlockType.FRAMED_RAILING));
+    public static final DeferredBlock<FramedRailing> FRAMED_RAILING_1_SLOPE = registerBlock(
+            "framed_railing_1_slope", () -> FramedRailing.of(CustomBlockType.FRAMED_RAILING));
+    public static final DeferredBlock<FramedRailing> FRAMED_RAILING_1_CORNER = registerBlock(
+            "framed_railing_1_corner", () -> FramedRailing.of(CustomBlockType.FRAMED_RAILING_CORNER));
 
     /**
      * Registers block and its item.
