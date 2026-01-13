@@ -98,6 +98,22 @@ public class FramedConquestBlocks {
             "framed_railing_4_slope", FramedRailingSlope::new);
     public static final DeferredBlock<FramedRailingCorner> FRAMED_RAILING_4_CORNER = registerBlock(
             "framed_railing_4_corner", FramedRailingCorner::new);
+    public static final DeferredBlock<FramedStairs> FRAMED_STEPS_1 = registerBlock(
+            "framed_steps_1", FramedStairs::new);
+    public static final DeferredBlock<FramedStairs> FRAMED_STEPS_2 = registerBlock(
+            "framed_steps_2", FramedStairs::new);
+    public static final DeferredBlock<FramedStairs> FRAMED_STEPS_3 = registerBlock(
+            "framed_steps_3", FramedStairs::new);
+    public static final DeferredBlock<FramedStairs> FRAMED_STEPS_4 = registerBlock(
+            "framed_steps_4", FramedStairs::new);
+    public static final DeferredBlock<FramedStairs> FRAMED_STEPS_5 = registerBlock(
+            "framed_steps_5", FramedStairs::new);
+    public static final DeferredBlock<FramedStairs> FRAMED_STEPS_6 = registerBlock(
+            "framed_steps_6", FramedStairs::new);
+    public static final DeferredBlock<FramedStairs> FRAMED_STEPS_7 = registerBlock(
+            "framed_steps_7", FramedStairs::new);
+    public static final DeferredBlock<FramedStairs> FRAMED_STEPS_8 = registerBlock(
+            "framed_steps_8", FramedStairs::new);
 
     /**
      * Registers block and its item.

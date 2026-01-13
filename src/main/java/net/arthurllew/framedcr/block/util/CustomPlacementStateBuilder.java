@@ -168,4 +168,16 @@ public class CustomPlacementStateBuilder<T extends CustomPlacementStateBuilder<T
 
         return this.self();
     }
+
+    /**
+     * @return placement block state for block with layers.
+     */
+    public final T withStairsShape() {
+        if (this.state != null) {
+            this.state = this.state.setValue(BlockStateProperties.STAIRS_SHAPE,
+                    BlockUtils.getStairsShape(this.state, this.ctx.getLevel(), this.ctx.getClickedPos()));
+        }
+
+        return this.self();
+    }
 }
