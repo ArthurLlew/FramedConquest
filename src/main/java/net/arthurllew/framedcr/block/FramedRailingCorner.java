@@ -37,13 +37,14 @@ public class FramedRailingCorner extends FramedRailing {
     /**
      * Produces pairs (block state, shape).
      */
-    public static ShapeProvider generateCornerShapes(ImmutableList<BlockState> states) {
-        return generateShapes(states, (state) -> switch (state.getValue(FACING)) {
-            case NORTH -> Shapes.or(NORTH_SHAPE, WEST_SHAPE);
-            case WEST -> Shapes.or(WEST_SHAPE, SOUTH_SHAPE);
-            case SOUTH -> Shapes.or(SOUTH_SHAPE, EAST_SHAPE);
-            case EAST -> Shapes.or(EAST_SHAPE, NORTH_SHAPE);
-            default -> throw new IllegalStateException();
-        });
+    public static ShapeProvider generateShapes(ImmutableList<BlockState> states) {
+        return generateShapes(states, (state) ->
+                switch (state.getValue(FACING)) {
+                    case NORTH -> Shapes.or(NORTH_SHAPE, WEST_SHAPE);
+                    case WEST -> Shapes.or(WEST_SHAPE, SOUTH_SHAPE);
+                    case SOUTH -> Shapes.or(SOUTH_SHAPE, EAST_SHAPE);
+                    case EAST -> Shapes.or(EAST_SHAPE, NORTH_SHAPE);
+                    default -> throw new IllegalStateException();
+                });
     }
 }
