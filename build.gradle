@@ -112,14 +112,14 @@ configurations {
 }
 
 repositories {
-    maven {
-        url "https://cursemaven.com"
+    flatDir {
+        dir 'libs'
     }
 }
 
 dependencies {
     // Framed blocks
-    implementation "curse.maven:framedblocks-441647:7135071"
+    implementation files('libs/FramedBlocks-10.5.3.jar')
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
