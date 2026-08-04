@@ -78,14 +78,21 @@ public class FramedStairs extends CustomFramedBlock {
     public static final EnumProperty<StairsShape> SHAPE = BlockStateProperties.STAIRS_SHAPE;
 
     /**
-     * Constructor.
+     * Base constructor.
      */
-    public FramedStairs() {
-        super(new CustomBlockType.Builder(FramedStairs::getShapeForState).build());
+    public FramedStairs(CustomBlockType blockType) {
+        super(blockType);
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(FACING, Direction.NORTH)
                 .setValue(HALF, Half.TOP)
                 .setValue(SHAPE, StairsShape.STRAIGHT));
+    }
+
+    /**
+     * Constructor.
+     */
+    public FramedStairs() {
+        this(new CustomBlockType.Builder(FramedStairs::getShapeForState).build());
     }
 
     /**
@@ -124,5 +131,19 @@ public class FramedStairs extends CustomFramedBlock {
     public static VoxelShape getShapeForState(BlockState state) {
         return (state.getValue(HALF) == Half.TOP ? TOP_SHAPES : BOTTOM_SHAPES)
                 [SHAPE_BY_STATE[state.getValue(SHAPE).ordinal() * 4 + state.getValue(FACING).get2DDataValue()]];
+    }
+
+    /**
+     * Stairs variant
+     */
+    public static class Plinth extends FramedStairs {
+        /**
+         * Constructor.
+         */
+        public Plinth() {
+            super(new CustomBlockType.Builder(FramedStairs::getShapeForState)
+                    .modelVariantForItem("_normal_bottom")
+                    .build());
+        }
     }
 }
