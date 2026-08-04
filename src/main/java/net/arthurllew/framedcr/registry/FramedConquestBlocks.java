@@ -141,6 +141,9 @@ public class FramedConquestBlocks {
             "framed_capital_doric_up", FramedCapital.DoricBottom::new, FramedCapital.DoricTop::new,
             FramedCapital.Doric::new);
 
+    public static final DeferredBlock<FramedBalustrade> FRAMED_CAPITAL_IONIAN = registerBlock(
+            "framed_capital_ionian", FramedBalustrade::new);
+
     public static final DeferredBlock<FramedStairs> FRAMED_CAPITAL_PLINTH_STAIRS = registerBlock(
             "framed_plinth_stairs", FramedStairs.Plinth::new);
 

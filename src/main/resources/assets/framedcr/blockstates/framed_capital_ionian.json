@@ -1,0 +1,14 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "framedcr:block/framed_capital_ionian_xz",
+      "y": 90
+    },
+    "axis=y": {
+      "model": "framedcr:block/framed_capital_ionian_y"
+    },
+    "axis=z": {
+      "model": "framedcr:block/framed_capital_ionian_xz"
+    }
+  }
+}
