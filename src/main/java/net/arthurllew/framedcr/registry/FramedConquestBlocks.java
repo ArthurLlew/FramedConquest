@@ -142,7 +142,7 @@ public class FramedConquestBlocks {
             FramedCapital.Doric::new);
 
     public static final DeferredBlock<FramedStairs> FRAMED_CAPITAL_PLINTH_STAIRS = registerBlock(
-            "framed_capital_plinth_stairs", FramedStairs.Plinth::new);
+            "framed_plinth_stairs", FramedStairs.Plinth::new);
 
     /**
      * Registers framed double block and its item.

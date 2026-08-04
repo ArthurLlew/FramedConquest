@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "framedcr:framed_capital_plinth_stairs"
+        "recipe": "framedcr:framed_plinth_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "framedcr:framed_capital_plinth_stairs"
+      "framedcr:framed_plinth_stairs"
     ]
   }
 }

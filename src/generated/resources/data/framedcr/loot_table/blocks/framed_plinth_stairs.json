@@ -28,11 +28,11 @@
               "function": "minecraft:explosion_decay"
             }
           ],
-          "name": "framedcr:framed_capital_plinth_stairs"
+          "name": "framedcr:framed_plinth_stairs"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "framedcr:blocks/framed_capital_plinth_stairs"
+  "random_sequence": "framedcr:blocks/framed_plinth_stairs"
 }

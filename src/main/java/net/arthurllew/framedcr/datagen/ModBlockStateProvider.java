@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.level.block.state.properties.StairsShape;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
@@ -61,6 +62,13 @@ public class ModBlockStateProvider extends BlockStateProvider {
             // Two meters arch half block
             else if (holder.get() instanceof FramedTwoMeterArchHalf block) {
                 this.twoMeterArchHalf(block);
+            }
+            // Stairs block
+            else if ((holder.get() instanceof FramedStairs block)
+                    && !holder.getId().getPath().equals("framed_steps_7")
+                    && !holder.getId().getPath().equals("framed_steps_8")
+                    && !(block instanceof FramedStairs.Plinth)) {
+                this.stairs(block);
             }
         }
     }
@@ -132,7 +140,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 case NORTH -> 0;
                 case SOUTH -> 180;
                 case WEST -> 270;
-                default -> 90; // EAST
+                default -> 90;
             };
             // +180 if bottom
             int rotY = bottom ? baseY : (baseY + 180) % 360;
@@ -172,7 +180,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 case NORTH -> 0;
                 case SOUTH -> 180;
                 case WEST -> 270;
-                default -> 90; // EAST
+                default -> 90;
             };
 
             // Init builder
@@ -219,7 +227,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
             // +180 if right
             int rotY = right ? (baseY + 180) % 360 : baseY;
 
-            // Choose model depending on top+right
+            // Choose model
             ModelFile model = top
                     ? (right ? modelL : modelR)
                     : (right ? modelR : modelL);
@@ -232,6 +240,71 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
             // Flip X if bottom
             if (!top) {
+                builder.rotationX(180);
+            }
+
+            // Build
+            return builder.build();
+        }, IGNORED_PROPERTIES);
+    }
+
+    /**
+     * Generates block state for a stairs block.
+     */
+    @SuppressWarnings("ExtractMethodRecommender")
+    public void stairs(FramedStairs block) {
+        String name = getBlockModelPath(block);
+        ModelFile modelStraight = this.models().getExistingFile(
+                ResourceLocation.fromNamespaceAndPath(FramedConquest.MODID, "block/" + name));
+        ModelFile modelOuter = this.models().getExistingFile(
+                ResourceLocation.fromNamespaceAndPath(FramedConquest.MODID, "block/" + name + "_outer"));
+        ModelFile modelInner = this.models().getExistingFile(
+                ResourceLocation.fromNamespaceAndPath(FramedConquest.MODID, "block/" + name + "_inner"));
+
+        // Iterate main block properties
+        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
+            // Get block state properties
+            Direction dir = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
+            Half half = state.getValue(BlockStateProperties.HALF);
+            StairsShape shape = state.getValue(BlockStateProperties.STAIRS_SHAPE);
+
+            // Whether is top
+            boolean top = half == Half.TOP;
+
+            // Choose Y rotation
+            int baseY = switch (dir) {
+                case EAST -> 0;
+                case SOUTH -> 90;
+                case WEST -> 180;
+                default -> 270;
+            };
+            // Left-handed shapes rotate one step counter-clockwise from the base facing rotation
+            int catRotY = ((shape == StairsShape.OUTER_LEFT) || (shape == StairsShape.INNER_LEFT))
+                    ? (baseY + 270) % 360 : baseY;
+
+            // Straight keeps the same Y when flipped upside-down
+            // outer/inner shapes rotate an extra 90 degrees when flipped, since the corner mirrors
+            int rotY = (top && shape != StairsShape.STRAIGHT) ? (catRotY + 90) % 360 : catRotY;
+
+            // Choose model
+            ModelFile model = switch (shape) {
+                case STRAIGHT -> modelStraight;
+                case OUTER_LEFT, OUTER_RIGHT -> modelOuter;
+                default -> modelInner; // INNER_LEFT, INNER_RIGHT
+            };
+
+            // Init builder
+            ConfiguredModel.Builder<?> builder = ConfiguredModel.builder()
+                    .modelFile(model)
+                    .uvLock(true);
+
+            // Ignore 0 rotation
+            if (rotY != 0) {
+                builder.rotationY(rotY);
+            }
+
+            // Flip X if top
+            if (top) {
                 builder.rotationX(180);
             }
 
