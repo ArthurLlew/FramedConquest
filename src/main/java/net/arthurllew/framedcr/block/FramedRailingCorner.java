@@ -1,13 +1,12 @@
 package net.arthurllew.framedcr.block;
 
-import com.google.common.collect.ImmutableList;
 import net.arthurllew.framedcr.block.type.CustomBlockType;
 import net.arthurllew.framedcr.block.util.CustomPlacementStateBuilder;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.Shapes;
-import xfacthd.framedblocks.api.shapes.ShapeProvider;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -19,7 +18,7 @@ public class FramedRailingCorner extends FramedRailing {
      * Constructor.
      */
     public FramedRailingCorner() {
-        super(CustomBlockType.FRAMED_RAILING_CORNER);
+        super(new CustomBlockType.Builder(FramedRailingCorner::getShapeForState).build());
     }
 
     /**
@@ -29,22 +28,21 @@ public class FramedRailingCorner extends FramedRailing {
     public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
         return CustomPlacementStateBuilder.of(this, context)
                 .withShapeIsCycledCheck()
-                .withQuarterFacing()
+                .withQuarterDirection()
                 .withWater()
                 .build();
     }
 
     /**
-     * Produces pairs (block state, shape).
+     * Generates shape for provided state.
      */
-    public static ShapeProvider generateShapes(ImmutableList<BlockState> states) {
-        return generateShapes(states, (state) ->
-                switch (state.getValue(FACING)) {
-                    case NORTH -> Shapes.or(NORTH_SHAPE, WEST_SHAPE);
-                    case WEST -> Shapes.or(WEST_SHAPE, SOUTH_SHAPE);
-                    case SOUTH -> Shapes.or(SOUTH_SHAPE, EAST_SHAPE);
-                    case EAST -> Shapes.or(EAST_SHAPE, NORTH_SHAPE);
-                    default -> throw new IllegalStateException();
-                });
+    public static VoxelShape getShapeForState(BlockState state) {
+        return switch (state.getValue(FACING)) {
+            case NORTH -> Shapes.or(NORTH_SHAPE, WEST_SHAPE);
+            case WEST -> Shapes.or(WEST_SHAPE, SOUTH_SHAPE);
+            case SOUTH -> Shapes.or(SOUTH_SHAPE, EAST_SHAPE);
+            case EAST -> Shapes.or(EAST_SHAPE, NORTH_SHAPE);
+            default -> throw new IllegalStateException();
+        };
     }
 }

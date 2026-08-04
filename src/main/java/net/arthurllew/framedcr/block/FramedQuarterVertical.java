@@ -1,6 +1,5 @@
 package net.arthurllew.framedcr.block;
 
-import com.google.common.collect.ImmutableList;
 import net.arthurllew.framedcr.block.type.CustomBlockType;
 import net.arthurllew.framedcr.block.util.BlockUtils;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -17,8 +16,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import xfacthd.framedblocks.api.block.FramedProperties;
-import xfacthd.framedblocks.api.shapes.ShapeProvider;
 import xfacthd.framedblocks.common.FBContent;
 import xfacthd.framedblocks.common.block.cube.FramedLayeredCubeBlock;
 import xfacthd.framedblocks.common.item.FramedSpecialBlockItem;
@@ -34,6 +31,9 @@ public class FramedQuarterVertical extends CustomFramedBlock {
     private static final VoxelShape[] EAST_SHAPE = new VoxelShape[]{Block.box(0.0F, 0.0F, 14.0F, 2.0F, 16.0F, 16.0F), Block.box(0.0F, 0.0F, 12.0F, 4.0F, 16.0F, 16.0F), Block.box(0.0F, 0.0F, 8.0F, 8.0F, 16.0F, 16.0F), Block.box(0.0F, 0.0F, 4.0F, 12.0F, 16.0F, 16.0F)};
     private static final VoxelShape[] WEST_SHAPE = new VoxelShape[]{Block.box(14.0F, 0.0F, 0.0F, 16.0F, 16.0F, 2.0F), Block.box(12.0F, 0.0F, 0.0F, 16.0F, 16.0F, 4.0F), Block.box(8.0F, 0.0F, 0.0F, 16.0F, 16.0F, 8.0F), Block.box(4.0F, 0.0F, 0.0F, 16.0F, 16.0F, 12.0F)};
 
+    /**
+     * Layers count.
+     */
     private static final int MAX_LAYERS = 4;
 
     /**
@@ -49,10 +49,22 @@ public class FramedQuarterVertical extends CustomFramedBlock {
      * Constructor.
      */
     public FramedQuarterVertical() {
-        super(CustomBlockType.FRAMED_QUARTER_VERTICAL);
+        super(new CustomBlockType.Builder(FramedQuarterVertical::getShapeForState)
+                .modelVariantForItem("_1")
+                .craftingCount(MAX_LAYERS)
+                .isLayered(true)
+                .build());
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(FACING, Direction.NORTH)
                 .setValue(LAYERS, 1));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public float getLootCount(BlockState state) {
+        return state.getValue(LAYERS) - 1;
     }
 
     /**
@@ -61,7 +73,7 @@ public class FramedQuarterVertical extends CustomFramedBlock {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(FACING, LAYERS, FramedProperties.SOLID, BlockStateProperties.WATERLOGGED);
+        builder.add(FACING, LAYERS);
     }
 
     /**
@@ -72,8 +84,8 @@ public class FramedQuarterVertical extends CustomFramedBlock {
         return BlockUtils.canLayeredBlockBeReplaced(LAYERS, MAX_LAYERS, this, state, context,
                 () -> {
                     Direction clickedFacing = context.getClickedFace();
-                    Direction facing = state.getValue(FACING);
-                    return clickedFacing == facing || clickedFacing == facing.getCounterClockWise();
+                    Direction dir = state.getValue(FACING);
+                    return clickedFacing == dir || clickedFacing == dir.getCounterClockWise();
                 });
     }
 
@@ -118,16 +130,15 @@ public class FramedQuarterVertical extends CustomFramedBlock {
     }
 
     /**
-     * Produces pairs (block state, shape).
+     * Generates shape for provided state.
      */
-    public static ShapeProvider generateShapes(ImmutableList<BlockState> states) {
-        return generateShapes(states, (state) ->
-                switch (state.getValue(FACING)) {
-                    case NORTH -> NORTH_SHAPE[state.getValue(LAYERS) - 1];
-                    case WEST -> WEST_SHAPE[state.getValue(LAYERS) - 1];
-                    case SOUTH -> SOUTH_SHAPE[state.getValue(LAYERS) - 1];
-                    case EAST -> EAST_SHAPE[state.getValue(LAYERS) - 1];
-                    default -> throw new IllegalStateException();
-                });
+    public static VoxelShape getShapeForState(BlockState state) {
+        return switch (state.getValue(FACING)) {
+            case NORTH -> NORTH_SHAPE[state.getValue(LAYERS) - 1];
+            case WEST -> WEST_SHAPE[state.getValue(LAYERS) - 1];
+            case SOUTH -> SOUTH_SHAPE[state.getValue(LAYERS) - 1];
+            case EAST -> EAST_SHAPE[state.getValue(LAYERS) - 1];
+            default -> throw new IllegalStateException();
+        };
     }
 }

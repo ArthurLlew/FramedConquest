@@ -5,7 +5,10 @@ import net.arthurllew.framedcr.registry.FramedConquestBlocks;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.*;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.SingleItemRecipeBuilder;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.conditions.IConditionBuilder;
@@ -24,13 +27,15 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
     @Override
     protected void buildRecipes(RecipeOutput recipeOutput) {
-        // Generate recipe for every block using custom block type
-        for (DeferredHolder<Block, ? extends Block> block : FramedConquestBlocks.BLOCKS.getEntries()) {
-            if (block.get() instanceof CustomFramedBlock framedBlock) {
+        // Generate recipe for every block
+        for (DeferredHolder<Block, ? extends Block> holder : FramedConquestBlocks.BLOCKS.getEntries()) {
+            // Is framed block and has block item
+            if ((holder.get() instanceof CustomFramedBlock framedBlock) && framedBlock.getCustomBlockType().hasBlockItem()) {
+                // Stonecutting recipe
                 SingleItemRecipeBuilder.stonecutting(Ingredient.of(FBContent.BLOCK_FRAMED_CUBE.value().asItem()),
-                        RecipeCategory.DECORATIONS,
-                        block.get(),
-                        framedBlock.getCustomBlockType().craftingCount());
+                        RecipeCategory.DECORATIONS, framedBlock, framedBlock.getCustomBlockType().craftingCount())
+                        .unlockedBy(getHasName(FBContent.BLOCK_FRAMED_CUBE.value()), has(FBContent.BLOCK_FRAMED_CUBE.value()))
+                        .save(recipeOutput);
             }
         }
     }

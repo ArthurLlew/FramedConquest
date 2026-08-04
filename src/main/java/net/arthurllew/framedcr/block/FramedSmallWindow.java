@@ -1,6 +1,5 @@
 package net.arthurllew.framedcr.block;
 
-import com.google.common.collect.ImmutableList;
 import net.arthurllew.framedcr.block.type.CustomBlockType;
 import net.arthurllew.framedcr.block.util.CustomPlacementStateBuilder;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -16,8 +15,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import xfacthd.framedblocks.api.block.FramedProperties;
-import xfacthd.framedblocks.api.shapes.ShapeProvider;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -59,7 +56,7 @@ public class FramedSmallWindow extends CustomFramedBlock {
      * Constructor.
      */
     public FramedSmallWindow() {
-        super(CustomBlockType.FRAMED_SMALL_WINDOW);
+        super(new CustomBlockType.Builder(FramedSmallWindow::getShapeForState).build());
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(UP, false)
                 .setValue(DOWN, false));
@@ -71,7 +68,7 @@ public class FramedSmallWindow extends CustomFramedBlock {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(UP, DOWN, FramedProperties.SOLID, BlockStateProperties.WATERLOGGED);
+        builder.add(UP, DOWN);
     }
 
     /**
@@ -89,9 +86,9 @@ public class FramedSmallWindow extends CustomFramedBlock {
      * @return new block state after the neighbor was updated.
      */
     @Override
-    public BlockState updateShape(BlockState state, Direction facing, BlockState facingState,
-                                  LevelAccessor level, BlockPos pos, BlockPos facingPos) {
-        return super.updateShape(state, facing, facingState, level, pos, facingPos)
+    public BlockState updateShape(BlockState state, Direction dir, BlockState neighborState,
+                                  LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
+        return super.updateShape(state, dir, neighborState, level, pos, neighborPos)
                 .setValue(UP, this.canConnectTo(level, pos.above()))
                 .setValue(DOWN, this.canConnectTo(level, pos.below()));
     }
@@ -112,17 +109,15 @@ public class FramedSmallWindow extends CustomFramedBlock {
     }
 
     /**
-     * Produces pairs (block state, shape).
+     * Generates shape for provided state.
      */
-    public static ShapeProvider generateShapes(ImmutableList<BlockState> states) {
-        return generateShapes(states, (state) -> {
-            if (state.getValue(DOWN) && state.getValue(UP)) {
-                return SHAPE;
-            } else if (!(Boolean)state.getValue(DOWN) && state.getValue(UP)) {
-                return DOWN_SHAPE;
-            } else {
-                return state.getValue(DOWN) && !(Boolean)state.getValue(UP) ? UP_SHAPE : UPDOWN_SHAPE;
-            }
-        });
+    public static VoxelShape getShapeForState(BlockState state) {
+        if (state.getValue(DOWN) && state.getValue(UP)) {
+            return SHAPE;
+        } else if (!(Boolean)state.getValue(DOWN) && state.getValue(UP)) {
+            return DOWN_SHAPE;
+        } else {
+            return state.getValue(DOWN) && !(Boolean)state.getValue(UP) ? UP_SHAPE : UPDOWN_SHAPE;
+        }
     }
 }

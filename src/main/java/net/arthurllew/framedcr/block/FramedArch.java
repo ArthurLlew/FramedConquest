@@ -1,6 +1,5 @@
 package net.arthurllew.framedcr.block;
 
-import com.google.common.collect.ImmutableList;
 import net.arthurllew.framedcr.block.properties.ArchShape;
 import net.arthurllew.framedcr.block.type.CustomBlockType;
 import net.arthurllew.framedcr.block.util.CustomPlacementStateBuilder;
@@ -26,8 +25,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import xfacthd.framedblocks.api.block.FramedProperties;
-import xfacthd.framedblocks.api.shapes.ShapeProvider;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -51,7 +48,9 @@ public class FramedArch extends CustomFramedBlock {
      * Constructor.
      */
     public FramedArch() {
-        super(CustomBlockType.FRAMED_ARCH);
+        super(new CustomBlockType.Builder(FramedArch::getShapeForState)
+                .modelVariantForItem("_1")
+                .build());
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(TYPE, ArchShape.ONE)
                 .setValue(FACING, Direction.NORTH));
@@ -63,7 +62,7 @@ public class FramedArch extends CustomFramedBlock {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(TYPE, FACING, FramedProperties.SOLID, BlockStateProperties.WATERLOGGED);
+        builder.add(TYPE, FACING);
     }
 
     /**
@@ -107,7 +106,7 @@ public class FramedArch extends CustomFramedBlock {
     public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
         return CustomPlacementStateBuilder.of(this, context)
                 .withShapeIsCycledCheck()
-                .withArchFacing()
+                .withArchDirection()
                 .withWater()
                 .build();
     }
@@ -143,30 +142,28 @@ public class FramedArch extends CustomFramedBlock {
     }
 
     /**
-     * Produces pairs (block state, shape).
+     * Generates shape for provided state.
      */
-    public static ShapeProvider generateShapes(ImmutableList<BlockState> states) {
-        return generateShapes(states, (state) -> {
-            if (state.getValue(TYPE) == ArchShape.ONE) {
-                return Shapes.block();
-            } else if (state.getValue(TYPE) == ArchShape.THREE_MIDDLE) {
-                return MIDDLE_SHAPE;
-            } else {
-                switch (state.getValue(FACING)) {
-                    case EAST -> {
-                        return SHAPES[1];
-                    }
-                    case SOUTH -> {
-                        return SHAPES[2];
-                    }
-                    case WEST -> {
-                        return SHAPES[3];
-                    }
-                    default -> {
-                        return SHAPES[0];
-                    }
+    public static VoxelShape getShapeForState(BlockState state) {
+        if (state.getValue(TYPE) == ArchShape.ONE) {
+            return Shapes.block();
+        } else if (state.getValue(TYPE) == ArchShape.THREE_MIDDLE) {
+            return MIDDLE_SHAPE;
+        } else {
+            switch (state.getValue(FACING)) {
+                case EAST -> {
+                    return SHAPES[1];
+                }
+                case SOUTH -> {
+                    return SHAPES[2];
+                }
+                case WEST -> {
+                    return SHAPES[3];
+                }
+                default -> {
+                    return SHAPES[0];
                 }
             }
-        });
+        }
     }
 }

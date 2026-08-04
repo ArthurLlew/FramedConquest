@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "framedblocks:framed_cube"
+  },
+  "result": {
+    "count": 1,
+    "id": "framedcr:framed_round_arch_smooth"
+  }
+}

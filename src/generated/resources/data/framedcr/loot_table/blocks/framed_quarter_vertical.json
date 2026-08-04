@@ -32,6 +32,34 @@
         }
       ],
       "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:explosion_decay"
+            },
+            {
+              "add": false,
+              "count": {
+                "type": "framedcr:layered",
+                "block": "framedcr:framed_quarter_vertical"
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "framedcr:framed_quarter_vertical"
+        }
+      ],
+      "rolls": 1.0
     }
   ],
   "random_sequence": "framedcr:blocks/framed_quarter_vertical"

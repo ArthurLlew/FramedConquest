@@ -1,6 +1,5 @@
 package net.arthurllew.framedcr.block;
 
-import com.google.common.collect.ImmutableList;
 import net.arthurllew.framedcr.block.properties.ArchFacadeShape;
 import net.arthurllew.framedcr.block.type.CustomBlockType;
 import net.arthurllew.framedcr.block.util.CustomPlacementStateBuilder;
@@ -27,8 +26,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import xfacthd.framedblocks.api.block.FramedProperties;
-import xfacthd.framedblocks.api.shapes.ShapeProvider;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -82,7 +79,9 @@ public class FramedArchFacade extends CustomFramedBlock {
      * Constructor.
      */
     public FramedArchFacade() {
-        super(CustomBlockType.FRAMED_ARCH_FACADE);
+        super(new CustomBlockType.Builder(FramedArchFacade::getShapeForState)
+                .modelVariantForItem("_1")
+                .build());
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(TYPE, ArchFacadeShape.ONE)
                 .setValue(FACING, Direction.NORTH)
@@ -95,7 +94,7 @@ public class FramedArchFacade extends CustomFramedBlock {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(TYPE, FACING, HALF, FramedProperties.SOLID, BlockStateProperties.WATERLOGGED);
+        builder.add(TYPE, FACING, HALF);
     }
 
     /**
@@ -139,7 +138,7 @@ public class FramedArchFacade extends CustomFramedBlock {
     public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
         return CustomPlacementStateBuilder.of(this, context)
                 .withShapeIsCycledCheck()
-                .withArchFacing()
+                .withArchDirection()
                 .withTopBottom()
                 .withWater()
                 .build();
@@ -176,47 +175,11 @@ public class FramedArchFacade extends CustomFramedBlock {
     }
 
     /**
-     * Produces pairs (block state, shape).
+     * Generates shape for provided state.
      */
-    public static ShapeProvider generateShapes(ImmutableList<BlockState> states) {
-        return generateShapes(states, (state) -> {
-            if (state.getValue(HALF) == Half.TOP) {
-                if (state.getValue(TYPE) == ArchFacadeShape.ONE) {
-                    return switch (state.getValue(FACING)) {
-                        case NORTH -> NORTH_SHAPE;
-                        case SOUTH -> SOUTH_SHAPE;
-                        case EAST -> EAST_SHAPE;
-                        case WEST -> WEST_SHAPE;
-                        default -> throw new IllegalStateException();
-                    };
-                } else if (state.getValue(TYPE) != ArchFacadeShape.TWO_L && state.getValue(TYPE) != ArchFacadeShape.THREE_L) {
-                    if (state.getValue(TYPE) != ArchFacadeShape.TWO_R && state.getValue(TYPE) != ArchFacadeShape.THREE_R) {
-                        return switch (state.getValue(FACING)) {
-                            case NORTH -> ARCH_MIDDLE_NORTH_SHAPE;
-                            case SOUTH -> ARCH_MIDDLE_SOUTH_SHAPE;
-                            case EAST -> ARCH_MIDDLE_EAST_SHAPE;
-                            case WEST -> ARCH_MIDDLE_WEST_SHAPE;
-                            default -> throw new IllegalStateException();
-                        };
-                    } else {
-                        return switch (state.getValue(FACING)) {
-                            case NORTH -> ARCH_NORTH_R_SHAPE;
-                            case SOUTH -> ARCH_SOUTH_R_SHAPE;
-                            case EAST -> ARCH_EAST_R_SHAPE;
-                            case WEST -> ARCH_WEST_R_SHAPE;
-                            default -> throw new IllegalStateException();
-                        };
-                    }
-                } else {
-                    return switch (state.getValue(FACING)) {
-                        case NORTH -> ARCH_NORTH_L_SHAPE;
-                        case SOUTH -> ARCH_SOUTH_L_SHAPE;
-                        case EAST -> ARCH_EAST_L_SHAPE;
-                        case WEST -> ARCH_WEST_L_SHAPE;
-                        default -> throw new IllegalStateException();
-                    };
-                }
-            } else if (state.getValue(TYPE) == ArchFacadeShape.ONE) {
+    public static VoxelShape getShapeForState(BlockState state) {
+        if (state.getValue(HALF) == Half.TOP) {
+            if (state.getValue(TYPE) == ArchFacadeShape.ONE) {
                 return switch (state.getValue(FACING)) {
                     case NORTH -> NORTH_SHAPE;
                     case SOUTH -> SOUTH_SHAPE;
@@ -227,30 +190,64 @@ public class FramedArchFacade extends CustomFramedBlock {
             } else if (state.getValue(TYPE) != ArchFacadeShape.TWO_L && state.getValue(TYPE) != ArchFacadeShape.THREE_L) {
                 if (state.getValue(TYPE) != ArchFacadeShape.TWO_R && state.getValue(TYPE) != ArchFacadeShape.THREE_R) {
                     return switch (state.getValue(FACING)) {
-                        case NORTH -> ARCH_MIDDLE_NORTH_BOTTOM_SHAPE;
-                        case SOUTH -> ARCH_MIDDLE_SOUTH_BOTTOM_SHAPE;
-                        case EAST -> ARCH_MIDDLE_EAST_BOTTOM_SHAPE;
-                        case WEST -> ARCH_MIDDLE_WEST_BOTTOM_SHAPE;
+                        case NORTH -> ARCH_MIDDLE_NORTH_SHAPE;
+                        case SOUTH -> ARCH_MIDDLE_SOUTH_SHAPE;
+                        case EAST -> ARCH_MIDDLE_EAST_SHAPE;
+                        case WEST -> ARCH_MIDDLE_WEST_SHAPE;
                         default -> throw new IllegalStateException();
                     };
                 } else {
                     return switch (state.getValue(FACING)) {
-                        case NORTH -> ARCH_NORTH_R_BOTTOM_SHAPE;
-                        case SOUTH -> ARCH_SOUTH_R_BOTTOM_SHAPE;
-                        case EAST -> ARCH_EAST_R_BOTTOM_SHAPE;
-                        case WEST -> ARCH_WEST_R_BOTTOM_SHAPE;
+                        case NORTH -> ARCH_NORTH_R_SHAPE;
+                        case SOUTH -> ARCH_SOUTH_R_SHAPE;
+                        case EAST -> ARCH_EAST_R_SHAPE;
+                        case WEST -> ARCH_WEST_R_SHAPE;
                         default -> throw new IllegalStateException();
                     };
                 }
             } else {
                 return switch (state.getValue(FACING)) {
-                    case NORTH -> ARCH_NORTH_L_BOTTOM_SHAPE;
-                    case SOUTH -> ARCH_SOUTH_L_BOTTOM_SHAPE;
-                    case EAST -> ARCH_EAST_L_BOTTOM_SHAPE;
-                    case WEST -> ARCH_WEST_L_BOTTOM_SHAPE;
+                    case NORTH -> ARCH_NORTH_L_SHAPE;
+                    case SOUTH -> ARCH_SOUTH_L_SHAPE;
+                    case EAST -> ARCH_EAST_L_SHAPE;
+                    case WEST -> ARCH_WEST_L_SHAPE;
                     default -> throw new IllegalStateException();
                 };
             }
-        });
+        } else if (state.getValue(TYPE) == ArchFacadeShape.ONE) {
+            return switch (state.getValue(FACING)) {
+                case NORTH -> NORTH_SHAPE;
+                case SOUTH -> SOUTH_SHAPE;
+                case EAST -> EAST_SHAPE;
+                case WEST -> WEST_SHAPE;
+                default -> throw new IllegalStateException();
+            };
+        } else if (state.getValue(TYPE) != ArchFacadeShape.TWO_L && state.getValue(TYPE) != ArchFacadeShape.THREE_L) {
+            if (state.getValue(TYPE) != ArchFacadeShape.TWO_R && state.getValue(TYPE) != ArchFacadeShape.THREE_R) {
+                return switch (state.getValue(FACING)) {
+                    case NORTH -> ARCH_MIDDLE_NORTH_BOTTOM_SHAPE;
+                    case SOUTH -> ARCH_MIDDLE_SOUTH_BOTTOM_SHAPE;
+                    case EAST -> ARCH_MIDDLE_EAST_BOTTOM_SHAPE;
+                    case WEST -> ARCH_MIDDLE_WEST_BOTTOM_SHAPE;
+                    default -> throw new IllegalStateException();
+                };
+            } else {
+                return switch (state.getValue(FACING)) {
+                    case NORTH -> ARCH_NORTH_R_BOTTOM_SHAPE;
+                    case SOUTH -> ARCH_SOUTH_R_BOTTOM_SHAPE;
+                    case EAST -> ARCH_EAST_R_BOTTOM_SHAPE;
+                    case WEST -> ARCH_WEST_R_BOTTOM_SHAPE;
+                    default -> throw new IllegalStateException();
+                };
+            }
+        } else {
+            return switch (state.getValue(FACING)) {
+                case NORTH -> ARCH_NORTH_L_BOTTOM_SHAPE;
+                case SOUTH -> ARCH_SOUTH_L_BOTTOM_SHAPE;
+                case EAST -> ARCH_EAST_L_BOTTOM_SHAPE;
+                case WEST -> ARCH_WEST_L_BOTTOM_SHAPE;
+                default -> throw new IllegalStateException();
+            };
+        }
     }
 }

@@ -2,6 +2,7 @@ package net.arthurllew.framedcr.datagen;
 
 import net.arthurllew.framedcr.FramedConquest;
 import net.arthurllew.framedcr.block.CustomFramedBlock;
+import net.arthurllew.framedcr.block.ICustomFramedDoubleBlock;
 import net.arthurllew.framedcr.registry.FramedConquestBlocks;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -19,19 +20,21 @@ public class ModItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
         // Generate block item models for every block using custom block type
-        for (DeferredHolder<Block, ? extends Block> block : FramedConquestBlocks.BLOCKS.getEntries()) {
-            if (block.get() instanceof CustomFramedBlock framedBlock) {
+        for (DeferredHolder<Block, ? extends Block> holder : FramedConquestBlocks.BLOCKS.getEntries()) {
+            if (holder.get() instanceof CustomFramedBlock framedBlock) {
                 if (framedBlock.getCustomBlockType().hasBlockItem()) {
-                    blockItem((DeferredBlock<? extends Block>) block,
+                    blockItem((DeferredBlock<? extends Block>) holder,
                             framedBlock.getCustomBlockType().modelVariantForItem());
                 }
             }
         }
     }
 
-    private void blockItem(DeferredBlock<? extends Block> block, String variantEnding) {
-        withExistingParent(block.getId().getPath(),
-                ResourceLocation.fromNamespaceAndPath(FramedConquest.MODID,
-                        "block/" + block.getId().getPath() + variantEnding));
+    private void blockItem(DeferredBlock<? extends Block> holder, String variantEnding) {
+        String itemId = holder.getId().getPath();
+        String modelPath = holder.get() instanceof ICustomFramedDoubleBlock ?
+                itemId.replaceFirst("_(?!.*_)", variantEnding + "/") : itemId + variantEnding;
+        withExistingParent(itemId,
+                ResourceLocation.fromNamespaceAndPath(FramedConquest.MODID, "block/" + modelPath));
     }
 }

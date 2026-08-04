@@ -1,0 +1,46 @@
+{
+  "variants": {
+    "facing=east,half=bottom": {
+      "model": "framedcr:block/framed_small_arch_half/double",
+      "uvlock": true,
+      "x": 180,
+      "y": 90
+    },
+    "facing=east,half=top": {
+      "model": "framedcr:block/framed_small_arch_half/double",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=north,half=bottom": {
+      "model": "framedcr:block/framed_small_arch_half/double",
+      "uvlock": true,
+      "x": 180
+    },
+    "facing=north,half=top": {
+      "model": "framedcr:block/framed_small_arch_half/double",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=south,half=bottom": {
+      "model": "framedcr:block/framed_small_arch_half/double",
+      "uvlock": true,
+      "x": 180,
+      "y": 180
+    },
+    "facing=south,half=top": {
+      "model": "framedcr:block/framed_small_arch_half/double",
+      "uvlock": true
+    },
+    "facing=west,half=bottom": {
+      "model": "framedcr:block/framed_small_arch_half/double",
+      "uvlock": true,
+      "x": 180,
+      "y": 270
+    },
+    "facing=west,half=top": {
+      "model": "framedcr:block/framed_small_arch_half/double",
+      "uvlock": true,
+      "y": 90
+    }
+  }
+}

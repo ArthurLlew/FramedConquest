@@ -1,0 +1,88 @@
+{
+  "variants": {
+    "facing=east,right=false,top=false": {
+      "model": "framedcr:block/framed_two_meter_arch_half_left/bottom",
+      "uvlock": true,
+      "x": 180,
+      "y": 90
+    },
+    "facing=east,right=false,top=true": {
+      "model": "framedcr:block/framed_two_meter_arch_half_right/bottom",
+      "uvlock": true,
+      "y": 90
+    },
+    "facing=east,right=true,top=false": {
+      "model": "framedcr:block/framed_two_meter_arch_half_right/bottom",
+      "uvlock": true,
+      "x": 180,
+      "y": 270
+    },
+    "facing=east,right=true,top=true": {
+      "model": "framedcr:block/framed_two_meter_arch_half_left/bottom",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=north,right=false,top=false": {
+      "model": "framedcr:block/framed_two_meter_arch_half_left/bottom",
+      "uvlock": true,
+      "x": 180
+    },
+    "facing=north,right=false,top=true": {
+      "model": "framedcr:block/framed_two_meter_arch_half_right/bottom",
+      "uvlock": true
+    },
+    "facing=north,right=true,top=false": {
+      "model": "framedcr:block/framed_two_meter_arch_half_right/bottom",
+      "uvlock": true,
+      "x": 180,
+      "y": 180
+    },
+    "facing=north,right=true,top=true": {
+      "model": "framedcr:block/framed_two_meter_arch_half_left/bottom",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=south,right=false,top=false": {
+      "model": "framedcr:block/framed_two_meter_arch_half_left/bottom",
+      "uvlock": true,
+      "x": 180,
+      "y": 180
+    },
+    "facing=south,right=false,top=true": {
+      "model": "framedcr:block/framed_two_meter_arch_half_right/bottom",
+      "uvlock": true,
+      "y": 180
+    },
+    "facing=south,right=true,top=false": {
+      "model": "framedcr:block/framed_two_meter_arch_half_right/bottom",
+      "uvlock": true,
+      "x": 180
+    },
+    "facing=south,right=true,top=true": {
+      "model": "framedcr:block/framed_two_meter_arch_half_left/bottom",
+      "uvlock": true
+    },
+    "facing=west,right=false,top=false": {
+      "model": "framedcr:block/framed_two_meter_arch_half_left/bottom",
+      "uvlock": true,
+      "x": 180,
+      "y": 270
+    },
+    "facing=west,right=false,top=true": {
+      "model": "framedcr:block/framed_two_meter_arch_half_right/bottom",
+      "uvlock": true,
+      "y": 270
+    },
+    "facing=west,right=true,top=false": {
+      "model": "framedcr:block/framed_two_meter_arch_half_right/bottom",
+      "uvlock": true,
+      "x": 180,
+      "y": 90
+    },
+    "facing=west,right=true,top=true": {
+      "model": "framedcr:block/framed_two_meter_arch_half_left/bottom",
+      "uvlock": true,
+      "y": 90
+    }
+  }
+}

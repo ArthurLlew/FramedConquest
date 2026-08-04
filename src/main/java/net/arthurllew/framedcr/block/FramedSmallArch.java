@@ -1,22 +1,26 @@
 package net.arthurllew.framedcr.block;
 
-import com.google.common.collect.ImmutableList;
+import net.arthurllew.framedcr.block.entity.FramedConquestDoubleBlockEntity;
 import net.arthurllew.framedcr.block.type.CustomBlockType;
 import net.arthurllew.framedcr.block.util.BlockUtils;
 import net.arthurllew.framedcr.block.util.CustomPlacementStateBuilder;
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.Tuple;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.Half;
+import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.phys.shapes.BooleanOp;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import xfacthd.framedblocks.api.block.FramedProperties;
-import xfacthd.framedblocks.api.shapes.ShapeProvider;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -37,13 +41,20 @@ public class FramedSmallArch extends CustomFramedBlock {
     public static final EnumProperty<Half> HALF = BlockStateProperties.HALF;
 
     /**
-     * Constructor.
+     * Base constructor.
      */
-    public FramedSmallArch() {
-        super(CustomBlockType.FRAMED_SMALL_ARCH);
+    public FramedSmallArch(CustomBlockType blockType) {
+        super(blockType);
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(AXIS, Direction.Axis.Z)
                 .setValue(HALF, Half.TOP));
+    }
+
+    /**
+     * Constructor.
+     */
+    public FramedSmallArch() {
+        this(new CustomBlockType.Builder(FramedSmallArch::getShapeForState).build());
     }
 
     /**
@@ -52,7 +63,7 @@ public class FramedSmallArch extends CustomFramedBlock {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(AXIS, HALF, FramedProperties.SOLID, BlockStateProperties.WATERLOGGED);
+        builder.add(AXIS, HALF);
     }
 
     /**
@@ -76,12 +87,102 @@ public class FramedSmallArch extends CustomFramedBlock {
     }
 
     /**
-     * Produces pairs (block state, shape).
+     * Generates shape for provided state.
      */
-    public static ShapeProvider generateShapes(ImmutableList<BlockState> states) {
-        return generateShapes(states, (state) -> switch(state.getValue(HALF)) {
+    public static VoxelShape getShapeForState(BlockState state) {
+        return switch(state.getValue(HALF)) {
             case TOP -> TOP_AABB;
             case BOTTOM -> BOTTOM_AABB;
-        });
+        };
+    }
+
+    /**
+     * Double part small arch.
+     */
+    public static class Double extends FramedSmallArch implements ICustomFramedDoubleBlock {
+        // Block pair
+        private final Block blockLeft, blockRight;
+
+        /**
+         * Constructor.
+         */
+        public Double(Block blockLeft, Block blockRight) {
+            super(new CustomBlockType.Builder(FramedSmallArch::getShapeForState)
+                    .doubleBlock(true)
+                    .build());
+            this.blockLeft = blockLeft;
+            this.blockRight = blockRight;
+        }
+
+        /**
+         * @return connected block entity.
+         */
+        @Override
+        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+            return new FramedConquestDoubleBlockEntity(pos, state);
+        }
+
+        /**
+         * @return two blocks used to shape double block.
+         */
+        @Override
+        public Tuple<BlockState, BlockState> calculateBlockPair(BlockState blockState) {
+            // Copy block state properties
+            BlockState blockStateLeft = this.blockLeft.defaultBlockState();
+            BlockState blockStateRight = this.blockRight.defaultBlockState();
+            for (Property<?> property : blockState.getProperties()) {
+                blockStateLeft = applyProperty(blockStateLeft, blockState, property);
+                blockStateRight = applyProperty(blockStateRight, blockState, property);
+            }
+            // Return states pair
+            return new Tuple<>(blockStateLeft, blockStateRight);
+        }
+    }
+
+    /**
+     * Bottom small arch part.
+     */
+    public static class Bottom extends FramedSmallArch {
+        private static final VoxelShape BOTTOM = Block.box(0, 4, 0, 16, 12, 16);
+
+        /**
+         * Constructor.
+         */
+        public Bottom() {
+            super(new CustomBlockType.Builder(Bottom::getShapeForState)
+                    .blockItem(false)
+                    .build());
+        }
+
+        /**
+         * Generates shape for provided state.
+         */
+        public static VoxelShape getShapeForState(BlockState state) {
+            return Shapes.join(FramedSmallArch.getShapeForState(state), BOTTOM, BooleanOp.AND);
+        }
+    }
+
+    /**
+     * Top small arch part.
+     */
+    public static class Top extends FramedSmallArch {
+        private static final VoxelShape TOP = Shapes.or(Block.box(0, 0, 0, 16, 4, 16),
+                Block.box(0, 12, 0, 16, 16, 16));
+
+        /**
+         * Constructor.
+         */
+        public Top() {
+            super(new CustomBlockType.Builder(Top::getShapeForState)
+                    .blockItem(false)
+                    .build());
+        }
+
+        /**
+         * Generates shape for provided state.
+         */
+        public static VoxelShape getShapeForState(BlockState state) {
+            return Shapes.join(FramedSmallArch.getShapeForState(state), TOP, BooleanOp.AND);
+        }
     }
 }

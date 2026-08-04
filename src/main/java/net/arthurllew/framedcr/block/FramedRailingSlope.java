@@ -26,7 +26,9 @@ public class FramedRailingSlope extends FramedRailing {
      * Constructor.
      */
     public FramedRailingSlope() {
-        super(CustomBlockType.FRAMED_RAILING_SLOPE);
+        super(new CustomBlockType.Builder(FramedRailing::getShapeForState)
+                .modelVariantForItem("_r")
+                .build());
         this.registerDefaultState(this.defaultBlockState()
                 .setValue(PropertyHolder.RIGHT, false));
     }

@@ -1,6 +1,5 @@
 package net.arthurllew.framedcr.block;
 
-import com.google.common.collect.ImmutableList;
 import net.arthurllew.framedcr.block.type.CustomBlockType;
 import net.arthurllew.framedcr.block.util.BlockUtils;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -18,8 +17,6 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import xfacthd.framedblocks.api.block.FramedProperties;
-import xfacthd.framedblocks.api.shapes.ShapeProvider;
 import xfacthd.framedblocks.common.FBContent;
 import xfacthd.framedblocks.common.block.cube.FramedLayeredCubeBlock;
 import xfacthd.framedblocks.common.item.FramedSpecialBlockItem;
@@ -39,6 +36,9 @@ public class FramedCornerVertical extends CustomFramedBlock {
     private static final VoxelShape[] NORTH_SHAPE = new VoxelShape[]{Shapes.or(VERTICAL_SLAB_NORTH_SHAPE[0], VERTICAL_SLAB_WEST_SHAPE[0]), Shapes.or(VERTICAL_SLAB_NORTH_SHAPE[1], VERTICAL_SLAB_WEST_SHAPE[1]), Shapes.or(VERTICAL_SLAB_NORTH_SHAPE[2], VERTICAL_SLAB_WEST_SHAPE[2]), Shapes.or(VERTICAL_SLAB_NORTH_SHAPE[3], VERTICAL_SLAB_WEST_SHAPE[3])};
     private static final VoxelShape[] SOUTH_SHAPE = new VoxelShape[]{Shapes.or(VERTICAL_SLAB_SOUTH_SHAPE[0], VERTICAL_SLAB_EAST_SHAPE[0]), Shapes.or(VERTICAL_SLAB_SOUTH_SHAPE[1], VERTICAL_SLAB_EAST_SHAPE[1]), Shapes.or(VERTICAL_SLAB_SOUTH_SHAPE[2], VERTICAL_SLAB_EAST_SHAPE[2]), Shapes.or(VERTICAL_SLAB_SOUTH_SHAPE[3], VERTICAL_SLAB_EAST_SHAPE[3])};
 
+    /**
+     * Layers count.
+     */
     private static final int MAX_LAYERS = 4;
 
     /**
@@ -54,10 +54,22 @@ public class FramedCornerVertical extends CustomFramedBlock {
      * Constructor.
      */
     public FramedCornerVertical() {
-        super(CustomBlockType.FRAMED_CORNER_VERTICAL);
+        super(new CustomBlockType.Builder(FramedCornerVertical::getShapeForState)
+                .modelVariantForItem("_1")
+                .craftingCount(MAX_LAYERS)
+                .isLayered(true)
+                .build());
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(FACING, Direction.NORTH)
                 .setValue(LAYERS, 1));
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public float getLootCount(BlockState state) {
+        return state.getValue(LAYERS) - 1;
     }
 
     /**
@@ -66,7 +78,7 @@ public class FramedCornerVertical extends CustomFramedBlock {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(FACING, LAYERS, FramedProperties.SOLID, BlockStateProperties.WATERLOGGED);
+        builder.add(FACING, LAYERS);
     }
 
     /**
@@ -77,8 +89,8 @@ public class FramedCornerVertical extends CustomFramedBlock {
         return BlockUtils.canLayeredBlockBeReplaced(LAYERS, MAX_LAYERS, this, state, context,
                 () -> {
                     Direction clickedFacing = context.getClickedFace();
-                    Direction facing = state.getValue(FACING);
-                    return clickedFacing == facing || clickedFacing == facing.getCounterClockWise();
+                    Direction dir = state.getValue(FACING);
+                    return clickedFacing == dir || clickedFacing == dir.getCounterClockWise();
                 });
     }
 
@@ -123,16 +135,15 @@ public class FramedCornerVertical extends CustomFramedBlock {
     }
 
     /**
-     * Produces pairs (block state, shape).
+     * Generates shape for provided state.
      */
-    public static ShapeProvider generateShapes(ImmutableList<BlockState> states) {
-        return generateShapes(states, (state) ->
-                switch (state.getValue(FACING)) {
-                    case NORTH -> NORTH_SHAPE[state.getValue(LAYERS) - 1];
-                    case WEST -> WEST_SHAPE[state.getValue(LAYERS) - 1];
-                    case SOUTH -> SOUTH_SHAPE[state.getValue(LAYERS) - 1];
-                    case EAST -> EAST_SHAPE[state.getValue(LAYERS) - 1];
-                    default -> throw new IllegalStateException();
-                });
+    public static VoxelShape getShapeForState(BlockState state) {
+        return switch (state.getValue(FACING)) {
+            case NORTH -> NORTH_SHAPE[state.getValue(LAYERS) - 1];
+            case WEST -> WEST_SHAPE[state.getValue(LAYERS) - 1];
+            case SOUTH -> SOUTH_SHAPE[state.getValue(LAYERS) - 1];
+            case EAST -> EAST_SHAPE[state.getValue(LAYERS) - 1];
+            default -> throw new IllegalStateException();
+        };
     }
 }

@@ -1,6 +1,5 @@
 package net.arthurllew.framedcr.block;
 
-import com.google.common.collect.ImmutableList;
 import net.arthurllew.framedcr.block.type.CustomBlockType;
 import net.arthurllew.framedcr.block.util.BlockUtils;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -11,13 +10,10 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
-import xfacthd.framedblocks.api.block.FramedProperties;
 import xfacthd.framedblocks.api.block.PlacementStateBuilder;
-import xfacthd.framedblocks.api.shapes.ShapeProvider;
 import xfacthd.framedblocks.common.block.pillar.FramedPillarBlock;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -41,24 +37,21 @@ public class FramedBalustrade extends CustomFramedBlock {
     private static final VoxelShape Y_AXIS_AABB = Shapes.or(Y_BASE, Shapes.or(Y_LOWER, Shapes.or(Y_MIDDLE, Y_TOP)));
 
     /**
-     * Horizontal axis property.
-     */
-    public static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.AXIS;
-    
-    /**
      * Constructor.
      */
     public FramedBalustrade() {
-        super(CustomBlockType.FRAMED_BALUSTRADE);
+        super(new CustomBlockType.Builder(FramedBalustrade::getShapeForState)
+                .modelVariantForItem("_y")
+                .build());
         this.registerDefaultState(this.stateDefinition.any()
-                .setValue(AXIS, Direction.Axis.Y));
+                .setValue(BlockStateProperties.AXIS, Direction.Axis.Y));
     }
 
     /// See [FramedPillarBlock].
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(AXIS, FramedProperties.SOLID, BlockStateProperties.WATERLOGGED);
+        builder.add(BlockStateProperties.AXIS);
     }
 
     /// See [FramedPillarBlock].
@@ -75,30 +68,29 @@ public class FramedBalustrade extends CustomFramedBlock {
      */
     @Override
     protected BlockState rotate(BlockState state, Rotation rotation) {
-        return BlockUtils.rotateAxis(state, rotation, AXIS);
+        return BlockUtils.rotateAxis(state, rotation, BlockStateProperties.AXIS);
     }
 
     /// See [FramedPillarBlock].
     @Override
     public BlockState getItemModelSource() {
-        return this.defaultBlockState().setValue(AXIS, Direction.Axis.Y);
+        return this.defaultBlockState().setValue(BlockStateProperties.AXIS, Direction.Axis.Y);
     }
 
     /// See [FramedPillarBlock].
     @Override
     public BlockState getJadeRenderState(BlockState state) {
-        return this.defaultBlockState().setValue(AXIS, Direction.Axis.Y);
+        return this.defaultBlockState().setValue(BlockStateProperties.AXIS, Direction.Axis.Y);
     }
 
     /**
-     * Produces pairs (block state, shape).
+     * Generates shape for provided state.
      */
-    public static ShapeProvider generateShapes(ImmutableList<BlockState> states) {
-        return generateShapes(states, (state) ->
-                switch (state.getValue(AXIS)) {
-                    case X -> X_AXIS_AABB;
-                    case Y -> Y_AXIS_AABB;
-                    case Z -> Z_AXIS_AABB;
-                });
+    public static VoxelShape getShapeForState(BlockState state) {
+        return switch (state.getValue(BlockStateProperties.AXIS)) {
+            case X -> X_AXIS_AABB;
+            case Y -> Y_AXIS_AABB;
+            case Z -> Z_AXIS_AABB;
+        };
     }
 }

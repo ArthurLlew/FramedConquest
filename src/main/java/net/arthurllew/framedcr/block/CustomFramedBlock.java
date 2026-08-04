@@ -1,24 +1,22 @@
 package net.arthurllew.framedcr.block;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.UnmodifiableIterator;
 import net.arthurllew.framedcr.block.entity.FramedConquestBlockEntity;
 import net.arthurllew.framedcr.block.type.CustomBlockType;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.Property;
 import xfacthd.framedblocks.api.block.AbstractFramedBlock;
+import xfacthd.framedblocks.api.block.FramedProperties;
 import xfacthd.framedblocks.api.block.IFramedBlock;
-import xfacthd.framedblocks.api.shapes.ShapeProvider;
 import xfacthd.framedblocks.common.block.FramedBlock;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.function.Function;
-import java.util.function.UnaryOperator;
 
 /**
  * Custom implementation of {@link FramedBlock}.
@@ -27,17 +25,19 @@ import java.util.function.UnaryOperator;
 @ParametersAreNonnullByDefault
 public abstract class CustomFramedBlock extends AbstractFramedBlock {
     /**
-     * Simplified constructor.
+     * Constructor.
      */
     protected CustomFramedBlock(CustomBlockType blockType) {
         super(blockType, IFramedBlock.createProperties(blockType));
     }
 
     /**
-     * Constructor.
+     * Appends basic block state attributes.
      */
-    protected CustomFramedBlock(CustomBlockType blockType, UnaryOperator<Properties> propertyModifier) {
-        super(blockType, propertyModifier);
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder);
+        builder.add(FramedProperties.SOLID, BlockStateProperties.WATERLOGGED);
     }
 
     /**
@@ -56,7 +56,7 @@ public abstract class CustomFramedBlock extends AbstractFramedBlock {
     }
 
     /**
-     * @return block entity to spawn.
+     * @return connected block entity.
      */
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
@@ -64,29 +64,26 @@ public abstract class CustomFramedBlock extends AbstractFramedBlock {
     }
 
     /**
-     * Produces pairs (block state, shape).
-     */
-    protected static ShapeProvider generateShapes(ImmutableList<BlockState> states,
-                                                  Function<BlockState, VoxelShape> getShapeFromState) {
-        // Get builder
-        ImmutableMap.Builder<BlockState, VoxelShape> builder = ImmutableMap.builder();
-
-        // For each state get appropriate shape
-        BlockState state;
-        for(UnmodifiableIterator<BlockState> iterator = states.iterator();
-            iterator.hasNext();
-            builder.put(state, getShapeFromState.apply(state))) {
-                state = iterator.next();
-        }
-
-        // Build
-        return ShapeProvider.of(builder.build());
-    }
-
-    /**
      * @return this block type.
      */
     public CustomBlockType getCustomBlockType() {
         return (CustomBlockType) this.getBlockType();
+    }
+
+    /**
+     * @param state this block state
+     * @return how many blocks this block state drops
+     */
+    public float getLootCount(BlockState state) {
+        return 1;
+    }
+
+    /**
+     * Helper method for transferring block state property.
+     */
+    protected static <T extends Comparable<T>> BlockState applyProperty(BlockState target,
+                                                                BlockState source,
+                                                                Property<T> property) {
+        return target.setValue(property, source.getValue(property));
     }
 }

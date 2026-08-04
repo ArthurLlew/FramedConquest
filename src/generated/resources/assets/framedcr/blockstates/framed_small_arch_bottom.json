@@ -1,0 +1,24 @@
+{
+  "variants": {
+    "axis=x,half=bottom": {
+      "model": "framedcr:block/framed_small_arch/bottom",
+      "uvlock": true,
+      "x": 180,
+      "y": 90
+    },
+    "axis=x,half=top": {
+      "model": "framedcr:block/framed_small_arch/bottom",
+      "uvlock": true,
+      "y": 90
+    },
+    "axis=z,half=bottom": {
+      "model": "framedcr:block/framed_small_arch/bottom",
+      "uvlock": true,
+      "x": 180
+    },
+    "axis=z,half=top": {
+      "model": "framedcr:block/framed_small_arch/bottom",
+      "uvlock": true
+    }
+  }
+}

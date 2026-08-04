@@ -1,7 +1,7 @@
 package net.arthurllew.framedcr.datagen;
 
 import net.arthurllew.framedcr.block.CustomFramedBlock;
-import net.arthurllew.framedcr.loot.PillarLootNumberProvider;
+import net.arthurllew.framedcr.loot.LayeredBlockLootNumberProvider;
 import net.arthurllew.framedcr.registry.FramedConquestBlocks;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.Holder;
@@ -27,23 +27,26 @@ public class ModBlockLootTables extends FramedBlockLootSubProvider {
 
     @Override
     public void generate() {
-        // Drop with camo + custom count
-        this.add(FramedConquestBlocks.FRAMED_PILLAR.value(),
-                LootTable.lootTable()
-                        .withPool(this.createDropWithCamoPool(FramedConquestBlocks.FRAMED_PILLAR.get()))
-                        .withPool(this.applyExplosionCondition(FramedConquestBlocks.FRAMED_PILLAR.get(),
-                                LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
-                                .add(((LootPoolSingletonContainer.Builder<?>)this.applyExplosionDecay(
-                                        FramedConquestBlocks.FRAMED_PILLAR.get(),
-                                        LootItem.lootTableItem(FramedConquestBlocks.FRAMED_PILLAR.get())))
-                                                .apply(SetItemCountFunction.setCount(
-                                                        PillarLootNumberProvider.INSTANCE))))));
-
         // Generate "drop self and camo" loot table for every block using custom block type
-        for (DeferredHolder<Block, ? extends Block> block : FramedConquestBlocks.BLOCKS.getEntries()) {
-            if (block.get() instanceof CustomFramedBlock framedBlock) {
-                if (!framedBlock.getCustomBlockType().hasSpecialLootTable()) {
-                    this.dropSelfWithCamo(block.get());
+        for (DeferredHolder<Block, ? extends Block> holder : FramedConquestBlocks.BLOCKS.getEntries()) {
+            if (holder.get() instanceof CustomFramedBlock framedBlock) {
+                // Layered block
+                if (framedBlock.getCustomBlockType().isLayered()) {
+                    // Drop with camo + custom count
+                    this.add(framedBlock,
+                            LootTable.lootTable()
+                                    .withPool(this.createDropWithCamoPool(framedBlock))
+                                    .withPool(this.applyExplosionCondition(framedBlock,
+                                            LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+                                                    .add(((LootPoolSingletonContainer.Builder<?>)this.applyExplosionDecay(
+                                                            framedBlock, LootItem.lootTableItem(framedBlock)))
+                                                            .apply(SetItemCountFunction.setCount(
+                                                                    new LayeredBlockLootNumberProvider(framedBlock)))))));
+                }
+                // Simple block
+                else {
+                    // Drop with camo
+                    this.dropSelfWithCamo(holder.get());
                 }
             }
         }

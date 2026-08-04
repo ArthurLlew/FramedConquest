@@ -1,6 +1,5 @@
 package net.arthurllew.framedcr.block;
 
-import com.google.common.collect.ImmutableList;
 import net.arthurllew.framedcr.block.type.CustomBlockType;
 import net.arthurllew.framedcr.block.util.CustomPlacementStateBuilder;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -25,8 +24,6 @@ import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import xfacthd.framedblocks.api.block.FramedProperties;
-import xfacthd.framedblocks.api.shapes.ShapeProvider;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -52,7 +49,7 @@ public class FramedRailing extends CustomFramedBlock {
      * Constructor.
      */
     public FramedRailing() {
-        this(CustomBlockType.FRAMED_RAILING);
+        this(new CustomBlockType.Builder(FramedRailing::getShapeForState).build());
     }
 
     /**
@@ -71,7 +68,7 @@ public class FramedRailing extends CustomFramedBlock {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(FACING, HALF, FramedProperties.SOLID, BlockStateProperties.WATERLOGGED);
+        builder.add(FACING, HALF);
     }
 
     /**
@@ -138,15 +135,15 @@ public class FramedRailing extends CustomFramedBlock {
     }
 
     /**
-     * Produces pairs (block state, shape).
+     * Generates shape for provided state.
      */
-    public static ShapeProvider generateShapes(ImmutableList<BlockState> states) {
-        return generateShapes(states, (state) -> switch (state.getValue(FACING)) {
+    public static VoxelShape getShapeForState(BlockState state) {
+        return switch (state.getValue(FACING)) {
             case NORTH -> NORTH_SHAPE;
             case WEST -> WEST_SHAPE;
             case SOUTH -> SOUTH_SHAPE;
             case EAST -> EAST_SHAPE;
             default -> throw new IllegalStateException();
-        });
+        };
     }
 }

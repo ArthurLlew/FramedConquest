@@ -1,8 +1,7 @@
 package net.arthurllew.framedcr.registry;
 
-import com.mojang.serialization.MapCodec;
 import net.arthurllew.framedcr.FramedConquest;
-import net.arthurllew.framedcr.loot.PillarLootNumberProvider;
+import net.arthurllew.framedcr.loot.LayeredBlockLootNumberProvider;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.storage.loot.providers.number.LootNumberProviderType;
@@ -16,10 +15,9 @@ public class FramedConquestLoot {
             DeferredRegister.create(Registries.LOOT_NUMBER_PROVIDER_TYPE, FramedConquest.MODID);
 
     /**
-     * Pillar loot count provider.
+     * Layered block loot count provider.
      */
-    public static final Holder<LootNumberProviderType> FRAMED_PILLAR_ITEM_COUNT_PROVIDER =
-            LOOT_NUMBER_PROVIDERS.register("layered_pillar",
-                    () -> new LootNumberProviderType(
-                            MapCodec.unit(PillarLootNumberProvider.INSTANCE)));
+    public static final Holder<LootNumberProviderType> FRAMED_LAYERED_BLOCK_LOOT_COUNT_PROVIDER =
+            LOOT_NUMBER_PROVIDERS.register("layered",
+                    () -> new LootNumberProviderType(LayeredBlockLootNumberProvider.CODEC));
 }

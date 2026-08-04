@@ -1,6 +1,5 @@
 package net.arthurllew.framedcr.block;
 
-import com.google.common.collect.ImmutableList;
 import net.arthurllew.framedcr.block.type.CustomBlockType;
 import net.arthurllew.framedcr.block.util.CustomPlacementStateBuilder;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -19,8 +18,6 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import xfacthd.framedblocks.api.block.FramedProperties;
-import xfacthd.framedblocks.api.shapes.ShapeProvider;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -74,7 +71,9 @@ public class FramedSmallWindowHalf extends CustomFramedBlock {
      * Constructor.
      */
     public FramedSmallWindowHalf() {
-        super(CustomBlockType.FRAMED_SMALL_WINDOW_HALF);
+        super(new CustomBlockType.Builder(FramedSmallWindowHalf::getShapeForState)
+                .modelVariantForItem("_updown")
+                .build());
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(FACING, Direction.NORTH)
                 .setValue(UP, false)
@@ -87,7 +86,7 @@ public class FramedSmallWindowHalf extends CustomFramedBlock {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(UP, DOWN, FACING, FramedProperties.SOLID, BlockStateProperties.WATERLOGGED);
+        builder.add(UP, DOWN, FACING);
     }
 
     /**
@@ -106,9 +105,9 @@ public class FramedSmallWindowHalf extends CustomFramedBlock {
      * @return new block state after the neighbor was updated.
      */
     @Override
-    public BlockState updateShape(BlockState state, Direction facing, BlockState facingState,
-                                  LevelAccessor level, BlockPos pos, BlockPos facingPos) {
-        return super.updateShape(state, facing, facingState, level, pos, facingPos)
+    public BlockState updateShape(BlockState state, Direction dir, BlockState neighborState,
+                                  LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
+        return super.updateShape(state, dir, neighborState, level, pos, neighborPos)
                 .setValue(UP, this.canConnectTo(level, pos.above()))
                 .setValue(DOWN, this.canConnectTo(level, pos.below()));
     }
@@ -145,43 +144,41 @@ public class FramedSmallWindowHalf extends CustomFramedBlock {
     }
 
     /**
-     * Produces pairs (block state, shape).
+     * Generates shape for provided state.
      */
-    public static ShapeProvider generateShapes(ImmutableList<BlockState> states) {
-        return generateShapes(states, (state) -> {
-            if (state.getValue(DOWN) && state.getValue(UP)) {
-                return switch (state.getValue(FACING)) {
-                    case NORTH -> NORTH_SHAPE;
-                    case WEST -> WEST_SHAPE;
-                    case SOUTH -> SOUTH_SHAPE;
-                    case EAST -> EAST_SHAPE;
-                    default -> throw new IllegalStateException();
-                };
-            } else if (!(Boolean)state.getValue(DOWN) && state.getValue(UP)) {
-                return switch (state.getValue(FACING)) {
-                    case NORTH -> DOWN_NORTH_SHAPE;
-                    case WEST -> DOWN_WEST_SHAPE;
-                    case SOUTH -> DOWN_SOUTH_SHAPE;
-                    case EAST -> DOWN_EAST_SHAPE;
-                    default -> throw new IllegalStateException();
-                };
-            } else if (state.getValue(DOWN) && !(Boolean)state.getValue(UP)) {
-                return switch (state.getValue(FACING)) {
-                    case NORTH -> UP_NORTH_SHAPE;
-                    case WEST -> UP_WEST_SHAPE;
-                    case SOUTH -> UP_SOUTH_SHAPE;
-                    case EAST -> UP_EAST_SHAPE;
-                    default -> throw new IllegalStateException();
-                };
-            } else {
-                return switch (state.getValue(FACING)) {
-                    case NORTH -> UPDOWN_NORTH_SHAPE;
-                    case WEST -> UPDOWN_WEST_SHAPE;
-                    case SOUTH -> UPDOWN_SOUTH_SHAPE;
-                    case EAST -> UPDOWN_EAST_SHAPE;
-                    default -> throw new IllegalStateException();
-                };
-            }
-        });
+    public static VoxelShape getShapeForState(BlockState state) {
+        if (state.getValue(DOWN) && state.getValue(UP)) {
+            return switch (state.getValue(FACING)) {
+                case NORTH -> NORTH_SHAPE;
+                case WEST -> WEST_SHAPE;
+                case SOUTH -> SOUTH_SHAPE;
+                case EAST -> EAST_SHAPE;
+                default -> throw new IllegalStateException();
+            };
+        } else if (!(Boolean)state.getValue(DOWN) && state.getValue(UP)) {
+            return switch (state.getValue(FACING)) {
+                case NORTH -> DOWN_NORTH_SHAPE;
+                case WEST -> DOWN_WEST_SHAPE;
+                case SOUTH -> DOWN_SOUTH_SHAPE;
+                case EAST -> DOWN_EAST_SHAPE;
+                default -> throw new IllegalStateException();
+            };
+        } else if (state.getValue(DOWN) && !(Boolean)state.getValue(UP)) {
+            return switch (state.getValue(FACING)) {
+                case NORTH -> UP_NORTH_SHAPE;
+                case WEST -> UP_WEST_SHAPE;
+                case SOUTH -> UP_SOUTH_SHAPE;
+                case EAST -> UP_EAST_SHAPE;
+                default -> throw new IllegalStateException();
+            };
+        } else {
+            return switch (state.getValue(FACING)) {
+                case NORTH -> UPDOWN_NORTH_SHAPE;
+                case WEST -> UPDOWN_WEST_SHAPE;
+                case SOUTH -> UPDOWN_SOUTH_SHAPE;
+                case EAST -> UPDOWN_EAST_SHAPE;
+                default -> throw new IllegalStateException();
+            };
+        }
     }
 }

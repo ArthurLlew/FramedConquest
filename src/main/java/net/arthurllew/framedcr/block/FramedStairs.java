@@ -1,6 +1,5 @@
 package net.arthurllew.framedcr.block;
 
-import com.google.common.collect.ImmutableList;
 import net.arthurllew.framedcr.block.type.CustomBlockType;
 import net.arthurllew.framedcr.block.util.CustomPlacementStateBuilder;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -15,8 +14,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import xfacthd.framedblocks.api.block.FramedProperties;
-import xfacthd.framedblocks.api.shapes.ShapeProvider;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -84,18 +81,20 @@ public class FramedStairs extends CustomFramedBlock {
      * Constructor.
      */
     public FramedStairs() {
-        super(CustomBlockType.FRAMED_STAIRS);
+        super(new CustomBlockType.Builder(FramedStairs::getShapeForState).build());
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(FACING, Direction.NORTH)
                 .setValue(HALF, Half.TOP)
                 .setValue(SHAPE, StairsShape.STRAIGHT));
     }
 
-    /// See [StairBlock].
+    /**
+     * Appends block state attributes.
+     */
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(FACING, HALF, SHAPE, FramedProperties.SOLID, BlockStateProperties.WATERLOGGED);
+        builder.add(FACING, HALF, SHAPE);
     }
 
     /**
@@ -106,7 +105,9 @@ public class FramedStairs extends CustomFramedBlock {
         return Shapes.empty();
     }
 
-    /// See [StairBlock].
+    /**
+     * @return block state that should be placed in the world depending on provided context.
+     */
     @Override
     public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
         return CustomPlacementStateBuilder.of(this, context)
@@ -117,17 +118,11 @@ public class FramedStairs extends CustomFramedBlock {
                 .build();
     }
 
-    /// See [StairBlock].
-    public static boolean isFramedStairs(BlockState state) {
-        return state.getBlock() instanceof FramedStairs;
-    }
-
     /**
-     * Produces pairs (block state, shape).
+     * Generates shape for provided state.
      */
-    public static ShapeProvider generateShapes(ImmutableList<BlockState> states) {
-        return generateShapes(states, (state) ->
-                (state.getValue(HALF) == Half.TOP ? TOP_SHAPES : BOTTOM_SHAPES)[SHAPE_BY_STATE[
-                        state.getValue(SHAPE).ordinal() * 4 + state.getValue(FACING).get2DDataValue()]]);
+    public static VoxelShape getShapeForState(BlockState state) {
+        return (state.getValue(HALF) == Half.TOP ? TOP_SHAPES : BOTTOM_SHAPES)
+                [SHAPE_BY_STATE[state.getValue(SHAPE).ordinal() * 4 + state.getValue(FACING).get2DDataValue()]];
     }
 }

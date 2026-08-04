@@ -50,7 +50,8 @@
             {
               "add": false,
               "count": {
-                "type": "framedcr:layered_pillar"
+                "type": "framedcr:layered",
+                "block": "framedcr:framed_pillar"
               },
               "function": "minecraft:set_count"
             }

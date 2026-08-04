@@ -6,11 +6,15 @@
   "block.framedcr.framed_arrowslit": "Framed Arrowslit",
   "block.framedcr.framed_sphere": "Framed Sphere",
   "block.framedcr.framed_small_arch": "Framed Small Arch",
+  "block.framedcr.framed_small_arch_double": "Framed Small Arch Double",
   "block.framedcr.framed_small_arch_half": "Framed Small Arch Half",
+  "block.framedcr.framed_small_arch_half_double": "Framed Small Arch Half Double",
+  "block.framedcr.framed_two_meter_arch": "Framed Two Meter Arch",
+  "block.framedcr.framed_two_meter_arch_double": "Framed Two Meter Arch Double",
+  "block.framedcr.framed_two_meter_arch_half": "Framed Two Meter Arch Half",
+  "block.framedcr.framed_two_meter_arch_half_double": "Framed Two Meter Arch Half Double",
   "block.framedcr.framed_small_window": "Framed Small Window",
   "block.framedcr.framed_small_window_half": "Framed Small Window Half",
-  "block.framedcr.framed_two_meter_arch": "Framed Two Meter Arch",
-  "block.framedcr.framed_two_meter_arch_half": "Framed Two Meter Arch Half",
   "block.framedcr.framed_corner_vertical": "Framed Corner Vertical",
   "block.framedcr.framed_quarter_horizontal": "Framed Quarter Horizontal",
   "block.framedcr.framed_quarter_vertical": "Framed Quarter Vertical",
@@ -49,5 +53,7 @@
   "block.framedcr.framed_steps_5": "Framed Steps 5",
   "block.framedcr.framed_steps_6": "Framed Steps 6",
   "block.framedcr.framed_steps_7": "Framed Steps 7",
-  "block.framedcr.framed_steps_8": "Framed Steps 8"
+  "block.framedcr.framed_steps_8": "Framed Steps 8",
+  "block.framedcr.framed_capital_doric_down_double": "Framed Capital Doric Down",
+  "block.framedcr.framed_capital_doric_up_double": "Framed Capital Doric Up"
 }

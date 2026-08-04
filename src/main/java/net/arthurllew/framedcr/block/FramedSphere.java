@@ -1,6 +1,5 @@
 package net.arthurllew.framedcr.block;
 
-import com.google.common.collect.ImmutableList;
 import net.arthurllew.framedcr.block.properties.SphereShape;
 import net.arthurllew.framedcr.block.type.CustomBlockType;
 import net.arthurllew.framedcr.block.util.CustomPlacementStateBuilder;
@@ -15,13 +14,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import xfacthd.framedblocks.api.block.FramedProperties;
-import xfacthd.framedblocks.api.shapes.ShapeProvider;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -42,16 +38,19 @@ public class FramedSphere extends CustomFramedBlock {
      * Constructor.
      */
     public FramedSphere() {
-        super(CustomBlockType.FRAMED_SPHERE);
+        super(new CustomBlockType.Builder(FramedSphere::getShapeForState)
+                .modelVariantForItem("_dragonegg")
+                .build());
         this.registerDefaultState(this.stateDefinition.any().setValue(TYPE, SphereShape.LARGE));
     }
 
     /**
      * Appends block state attributes.
      */
+    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(TYPE, FramedProperties.SOLID, BlockStateProperties.WATERLOGGED);
+        builder.add(TYPE);
     }
 
     /**
@@ -90,15 +89,14 @@ public class FramedSphere extends CustomFramedBlock {
     }
 
     /**
-     * Produces pairs (block state, shape).
+     * Generates shape for provided state.
      */
-    public static ShapeProvider generateShapes(ImmutableList<BlockState> states) {
-        return generateShapes(states, (state) ->
-                switch (state.getValue(TYPE).toString()) {
-                    case "egg" -> EGG;
-                    case "small" -> SMALL;
-                    case "large" -> LARGE;
-                    default -> throw new IllegalStateException();
-                });
+    public static VoxelShape getShapeForState(BlockState state) {
+        return switch (state.getValue(TYPE).toString()) {
+            case "egg" -> EGG;
+            case "small" -> SMALL;
+            case "large" -> LARGE;
+            default -> throw new IllegalStateException();
+        };
     }
 }

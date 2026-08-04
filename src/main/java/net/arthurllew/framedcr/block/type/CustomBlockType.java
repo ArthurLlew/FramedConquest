@@ -1,7 +1,6 @@
 package net.arthurllew.framedcr.block.type;
 
 import com.google.common.collect.ImmutableList;
-import net.arthurllew.framedcr.block.*;
 import net.arthurllew.framedcr.datagen.ModBlockLootTables;
 import net.arthurllew.framedcr.datagen.ModItemModelProvider;
 import net.arthurllew.framedcr.datagen.ModRecipeProvider;
@@ -16,166 +15,19 @@ import xfacthd.framedblocks.api.shapes.ShapeGenerator;
 import xfacthd.framedblocks.api.shapes.ShapeProvider;
 import xfacthd.framedblocks.api.type.IBlockType;
 import xfacthd.framedblocks.common.data.BlockType;
-import xfacthd.framedblocks.common.data.shapes.SplitShapeGenerator;
-import xfacthd.framedblocks.common.data.facepreds.FullFacePredicates;
-import xfacthd.framedblocks.common.data.shapes.stairs.standard.HalfStairsShapes;
-import xfacthd.framedblocks.common.data.skippreds.SideSkipPredicates;
 import xfacthd.framedblocks.common.data.conpreds.ConnectionPredicates;
-import xfacthd.framedblocks.common.data.skippreds.stairs.StairsSkipPredicate;
+import xfacthd.framedblocks.common.data.facepreds.FullFacePredicates;
+import xfacthd.framedblocks.common.data.shapes.SplitShapeGenerator;
+import xfacthd.framedblocks.common.data.skippreds.SideSkipPredicates;
 
 import java.util.Locale;
 import java.util.Objects;
 
 /**
- * Copies behavior and logic of {@link BlockType}, {@link FullFacePredicates}, {@link SideSkipPredicates} and
+ * Custom implementation of {@link BlockType}, {@link FullFacePredicates}, {@link SideSkipPredicates} and
  * {@link ConnectionPredicates}.
  */
-public enum CustomBlockType implements IBlockType {
-    FRAMED_PILLAR(true, false, false, true, true,
-            true, false, false,
-            ConTexMode.FULL_FACE,
-            FramedPillar::generateShapes,
-            FullFacePredicate.FALSE,
-            SideSkipPredicate.FALSE,
-            ConnectionPredicate.FULL_EDGE,
-            "_1", 3, true),
-    FRAMED_BALUSTRADE(true, false, false, true, true,
-            true, false, false,
-            ConTexMode.FULL_FACE,
-            FramedBalustrade::generateShapes,
-            FullFacePredicate.FALSE,
-            SideSkipPredicate.FALSE,
-            ConnectionPredicate.FULL_EDGE,
-            "_y"),
-    FRAMED_ARROWSLIT(true, false, false, true, true,
-            true, false, false,
-            ConTexMode.FULL_FACE,
-            FramedArrowslit::generateShapes,
-            FullFacePredicate.FALSE,
-            SideSkipPredicate.FALSE,
-            ConnectionPredicate.FULL_EDGE),
-    FRAMED_SPHERE(true, false, false, true, true,
-            true, false, false,
-            ConTexMode.FULL_FACE,
-            FramedSphere::generateShapes,
-            FullFacePredicate.FALSE,
-            SideSkipPredicate.FALSE,
-            ConnectionPredicate.FULL_EDGE,
-            "_dragonegg"),
-    FRAMED_SMALL_ARCH(true, false, false, true, true,
-            true, false, false,
-            ConTexMode.FULL_FACE,
-            FramedSmallArch::generateShapes,
-            FullFacePredicate.FALSE,
-            SideSkipPredicate.FALSE,
-            ConnectionPredicate.FULL_EDGE),
-    FRAMED_SMALL_ARCH_HALF(true, false, false, true, true,
-            true, false, false,
-            ConTexMode.FULL_FACE,
-            FramedSmallArchHalf::generateShapes,
-            FullFacePredicate.FALSE,
-            SideSkipPredicate.FALSE,
-            ConnectionPredicate.FULL_EDGE),
-    FRAMED_SMALL_WINDOW(true, false, false, true, true,
-            true, false, false,
-            ConTexMode.FULL_FACE,
-            FramedSmallWindow::generateShapes,
-            FullFacePredicate.FALSE,
-            SideSkipPredicate.FALSE,
-            ConnectionPredicate.FULL_EDGE),
-    FRAMED_SMALL_WINDOW_HALF(true, false, false, true, true,
-            true, false, false,
-            ConTexMode.FULL_FACE,
-            FramedSmallWindowHalf::generateShapes,
-            FullFacePredicate.FALSE,
-            SideSkipPredicate.FALSE,
-            ConnectionPredicate.FULL_EDGE,
-            "_updown"),
-    FRAMED_TWO_METER_ARCH(true, false, false, true, true,
-            true, false, false,
-            ConTexMode.FULL_FACE,
-            FramedTwoMeterArch::generateShapes,
-            FramedTwoMeterArch::fullFacePredicate,
-            new StairsSkipPredicate(),
-            ConnectionPredicate.FULL_EDGE),
-    FRAMED_TWO_METER_ARCH_HALF(true, false, false, true, true,
-            true, false, false,
-            ConTexMode.FULL_FACE,
-            HalfStairsShapes::generate,
-            FullFacePredicate.FALSE,
-            SideSkipPredicate.FALSE,
-            ConnectionPredicate.FULL_EDGE,
-            "_right"),
-    FRAMED_CORNER_VERTICAL(true, false, false, true, true,
-            true, false, false,
-            ConTexMode.FULL_FACE,
-            FramedCornerVertical::generateShapes,
-            FullFacePredicate.FALSE,
-            SideSkipPredicate.FALSE,
-            ConnectionPredicate.FULL_EDGE,
-            "_1"),
-    FRAMED_QUARTER_HORIZONTAL(true, false, false, true, true,
-            true, false, false,
-            ConTexMode.FULL_FACE,
-            FramedQuarterHorizontal::generateShapes,
-            FullFacePredicate.FALSE,
-            SideSkipPredicate.FALSE,
-            ConnectionPredicate.FULL_EDGE,
-            "_2"),
-    FRAMED_QUARTER_VERTICAL(true, false, false, true, true,
-            true, false, false,
-            ConTexMode.FULL_FACE,
-            FramedQuarterVertical::generateShapes,
-            FullFacePredicate.FALSE,
-            SideSkipPredicate.FALSE,
-            ConnectionPredicate.FULL_EDGE,
-            "_1"),
-    FRAMED_ARCH(true, false, false, true, true,
-            true, false, false,
-            ConTexMode.FULL_FACE,
-            FramedArch::generateShapes,
-            FullFacePredicate.FALSE,
-            SideSkipPredicate.FALSE,
-            ConnectionPredicate.FULL_EDGE,
-            "_1"),
-    FRAMED_ARCH_FACADE(true, false, false, true, true,
-            true, false, false,
-            ConTexMode.FULL_FACE,
-            FramedArchFacade::generateShapes,
-            FullFacePredicate.FALSE,
-            SideSkipPredicate.FALSE,
-            ConnectionPredicate.FULL_EDGE,
-            "_1"),
-    FRAMED_RAILING(true, false, false, true, true,
-            true, false, false,
-            ConTexMode.FULL_FACE,
-            FramedRailing::generateShapes,
-            FullFacePredicate.FALSE,
-            SideSkipPredicate.FALSE,
-            ConnectionPredicate.FULL_EDGE),
-    FRAMED_RAILING_CORNER(true, false, false, true, true,
-            true, false, false,
-            ConTexMode.FULL_FACE,
-            FramedRailingCorner::generateShapes,
-            FullFacePredicate.FALSE,
-            SideSkipPredicate.FALSE,
-            ConnectionPredicate.FULL_EDGE),
-    FRAMED_RAILING_SLOPE(true, false, false, true, true,
-            true, false, false,
-            ConTexMode.FULL_FACE,
-            FramedRailing::generateShapes,
-            FullFacePredicate.FALSE,
-            SideSkipPredicate.FALSE,
-            ConnectionPredicate.FULL_EDGE,
-            "_r"),
-    FRAMED_STAIRS(true, false, false, true, true,
-            true, false, false,
-            ConTexMode.FULL_FACE,
-            FramedStairs::generateShapes,
-            FullFacePredicate.FALSE,
-            SideSkipPredicate.FALSE,
-            ConnectionPredicate.FULL_EDGE);
-
+public class CustomBlockType implements IBlockType {
     /**
      * Unique ID.
      */
@@ -196,7 +48,7 @@ public enum CustomBlockType implements IBlockType {
     private final boolean blockItem;
     private final boolean allowIntangible;
     /**
-     * Whether block occupies two blocks (like doors).
+     * Whether this block contains two camos.
      */
     private final boolean doubleBlock;
     /**
@@ -220,7 +72,7 @@ public enum CustomBlockType implements IBlockType {
     private final SideSkipPredicate sideSkipPredicate;
     private final ConnectionPredicate connectionPredicates;
     /**
-     * Block model variation ending to be used by item model (see {@link ModItemModelProvider}).
+     * Block model suffix (see {@link ModItemModelProvider}).
      */
     private final String modelVariantForItem;
     /**
@@ -228,40 +80,23 @@ public enum CustomBlockType implements IBlockType {
      */
     private final int craftingCount;
     /**
-     * Determines block loot table (see {@link ModBlockLootTables}).
+     * Whether this block has special loot table (see {@link ModBlockLootTables}).
      */
-    private final boolean hasSpecialLootTable;
+    private final boolean isLayered;
 
+    /**
+     * Full constructor.
+     */
     CustomBlockType(boolean canOcclude, boolean specialHitbox, boolean specialTile, boolean waterloggable,
                     boolean blockItem, boolean allowIntangible, boolean doubleBlock, boolean lockable,
-                    ConTexMode minCTMode, ShapeGenerator shapeGen,
-                    FullFacePredicate fullFacePredicate,
-                    SideSkipPredicate sideSkipPredicate,
-                    ConnectionPredicate connectionPredicates) {
-        this(canOcclude, specialHitbox, specialTile, waterloggable, blockItem, allowIntangible, doubleBlock, lockable,
-                minCTMode, shapeGen, fullFacePredicate, sideSkipPredicate, connectionPredicates,
-                "", 1, false);
-    }
-
-    CustomBlockType(boolean canOcclude, boolean specialHitbox, boolean specialTile, boolean waterloggable,
-                    boolean blockItem, boolean allowIntangible, boolean doubleBlock, boolean lockable,
-                    ConTexMode minCTMode, ShapeGenerator shapeGen,
+                    ConTexMode minCTMode,
                     FullFacePredicate fullFacePredicate,
                     SideSkipPredicate sideSkipPredicate,
                     ConnectionPredicate connectionPredicates,
-                    String modelVariantForItem) {
-        this(canOcclude, specialHitbox, specialTile, waterloggable, blockItem, allowIntangible, doubleBlock, lockable,
-                minCTMode, shapeGen, fullFacePredicate, sideSkipPredicate, connectionPredicates,
-                modelVariantForItem, 1, false);
-    }
-
-    CustomBlockType(boolean canOcclude, boolean specialHitbox, boolean specialTile, boolean waterloggable,
-                    boolean blockItem, boolean allowIntangible, boolean doubleBlock, boolean lockable,
-                    ConTexMode minCTMode, ShapeGenerator shapeGen,
-                    FullFacePredicate fullFacePredicate,
-                    SideSkipPredicate sideSkipPredicate,
-                    ConnectionPredicate connectionPredicates,
-                    String modelVariantForItem, int craftingCount, boolean hasSpecialLootTable) {
+                    ShapeGenerator shapeGen,
+                    String modelVariantForItem,
+                    int craftingCount,
+                    boolean isLayered) {
         this.name = this.toString().toLowerCase(Locale.ROOT);
         this.canOcclude = canOcclude;
         this.specialHitbox = specialHitbox;
@@ -282,7 +117,7 @@ public enum CustomBlockType implements IBlockType {
 
         this.modelVariantForItem = modelVariantForItem;
         this.craftingCount = craftingCount;
-        this.hasSpecialLootTable = hasSpecialLootTable;
+        this.isLayered = isLayered;
     }
 
     public String modelVariantForItem() {
@@ -293,8 +128,8 @@ public enum CustomBlockType implements IBlockType {
         return this.craftingCount;
     }
 
-    public boolean hasSpecialLootTable() {
-        return this.hasSpecialLootTable;
+    public boolean isLayered() {
+        return this.isLayered;
     }
 
     @Override
@@ -394,6 +229,92 @@ public enum CustomBlockType implements IBlockType {
 
     @Override
     public int compareTo(IBlockType other) {
-        return other instanceof CustomBlockType type ? this.compareTo(type) : 1;
+        return other instanceof CustomBlockType ? 0 : 1;
+    }
+
+    /**
+     * Instance builder.
+     */
+    @SuppressWarnings({"FieldMayBeFinal", "FieldCanBeLocal"})
+    public static class Builder {
+        private boolean canOcclude = true;
+        private boolean specialHitbox = false;
+        private boolean specialTile = false;
+        private boolean waterloggable = true;
+        private boolean blockItem = true;
+        private boolean allowIntangible = true;
+        private boolean doubleBlock = false;
+        private boolean lockable = false;
+        private ConTexMode minCTMode = ConTexMode.FULL_FACE;
+        private FullFacePredicate fullFacePredicate = FullFacePredicate.FALSE;
+        private SideSkipPredicate sideSkipPredicate = SideSkipPredicate.FALSE;
+        private ConnectionPredicate connectionPredicates = ConnectionPredicate.FULL_EDGE;
+        private final ShapeGenerator shapeGen;
+        private String modelVariantForItem = "";
+        private int craftingCount = 1;
+        private boolean isLayered = false;
+
+        public Builder(ShapeGenerator shapeGen) {
+            this.shapeGen = shapeGen;
+        }
+
+        public Builder(IShapeGenerator shapeGen) {
+            this.shapeGen = shapeGen;
+        }
+
+        public Builder waterloggable(boolean waterloggable) {
+            this.waterloggable = waterloggable;
+
+            return this;
+        }
+
+        public Builder blockItem(boolean blockItem) {
+            this.blockItem = blockItem;
+
+            return this;
+        }
+
+        public Builder doubleBlock(boolean doubleBlock) {
+            this.doubleBlock = doubleBlock;
+
+            return this;
+        }
+
+        public Builder fullFacePredicate(FullFacePredicate fullFacePredicate) {
+            this.fullFacePredicate = fullFacePredicate;
+
+            return this;
+        }
+
+        public Builder sideSkipPredicate(SideSkipPredicate sideSkipPredicate) {
+            this.sideSkipPredicate = sideSkipPredicate;
+
+            return this;
+        }
+
+        public Builder modelVariantForItem(String modelVariantForItem) {
+            this.modelVariantForItem = modelVariantForItem;
+
+            return this;
+        }
+
+        public Builder craftingCount(int craftingCount) {
+            this.craftingCount = craftingCount;
+
+            return this;
+        }
+
+        public Builder isLayered(boolean isLayered) {
+            this.isLayered = isLayered;
+
+            return this;
+        }
+
+        public CustomBlockType build() {
+            return new CustomBlockType(this.canOcclude, this.specialHitbox, this.specialTile, this.waterloggable,
+                    this.blockItem, this.allowIntangible, this.doubleBlock, this.lockable,
+                    this.minCTMode, this.fullFacePredicate, this.sideSkipPredicate, this.connectionPredicates,
+                    this.shapeGen, this.modelVariantForItem, this.craftingCount, this.isLayered);
+        }
     }
 }
