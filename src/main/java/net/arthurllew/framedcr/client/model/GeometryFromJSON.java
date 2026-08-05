@@ -64,7 +64,11 @@ public class GeometryFromJSON extends Geometry {
      */
     protected void remapQuads(QuadMap quadMap, BakedQuad quad, List<BakedQuad> originalQuads, Direction dir) {
         for(BakedQuad originalQuad : originalQuads) {
-            QuadModifier.of(originalQuad).tintIndex(quad.getTintIndex()).apply(remap(new QuadData(quad)))
+            QuadModifier.of(originalQuad)
+                    .tintIndex(quad.getTintIndex())
+                    .shade(quad.isShade())
+                    .ambientOcclusion(quad.hasAmbientOcclusion())
+                    .apply(remap(new QuadData(quad)))
                     .export(quadMap.get(dir));
         }
     }
