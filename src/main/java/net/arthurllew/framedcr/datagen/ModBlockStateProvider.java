@@ -44,7 +44,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
         // Generate block states for some of the blocks
         for (DeferredHolder<Block, ? extends Block> holder : FramedConquestBlocks.BLOCKS.getEntries()) {
             // Capital block
-            if (holder.get() instanceof FramedCapital block) {
+            if (holder.get() instanceof FramedCapital block
+                    && !(block instanceof FramedCapital.Connected)) {
                 this.simpleBlockWithExistingModel(block, ModBlockStateProvider::getDoubleBlockModelPath);
             }
             // Small arch block

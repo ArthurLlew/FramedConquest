@@ -68,6 +68,9 @@
     "framedcr:framed_capital_doric_up_top",
     "framedcr:framed_capital_doric_up_double",
     "framedcr:framed_capital_ionian",
+    "framedcr:framed_capital_corinthian",
+    "framedcr:framed_cornice",
+    "framedcr:framed_plinth",
     "framedcr:framed_plinth_stairs"
   ]
 }

@@ -144,7 +144,16 @@ public class FramedConquestBlocks {
     public static final DeferredBlock<FramedBalustrade> FRAMED_CAPITAL_IONIAN = registerBlock(
             "framed_capital_ionian", FramedBalustrade::new);
 
-    public static final DeferredBlock<FramedStairs> FRAMED_CAPITAL_PLINTH_STAIRS = registerBlock(
+    public static final DeferredBlock<FramedCapital> FRAMED_CAPITAL_CORINTHIAN = registerBlock(
+            "framed_capital_corinthian", FramedCapital.Connected::new);
+
+    public static final DeferredBlock<FramedCapital> FRAMED_CORNICE = registerBlock(
+            "framed_cornice", FramedCapital.Connected::new);
+
+    public static final DeferredBlock<FramedCapital> FRAMED_PLINTH = registerBlock(
+            "framed_plinth", FramedCapital.Connected::new);
+
+    public static final DeferredBlock<FramedStairs> FRAMED_PLINTH_STAIRS = registerBlock(
             "framed_plinth_stairs", FramedStairs.Plinth::new);
 
     /**

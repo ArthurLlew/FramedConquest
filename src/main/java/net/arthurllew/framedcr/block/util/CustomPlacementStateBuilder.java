@@ -145,13 +145,33 @@ public class CustomPlacementStateBuilder<T extends CustomPlacementStateBuilder<T
         if (this.state != null) {
             BlockGetter level = this.ctx.getLevel();
             BlockPos blockpos = this.ctx.getClickedPos();
-            BlockPos up = blockpos.above();
-            BlockPos down = blockpos.below();
-            BlockState BlockStateUp = level.getBlockState(up);
-            BlockState BlockStateDown = level.getBlockState(down);
+            BlockState BlockStateUp = level.getBlockState(blockpos.above());
+            BlockState BlockStateDown = level.getBlockState(blockpos.below());
             this.state = state
                     .setValue(BlockStateProperties.UP, canConnectTo.apply(BlockStateUp))
                     .setValue(BlockStateProperties.DOWN, canConnectTo.apply(BlockStateDown));
+        }
+
+        return this.self();
+    }
+
+    /**
+     * Calculates block up and down connections.
+     */
+    public final T withHorizontalConnection(Function<BlockState, Boolean> canConnectTo) {
+        // Avoid null state
+        if (this.state != null) {
+            BlockGetter level = this.ctx.getLevel();
+            BlockPos blockpos = this.ctx.getClickedPos();
+            BlockState BlockStateNorth = level.getBlockState(blockpos.north());
+            BlockState BlockStateWest = level.getBlockState(blockpos.west());
+            BlockState BlockStateSouth = level.getBlockState(blockpos.south());
+            BlockState BlockStateEast = level.getBlockState(blockpos.east());
+            this.state = state
+                    .setValue(BlockStateProperties.NORTH, canConnectTo.apply(BlockStateNorth))
+                    .setValue(BlockStateProperties.WEST, canConnectTo.apply(BlockStateWest))
+                    .setValue(BlockStateProperties.SOUTH, canConnectTo.apply(BlockStateSouth))
+                    .setValue(BlockStateProperties.EAST, canConnectTo.apply(BlockStateEast));
         }
 
         return this.self();
