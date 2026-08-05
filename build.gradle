@@ -119,7 +119,7 @@ repositories {
 
 dependencies {
     // Framed blocks
-    implementation files('libs/FramedBlocks-10.5.3.jar')
+    implementation files('libs/FramedBlocks-10.6.1.jar')
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
