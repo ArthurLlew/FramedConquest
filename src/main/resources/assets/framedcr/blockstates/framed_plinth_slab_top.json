@@ -1,0 +1,140 @@
+{
+  "variants": {
+    "half=bottom,east=false,north=false,south=false,west=false": {
+      "model": "framedcr:block/framed_plinth_slab_top_half"
+    },
+    "half=bottom,east=false,north=true,south=false,west=false": {
+      "model": "framedcr:block/framed_plinth_slab_top_half_n"
+    },
+    "half=bottom,east=true,north=false,south=false,west=false": {
+      "model": "framedcr:block/framed_plinth_slab_top_half_n",
+      "y": 90,
+      "uvlock": true
+    },
+    "half=bottom,east=false,north=false,south=true,west=false": {
+      "model": "framedcr:block/framed_plinth_slab_top_half_n",
+      "y": 180,
+      "uvlock": true
+    },
+    "half=bottom,east=false,north=false,south=false,west=true": {
+      "model": "framedcr:block/framed_plinth_slab_top_half_n",
+      "y": 270,
+      "uvlock": true
+    },
+    "half=bottom,east=true,north=true,south=false,west=false": {
+      "model": "framedcr:block/framed_plinth_slab_top_half_ne"
+    },
+    "half=bottom,east=true,north=false,south=true,west=false": {
+      "model": "framedcr:block/framed_plinth_slab_top_half_ne",
+      "y": 90,
+      "uvlock": true
+    },
+    "half=bottom,east=false,north=false,south=true,west=true": {
+      "model": "framedcr:block/framed_plinth_slab_top_half_ne",
+      "y": 180,
+      "uvlock": true
+    },
+    "half=bottom,east=false,north=true,south=false,west=true": {
+      "model": "framedcr:block/framed_plinth_slab_top_half_ne",
+      "y": 270,
+      "uvlock": true
+    },
+    "half=bottom,east=false,north=true,south=true,west=false": {
+      "model": "framedcr:block/framed_plinth_slab_top_half_ns"
+    },
+    "half=bottom,east=true,north=false,south=false,west=true": {
+      "model": "framedcr:block/framed_plinth_slab_top_half_ns_1",
+      "y": 90,
+      "uvlock": true
+    },
+    "half=bottom,east=true,north=true,south=true,west=false": {
+      "model": "framedcr:block/framed_plinth_slab_top_half_nse"
+    },
+    "half=bottom,east=true,north=false,south=true,west=true": {
+      "model": "framedcr:block/framed_plinth_slab_top_half_nse",
+      "y": 90,
+      "uvlock": true
+    },
+    "half=bottom,east=false,north=true,south=true,west=true": {
+      "model": "framedcr:block/framed_plinth_slab_top_half_nse",
+      "y": 180,
+      "uvlock": true
+    },
+    "half=bottom,east=true,north=true,south=false,west=true": {
+      "model": "framedcr:block/framed_plinth_slab_top_half_nse",
+      "y": 270,
+      "uvlock": true
+    },
+    "half=bottom,east=true,north=true,south=true,west=true": {
+      "model": "framedcr:block/framed_plinth_slab_top_half_nsew"
+    },
+    "half=top,east=false,north=false,south=false,west=false": {
+      "model": "framedcr:block/framed_plinth_slab_top_upper"
+    },
+    "half=top,east=false,north=true,south=false,west=false": {
+      "model": "framedcr:block/framed_plinth_slab_top_upper_n"
+    },
+    "half=top,east=true,north=false,south=false,west=false": {
+      "model": "framedcr:block/framed_plinth_slab_top_upper_n",
+      "y": 90,
+      "uvlock": true
+    },
+    "half=top,east=false,north=false,south=true,west=false": {
+      "model": "framedcr:block/framed_plinth_slab_top_upper_n",
+      "y": 180,
+      "uvlock": true
+    },
+    "half=top,east=false,north=false,south=false,west=true": {
+      "model": "framedcr:block/framed_plinth_slab_top_upper_n",
+      "y": 270,
+      "uvlock": true
+    },
+    "half=top,east=true,north=true,south=false,west=false": {
+      "model": "framedcr:block/framed_plinth_slab_top_upper_ne"
+    },
+    "half=top,east=true,north=false,south=true,west=false": {
+      "model": "framedcr:block/framed_plinth_slab_top_upper_ne",
+      "y": 90,
+      "uvlock": true
+    },
+    "half=top,east=false,north=false,south=true,west=true": {
+      "model": "framedcr:block/framed_plinth_slab_top_upper_ne",
+      "y": 180,
+      "uvlock": true
+    },
+    "half=top,east=false,north=true,south=false,west=true": {
+      "model": "framedcr:block/framed_plinth_slab_top_upper_ne",
+      "y": 270,
+      "uvlock": true
+    },
+    "half=top,east=false,north=true,south=true,west=false": {
+      "model": "framedcr:block/framed_plinth_slab_top_upper_ns"
+    },
+    "half=top,east=true,north=false,south=false,west=true": {
+      "model": "framedcr:block/framed_plinth_slab_top_upper_ns_1",
+      "y": 90,
+      "uvlock": true
+    },
+    "half=top,east=true,north=true,south=true,west=false": {
+      "model": "framedcr:block/framed_plinth_slab_top_upper_nse"
+    },
+    "half=top,east=true,north=false,south=true,west=true": {
+      "model": "framedcr:block/framed_plinth_slab_top_upper_nse",
+      "y": 90,
+      "uvlock": true
+    },
+    "half=top,east=false,north=true,south=true,west=true": {
+      "model": "framedcr:block/framed_plinth_slab_top_upper_nse",
+      "y": 180,
+      "uvlock": true
+    },
+    "half=top,east=true,north=true,south=false,west=true": {
+      "model": "framedcr:block/framed_plinth_slab_top_upper_nse",
+      "y": 270,
+      "uvlock": true
+    },
+    "half=top,east=true,north=true,south=true,west=true": {
+      "model": "framedcr:block/framed_plinth_slab_top_upper_nsew"
+    }
+  }
+}

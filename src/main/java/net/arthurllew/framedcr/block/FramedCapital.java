@@ -13,10 +13,9 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import xfacthd.framedblocks.api.block.FramedProperties;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -25,6 +24,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public class FramedCapital extends CustomFramedBlock {
     private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 16, 16);
+    private static final VoxelShape BOTTOM = Block.box(0, 0, 0, 16, 8, 16);
+    private static final VoxelShape TOP = Block.box(0, 8, 0, 16, 16, 16);
 
     /**
      * Base constructor.
@@ -62,23 +63,31 @@ public class FramedCapital extends CustomFramedBlock {
      * Capital that can horizontally connect to its neighbors.
      */
     public static class Connected extends FramedCapital {
+        // Connection properties
         private static final BooleanProperty NORTH = BlockStateProperties.NORTH;
         private static final BooleanProperty WEST = BlockStateProperties.WEST;
         private static final BooleanProperty SOUTH = BlockStateProperties.SOUTH;
         private static final BooleanProperty EAST = BlockStateProperties.EAST;
 
         /**
-         * Constructor.
+         * Base constructor.
          */
-        public Connected() {
-            super(new CustomBlockType.Builder(FramedCapital::getShapeForState)
-                    .waterloggable(false)
-                    .build());
+        public Connected(CustomBlockType blockType) {
+            super(blockType);
             this.registerDefaultState(this.stateDefinition.any()
                     .setValue(NORTH, false)
                     .setValue(WEST, false)
                     .setValue(SOUTH, false)
                     .setValue(EAST, false));
+        }
+
+        /**
+         * Constructor.
+         */
+        public Connected() {
+            this(new CustomBlockType.Builder(FramedCapital::getShapeForState)
+                    .waterloggable(false)
+                    .build());
         }
 
         /**
@@ -106,25 +115,91 @@ public class FramedCapital extends CustomFramedBlock {
         @Override
         public BlockState updateShape(BlockState state, Direction dir, BlockState neighborState,
                                       LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
-            return super.updateShape(state, dir, neighborState, level, pos, neighborPos)
-                    .setValue(NORTH, this.canConnectTo(level, pos.north()))
-                    .setValue(WEST, this.canConnectTo(level, pos.west()))
-                    .setValue(SOUTH, this.canConnectTo(level, pos.south()))
-                    .setValue(EAST, this.canConnectTo(level, pos.east()));
+            // Base block state
+            BlockState base = super.updateShape(state, dir, neighborState, level, pos, neighborPos);
+            // On horizontal axis
+            if ((dir.getAxis() == Direction.Axis.X) || (dir.getAxis() == Direction.Axis.Z)) {
+                return switch (dir) {
+                    case NORTH -> base.setValue(NORTH, this.canConnectTo(state, neighborState));
+                    case WEST -> base.setValue(WEST, this.canConnectTo(state, neighborState));
+                    case SOUTH -> base.setValue(SOUTH, this.canConnectTo(state, neighborState));
+                    default -> base.setValue(EAST, this.canConnectTo(state, neighborState));
+                };
+            }
+            // Return base otherwise
+            else {
+                return base;
+            }
         }
 
         /**
-         * @return whether this block can connect to block state at provided position.
+         * @return whether provided block state can connect to provided neighbor block state.
          */
-        private boolean canConnectTo(LevelAccessor world, BlockPos pos) {
-            return canConnectTo(world.getBlockState(pos));
+        protected boolean canConnectTo(BlockState state, BlockState neighborState) {
+            return neighborState.is(this);
+        }
+    }
+
+    /**
+     * Capital that can horizontally connect to its neighbors.
+     */
+    public static class ConnectedSlab extends Connected {
+        /**
+         * Top/bottom location property.
+         */
+        public static final EnumProperty<Half> HALF = BlockStateProperties.HALF;
+
+        /**
+         * Constructor.
+         */
+        public ConnectedSlab() {
+            super(new CustomBlockType.Builder(ConnectedSlab::getShapeForState)
+                    .waterloggable(false)
+                    .modelVariantForItem("_half")
+                    .build());
+            this.registerDefaultState(this.stateDefinition.any()
+                    .setValue(FramedProperties.SOLID, false)
+                    .setValue(HALF, Half.TOP));
+        }
+
+        /**
+         * Appends block state attributes.
+         */
+        @Override
+        protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+            super.createBlockStateDefinition(builder);
+            builder.add(HALF);
+        }
+
+        /**
+         * @return block state that should be placed in the world depending on provided context.
+         */
+        @Override
+        public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
+            return CustomPlacementStateBuilder.of(this, context)
+                    .withHorizontalConnection(this::canConnectTo)
+                    .withTopBottom()
+                    .build();
         }
 
         /**
          * @return whether this block can connect to provided block state.
          */
-        private boolean canConnectTo(BlockState blockstate) {
-            return blockstate.is(this);
+        @Override
+        protected boolean canConnectTo(BlockState state, BlockState neighborState) {
+            if (neighborState.is(this)) {
+                return (state.getValue(HALF) == neighborState.getValue(HALF));
+            }
+            else {
+                return false;
+            }
+        }
+
+        /**
+         * Generates shape for provided state.
+         */
+        public static VoxelShape getShapeForState(BlockState state) {
+            return state.getValue(HALF) == Half.TOP ? TOP : BOTTOM;
         }
     }
 
@@ -176,8 +251,6 @@ public class FramedCapital extends CustomFramedBlock {
      * Bottom doric capital part.
      */
     public static class DoricBottom extends FramedCapital {
-        private static final VoxelShape BOTTOM = Block.box(0, 0, 0, 16, 8, 16);
-
         /**
          * Constructor.
          */
@@ -200,8 +273,6 @@ public class FramedCapital extends CustomFramedBlock {
      * Top doric capital part.
      */
     public static class DoricTop extends FramedCapital {
-        private static final VoxelShape TOP = Block.box(0, 8, 0, 16, 16, 16);
-
         /**
          * Constructor.
          */

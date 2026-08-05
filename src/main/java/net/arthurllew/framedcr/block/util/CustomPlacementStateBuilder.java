@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.state.properties.StairsShape;
 import org.jetbrains.annotations.Nullable;
 import xfacthd.framedblocks.api.block.PlacementStateBuilder;
 
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class CustomPlacementStateBuilder<T extends CustomPlacementStateBuilder<T>> extends PlacementStateBuilder<T> {
@@ -158,7 +159,7 @@ public class CustomPlacementStateBuilder<T extends CustomPlacementStateBuilder<T
     /**
      * Calculates block up and down connections.
      */
-    public final T withHorizontalConnection(Function<BlockState, Boolean> canConnectTo) {
+    public final T withHorizontalConnection(BiFunction<BlockState, BlockState, Boolean> canConnectTo) {
         // Avoid null state
         if (this.state != null) {
             BlockGetter level = this.ctx.getLevel();
@@ -168,10 +169,10 @@ public class CustomPlacementStateBuilder<T extends CustomPlacementStateBuilder<T
             BlockState BlockStateSouth = level.getBlockState(blockpos.south());
             BlockState BlockStateEast = level.getBlockState(blockpos.east());
             this.state = state
-                    .setValue(BlockStateProperties.NORTH, canConnectTo.apply(BlockStateNorth))
-                    .setValue(BlockStateProperties.WEST, canConnectTo.apply(BlockStateWest))
-                    .setValue(BlockStateProperties.SOUTH, canConnectTo.apply(BlockStateSouth))
-                    .setValue(BlockStateProperties.EAST, canConnectTo.apply(BlockStateEast));
+                    .setValue(BlockStateProperties.NORTH, canConnectTo.apply(this.state, BlockStateNorth))
+                    .setValue(BlockStateProperties.WEST, canConnectTo.apply(this.state, BlockStateWest))
+                    .setValue(BlockStateProperties.SOUTH, canConnectTo.apply(this.state, BlockStateSouth))
+                    .setValue(BlockStateProperties.EAST, canConnectTo.apply(this.state, BlockStateEast));
         }
 
         return this.self();

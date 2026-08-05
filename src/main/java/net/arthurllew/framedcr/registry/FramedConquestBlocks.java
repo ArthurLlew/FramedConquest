@@ -152,7 +152,10 @@ public class FramedConquestBlocks {
 
     public static final DeferredBlock<FramedCapital> FRAMED_PLINTH = registerBlock(
             "framed_plinth", FramedCapital.Connected::new);
-
+    public static final DeferredBlock<FramedCapital> FRAMED_PLINTH_SLAB_BOTTOM = registerBlock(
+            "framed_plinth_slab_bottom", FramedCapital.ConnectedSlab::new);
+    public static final DeferredBlock<FramedCapital> FRAMED_PLINTH_SLAB_TOP = registerBlock(
+            "framed_plinth_slab_top", FramedCapital.ConnectedSlab::new);
     public static final DeferredBlock<FramedStairs> FRAMED_PLINTH_STAIRS = registerBlock(
             "framed_plinth_stairs", FramedStairs.Plinth::new);
 

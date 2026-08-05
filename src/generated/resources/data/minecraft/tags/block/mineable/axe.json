@@ -71,6 +71,8 @@
     "framedcr:framed_capital_corinthian",
     "framedcr:framed_cornice",
     "framedcr:framed_plinth",
+    "framedcr:framed_plinth_slab_bottom",
+    "framedcr:framed_plinth_slab_top",
     "framedcr:framed_plinth_stairs"
   ]
 }
