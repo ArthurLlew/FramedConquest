@@ -248,7 +248,7 @@ public class CustomBlockType implements IBlockType {
         private ConTexMode minCTMode = ConTexMode.FULL_FACE;
         private FullFacePredicate fullFacePredicate = FullFacePredicate.FALSE;
         private SideSkipPredicate sideSkipPredicate = SideSkipPredicate.FALSE;
-        private ConnectionPredicate connectionPredicates = ConnectionPredicate.FULL_EDGE;
+        private ConnectionPredicate connectionPredicates = ConnectionPredicate.FULL_FACE;
         private final ShapeGenerator shapeGen;
         private String modelVariantForItem = "";
         private int craftingCount = 1;
@@ -282,12 +282,6 @@ public class CustomBlockType implements IBlockType {
 
         public Builder fullFacePredicate(FullFacePredicate fullFacePredicate) {
             this.fullFacePredicate = fullFacePredicate;
-
-            return this;
-        }
-
-        public Builder sideSkipPredicate(SideSkipPredicate sideSkipPredicate) {
-            this.sideSkipPredicate = sideSkipPredicate;
 
             return this;
         }

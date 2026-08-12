@@ -17,7 +17,6 @@ import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import xfacthd.framedblocks.common.data.skippreds.stairs.StairsSkipPredicate;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -57,7 +56,6 @@ public class FramedTwoMeterArch extends CustomFramedBlock {
     public FramedTwoMeterArch() {
         this(new CustomBlockType.Builder(FramedTwoMeterArch::getShapeForState)
                 .fullFacePredicate(FramedTwoMeterArch::fullFacePredicate)
-                .sideSkipPredicate(new StairsSkipPredicate())
                 .build());
     }
 
@@ -126,7 +124,6 @@ public class FramedTwoMeterArch extends CustomFramedBlock {
         public Double(Block blockLeft, Block blockRight) {
             super(new CustomBlockType.Builder(FramedTwoMeterArch::getShapeForState)
                     .fullFacePredicate(FramedTwoMeterArch::fullFacePredicate)
-                    .sideSkipPredicate(new StairsSkipPredicate())
                     .doubleBlock(true)
                     .build());
             this.blockLeft = blockLeft;
@@ -170,7 +167,6 @@ public class FramedTwoMeterArch extends CustomFramedBlock {
         public Bottom() {
             super(new CustomBlockType.Builder(Bottom::getShapeForState)
                     .fullFacePredicate(FramedTwoMeterArch::fullFacePredicate)
-                    .sideSkipPredicate(new StairsSkipPredicate())
                     .blockItem(false)
                     .build());
         }
@@ -195,7 +191,6 @@ public class FramedTwoMeterArch extends CustomFramedBlock {
         public Top() {
             super(new CustomBlockType.Builder(Top::getShapeForState)
                     .fullFacePredicate(FramedTwoMeterArch::fullFacePredicate)
-                    .sideSkipPredicate(new StairsSkipPredicate())
                     .blockItem(false)
                     .build());
         }
