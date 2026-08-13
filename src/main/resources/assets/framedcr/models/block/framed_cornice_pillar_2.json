@@ -1,0 +1,79 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"parent": "block/cube_column",
+	"render_type": "minecraft:cutout",
+	"textures": {
+		"all": "framedblocks:block/framed_block",
+		"particle": "#all"
+	},
+	"elements": [
+		{
+			"name": "Cube1",
+			"from": [6, 0, 6],
+			"to": [10, 4.5, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [14, 8, 14]},
+			"faces": {
+				"north": {"uv": [6, 11.5, 10, 16], "texture": "#all"},
+				"east": {"uv": [6, 11.5, 10, 16], "texture": "#all"},
+				"south": {"uv": [6, 11.5, 10, 16], "texture": "#all"},
+				"west": {"uv": [6, 11.5, 10, 16], "texture": "#all"},
+				"up": {"uv": [6, 6, 10, 10], "texture": "#all"},
+				"down": {"uv": [6, 6, 10, 10], "texture": "#all"}
+			}
+		},
+		{
+			"name": "Cube14",
+			"from": [0, 13, 0],
+			"to": [16, 15.991, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [2, 8, 14]},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 2.991], "texture": "#all"},
+				"east": {"uv": [0, 0.009, 16, 3], "texture": "#all"},
+				"south": {"uv": [0, 0.009, 16, 3], "texture": "#all"},
+				"west": {"uv": [0, 0.009, 16, 3], "texture": "#all"},
+				"up": {"uv": [0, 0, 16, 16], "rotation": 180, "texture": "#all"},
+				"down": {"uv": [0, 0, 16, 16], "rotation": 180, "texture": "#all"}
+			}
+		},
+		{
+			"name": "Cube16",
+			"from": [2, 11, 2],
+			"to": [14, 13, 14],
+			"rotation": {"angle": 0, "axis": "y", "origin": [2, 8, 2]},
+			"faces": {
+				"north": {"uv": [2, 3, 14, 5], "texture": "#all"},
+				"east": {"uv": [2, 3, 14, 5], "texture": "#all"},
+				"south": {"uv": [2, 3, 14, 5], "texture": "#all"},
+				"west": {"uv": [2, 3, 14, 5], "texture": "#all"},
+				"down": {"uv": [2, 2, 14, 14], "rotation": 90, "texture": "#all"}
+			}
+		},
+		{
+			"name": "Cube18",
+			"from": [3.5, 8, 3.5],
+			"to": [12.5, 11, 12.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [14, 8, 14]},
+			"faces": {
+				"north": {"uv": [3.5, 5, 12.5, 8], "texture": "#all"},
+				"east": {"uv": [3.5, 5, 12.5, 8], "texture": "#all"},
+				"south": {"uv": [3.5, 5, 12.5, 8], "texture": "#all"},
+				"west": {"uv": [3.5, 5, 12.5, 8], "texture": "#all"},
+				"down": {"uv": [3.5, 3.5, 12.5, 12.5], "rotation": 270, "texture": "#all"}
+			}
+		},
+		{
+			"name": "Cube18",
+			"from": [5, 4.5, 5],
+			"to": [11, 8, 11],
+			"rotation": {"angle": 0, "axis": "y", "origin": [14, 8, 2]},
+			"faces": {
+				"north": {"uv": [5, 8, 11, 11.5], "texture": "#all"},
+				"east": {"uv": [5, 8, 11, 11.5], "texture": "#all"},
+				"south": {"uv": [5, 8, 11, 11.5], "texture": "#all"},
+				"west": {"uv": [5, 8, 11, 11.5], "texture": "#all"},
+				"down": {"uv": [5, 5, 11, 11], "texture": "#all"}
+			}
+		}
+	]
+}

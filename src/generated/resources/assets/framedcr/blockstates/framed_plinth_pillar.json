@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "layer=1": {
+      "model": "framedcr:block/framed_plinth_pillar_2",
+      "uvlock": true
+    },
+    "layer=2": {
+      "model": "framedcr:block/framed_plinth_wall_post",
+      "uvlock": true
+    },
+    "layer=3": {
+      "model": "framedcr:block/framed_plinth_pillar_6",
+      "uvlock": true
+    }
+  }
+}

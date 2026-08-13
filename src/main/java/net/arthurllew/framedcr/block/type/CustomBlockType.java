@@ -1,6 +1,7 @@
 package net.arthurllew.framedcr.block.type;
 
 import com.google.common.collect.ImmutableList;
+import net.arthurllew.framedcr.block.shape.IShapeGenerator;
 import net.arthurllew.framedcr.datagen.ModBlockLootTables;
 import net.arthurllew.framedcr.datagen.ModItemModelProvider;
 import net.arthurllew.framedcr.datagen.ModRecipeProvider;

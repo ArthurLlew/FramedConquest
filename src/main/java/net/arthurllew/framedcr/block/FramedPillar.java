@@ -1,17 +1,24 @@
 package net.arthurllew.framedcr.block;
 
+import net.arthurllew.framedcr.block.entity.FramedConquestDoubleBlockEntity;
 import net.arthurllew.framedcr.block.type.CustomBlockType;
 import net.arthurllew.framedcr.block.util.BlockUtils;
 import net.arthurllew.framedcr.block.util.CustomPlacementStateBuilder;
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.Tuple;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.phys.shapes.BooleanOp;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import xfacthd.framedblocks.common.FBContent;
 import xfacthd.framedblocks.common.block.cube.FramedLayeredCubeBlock;
@@ -42,11 +49,19 @@ public class FramedPillar extends CustomFramedBlock {
     public static final IntegerProperty LAYERS = IntegerProperty.create("layer", 1, MAX_LAYERS);
 
     /**
+     * Base constructor.
+     */
+    public FramedPillar(CustomBlockType blockType) {
+        super(blockType);
+        this.registerDefaultState(this.stateDefinition.any().setValue(LAYERS, 1));
+    }
+
+    /**
      * Constructor.
      */
     public FramedPillar() {
-        super(new CustomBlockType.Builder(FramedPillar::getShapeForState)
-                .modelVariantForItem("_1")
+        this(new CustomBlockType.Builder(FramedPillar::getShapeForState)
+                .modelVariantForItem("_2")
                 .craftingCount(MAX_LAYERS)
                 .isLayered(true)
                 .build());
@@ -107,5 +122,103 @@ public class FramedPillar extends CustomFramedBlock {
      */
     public static VoxelShape getShapeForState(BlockState state) {
         return SHAPE[state.getValue(LAYERS) - 1];
+    }
+
+    /**
+     * Double part pillar.
+     */
+    public static class Double extends FramedPillar implements ICustomFramedDoubleBlock {
+        // Block pair
+        private final Block blockLeft, blockRight;
+
+        /**
+         * Constructor.
+         */
+        public Double(Block blockLeft, Block blockRight) {
+            super(new CustomBlockType.Builder(FramedPillar::getShapeForState)
+                    .doubleBlock(true)
+                    .modelVariantForItem("_2")
+                    .craftingCount(MAX_LAYERS)
+                    .isLayered(true)
+                    .build());
+            this.blockLeft = blockLeft;
+            this.blockRight = blockRight;
+        }
+
+        /**
+         * @return connected block entity.
+         */
+        @Override
+        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+            return new FramedConquestDoubleBlockEntity(pos, state);
+        }
+
+        /**
+         * @return two blocks used to shape double block.
+         */
+        @Override
+        public Tuple<BlockState, BlockState> calculateBlockPair(BlockState blockState) {
+            // Copy block state properties
+            BlockState blockStateLeft = this.blockLeft.defaultBlockState();
+            BlockState blockStateRight = this.blockRight.defaultBlockState();
+            for (Property<?> property : blockState.getProperties()) {
+                blockStateLeft = applyProperty(blockStateLeft, blockState, property);
+                blockStateRight = applyProperty(blockStateRight, blockState, property);
+            }
+            // Return states pair
+            return new Tuple<>(blockStateLeft, blockStateRight);
+        }
+    }
+
+    /**
+     * Bottom two meter arch part.
+     */
+    public static class Bottom extends FramedPillar {
+        private static final VoxelShape BOTTOM = Block.box(0, 0, 0, 16, 8, 16);
+
+        /**
+         * Constructor.
+         */
+        public Bottom() {
+            super(new CustomBlockType.Builder(Bottom::getShapeForState)
+                    .blockItem(false)
+                    .modelVariantForItem("_2")
+                    .craftingCount(MAX_LAYERS)
+                    .isLayered(true)
+                    .build());
+        }
+
+        /**
+         * Generates shape for provided state.
+         */
+        public static VoxelShape getShapeForState(BlockState state) {
+            return Shapes.join(FramedPillar.getShapeForState(state), BOTTOM, BooleanOp.AND);
+        }
+    }
+
+    /**
+     * Top two meter arch part.
+     */
+    public static class Top extends FramedPillar {
+        private static final VoxelShape TOP = Block.box(0, 8, 0, 16, 16, 16);
+
+        /**
+         * Constructor.
+         */
+        public Top() {
+            super(new CustomBlockType.Builder(Top::getShapeForState)
+                    .blockItem(false)
+                    .modelVariantForItem("_2")
+                    .craftingCount(MAX_LAYERS)
+                    .isLayered(true)
+                    .build());
+        }
+
+        /**
+         * Generates shape for provided state.
+         */
+        public static VoxelShape getShapeForState(BlockState state) {
+            return Shapes.join(FramedPillar.getShapeForState(state), TOP, BooleanOp.AND);
+        }
     }
 }

@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "layer=1": {
+      "model": "framedcr:block/framed_capital_doric_down_pillar_2/top",
+      "uvlock": true
+    },
+    "layer=2": {
+      "model": "framedcr:block/framed_capital_doric_down_wall_post/top",
+      "uvlock": true
+    },
+    "layer=3": {
+      "model": "framedcr:block/framed_capital_doric_down_pillar_6/top",
+      "uvlock": true
+    }
+  }
+}

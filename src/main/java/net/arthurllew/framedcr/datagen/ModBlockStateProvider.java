@@ -9,10 +9,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.Half;
-import net.minecraft.world.level.block.state.properties.Property;
-import net.minecraft.world.level.block.state.properties.StairsShape;
+import net.minecraft.world.level.block.state.properties.*;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
@@ -66,10 +63,15 @@ public class ModBlockStateProvider extends BlockStateProvider {
             }
             // Stairs block
             else if ((holder.get() instanceof FramedStairs block)
-                    && !holder.getId().getPath().equals("framed_steps_7")
-                    && !holder.getId().getPath().equals("framed_steps_8")
+                    && !(block == FramedConquestBlocks.FRAMED_STEPS_7.get())
+                    && !(block == FramedConquestBlocks.FRAMED_STEPS_8.get())
                     && !(block instanceof FramedStairs.Plinth)) {
                 this.stairs(block);
+            }
+            // Pillar block
+            else if ((holder.get() instanceof FramedPillar block)
+                    && !(block == FramedConquestBlocks.FRAMED_PILLAR.get())) {
+                this.pillar(block);
             }
         }
     }
@@ -315,6 +317,44 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
 
     /**
+     * Generates block states for a pillar block.
+     */
+    public void pillar(FramedPillar block) {
+        String modelPath = getPillarModelPath(block);
+        ModelFile model1 = this.models().getExistingFile(
+                ResourceLocation.fromNamespaceAndPath(FramedConquest.MODID,
+                        "block/" + modelPath.replace("pillar", "pillar_2")));
+        ModelFile model2 = this.models().getExistingFile(
+                ResourceLocation.fromNamespaceAndPath(FramedConquest.MODID,
+                        "block/" + modelPath.replace("pillar", "wall_post")));
+        ModelFile model3 = this.models().getExistingFile(
+                ResourceLocation.fromNamespaceAndPath(FramedConquest.MODID,
+                        "block/" + modelPath.replace("pillar", "pillar_6")));
+
+        // Iterate main block properties
+        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
+            // Get block state properties
+            int layers = state.getValue(FramedPillar.LAYERS);
+
+            // Switch layers
+            ModelFile model = switch (layers) {
+                case 1 -> model1;
+                case 2 -> model2;
+                case 3 -> model3;
+                default -> model1;
+            };
+
+            // Init builder
+            ConfiguredModel.Builder<?> builder = ConfiguredModel.builder()
+                    .modelFile(model)
+                    .uvLock(true);
+
+            // Build
+            return builder.build();
+        }, IGNORED_PROPERTIES);
+    }
+
+    /**
      * @return block model path
      */
     protected static String getBlockModelPath(Block block) {
@@ -338,7 +378,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
 
     /**
-     * @return double block model path
+     * @return block model path
      */
     protected static String getSmallArchModelPath(FramedSmallArch block) {
         if (block instanceof FramedSmallArch.Bottom
@@ -352,7 +392,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
 
     /**
-     * @return double block model path
+     * @return block model path
      */
     protected static String getSmallArchHalfModelPath(FramedSmallArchHalf block) {
         if (block instanceof FramedSmallArchHalf.Bottom
@@ -366,7 +406,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
 
     /**
-     * @return double block model path
+     * @return block model path
      */
     protected static String getTwoMeterArchModelPath(FramedTwoMeterArch block) {
         if (block instanceof FramedTwoMeterArch.Bottom
@@ -380,7 +420,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
 
     /**
-     * @return double block model path
+     * @return block model path
      */
     protected static String getTwoMeterArchHalfModelPath(FramedTwoMeterArchHalf block, String variant) {
         if (block instanceof FramedTwoMeterArchHalf.Bottom
@@ -390,6 +430,20 @@ public class ModBlockStateProvider extends BlockStateProvider {
         }
         else {
             return getBlockModelPath(block) + variant;
+        }
+    }
+
+    /**
+     * @return block model path
+     */
+    protected static String getPillarModelPath(FramedPillar block) {
+        if (block instanceof FramedPillar.Bottom
+                || block instanceof FramedPillar.Top
+                || block instanceof FramedPillar.Double) {
+            return getDoubleBlockModelPath(block);
+        }
+        else {
+            return getBlockModelPath(block);
         }
     }
 }

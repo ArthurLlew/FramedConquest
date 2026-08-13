@@ -140,15 +140,25 @@ public class FramedConquestBlocks {
     public static final DeferredBlock<FramedCapital> FRAMED_CAPITAL_DORIC_UP = registerDoubleBlock(
             "framed_capital_doric_up", FramedCapital.DoricBottom::new, FramedCapital.DoricTop::new,
             FramedCapital.Doric::new);
+    public static final DeferredBlock<FramedPillar> FRAMED_CAPITAL_DORIC_DOWN_PILLAR = registerDoubleBlock(
+            "framed_capital_doric_down_pillar", FramedPillar.Bottom::new, FramedPillar.Top::new,
+            FramedPillar.Double::new);
+    public static final DeferredBlock<FramedPillar> FRAMED_CAPITAL_DORIC_UP_PILLAR = registerDoubleBlock(
+            "framed_capital_doric_up_pillar", FramedPillar.Bottom::new, FramedPillar.Top::new,
+            FramedPillar.Double::new);
 
     public static final DeferredBlock<FramedBalustrade> FRAMED_CAPITAL_IONIAN = registerBlock(
             "framed_capital_ionian", FramedBalustrade::new);
 
     public static final DeferredBlock<FramedCapital> FRAMED_CAPITAL_CORINTHIAN = registerBlock(
             "framed_capital_corinthian", FramedCapital.Connected::new);
+    public static final DeferredBlock<FramedPillar> FRAMED_CAPITAL_CORINTHIAN_PILLAR = registerBlock(
+            "framed_capital_corinthian_pillar", FramedPillar::new);
 
     public static final DeferredBlock<FramedCapital> FRAMED_CORNICE = registerBlock(
             "framed_cornice", FramedCapital.Connected::new);
+    public static final DeferredBlock<FramedPillar> FRAMED_CORNICE_PILLAR = registerBlock(
+            "framed_cornice_pillar", FramedPillar::new);
 
     public static final DeferredBlock<FramedCapital> FRAMED_PLINTH = registerBlock(
             "framed_plinth", FramedCapital.Connected::new);
@@ -158,6 +168,8 @@ public class FramedConquestBlocks {
             "framed_plinth_slab_top", FramedCapital.ConnectedSlab::new);
     public static final DeferredBlock<FramedStairs> FRAMED_PLINTH_STAIRS = registerBlock(
             "framed_plinth_stairs", FramedStairs.Plinth::new);
+    public static final DeferredBlock<FramedPillar> FRAMED_PLINTH_PILLAR = registerBlock(
+            "framed_plinth_pillar", FramedPillar::new);
 
     /**
      * Registers framed double block and its item.

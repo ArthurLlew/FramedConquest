@@ -1,4 +1,4 @@
-package net.arthurllew.framedcr.block.type;
+package net.arthurllew.framedcr.block.shape;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;

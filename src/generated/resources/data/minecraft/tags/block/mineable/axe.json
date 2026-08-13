@@ -67,12 +67,21 @@
     "framedcr:framed_capital_doric_up_bottom",
     "framedcr:framed_capital_doric_up_top",
     "framedcr:framed_capital_doric_up_double",
+    "framedcr:framed_capital_doric_down_pillar_bottom",
+    "framedcr:framed_capital_doric_down_pillar_top",
+    "framedcr:framed_capital_doric_down_pillar_double",
+    "framedcr:framed_capital_doric_up_pillar_bottom",
+    "framedcr:framed_capital_doric_up_pillar_top",
+    "framedcr:framed_capital_doric_up_pillar_double",
     "framedcr:framed_capital_ionian",
     "framedcr:framed_capital_corinthian",
+    "framedcr:framed_capital_corinthian_pillar",
     "framedcr:framed_cornice",
+    "framedcr:framed_cornice_pillar",
     "framedcr:framed_plinth",
     "framedcr:framed_plinth_slab_bottom",
     "framedcr:framed_plinth_slab_top",
-    "framedcr:framed_plinth_stairs"
+    "framedcr:framed_plinth_stairs",
+    "framedcr:framed_plinth_pillar"
   ]
 }
