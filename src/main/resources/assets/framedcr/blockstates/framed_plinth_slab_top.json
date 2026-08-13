@@ -1,72 +1,72 @@
 {
   "variants": {
     "half=bottom,east=false,north=false,south=false,west=false": {
-      "model": "framedcr:block/framed_plinth_slab_top_half"
+      "model": "framedcr:block/framed_plinth_slab_top_lower"
     },
     "half=bottom,east=false,north=true,south=false,west=false": {
-      "model": "framedcr:block/framed_plinth_slab_top_half_n"
+      "model": "framedcr:block/framed_plinth_slab_top_lower_n"
     },
     "half=bottom,east=true,north=false,south=false,west=false": {
-      "model": "framedcr:block/framed_plinth_slab_top_half_n",
+      "model": "framedcr:block/framed_plinth_slab_top_lower_n",
       "y": 90,
       "uvlock": true
     },
     "half=bottom,east=false,north=false,south=true,west=false": {
-      "model": "framedcr:block/framed_plinth_slab_top_half_n",
+      "model": "framedcr:block/framed_plinth_slab_top_lower_n",
       "y": 180,
       "uvlock": true
     },
     "half=bottom,east=false,north=false,south=false,west=true": {
-      "model": "framedcr:block/framed_plinth_slab_top_half_n",
+      "model": "framedcr:block/framed_plinth_slab_top_lower_n",
       "y": 270,
       "uvlock": true
     },
     "half=bottom,east=true,north=true,south=false,west=false": {
-      "model": "framedcr:block/framed_plinth_slab_top_half_ne"
+      "model": "framedcr:block/framed_plinth_slab_top_lower_ne"
     },
     "half=bottom,east=true,north=false,south=true,west=false": {
-      "model": "framedcr:block/framed_plinth_slab_top_half_ne",
+      "model": "framedcr:block/framed_plinth_slab_top_lower_ne",
       "y": 90,
       "uvlock": true
     },
     "half=bottom,east=false,north=false,south=true,west=true": {
-      "model": "framedcr:block/framed_plinth_slab_top_half_ne",
+      "model": "framedcr:block/framed_plinth_slab_top_lower_ne",
       "y": 180,
       "uvlock": true
     },
     "half=bottom,east=false,north=true,south=false,west=true": {
-      "model": "framedcr:block/framed_plinth_slab_top_half_ne",
+      "model": "framedcr:block/framed_plinth_slab_top_lower_ne",
       "y": 270,
       "uvlock": true
     },
     "half=bottom,east=false,north=true,south=true,west=false": {
-      "model": "framedcr:block/framed_plinth_slab_top_half_ns"
+      "model": "framedcr:block/framed_plinth_slab_top_lower_ns"
     },
     "half=bottom,east=true,north=false,south=false,west=true": {
-      "model": "framedcr:block/framed_plinth_slab_top_half_ns_1",
+      "model": "framedcr:block/framed_plinth_slab_top_lower_ns_1",
       "y": 90,
       "uvlock": true
     },
     "half=bottom,east=true,north=true,south=true,west=false": {
-      "model": "framedcr:block/framed_plinth_slab_top_half_nse"
+      "model": "framedcr:block/framed_plinth_slab_top_lower_nse"
     },
     "half=bottom,east=true,north=false,south=true,west=true": {
-      "model": "framedcr:block/framed_plinth_slab_top_half_nse",
+      "model": "framedcr:block/framed_plinth_slab_top_lower_nse",
       "y": 90,
       "uvlock": true
     },
     "half=bottom,east=false,north=true,south=true,west=true": {
-      "model": "framedcr:block/framed_plinth_slab_top_half_nse",
+      "model": "framedcr:block/framed_plinth_slab_top_lower_nse",
       "y": 180,
       "uvlock": true
     },
     "half=bottom,east=true,north=true,south=false,west=true": {
-      "model": "framedcr:block/framed_plinth_slab_top_half_nse",
+      "model": "framedcr:block/framed_plinth_slab_top_lower_nse",
       "y": 270,
       "uvlock": true
     },
     "half=bottom,east=true,north=true,south=true,west=true": {
-      "model": "framedcr:block/framed_plinth_slab_top_half_nsew"
+      "model": "framedcr:block/framed_plinth_slab_top_lower_nsew"
     },
     "half=top,east=false,north=false,south=false,west=false": {
       "model": "framedcr:block/framed_plinth_slab_top_upper"
