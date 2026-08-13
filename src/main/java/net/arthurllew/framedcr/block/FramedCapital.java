@@ -154,7 +154,6 @@ public class FramedCapital extends CustomFramedBlock {
          */
         public ConnectedSlab() {
             super(new CustomBlockType.Builder(ConnectedSlab::getShapeForState)
-                    .waterloggable(true)
                     .modelVariantForItem("_lower")
                     .build());
             this.registerDefaultState(this.stateDefinition.any()
