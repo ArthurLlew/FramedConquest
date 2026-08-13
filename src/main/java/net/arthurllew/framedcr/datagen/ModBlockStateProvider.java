@@ -73,6 +73,11 @@ public class ModBlockStateProvider extends BlockStateProvider {
                     && !(block == FramedConquestBlocks.FRAMED_PILLAR.get())) {
                 this.pillar(block);
             }
+            // Capital vertical corner block
+            else if (holder.get() instanceof FramedCapitalCornerVertical block) {
+                this.framedCornerVerticalCapital(block);
+            }
+
         }
     }
 
@@ -355,6 +360,54 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
 
     /**
+     * Generates block states for a capital vertical corner block.
+     */
+    public void framedCornerVerticalCapital(FramedCapitalCornerVertical block) {
+        String modelPath = getFramedCornerVerticalCapital(block);
+        ModelFile model1 = this.models().getExistingFile(
+                ResourceLocation.fromNamespaceAndPath(FramedConquest.MODID,
+                        "block/" + modelPath.replace("corner", "corner_2")));
+        ModelFile model2 = this.models().getExistingFile(
+                ResourceLocation.fromNamespaceAndPath(FramedConquest.MODID,
+                        "block/" + modelPath.replace("corner", "corner_4")));
+        ModelFile model3 = this.models().getExistingFile(
+                ResourceLocation.fromNamespaceAndPath(FramedConquest.MODID,
+                        "block/" + modelPath.replace("corner", "corner_6")));
+
+        // Iterate main block properties
+        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
+            // Get block state properties
+            Direction dir = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
+            int layers = state.getValue(FramedCapitalCornerVertical.LAYERS);
+
+            // Choose Y rotation
+            int rotY = switch (dir) {
+                case EAST -> 90;
+                case SOUTH -> 180;
+                case WEST -> 270;
+                default -> 0;
+            };
+
+            // Switch layers
+            ModelFile model = switch (layers) {
+                case 2 -> model1;
+                case 3 -> model2;
+                case 4 -> model3;
+                default -> model1;
+            };
+
+            // Init builder
+            ConfiguredModel.Builder<?> builder = ConfiguredModel.builder()
+                    .modelFile(model)
+                    .rotationY(rotY)
+                    .uvLock(true);
+
+            // Build
+            return builder.build();
+        }, IGNORED_PROPERTIES);
+    }
+
+    /**
      * @return block model path
      */
     protected static String getBlockModelPath(Block block) {
@@ -378,7 +431,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
 
     /**
-     * @return block model path
+     * @return small arch block model path
      */
     protected static String getSmallArchModelPath(FramedSmallArch block) {
         if (block instanceof FramedSmallArch.Bottom
@@ -392,7 +445,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
 
     /**
-     * @return block model path
+     * @return small arch half block model path
      */
     protected static String getSmallArchHalfModelPath(FramedSmallArchHalf block) {
         if (block instanceof FramedSmallArchHalf.Bottom
@@ -406,7 +459,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
 
     /**
-     * @return block model path
+     * @return two meters arch block model path
      */
     protected static String getTwoMeterArchModelPath(FramedTwoMeterArch block) {
         if (block instanceof FramedTwoMeterArch.Bottom
@@ -420,7 +473,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
 
     /**
-     * @return block model path
+     * @return two meters arch two block model path
      */
     protected static String getTwoMeterArchHalfModelPath(FramedTwoMeterArchHalf block, String variant) {
         if (block instanceof FramedTwoMeterArchHalf.Bottom
@@ -434,12 +487,26 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
 
     /**
-     * @return block model path
+     * @return pillar block model path
      */
     protected static String getPillarModelPath(FramedPillar block) {
         if (block instanceof FramedPillar.Bottom
                 || block instanceof FramedPillar.Top
                 || block instanceof FramedPillar.Double) {
+            return getDoubleBlockModelPath(block);
+        }
+        else {
+            return getBlockModelPath(block);
+        }
+    }
+
+    /**
+     * @return capital vertical corner block model path
+     */
+    protected static String getFramedCornerVerticalCapital(FramedCapitalCornerVertical block) {
+        if (block instanceof FramedCapitalCornerVertical.Bottom
+                || block instanceof FramedCapitalCornerVertical.Top
+                || block instanceof FramedCapitalCornerVertical.Double) {
             return getDoubleBlockModelPath(block);
         }
         else {

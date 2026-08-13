@@ -4,8 +4,8 @@
 	"parent": "block/block",
 	"render_type": "minecraft:cutout",
 	"textures": {
-		"particle": "framedblocks:block/framed_block",
-		"bottom": "framedblocks:block/framed_block_alt"
+		"all": "framedblocks:block/framed_block_alt",
+		"particle": "#all"
 	},
 	"elements": [
 		{
@@ -37,7 +37,7 @@
 						12.5,
 						10
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				},
 				"west": {
 					"uv": [
@@ -46,7 +46,7 @@
 						16,
 						10
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				},
 				"up": {
 					"uv": [
@@ -56,7 +56,7 @@
 						4
 					],
 					"rotation": 270,
-					"texture": "#bottom"
+					"texture": "#all"
 				}
 			}
 		},
@@ -89,7 +89,7 @@
 						13.5,
 						12
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				},
 				"west": {
 					"uv": [
@@ -98,7 +98,7 @@
 						16,
 						12
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				},
 				"up": {
 					"uv": [
@@ -108,7 +108,7 @@
 						4
 					],
 					"rotation": 270,
-					"texture": "#bottom"
+					"texture": "#all"
 				}
 			}
 		},
@@ -141,7 +141,7 @@
 						14.5,
 						15.999
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				},
 				"west": {
 					"uv": [
@@ -150,7 +150,7 @@
 						16,
 						15.999
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				},
 				"up": {
 					"uv": [
@@ -159,7 +159,7 @@
 						4,
 						16
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				},
 				"down": {
 					"uv": [
@@ -168,7 +168,7 @@
 						4,
 						14.5
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				}
 			}
 		},
@@ -201,7 +201,7 @@
 						12,
 						10
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				},
 				"up": {
 					"uv": [
@@ -210,7 +210,7 @@
 						16,
 						4
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				}
 			}
 		},
@@ -243,7 +243,7 @@
 						12,
 						12
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				},
 				"up": {
 					"uv": [
@@ -252,7 +252,7 @@
 						16,
 						4
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				}
 			}
 		},
@@ -285,7 +285,7 @@
 						12,
 						15.999
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				},
 				"up": {
 					"uv": [
@@ -294,7 +294,7 @@
 						16,
 						4
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				},
 				"down": {
 					"uv": [
@@ -303,7 +303,7 @@
 						16,
 						14.5
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				}
 			}
 		},
@@ -336,7 +336,7 @@
 						1.5,
 						12
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				},
 				"south": {
 					"uv": [
@@ -345,7 +345,7 @@
 						16,
 						12
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				},
 				"up": {
 					"uv": [
@@ -354,7 +354,7 @@
 						16,
 						16
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				}
 			}
 		},
@@ -387,7 +387,7 @@
 						2.5,
 						15.999
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				},
 				"south": {
 					"uv": [
@@ -396,7 +396,7 @@
 						16,
 						16
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				},
 				"up": {
 					"uv": [
@@ -405,7 +405,7 @@
 						16,
 						16
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				},
 				"down": {
 					"uv": [
@@ -415,7 +415,7 @@
 						2.5
 					],
 					"rotation": 270,
-					"texture": "#bottom"
+					"texture": "#all"
 				}
 			}
 		},
@@ -448,7 +448,7 @@
 						0.5,
 						10
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				},
 				"east": {
 					"uv": [
@@ -457,7 +457,7 @@
 						12.5,
 						10
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				},
 				"up": {
 					"uv": [
@@ -466,7 +466,7 @@
 						16,
 						16
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				}
 			}
 		},
@@ -499,7 +499,7 @@
 						1.5,
 						12
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				},
 				"east": {
 					"uv": [
@@ -508,7 +508,7 @@
 						13.5,
 						12
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				},
 				"up": {
 					"uv": [
@@ -517,7 +517,7 @@
 						16,
 						16
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				}
 			}
 		},
@@ -550,7 +550,7 @@
 						2.5,
 						15.999
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				},
 				"east": {
 					"uv": [
@@ -559,7 +559,7 @@
 						14.5,
 						15.999
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				},
 				"up": {
 					"uv": [
@@ -568,7 +568,7 @@
 						16,
 						16
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				},
 				"down": {
 					"uv": [
@@ -578,7 +578,7 @@
 						2.5
 					],
 					"rotation": 270,
-					"texture": "#bottom"
+					"texture": "#all"
 				}
 			}
 		},
@@ -611,7 +611,7 @@
 						4,
 						12
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				},
 				"west": {
 					"uv": [
@@ -620,7 +620,7 @@
 						16,
 						12
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				},
 				"up": {
 					"uv": [
@@ -629,7 +629,7 @@
 						4,
 						16
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				}
 			}
 		},
@@ -662,7 +662,7 @@
 						4,
 						15.999
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				},
 				"west": {
 					"uv": [
@@ -671,7 +671,7 @@
 						16,
 						16
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				},
 				"up": {
 					"uv": [
@@ -680,7 +680,7 @@
 						4,
 						16
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				},
 				"down": {
 					"uv": [
@@ -690,7 +690,7 @@
 						2.5
 					],
 					"rotation": 180,
-					"texture": "#bottom"
+					"texture": "#all"
 				}
 			}
 		},
@@ -723,7 +723,7 @@
 						16,
 						10
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				},
 				"up": {
 					"uv": [
@@ -732,7 +732,7 @@
 						16,
 						16
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				}
 			}
 		},
@@ -765,7 +765,7 @@
 						16,
 						12
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				},
 				"up": {
 					"uv": [
@@ -774,7 +774,7 @@
 						16,
 						16
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				}
 			}
 		},
@@ -807,7 +807,7 @@
 						16,
 						15.999
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				},
 				"up": {
 					"uv": [
@@ -816,7 +816,7 @@
 						16,
 						16
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				},
 				"down": {
 					"uv": [
@@ -826,7 +826,7 @@
 						2.5
 					],
 					"rotation": 180,
-					"texture": "#bottom"
+					"texture": "#all"
 				}
 			}
 		},
@@ -859,7 +859,7 @@
 						0.5,
 						10
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				},
 				"south": {
 					"uv": [
@@ -868,7 +868,7 @@
 						16,
 						10
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				},
 				"up": {
 					"uv": [
@@ -877,7 +877,7 @@
 						16,
 						16
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				}
 			}
 		},
@@ -910,7 +910,7 @@
 						4,
 						10
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				},
 				"west": {
 					"uv": [
@@ -919,7 +919,7 @@
 						16,
 						10
 					],
-					"texture": "#bottom"
+					"texture": "#all"
 				},
 				"up": {
 					"uv": [
@@ -929,7 +929,7 @@
 						16
 					],
 					"rotation": 180,
-					"texture": "#bottom"
+					"texture": "#all"
 				}
 			}
 		}

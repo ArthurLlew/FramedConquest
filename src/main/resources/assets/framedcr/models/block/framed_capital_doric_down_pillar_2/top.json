@@ -4,8 +4,8 @@
 	"parent": "block/block",
 	"render_type": "minecraft:cutout",
 	"textures": {
-		"particle": "framedblocks:block/framed_block",
-		"top": "framedblocks:block/framed_block"
+		"all": "framedblocks:block/framed_block",
+		"particle": "#all"
 	},
 	"elements": [
 		{
@@ -36,7 +36,7 @@
 						10,
 						16
 					],
-					"texture": "#top"
+					"texture": "#all"
 				},
 				"east": {
 					"uv": [
@@ -45,7 +45,7 @@
 						10,
 						16
 					],
-					"texture": "#top"
+					"texture": "#all"
 				},
 				"south": {
 					"uv": [
@@ -54,7 +54,7 @@
 						10,
 						16
 					],
-					"texture": "#top"
+					"texture": "#all"
 				},
 				"west": {
 					"uv": [
@@ -63,7 +63,7 @@
 						10,
 						16
 					],
-					"texture": "#top"
+					"texture": "#all"
 				},
 				"up": {
 					"uv": [
@@ -72,7 +72,7 @@
 						10,
 						10
 					],
-					"texture": "#top",
+					"texture": "#all",
 					"cullface": "up"
 				},
 				"down": {
@@ -82,7 +82,7 @@
 						10,
 						10
 					],
-					"texture": "#top",
+					"texture": "#all",
 					"cullface": "down"
 				}
 			}

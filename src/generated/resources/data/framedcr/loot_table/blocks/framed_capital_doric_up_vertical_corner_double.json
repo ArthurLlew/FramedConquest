@@ -1,0 +1,66 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "conditions": [
+                {
+                  "condition": "framedblocks:non_trivial_camo"
+                }
+              ],
+              "function": "minecraft:copy_components",
+              "include": [
+                "framedblocks:camo_list"
+              ],
+              "source": "block_entity"
+            },
+            {
+              "function": "minecraft:explosion_decay"
+            }
+          ],
+          "name": "framedcr:framed_capital_doric_up_vertical_corner_double"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:explosion_decay"
+            },
+            {
+              "add": false,
+              "count": {
+                "type": "framedcr:layered",
+                "block": "framedcr:framed_capital_doric_up_vertical_corner_double"
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "framedcr:framed_capital_doric_up_vertical_corner_double"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "framedcr:blocks/framed_capital_doric_up_vertical_corner_double"
+}

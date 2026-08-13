@@ -26,10 +26,10 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class FramedQuarterVertical extends CustomFramedBlock {
-    private static final VoxelShape[] NORTH_SHAPE = new VoxelShape[]{Block.box(14.0F, 0.0F, 14.0F, 16.0F, 16.0F, 16.0F), Block.box(12.0F, 0.0F, 12.0F, 16.0F, 16.0F, 16.0F), Block.box(8.0F, 0.0F, 8.0F, 16.0F, 16.0F, 16.0F), Block.box(4.0F, 0.0F, 4.0F, 16.0F, 16.0F, 16.0F)};
-    private static final VoxelShape[] SOUTH_SHAPE = new VoxelShape[]{Block.box(0.0F, 0.0F, 0.0F, 2.0F, 16.0F, 2.0F), Block.box(0.0F, 0.0F, 0.0F, 4.0F, 16.0F, 4.0F), Block.box(0.0F, 0.0F, 0.0F, 8.0F, 16.0F, 8.0F), Block.box(0.0F, 0.0F, 0.0F, 12.0F, 16.0F, 12.0F)};
-    private static final VoxelShape[] EAST_SHAPE = new VoxelShape[]{Block.box(0.0F, 0.0F, 14.0F, 2.0F, 16.0F, 16.0F), Block.box(0.0F, 0.0F, 12.0F, 4.0F, 16.0F, 16.0F), Block.box(0.0F, 0.0F, 8.0F, 8.0F, 16.0F, 16.0F), Block.box(0.0F, 0.0F, 4.0F, 12.0F, 16.0F, 16.0F)};
-    private static final VoxelShape[] WEST_SHAPE = new VoxelShape[]{Block.box(14.0F, 0.0F, 0.0F, 16.0F, 16.0F, 2.0F), Block.box(12.0F, 0.0F, 0.0F, 16.0F, 16.0F, 4.0F), Block.box(8.0F, 0.0F, 0.0F, 16.0F, 16.0F, 8.0F), Block.box(4.0F, 0.0F, 0.0F, 16.0F, 16.0F, 12.0F)};
+    protected static final VoxelShape[] NORTH_SHAPE = new VoxelShape[]{Block.box(14.0F, 0.0F, 14.0F, 16.0F, 16.0F, 16.0F), Block.box(12.0F, 0.0F, 12.0F, 16.0F, 16.0F, 16.0F), Block.box(8.0F, 0.0F, 8.0F, 16.0F, 16.0F, 16.0F), Block.box(4.0F, 0.0F, 4.0F, 16.0F, 16.0F, 16.0F)};
+    protected static final VoxelShape[] SOUTH_SHAPE = new VoxelShape[]{Block.box(0.0F, 0.0F, 0.0F, 2.0F, 16.0F, 2.0F), Block.box(0.0F, 0.0F, 0.0F, 4.0F, 16.0F, 4.0F), Block.box(0.0F, 0.0F, 0.0F, 8.0F, 16.0F, 8.0F), Block.box(0.0F, 0.0F, 0.0F, 12.0F, 16.0F, 12.0F)};
+    protected static final VoxelShape[] EAST_SHAPE = new VoxelShape[]{Block.box(0.0F, 0.0F, 14.0F, 2.0F, 16.0F, 16.0F), Block.box(0.0F, 0.0F, 12.0F, 4.0F, 16.0F, 16.0F), Block.box(0.0F, 0.0F, 8.0F, 8.0F, 16.0F, 16.0F), Block.box(0.0F, 0.0F, 4.0F, 12.0F, 16.0F, 16.0F)};
+    protected static final VoxelShape[] WEST_SHAPE = new VoxelShape[]{Block.box(14.0F, 0.0F, 0.0F, 16.0F, 16.0F, 2.0F), Block.box(12.0F, 0.0F, 0.0F, 16.0F, 16.0F, 4.0F), Block.box(8.0F, 0.0F, 0.0F, 16.0F, 16.0F, 8.0F), Block.box(4.0F, 0.0F, 0.0F, 16.0F, 16.0F, 12.0F)};
 
     /**
      * Layers count.
