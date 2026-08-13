@@ -152,7 +152,7 @@ public class FramedCapitalCornerVertical extends CustomFramedBlock {
     }
 
     /**
-     * Double part pillar.
+     * Double part variant.
      */
     public static class Double extends FramedCapitalCornerVertical implements ICustomFramedDoubleBlock {
         // Block pair
@@ -198,7 +198,7 @@ public class FramedCapitalCornerVertical extends CustomFramedBlock {
     }
 
     /**
-     * Bottom two meter arch part.
+     * Double part variant bottom.
      */
     public static class Bottom extends FramedCapitalCornerVertical {
         private static final VoxelShape BOTTOM = Block.box(0, 0, 0, 16, 8, 16);
@@ -224,7 +224,7 @@ public class FramedCapitalCornerVertical extends CustomFramedBlock {
     }
 
     /**
-     * Top two meter arch part.
+     * Double part variant top.
      */
     public static class Top extends FramedCapitalCornerVertical {
         private static final VoxelShape TOP = Block.box(0, 8, 0, 16, 16, 16);

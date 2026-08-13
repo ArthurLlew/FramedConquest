@@ -112,7 +112,7 @@ public class FramedTwoMeterArch extends CustomFramedBlock {
     }
 
     /**
-     * Double part two meter arch.
+     * Double part variant.
      */
     public static class Double extends FramedTwoMeterArch implements ICustomFramedDoubleBlock {
         // Block pair
@@ -156,7 +156,7 @@ public class FramedTwoMeterArch extends CustomFramedBlock {
     }
 
     /**
-     * Bottom two meter arch part.
+     * Double part variant bottom.
      */
     public static class Bottom extends FramedTwoMeterArch {
         private static final VoxelShape BOTTOM = Block.box(0, 0, 0, 16, 8, 16);
@@ -180,7 +180,7 @@ public class FramedTwoMeterArch extends CustomFramedBlock {
     }
 
     /**
-     * Top two meter arch part.
+     * Double part variant top.
      */
     public static class Top extends FramedTwoMeterArch {
         private static final VoxelShape TOP = Block.box(0, 8, 0, 16, 16, 16);

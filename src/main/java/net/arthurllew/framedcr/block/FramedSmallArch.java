@@ -97,7 +97,7 @@ public class FramedSmallArch extends CustomFramedBlock {
     }
 
     /**
-     * Double part small arch.
+     * Double part variant.
      */
     public static class Double extends FramedSmallArch implements ICustomFramedDoubleBlock {
         // Block pair
@@ -140,7 +140,7 @@ public class FramedSmallArch extends CustomFramedBlock {
     }
 
     /**
-     * Bottom small arch part.
+     * Double part variant bottom.
      */
     public static class Bottom extends FramedSmallArch {
         private static final VoxelShape BOTTOM = Block.box(0, 4, 0, 16, 12, 16);
@@ -163,7 +163,7 @@ public class FramedSmallArch extends CustomFramedBlock {
     }
 
     /**
-     * Top small arch part.
+     * Double part variant top.
      */
     public static class Top extends FramedSmallArch {
         private static final VoxelShape TOP = Shapes.or(Block.box(0, 0, 0, 16, 4, 16),
