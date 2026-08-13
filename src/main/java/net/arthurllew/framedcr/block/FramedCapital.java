@@ -126,7 +126,7 @@ public class FramedCapital extends CustomFramedBlock {
                     default -> base.setValue(EAST, this.canConnectTo(state, neighborState));
                 };
             }
-            // Return base otherwise
+            // Return base state otherwise
             else {
                 return base;
             }

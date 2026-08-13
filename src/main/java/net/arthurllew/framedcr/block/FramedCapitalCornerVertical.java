@@ -61,7 +61,7 @@ public class FramedCapitalCornerVertical extends CustomFramedBlock {
      * Constructor.
      */
     public FramedCapitalCornerVertical() {
-        super(new CustomBlockType.Builder(FramedCapitalCornerVertical::getShapeForState)
+        this(new CustomBlockType.Builder(FramedCapitalCornerVertical::getShapeForState)
                 .modelVariantForItem("_2")
                 .craftingCount(MAX_LAYERS)
                 .isLayered(true)

@@ -341,7 +341,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
             // Get block state properties
             int layers = state.getValue(FramedPillar.LAYERS);
 
-            // Switch layers
+            // Choose model
             ModelFile model = switch (layers) {
                 case 1 -> model1;
                 case 2 -> model2;
@@ -388,7 +388,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 default -> 0;
             };
 
-            // Switch layers
+            // Choose model
             ModelFile model = switch (layers) {
                 case 2 -> model1;
                 case 3 -> model2;

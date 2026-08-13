@@ -52,7 +52,7 @@ public class FramedTwoMeterArchHalf extends CustomFramedBlock {
      * Constructor.
      */
     public FramedTwoMeterArchHalf() {
-        super(new CustomBlockType.Builder(HalfStairsShapes::generate)
+        this(new CustomBlockType.Builder(HalfStairsShapes::generate)
                 .modelVariantForItem("_right")
                 .build());
     }
