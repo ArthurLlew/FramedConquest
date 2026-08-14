@@ -51,6 +51,7 @@ public class FramedCornerVertical extends CustomFramedBlock {
      */
     public FramedCornerVertical() {
         super(new CustomBlockType.Builder(FramedCornerVertical::getShapeForState)
+                .fullFacePredicate(FramedCornerVertical::fullFacePredicate)
                 .modelVariantForItem("_1")
                 .craftingCount(MAX_LAYERS)
                 .isLayered(true)
@@ -141,5 +142,12 @@ public class FramedCornerVertical extends CustomFramedBlock {
             case EAST -> EAST_SHAPE[state.getValue(LAYERS) - 1];
             default -> throw new IllegalStateException();
         };
+    }
+
+    /**
+     * @return whether this block face in given direction is considered full.
+     */
+    public static boolean fullFacePredicate(BlockState state, Direction dir) {
+        return state.getValue(FACING) == dir.getOpposite() || state.getValue(FACING).getClockWise() == dir;
     }
 }

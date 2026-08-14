@@ -150,8 +150,8 @@ public class FramedTwoMeterArchHalf extends CustomFramedBlock {
          */
         public Double(Block blockLeft, Block blockRight) {
             super(new CustomBlockType.Builder(FramedTwoMeterArchHalf::getShapeForState)
-                    .modelVariantForItem("_right")
                     .doubleBlock(true)
+                    .modelVariantForItem("_right")
                     .build());
             this.blockLeft = blockLeft;
             this.blockRight = blockRight;

@@ -99,7 +99,7 @@ public class FramedTwoMeterArch extends CustomFramedBlock {
     }
 
     /**
-     * @return whether this block should cull face in given direction.
+     * @return whether this block face in given direction is considered full.
      */
     public static boolean fullFacePredicate(BlockState state, Direction dir) {
         if (dir == Direction.UP) {
@@ -123,8 +123,8 @@ public class FramedTwoMeterArch extends CustomFramedBlock {
          */
         public Double(Block blockLeft, Block blockRight) {
             super(new CustomBlockType.Builder(FramedTwoMeterArch::getShapeForState)
-                    .fullFacePredicate(FramedTwoMeterArch::fullFacePredicate)
                     .doubleBlock(true)
+                    .fullFacePredicate(FramedTwoMeterArch::fullFacePredicate)
                     .build());
             this.blockLeft = blockLeft;
             this.blockRight = blockRight;
@@ -166,8 +166,8 @@ public class FramedTwoMeterArch extends CustomFramedBlock {
          */
         public Bottom() {
             super(new CustomBlockType.Builder(Bottom::getShapeForState)
-                    .fullFacePredicate(FramedTwoMeterArch::fullFacePredicate)
                     .blockItem(false)
+                    .fullFacePredicate(FramedTwoMeterArch::fullFacePredicate)
                     .build());
         }
 
@@ -190,8 +190,8 @@ public class FramedTwoMeterArch extends CustomFramedBlock {
          */
         public Top() {
             super(new CustomBlockType.Builder(Top::getShapeForState)
-                    .fullFacePredicate(FramedTwoMeterArch::fullFacePredicate)
                     .blockItem(false)
+                    .fullFacePredicate(FramedTwoMeterArch::fullFacePredicate)
                     .build());
         }
 

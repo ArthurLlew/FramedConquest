@@ -51,6 +51,7 @@ public class FramedCapitalSlabVertical extends CustomFramedBlock {
      */
     public FramedCapitalSlabVertical() {
         super(new CustomBlockType.Builder(FramedCapitalSlabVertical::getShapeForState)
+                .fullFacePredicate(FramedCapitalSlabVertical::fullFacePredicate)
                 .modelVariantForItem("_2")
                 .craftingCount(MAX_LAYERS)
                 .isLayered(true)
@@ -145,5 +146,12 @@ public class FramedCapitalSlabVertical extends CustomFramedBlock {
             case EAST -> EAST_SHAPE[state.getValue(LAYERS) - 1];
             default -> throw new IllegalStateException();
         };
+    }
+
+    /**
+     * @return whether this block face in given direction is considered full.
+     */
+    public static boolean fullFacePredicate(BlockState state, Direction dir) {
+        return state.getValue(FACING) == dir.getOpposite();
     }
 }

@@ -246,7 +246,7 @@ public class CustomBlockType implements IBlockType {
         private boolean allowIntangible = true;
         private boolean doubleBlock = false;
         private boolean lockable = false;
-        private ConTexMode minCTMode = ConTexMode.FULL_FACE;
+        private ConTexMode minCTMode = ConTexMode.FULL_EDGE;
         private FullFacePredicate fullFacePredicate = FullFacePredicate.FALSE;
         private SideSkipPredicate sideSkipPredicate = SideSkipPredicate.FALSE;
         private ConnectionPredicate connectionPredicates = ConnectionPredicate.FULL_FACE;

@@ -16,10 +16,7 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -62,6 +59,7 @@ public class FramedCapitalCornerVertical extends CustomFramedBlock {
      */
     public FramedCapitalCornerVertical() {
         this(new CustomBlockType.Builder(FramedCapitalCornerVertical::getShapeForState)
+                .fullFacePredicate(FramedCornerVertical::fullFacePredicate)
                 .modelVariantForItem("_2")
                 .craftingCount(MAX_LAYERS)
                 .isLayered(true)
@@ -164,6 +162,7 @@ public class FramedCapitalCornerVertical extends CustomFramedBlock {
         public Double(Block blockLeft, Block blockRight) {
             super(new CustomBlockType.Builder(FramedCapitalCornerVertical::getShapeForState)
                     .doubleBlock(true)
+                    .fullFacePredicate(FramedCornerVertical::fullFacePredicate)
                     .modelVariantForItem("_2")
                     .craftingCount(MAX_LAYERS)
                     .isLayered(true)
@@ -209,6 +208,7 @@ public class FramedCapitalCornerVertical extends CustomFramedBlock {
         public Bottom() {
             super(new CustomBlockType.Builder(Bottom::getShapeForState)
                     .blockItem(false)
+                    .fullFacePredicate(FramedCornerVertical::fullFacePredicate)
                     .modelVariantForItem("_2")
                     .craftingCount(MAX_LAYERS)
                     .isLayered(true)
@@ -235,6 +235,7 @@ public class FramedCapitalCornerVertical extends CustomFramedBlock {
         public Top() {
             super(new CustomBlockType.Builder(Top::getShapeForState)
                     .blockItem(false)
+                    .fullFacePredicate(FramedCornerVertical::fullFacePredicate)
                     .modelVariantForItem("_2")
                     .craftingCount(MAX_LAYERS)
                     .isLayered(true)

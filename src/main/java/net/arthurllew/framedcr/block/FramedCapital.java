@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import xfacthd.framedblocks.api.predicate.fullface.FullFacePredicate;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -40,6 +41,7 @@ public class FramedCapital extends CustomFramedBlock {
     public FramedCapital() {
         this(new CustomBlockType.Builder(FramedCapital::getShapeForState)
                 .waterloggable(false)
+                .fullFacePredicate(FullFacePredicate.TRUE)
                 .build());
     }
 
@@ -86,6 +88,7 @@ public class FramedCapital extends CustomFramedBlock {
         public Connected() {
             this(new CustomBlockType.Builder(FramedCapital::getShapeForState)
                     .waterloggable(false)
+                    .fullFacePredicate(FullFacePredicate.TRUE)
                     .build());
         }
 
@@ -213,6 +216,7 @@ public class FramedCapital extends CustomFramedBlock {
         public Doric(Block blockLeft, Block blockRight) {
             super(new CustomBlockType.Builder(FramedCapital::getShapeForState)
                     .waterloggable(false)
+                    .fullFacePredicate(FullFacePredicate.TRUE)
                     .doubleBlock(true)
                     .build());
             this.blockLeft = blockLeft;
@@ -254,6 +258,7 @@ public class FramedCapital extends CustomFramedBlock {
         public DoricBottom() {
             super(new CustomBlockType.Builder(DoricBottom::getShapeForState)
                     .waterloggable(false)
+                    .fullFacePredicate(FullFacePredicate.TRUE)
                     .blockItem(false)
                     .build());
         }
@@ -276,6 +281,7 @@ public class FramedCapital extends CustomFramedBlock {
         public DoricTop() {
             super(new CustomBlockType.Builder(DoricTop::getShapeForState)
                     .waterloggable(false)
+                    .fullFacePredicate(FullFacePredicate.TRUE)
                     .blockItem(false)
                     .build());
         }
