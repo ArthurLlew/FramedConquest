@@ -132,8 +132,6 @@
 			"rotation": {"angle": 0, "axis": "y", "origin": [12, 6.88, 16]},
 			"faces": {
 				"north": {"uv": [6.5, 3, 9.51, 5.537], "texture": "#all"},
-				"east": {"uv": [16, 3, 12.5, 6], "texture": "#all"},
-				"west": {"uv": [16, 3, 14, 6], "texture": "#all"},
 				"up": {"uv": [10, 0, 6.5, 3.5], "rotation": 180, "texture": "#all"},
 				"down": {"uv": [16, 0, 12.5, 2], "rotation": 180, "texture": "#all"}
 			}
@@ -144,8 +142,6 @@
 			"to": [8.47959, 13.18042, 13.13255],
 			"rotation": {"angle": 0, "axis": "y", "origin": [16, 6.88, 12]},
 			"faces": {
-				"north": {"uv": [16, 3, 12.5, 6], "texture": "#all"},
-				"south": {"uv": [16, 3, 14, 6], "texture": "#all"},
 				"west": {"uv": [6.5, 3, 9.51, 5.537], "texture": "#all"},
 				"up": {"uv": [10, 0, 6.5, 3.5], "rotation": 90, "texture": "#all"},
 				"down": {"uv": [16, 0, 12.5, 2], "rotation": 270, "texture": "#all"}
@@ -157,9 +153,7 @@
 			"to": [13.13255, 13.18042, 18.46401],
 			"rotation": {"angle": 0, "axis": "y", "origin": [12, 6.88, 8]},
 			"faces": {
-				"east": {"uv": [16, 3, 14, 6], "texture": "#all"},
 				"south": {"uv": [6.5, 3, 9.51, 5.537], "texture": "#all"},
-				"west": {"uv": [16, 3, 12.5, 6], "texture": "#all"},
 				"up": {"uv": [10, 0, 6.5, 3.5], "texture": "#all"},
 				"down": {"uv": [16, 0, 12.5, 2], "texture": "#all"}
 			}
@@ -440,7 +434,6 @@
 				"north": {"uv": [0, 15.5, 8, 16], "texture": "#all"},
 				"east": {"uv": [15.5, 15.5, 16, 16], "texture": "#all"},
 				"west": {"uv": [1, 15.5, 1.5, 16], "texture": "#all"},
-				"up": {"uv": [0, 15.5, 8, 15.98437], "rotation": 180, "texture": "#all"},
 				"down": {"uv": [0, 0, 8, 0.48437], "rotation": 180, "texture": "#all"}
 			}
 		},
@@ -453,7 +446,6 @@
 				"north": {"uv": [15.5, 15.5, 16, 16], "texture": "#all"},
 				"south": {"uv": [0, 15.5, 0.5, 16], "texture": "#all"},
 				"west": {"uv": [0, 15.5, 8, 16], "texture": "#all"},
-				"up": {"uv": [0, 15.5, 8, 15.98828], "rotation": 90, "texture": "#all"},
 				"down": {"uv": [0, 0, 8, 0.48828], "rotation": 270, "texture": "#all"}
 			}
 		},

@@ -135,7 +135,6 @@
 			"to": [4, 12, 8],
 			"faces": {
 				"north": {"uv": [12, 4, 15, 6.5], "texture": "#all"},
-				"south": {"uv": [1, 4, 4, 6.5], "texture": "#all"},
 				"west": {"uv": [0, 4, 8, 6.5], "texture": "#all"},
 				"down": {"uv": [1, 8, 4, 16], "texture": "#all"}
 			}

@@ -396,7 +396,6 @@
 			"faces": {
 				"north": {"uv": [15, 8, 16, 9], "texture": "#all"},
 				"west": {"uv": [0, 8, 1, 9], "texture": "#all"},
-				"up": {"uv": [0, 0, 0, 0], "texture": "#all"},
 				"down": {"uv": [15, 0, 16, 1], "rotation": 180, "texture": "#all"}
 			}
 		},
