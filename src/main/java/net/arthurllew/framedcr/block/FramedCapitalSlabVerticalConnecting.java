@@ -146,7 +146,9 @@ public class FramedCapitalSlabVerticalConnecting extends CustomFramedBlock {
      * @return whether provided block state can connect to provided neighbor block state.
      */
     protected boolean canConnectTo(BlockState state, BlockState neighborState) {
-        return neighborState.is(this) || (neighborState.getBlock() instanceof FramedCapital);
+        return neighborState.is(this)
+                || (neighborState.getBlock() instanceof FramedCapital.Connected)
+                || (neighborState.getBlock() instanceof FramedCapitalQuarterVerticalConnecting);
     }
 
     /**
