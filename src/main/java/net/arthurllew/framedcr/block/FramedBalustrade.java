@@ -43,7 +43,7 @@ public class FramedBalustrade extends CustomFramedBlock {
         super(new CustomBlockType.Builder(FramedBalustrade::getShapeForState)
                 .modelVariantForItem("_y")
                 .build());
-        this.registerDefaultState(this.stateDefinition.any()
+        this.registerDefaultState(this.defaultBlockState()
                 .setValue(BlockStateProperties.AXIS, Direction.Axis.Y));
     }
 

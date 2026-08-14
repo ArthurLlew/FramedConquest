@@ -74,7 +74,7 @@ public class FramedSmallWindowHalf extends CustomFramedBlock {
         super(new CustomBlockType.Builder(FramedSmallWindowHalf::getShapeForState)
                 .modelVariantForItem("_updown")
                 .build());
-        this.registerDefaultState(this.stateDefinition.any()
+        this.registerDefaultState(this.defaultBlockState()
                 .setValue(FACING, Direction.NORTH)
                 .setValue(UP, false)
                 .setValue(DOWN, false));

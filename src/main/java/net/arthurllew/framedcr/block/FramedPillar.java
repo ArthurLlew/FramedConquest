@@ -53,7 +53,7 @@ public class FramedPillar extends CustomFramedBlock {
      */
     public FramedPillar(CustomBlockType blockType) {
         super(blockType);
-        this.registerDefaultState(this.stateDefinition.any().setValue(LAYERS, 1));
+        this.registerDefaultState(this.defaultBlockState().setValue(LAYERS, 1));
     }
 
     /**

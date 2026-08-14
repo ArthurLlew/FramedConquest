@@ -52,7 +52,7 @@ public class FramedArrowslit extends CustomFramedBlock {
      */
     public FramedArrowslit() {
         super(new CustomBlockType.Builder(FramedArrowslit::getShapeForState).build());
-        this.registerDefaultState(this.stateDefinition.any()
+        this.registerDefaultState(this.defaultBlockState()
                 .setValue(FACING, Direction.NORTH));
     }
 

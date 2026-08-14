@@ -15,7 +15,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import xfacthd.framedblocks.api.block.FramedProperties;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -74,7 +73,7 @@ public class FramedCapital extends CustomFramedBlock {
          */
         public Connected(CustomBlockType blockType) {
             super(blockType);
-            this.registerDefaultState(this.stateDefinition.any()
+            this.registerDefaultState(this.defaultBlockState()
                     .setValue(NORTH, false)
                     .setValue(WEST, false)
                     .setValue(SOUTH, false)
@@ -105,7 +104,7 @@ public class FramedCapital extends CustomFramedBlock {
         @Override
         public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
             return CustomPlacementStateBuilder.of(this, context)
-                    .withHorizontalConnection(this::canConnectTo)
+                    .withCapitalHorizontalConnection(this::canConnectTo)
                     .build();
         }
 
@@ -156,8 +155,7 @@ public class FramedCapital extends CustomFramedBlock {
             super(new CustomBlockType.Builder(ConnectedSlab::getShapeForState)
                     .modelVariantForItem("_lower")
                     .build());
-            this.registerDefaultState(this.stateDefinition.any()
-                    .setValue(FramedProperties.SOLID, false)
+            this.registerDefaultState(this.defaultBlockState()
                     .setValue(HALF, Half.TOP));
         }
 
@@ -176,7 +174,7 @@ public class FramedCapital extends CustomFramedBlock {
         @Override
         public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
             return CustomPlacementStateBuilder.of(this, context)
-                    .withHorizontalConnection(this::canConnectTo)
+                    .withCapitalHorizontalConnection(this::canConnectTo)
                     .withTopBottom()
                     .build();
         }

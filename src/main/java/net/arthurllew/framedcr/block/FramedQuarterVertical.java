@@ -54,7 +54,7 @@ public class FramedQuarterVertical extends CustomFramedBlock {
                 .craftingCount(MAX_LAYERS)
                 .isLayered(true)
                 .build());
-        this.registerDefaultState(this.stateDefinition.any()
+        this.registerDefaultState(this.defaultBlockState()
                 .setValue(FACING, Direction.NORTH)
                 .setValue(LAYERS, 1));
     }

@@ -1,0 +1,361 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"all": "framedblocks:block/framed_block_alt",
+		"particle": "#all"
+	},
+	"elements": [
+		{
+			"name": "Box2",
+			"from": [
+				11.5,
+				6,
+				11.5
+			],
+			"to": [
+				12,
+				7,
+				16
+			],
+			"rotation": {
+				"angle": 0,
+				"axis": "y",
+				"origin": [
+					20,
+					8,
+					12
+				]
+			},
+			"faces": {
+				"north": {
+					"uv": [
+						4,
+						9,
+						4.5,
+						10
+					],
+					"texture": "#all"
+				},
+				"south": {
+					"uv": [
+						11.5,
+						9,
+						12,
+						10
+					],
+					"texture": "#all"
+				},
+				"west": {
+					"uv": [
+						7.5,
+						9,
+						12,
+						10
+					],
+					"texture": "#all"
+				},
+				"up": {
+					"uv": [
+						11.5,
+						7.5,
+						12,
+						12
+					],
+					"texture": "#all"
+				}
+			}
+		},
+		{
+			"name": "Box2",
+			"from": [
+				10.5,
+				4,
+				10.5
+			],
+			"to": [
+				12,
+				6,
+				16
+			],
+			"rotation": {
+				"angle": 0,
+				"axis": "y",
+				"origin": [
+					20,
+					8,
+					12
+				]
+			},
+			"faces": {
+				"north": {
+					"uv": [
+						4,
+						10,
+						5.5,
+						12
+					],
+					"texture": "#all"
+				},
+				"south": {
+					"uv": [
+						10.5,
+						10,
+						12,
+						12
+					],
+					"texture": "#all"
+				},
+				"west": {
+					"uv": [
+						6.5,
+						10,
+						12,
+						12
+					],
+					"texture": "#all"
+				},
+				"up": {
+					"uv": [
+						10.5,
+						6.5,
+						12,
+						12
+					],
+					"texture": "#all"
+				}
+			}
+		},
+		{
+			"name": "Box2",
+			"from": [
+				9.5,
+				0.001,
+				9.5
+			],
+			"to": [
+				12,
+				4.001,
+				16
+			],
+			"rotation": {
+				"angle": 0,
+				"axis": "y",
+				"origin": [
+					20,
+					8,
+					12
+				]
+			},
+			"faces": {
+				"north": {
+					"uv": [
+						4,
+						11.999,
+						6.5,
+						15.999
+					],
+					"texture": "#all"
+				},
+				"south": {
+					"uv": [
+						9.5,
+						11.999,
+						12,
+						15.999
+					],
+					"texture": "#all"
+				},
+				"west": {
+					"uv": [
+						5.5,
+						11.999,
+						12,
+						15.999
+					],
+					"texture": "#all"
+				},
+				"up": {
+					"uv": [
+						9.5,
+						5.5,
+						12,
+						12
+					],
+					"texture": "#all"
+				},
+				"down": {
+					"uv": [
+						9.5,
+						4,
+						12,
+						10.5
+					],
+					"texture": "#all"
+				}
+			}
+		},
+		{
+			"name": "Box2",
+			"from": [
+				12,
+				6,
+				11.5
+			],
+			"to": [
+				16,
+				7,
+				12
+			],
+			"rotation": {
+				"angle": 0,
+				"axis": "y",
+				"origin": [
+					8,
+					8,
+					20
+				]
+			},
+			"faces": {
+				"north": {
+					"uv": [
+						0,
+						9,
+						4,
+						10
+					],
+					"texture": "#all"
+				},
+				"east": {
+					"uv": [
+						8,
+						9,
+						8.5,
+						10
+					],
+					"texture": "#all"
+				},
+				"up": {
+					"uv": [
+						12,
+						7.5,
+						16,
+						8
+					],
+					"texture": "#all"
+				}
+			}
+		},
+		{
+			"name": "Box2",
+			"from": [
+				12,
+				4,
+				10.5
+			],
+			"to": [
+				16,
+				6,
+				12
+			],
+			"rotation": {
+				"angle": 0,
+				"axis": "y",
+				"origin": [
+					8,
+					8,
+					20
+				]
+			},
+			"faces": {
+				"north": {
+					"uv": [
+						0,
+						10,
+						4,
+						12
+					],
+					"texture": "#all"
+				},
+				"east": {
+					"uv": [
+						8,
+						10,
+						9.5,
+						12
+					],
+					"texture": "#all"
+				},
+				"up": {
+					"uv": [
+						12,
+						6.5,
+						16,
+						8
+					],
+					"texture": "#all"
+				}
+			}
+		},
+		{
+			"name": "Box2",
+			"from": [
+				12,
+				0.001,
+				9.5
+			],
+			"to": [
+				16,
+				4.001,
+				12
+			],
+			"rotation": {
+				"angle": 0,
+				"axis": "y",
+				"origin": [
+					8,
+					8,
+					20
+				]
+			},
+			"faces": {
+				"north": {
+					"uv": [
+						0,
+						11.999,
+						4,
+						15.999
+					],
+					"texture": "#all"
+				},
+				"east": {
+					"uv": [
+						8,
+						11.999,
+						10.5,
+						15.999
+					],
+					"texture": "#all"
+				},
+				"up": {
+					"uv": [
+						12,
+						5.5,
+						16,
+						8
+					],
+					"texture": "#all"
+				},
+				"down": {
+					"uv": [
+						12,
+						8,
+						16,
+						10.5
+					],
+					"texture": "#all"
+				}
+			}
+		}
+	]
+}

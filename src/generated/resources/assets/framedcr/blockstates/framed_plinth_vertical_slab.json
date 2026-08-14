@@ -1,0 +1,460 @@
+{
+  "variants": {
+    "east=false,facing=east,layer=2,south=false,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_2",
+      "uvlock": true,
+      "y": 90
+    },
+    "east=false,facing=east,layer=2,south=false,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_2_w",
+      "uvlock": true,
+      "y": 90
+    },
+    "east=false,facing=east,layer=2,south=true,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_2_s",
+      "uvlock": true,
+      "y": 90
+    },
+    "east=false,facing=east,layer=2,south=true,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_2_sw",
+      "uvlock": true,
+      "y": 90
+    },
+    "east=false,facing=east,layer=3,south=false,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_4",
+      "uvlock": true,
+      "y": 90
+    },
+    "east=false,facing=east,layer=3,south=false,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_4_w",
+      "uvlock": true,
+      "y": 90
+    },
+    "east=false,facing=east,layer=3,south=true,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_4_s",
+      "uvlock": true,
+      "y": 90
+    },
+    "east=false,facing=east,layer=3,south=true,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_4_sw",
+      "uvlock": true,
+      "y": 90
+    },
+    "east=false,facing=east,layer=4,south=false,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_6",
+      "uvlock": true,
+      "y": 90
+    },
+    "east=false,facing=east,layer=4,south=false,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_6_w",
+      "uvlock": true,
+      "y": 90
+    },
+    "east=false,facing=east,layer=4,south=true,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_6_s",
+      "uvlock": true,
+      "y": 90
+    },
+    "east=false,facing=east,layer=4,south=true,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_6_sw",
+      "uvlock": true,
+      "y": 90
+    },
+    "east=false,facing=north,layer=2,south=false,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_2",
+      "uvlock": true
+    },
+    "east=false,facing=north,layer=2,south=false,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_2_w",
+      "uvlock": true
+    },
+    "east=false,facing=north,layer=2,south=true,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_2_s",
+      "uvlock": true
+    },
+    "east=false,facing=north,layer=2,south=true,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_2_sw",
+      "uvlock": true
+    },
+    "east=false,facing=north,layer=3,south=false,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_4",
+      "uvlock": true
+    },
+    "east=false,facing=north,layer=3,south=false,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_4_w",
+      "uvlock": true
+    },
+    "east=false,facing=north,layer=3,south=true,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_4_s",
+      "uvlock": true
+    },
+    "east=false,facing=north,layer=3,south=true,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_4_sw",
+      "uvlock": true
+    },
+    "east=false,facing=north,layer=4,south=false,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_6",
+      "uvlock": true
+    },
+    "east=false,facing=north,layer=4,south=false,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_6_w",
+      "uvlock": true
+    },
+    "east=false,facing=north,layer=4,south=true,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_6_s",
+      "uvlock": true
+    },
+    "east=false,facing=north,layer=4,south=true,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_6_sw",
+      "uvlock": true
+    },
+    "east=false,facing=south,layer=2,south=false,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_2",
+      "uvlock": true,
+      "y": 180
+    },
+    "east=false,facing=south,layer=2,south=false,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_2_w",
+      "uvlock": true,
+      "y": 180
+    },
+    "east=false,facing=south,layer=2,south=true,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_2_s",
+      "uvlock": true,
+      "y": 180
+    },
+    "east=false,facing=south,layer=2,south=true,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_2_sw",
+      "uvlock": true,
+      "y": 180
+    },
+    "east=false,facing=south,layer=3,south=false,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_4",
+      "uvlock": true,
+      "y": 180
+    },
+    "east=false,facing=south,layer=3,south=false,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_4_w",
+      "uvlock": true,
+      "y": 180
+    },
+    "east=false,facing=south,layer=3,south=true,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_4_s",
+      "uvlock": true,
+      "y": 180
+    },
+    "east=false,facing=south,layer=3,south=true,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_4_sw",
+      "uvlock": true,
+      "y": 180
+    },
+    "east=false,facing=south,layer=4,south=false,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_6",
+      "uvlock": true,
+      "y": 180
+    },
+    "east=false,facing=south,layer=4,south=false,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_6_w",
+      "uvlock": true,
+      "y": 180
+    },
+    "east=false,facing=south,layer=4,south=true,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_6_s",
+      "uvlock": true,
+      "y": 180
+    },
+    "east=false,facing=south,layer=4,south=true,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_6_sw",
+      "uvlock": true,
+      "y": 180
+    },
+    "east=false,facing=west,layer=2,south=false,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_2",
+      "uvlock": true,
+      "y": 270
+    },
+    "east=false,facing=west,layer=2,south=false,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_2_w",
+      "uvlock": true,
+      "y": 270
+    },
+    "east=false,facing=west,layer=2,south=true,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_2_s",
+      "uvlock": true,
+      "y": 270
+    },
+    "east=false,facing=west,layer=2,south=true,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_2_sw",
+      "uvlock": true,
+      "y": 270
+    },
+    "east=false,facing=west,layer=3,south=false,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_4",
+      "uvlock": true,
+      "y": 270
+    },
+    "east=false,facing=west,layer=3,south=false,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_4_w",
+      "uvlock": true,
+      "y": 270
+    },
+    "east=false,facing=west,layer=3,south=true,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_4_s",
+      "uvlock": true,
+      "y": 270
+    },
+    "east=false,facing=west,layer=3,south=true,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_4_sw",
+      "uvlock": true,
+      "y": 270
+    },
+    "east=false,facing=west,layer=4,south=false,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_6",
+      "uvlock": true,
+      "y": 270
+    },
+    "east=false,facing=west,layer=4,south=false,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_6_w",
+      "uvlock": true,
+      "y": 270
+    },
+    "east=false,facing=west,layer=4,south=true,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_6_s",
+      "uvlock": true,
+      "y": 270
+    },
+    "east=false,facing=west,layer=4,south=true,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_6_sw",
+      "uvlock": true,
+      "y": 270
+    },
+    "east=true,facing=east,layer=2,south=false,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_2_e",
+      "uvlock": true,
+      "y": 90
+    },
+    "east=true,facing=east,layer=2,south=false,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_2_ew",
+      "uvlock": true,
+      "y": 90
+    },
+    "east=true,facing=east,layer=2,south=true,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_2_es",
+      "uvlock": true,
+      "y": 90
+    },
+    "east=true,facing=east,layer=2,south=true,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_2_esw",
+      "uvlock": true,
+      "y": 90
+    },
+    "east=true,facing=east,layer=3,south=false,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_4_e",
+      "uvlock": true,
+      "y": 90
+    },
+    "east=true,facing=east,layer=3,south=false,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_4_ew",
+      "uvlock": true,
+      "y": 90
+    },
+    "east=true,facing=east,layer=3,south=true,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_4_es",
+      "uvlock": true,
+      "y": 90
+    },
+    "east=true,facing=east,layer=3,south=true,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_4_esw",
+      "uvlock": true,
+      "y": 90
+    },
+    "east=true,facing=east,layer=4,south=false,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_6_e",
+      "uvlock": true,
+      "y": 90
+    },
+    "east=true,facing=east,layer=4,south=false,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_6_ew",
+      "uvlock": true,
+      "y": 90
+    },
+    "east=true,facing=east,layer=4,south=true,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_6_es",
+      "uvlock": true,
+      "y": 90
+    },
+    "east=true,facing=east,layer=4,south=true,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_6_esw",
+      "uvlock": true,
+      "y": 90
+    },
+    "east=true,facing=north,layer=2,south=false,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_2_e",
+      "uvlock": true
+    },
+    "east=true,facing=north,layer=2,south=false,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_2_ew",
+      "uvlock": true
+    },
+    "east=true,facing=north,layer=2,south=true,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_2_es",
+      "uvlock": true
+    },
+    "east=true,facing=north,layer=2,south=true,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_2_esw",
+      "uvlock": true
+    },
+    "east=true,facing=north,layer=3,south=false,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_4_e",
+      "uvlock": true
+    },
+    "east=true,facing=north,layer=3,south=false,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_4_ew",
+      "uvlock": true
+    },
+    "east=true,facing=north,layer=3,south=true,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_4_es",
+      "uvlock": true
+    },
+    "east=true,facing=north,layer=3,south=true,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_4_esw",
+      "uvlock": true
+    },
+    "east=true,facing=north,layer=4,south=false,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_6_e",
+      "uvlock": true
+    },
+    "east=true,facing=north,layer=4,south=false,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_6_ew",
+      "uvlock": true
+    },
+    "east=true,facing=north,layer=4,south=true,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_6_es",
+      "uvlock": true
+    },
+    "east=true,facing=north,layer=4,south=true,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_6_esw",
+      "uvlock": true
+    },
+    "east=true,facing=south,layer=2,south=false,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_2_e",
+      "uvlock": true,
+      "y": 180
+    },
+    "east=true,facing=south,layer=2,south=false,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_2_ew",
+      "uvlock": true,
+      "y": 180
+    },
+    "east=true,facing=south,layer=2,south=true,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_2_es",
+      "uvlock": true,
+      "y": 180
+    },
+    "east=true,facing=south,layer=2,south=true,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_2_esw",
+      "uvlock": true,
+      "y": 180
+    },
+    "east=true,facing=south,layer=3,south=false,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_4_e",
+      "uvlock": true,
+      "y": 180
+    },
+    "east=true,facing=south,layer=3,south=false,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_4_ew",
+      "uvlock": true,
+      "y": 180
+    },
+    "east=true,facing=south,layer=3,south=true,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_4_es",
+      "uvlock": true,
+      "y": 180
+    },
+    "east=true,facing=south,layer=3,south=true,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_4_esw",
+      "uvlock": true,
+      "y": 180
+    },
+    "east=true,facing=south,layer=4,south=false,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_6_e",
+      "uvlock": true,
+      "y": 180
+    },
+    "east=true,facing=south,layer=4,south=false,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_6_ew",
+      "uvlock": true,
+      "y": 180
+    },
+    "east=true,facing=south,layer=4,south=true,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_6_es",
+      "uvlock": true,
+      "y": 180
+    },
+    "east=true,facing=south,layer=4,south=true,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_6_esw",
+      "uvlock": true,
+      "y": 180
+    },
+    "east=true,facing=west,layer=2,south=false,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_2_e",
+      "uvlock": true,
+      "y": 270
+    },
+    "east=true,facing=west,layer=2,south=false,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_2_ew",
+      "uvlock": true,
+      "y": 270
+    },
+    "east=true,facing=west,layer=2,south=true,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_2_es",
+      "uvlock": true,
+      "y": 270
+    },
+    "east=true,facing=west,layer=2,south=true,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_2_esw",
+      "uvlock": true,
+      "y": 270
+    },
+    "east=true,facing=west,layer=3,south=false,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_4_e",
+      "uvlock": true,
+      "y": 270
+    },
+    "east=true,facing=west,layer=3,south=false,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_4_ew",
+      "uvlock": true,
+      "y": 270
+    },
+    "east=true,facing=west,layer=3,south=true,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_4_es",
+      "uvlock": true,
+      "y": 270
+    },
+    "east=true,facing=west,layer=3,south=true,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_4_esw",
+      "uvlock": true,
+      "y": 270
+    },
+    "east=true,facing=west,layer=4,south=false,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_6_e",
+      "uvlock": true,
+      "y": 270
+    },
+    "east=true,facing=west,layer=4,south=false,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_6_ew",
+      "uvlock": true,
+      "y": 270
+    },
+    "east=true,facing=west,layer=4,south=true,west=false": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_6_es",
+      "uvlock": true,
+      "y": 270
+    },
+    "east=true,facing=west,layer=4,south=true,west=true": {
+      "model": "framedcr:block/framed_plinth_vertical_slab_6_esw",
+      "uvlock": true,
+      "y": 270
+    }
+  }
+}

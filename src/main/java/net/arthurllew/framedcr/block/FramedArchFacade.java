@@ -82,7 +82,7 @@ public class FramedArchFacade extends CustomFramedBlock {
         super(new CustomBlockType.Builder(FramedArchFacade::getShapeForState)
                 .modelVariantForItem("_1")
                 .build());
-        this.registerDefaultState(this.stateDefinition.any()
+        this.registerDefaultState(this.defaultBlockState()
                 .setValue(TYPE, ArchFacadeShape.ONE)
                 .setValue(FACING, Direction.NORTH)
                 .setValue(HALF, Half.TOP));

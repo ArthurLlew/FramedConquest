@@ -82,7 +82,7 @@ public class FramedStairs extends CustomFramedBlock {
      */
     public FramedStairs(CustomBlockType blockType) {
         super(blockType);
-        this.registerDefaultState(this.stateDefinition.any()
+        this.registerDefaultState(this.defaultBlockState()
                 .setValue(FACING, Direction.NORTH)
                 .setValue(HALF, Half.TOP)
                 .setValue(SHAPE, StairsShape.STRAIGHT));

@@ -45,7 +45,7 @@ public class FramedSmallArch extends CustomFramedBlock {
      */
     public FramedSmallArch(CustomBlockType blockType) {
         super(blockType);
-        this.registerDefaultState(this.stateDefinition.any()
+        this.registerDefaultState(this.defaultBlockState()
                 .setValue(AXIS, Direction.Axis.Z)
                 .setValue(HALF, Half.TOP));
     }

@@ -157,11 +157,12 @@ public class CustomPlacementStateBuilder<T extends CustomPlacementStateBuilder<T
     }
 
     /**
-     * Calculates block up and down connections.
+     * Calculates capital horizontal connections.
      */
-    public final T withHorizontalConnection(BiFunction<BlockState, BlockState, Boolean> canConnectTo) {
+    public final T withCapitalHorizontalConnection(BiFunction<BlockState, BlockState, Boolean> canConnectTo) {
         // Avoid null state
         if (this.state != null) {
+            // Check horizontal connections
             BlockGetter level = this.ctx.getLevel();
             BlockPos blockpos = this.ctx.getClickedPos();
             BlockState BlockStateNorth = level.getBlockState(blockpos.north());
@@ -173,6 +174,52 @@ public class CustomPlacementStateBuilder<T extends CustomPlacementStateBuilder<T
                     .setValue(BlockStateProperties.WEST, canConnectTo.apply(this.state, BlockStateWest))
                     .setValue(BlockStateProperties.SOUTH, canConnectTo.apply(this.state, BlockStateSouth))
                     .setValue(BlockStateProperties.EAST, canConnectTo.apply(this.state, BlockStateEast));
+        }
+
+        return this.self();
+    }
+
+    /**
+     * Calculates capital vertical slab horizontal connections.
+     */
+    public final T withCapitalSlabVerticalConnection(BiFunction<BlockState, BlockState, Boolean> canConnectTo) {
+        // Avoid null state
+        if (this.state != null) {
+            // Current direction
+            Direction dir = this.state.getValue(BlockStateProperties.HORIZONTAL_FACING);
+
+            // Check connections behind and to the right
+            BlockGetter level = this.ctx.getLevel();
+            BlockPos blockpos = this.ctx.getClickedPos();
+            BlockState BlockStateLeft = level.getBlockState(blockpos.relative(dir.getCounterClockWise()));
+            BlockState BlockStateBehind = level.getBlockState(blockpos.relative(dir.getOpposite()));
+            BlockState BlockStateRight = level.getBlockState(blockpos.relative(dir.getClockWise()));
+            this.state = state
+                    .setValue(BlockStateProperties.WEST, canConnectTo.apply(this.state, BlockStateLeft))
+                    .setValue(BlockStateProperties.SOUTH, canConnectTo.apply(this.state, BlockStateBehind))
+                    .setValue(BlockStateProperties.EAST, canConnectTo.apply(this.state, BlockStateRight));
+        }
+
+        return this.self();
+    }
+
+    /**
+     * Calculates capital vertical quarter horizontal connections.
+     */
+    public final T withCapitalQuarterVerticalConnection(BiFunction<BlockState, BlockState, Boolean> canConnectTo) {
+        // Avoid null state
+        if (this.state != null) {
+            // Current direction
+            Direction dir = this.state.getValue(BlockStateProperties.HORIZONTAL_FACING);
+
+            // Check connections behind and to the right
+            BlockGetter level = this.ctx.getLevel();
+            BlockPos blockpos = this.ctx.getClickedPos();
+            BlockState BlockStateBehind = level.getBlockState(blockpos.relative(dir.getOpposite()));
+            BlockState BlockStateRight = level.getBlockState(blockpos.relative(dir.getClockWise()));
+            this.state = state
+                    .setValue(BlockStateProperties.SOUTH, canConnectTo.apply(this.state, BlockStateBehind))
+                    .setValue(BlockStateProperties.EAST, canConnectTo.apply(this.state, BlockStateRight));
         }
 
         return this.self();

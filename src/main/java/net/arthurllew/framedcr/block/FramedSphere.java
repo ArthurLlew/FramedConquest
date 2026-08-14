@@ -41,7 +41,7 @@ public class FramedSphere extends CustomFramedBlock {
         super(new CustomBlockType.Builder(FramedSphere::getShapeForState)
                 .modelVariantForItem("_dragonegg")
                 .build());
-        this.registerDefaultState(this.stateDefinition.any().setValue(TYPE, SphereShape.LARGE));
+        this.registerDefaultState(this.defaultBlockState().setValue(TYPE, SphereShape.LARGE));
     }
 
     /**

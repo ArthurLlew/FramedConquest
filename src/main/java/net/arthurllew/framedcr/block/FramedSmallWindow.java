@@ -57,7 +57,7 @@ public class FramedSmallWindow extends CustomFramedBlock {
      */
     public FramedSmallWindow() {
         super(new CustomBlockType.Builder(FramedSmallWindow::getShapeForState).build());
-        this.registerDefaultState(this.stateDefinition.any()
+        this.registerDefaultState(this.defaultBlockState()
                 .setValue(UP, false)
                 .setValue(DOWN, false));
     }

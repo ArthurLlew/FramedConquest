@@ -1,0 +1,173 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"all": "framedblocks:block/framed_block_alt",
+		"particle": "#all"
+	},
+	"elements": [
+		{
+			"name": "Box2",
+			"from": [
+				0,
+				6,
+				7.5
+			],
+			"to": [
+				16,
+				7,
+				8
+			],
+			"faces": {
+				"north": {
+					"uv": [
+						0,
+						9,
+						16,
+						10
+					],
+					"texture": "#all"
+				},
+				"east": {
+					"uv": [
+						13.5,
+						9,
+						14,
+						10
+					],
+					"texture": "#all"
+				},
+				"west": {
+					"uv": [
+						2,
+						9,
+						2.5,
+						10
+					],
+					"texture": "#all"
+				},
+				"up": {
+					"uv": [
+						0,
+						13.5,
+						16,
+						14
+					],
+					"rotation": 180,
+					"texture": "#all"
+				}
+			}
+		},
+		{
+			"name": "Box2",
+			"from": [
+				0,
+				4,
+				6.5
+			],
+			"to": [
+				16,
+				6,
+				8
+			],
+			"faces": {
+				"north": {
+					"uv": [
+						0,
+						10,
+						16,
+						12
+					],
+					"texture": "#all"
+				},
+				"east": {
+					"uv": [
+						14.5,
+						10,
+						16,
+						12
+					],
+					"texture": "#all"
+				},
+				"west": {
+					"uv": [
+						0,
+						10,
+						1.5,
+						12
+					],
+					"texture": "#all"
+				},
+				"up": {
+					"uv": [
+						0,
+						0,
+						16,
+						1.5
+					],
+					"texture": "#all"
+				}
+			}
+		},
+		{
+			"name": "Box2",
+			"from": [
+				0,
+				0,
+				5.5
+			],
+			"to": [
+				16,
+				4,
+				8
+			],
+			"faces": {
+				"north": {
+					"uv": [
+						0,
+						12,
+						16,
+						16
+					],
+					"texture": "#all"
+				},
+				"east": {
+					"uv": [
+						13.5,
+						12,
+						16,
+						16
+					],
+					"texture": "#all"
+				},
+				"west": {
+					"uv": [
+						0,
+						12,
+						2.5,
+						16
+					],
+					"texture": "#all"
+				},
+				"up": {
+					"uv": [
+						0,
+						0,
+						16,
+						2.5
+					],
+					"texture": "#all"
+				},
+				"down": {
+					"uv": [
+						0,
+						13.5,
+						16,
+						16
+					],
+					"texture": "#all"
+				}
+			}
+		}
+	]
+}

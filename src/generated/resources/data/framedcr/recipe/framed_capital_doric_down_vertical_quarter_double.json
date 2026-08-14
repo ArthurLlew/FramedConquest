@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "framedblocks:framed_cube"
+  },
+  "result": {
+    "count": 4,
+    "id": "framedcr:framed_capital_doric_down_vertical_quarter_double"
+  }
+}

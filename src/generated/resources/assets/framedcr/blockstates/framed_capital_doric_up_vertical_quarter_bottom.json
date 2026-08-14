@@ -1,0 +1,232 @@
+{
+  "variants": {
+    "east=false,facing=east,layer=2,south=false": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_2/bottom",
+      "uvlock": true,
+      "y": 90
+    },
+    "east=false,facing=east,layer=2,south=true": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_2_s/bottom",
+      "uvlock": true,
+      "y": 90
+    },
+    "east=false,facing=east,layer=3,south=false": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_4/bottom",
+      "uvlock": true,
+      "y": 90
+    },
+    "east=false,facing=east,layer=3,south=true": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_4_s/bottom",
+      "uvlock": true,
+      "y": 90
+    },
+    "east=false,facing=east,layer=4,south=false": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_6/bottom",
+      "uvlock": true,
+      "y": 90
+    },
+    "east=false,facing=east,layer=4,south=true": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_6_s/bottom",
+      "uvlock": true,
+      "y": 90
+    },
+    "east=false,facing=north,layer=2,south=false": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_2/bottom",
+      "uvlock": true
+    },
+    "east=false,facing=north,layer=2,south=true": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_2_s/bottom",
+      "uvlock": true
+    },
+    "east=false,facing=north,layer=3,south=false": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_4/bottom",
+      "uvlock": true
+    },
+    "east=false,facing=north,layer=3,south=true": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_4_s/bottom",
+      "uvlock": true
+    },
+    "east=false,facing=north,layer=4,south=false": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_6/bottom",
+      "uvlock": true
+    },
+    "east=false,facing=north,layer=4,south=true": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_6_s/bottom",
+      "uvlock": true
+    },
+    "east=false,facing=south,layer=2,south=false": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_2/bottom",
+      "uvlock": true,
+      "y": 180
+    },
+    "east=false,facing=south,layer=2,south=true": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_2_s/bottom",
+      "uvlock": true,
+      "y": 180
+    },
+    "east=false,facing=south,layer=3,south=false": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_4/bottom",
+      "uvlock": true,
+      "y": 180
+    },
+    "east=false,facing=south,layer=3,south=true": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_4_s/bottom",
+      "uvlock": true,
+      "y": 180
+    },
+    "east=false,facing=south,layer=4,south=false": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_6/bottom",
+      "uvlock": true,
+      "y": 180
+    },
+    "east=false,facing=south,layer=4,south=true": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_6_s/bottom",
+      "uvlock": true,
+      "y": 180
+    },
+    "east=false,facing=west,layer=2,south=false": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_2/bottom",
+      "uvlock": true,
+      "y": 270
+    },
+    "east=false,facing=west,layer=2,south=true": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_2_s/bottom",
+      "uvlock": true,
+      "y": 270
+    },
+    "east=false,facing=west,layer=3,south=false": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_4/bottom",
+      "uvlock": true,
+      "y": 270
+    },
+    "east=false,facing=west,layer=3,south=true": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_4_s/bottom",
+      "uvlock": true,
+      "y": 270
+    },
+    "east=false,facing=west,layer=4,south=false": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_6/bottom",
+      "uvlock": true,
+      "y": 270
+    },
+    "east=false,facing=west,layer=4,south=true": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_6_s/bottom",
+      "uvlock": true,
+      "y": 270
+    },
+    "east=true,facing=east,layer=2,south=false": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_2_e/bottom",
+      "uvlock": true,
+      "y": 90
+    },
+    "east=true,facing=east,layer=2,south=true": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_2_es/bottom",
+      "uvlock": true,
+      "y": 90
+    },
+    "east=true,facing=east,layer=3,south=false": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_4_e/bottom",
+      "uvlock": true,
+      "y": 90
+    },
+    "east=true,facing=east,layer=3,south=true": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_4_es/bottom",
+      "uvlock": true,
+      "y": 90
+    },
+    "east=true,facing=east,layer=4,south=false": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_6_e/bottom",
+      "uvlock": true,
+      "y": 90
+    },
+    "east=true,facing=east,layer=4,south=true": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_6_es/bottom",
+      "uvlock": true,
+      "y": 90
+    },
+    "east=true,facing=north,layer=2,south=false": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_2_e/bottom",
+      "uvlock": true
+    },
+    "east=true,facing=north,layer=2,south=true": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_2_es/bottom",
+      "uvlock": true
+    },
+    "east=true,facing=north,layer=3,south=false": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_4_e/bottom",
+      "uvlock": true
+    },
+    "east=true,facing=north,layer=3,south=true": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_4_es/bottom",
+      "uvlock": true
+    },
+    "east=true,facing=north,layer=4,south=false": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_6_e/bottom",
+      "uvlock": true
+    },
+    "east=true,facing=north,layer=4,south=true": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_6_es/bottom",
+      "uvlock": true
+    },
+    "east=true,facing=south,layer=2,south=false": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_2_e/bottom",
+      "uvlock": true,
+      "y": 180
+    },
+    "east=true,facing=south,layer=2,south=true": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_2_es/bottom",
+      "uvlock": true,
+      "y": 180
+    },
+    "east=true,facing=south,layer=3,south=false": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_4_e/bottom",
+      "uvlock": true,
+      "y": 180
+    },
+    "east=true,facing=south,layer=3,south=true": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_4_es/bottom",
+      "uvlock": true,
+      "y": 180
+    },
+    "east=true,facing=south,layer=4,south=false": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_6_e/bottom",
+      "uvlock": true,
+      "y": 180
+    },
+    "east=true,facing=south,layer=4,south=true": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_6_es/bottom",
+      "uvlock": true,
+      "y": 180
+    },
+    "east=true,facing=west,layer=2,south=false": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_2_e/bottom",
+      "uvlock": true,
+      "y": 270
+    },
+    "east=true,facing=west,layer=2,south=true": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_2_es/bottom",
+      "uvlock": true,
+      "y": 270
+    },
+    "east=true,facing=west,layer=3,south=false": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_4_e/bottom",
+      "uvlock": true,
+      "y": 270
+    },
+    "east=true,facing=west,layer=3,south=true": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_4_es/bottom",
+      "uvlock": true,
+      "y": 270
+    },
+    "east=true,facing=west,layer=4,south=false": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_6_e/bottom",
+      "uvlock": true,
+      "y": 270
+    },
+    "east=true,facing=west,layer=4,south=true": {
+      "model": "framedcr:block/framed_capital_doric_up_vertical_quarter_6_es/bottom",
+      "uvlock": true,
+      "y": 270
+    }
+  }
+}

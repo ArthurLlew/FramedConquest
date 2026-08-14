@@ -27,14 +27,10 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class FramedCornerVertical extends CustomFramedBlock {
-    private static final VoxelShape[] VERTICAL_SLAB_EAST_SHAPE = new VoxelShape[]{Block.box(0.0F, 0.0F, 0.0F, 2.0F, 16.0F, 16.0F), Block.box(0.0F, 0.0F, 0.0F, 4.0F, 16.0F, 16.0F), Block.box(0.0F, 0.0F, 0.0F, 8.0F, 16.0F, 16.0F), Block.box(0.0F, 0.0F, 0.0F, 12.0F, 16.0F, 16.0F)};
-    private static final VoxelShape[] VERTICAL_SLAB_WEST_SHAPE = new VoxelShape[]{Block.box(14.0F, 0.0F, 0.0F, 16.0F, 16.0F, 16.0F), Block.box(12.0F, 0.0F, 0.0F, 16.0F, 16.0F, 16.0F), Block.box(8.0F, 0.0F, 0.0F, 16.0F, 16.0F, 16.0F), Block.box(4.0F, 0.0F, 0.0F, 16.0F, 16.0F, 16.0F)};
-    private static final VoxelShape[] VERTICAL_SLAB_SOUTH_SHAPE = new VoxelShape[]{Block.box(0.0F, 0.0F, 0.0F, 16.0F, 16.0F, 2.0F), Block.box(0.0F, 0.0F, 0.0F, 16.0F, 16.0F, 4.0F), Block.box(0.0F, 0.0F, 0.0F, 16.0F, 16.0F, 8.0F), Block.box(0.0F, 0.0F, 0.0F, 16.0F, 16.0F, 12.0F)};
-    private static final VoxelShape[] VERTICAL_SLAB_NORTH_SHAPE = new VoxelShape[]{Block.box(0.0F, 0.0F, 14.0F, 16.0F, 16.0F, 16.0F), Block.box(0.0F, 0.0F, 12.0F, 16.0F, 16.0F, 16.0F), Block.box(0.0F, 0.0F, 8.0F, 16.0F, 16.0F, 16.0F), Block.box(0.0F, 0.0F, 4.0F, 16.0F, 16.0F, 16.0F)};
-    protected static final VoxelShape[] EAST_SHAPE = new VoxelShape[]{Shapes.or(VERTICAL_SLAB_EAST_SHAPE[0], VERTICAL_SLAB_NORTH_SHAPE[0]), Shapes.or(VERTICAL_SLAB_EAST_SHAPE[1], VERTICAL_SLAB_NORTH_SHAPE[1]), Shapes.or(VERTICAL_SLAB_EAST_SHAPE[2], VERTICAL_SLAB_NORTH_SHAPE[2]), Shapes.or(VERTICAL_SLAB_EAST_SHAPE[3], VERTICAL_SLAB_NORTH_SHAPE[3])};
-    protected static final VoxelShape[] WEST_SHAPE = new VoxelShape[]{Shapes.or(VERTICAL_SLAB_WEST_SHAPE[0], VERTICAL_SLAB_SOUTH_SHAPE[0]), Shapes.or(VERTICAL_SLAB_WEST_SHAPE[1], VERTICAL_SLAB_SOUTH_SHAPE[1]), Shapes.or(VERTICAL_SLAB_WEST_SHAPE[2], VERTICAL_SLAB_SOUTH_SHAPE[2]), Shapes.or(VERTICAL_SLAB_WEST_SHAPE[3], VERTICAL_SLAB_SOUTH_SHAPE[3])};
-    protected static final VoxelShape[] NORTH_SHAPE = new VoxelShape[]{Shapes.or(VERTICAL_SLAB_NORTH_SHAPE[0], VERTICAL_SLAB_WEST_SHAPE[0]), Shapes.or(VERTICAL_SLAB_NORTH_SHAPE[1], VERTICAL_SLAB_WEST_SHAPE[1]), Shapes.or(VERTICAL_SLAB_NORTH_SHAPE[2], VERTICAL_SLAB_WEST_SHAPE[2]), Shapes.or(VERTICAL_SLAB_NORTH_SHAPE[3], VERTICAL_SLAB_WEST_SHAPE[3])};
-    protected static final VoxelShape[] SOUTH_SHAPE = new VoxelShape[]{Shapes.or(VERTICAL_SLAB_SOUTH_SHAPE[0], VERTICAL_SLAB_EAST_SHAPE[0]), Shapes.or(VERTICAL_SLAB_SOUTH_SHAPE[1], VERTICAL_SLAB_EAST_SHAPE[1]), Shapes.or(VERTICAL_SLAB_SOUTH_SHAPE[2], VERTICAL_SLAB_EAST_SHAPE[2]), Shapes.or(VERTICAL_SLAB_SOUTH_SHAPE[3], VERTICAL_SLAB_EAST_SHAPE[3])};
+    protected static final VoxelShape[] EAST_SHAPE = new VoxelShape[]{Shapes.or(FramedCapitalSlabVertical.EAST_SHAPE[0], FramedCapitalSlabVertical.NORTH_SHAPE[0]), Shapes.or(FramedCapitalSlabVertical.EAST_SHAPE[1], FramedCapitalSlabVertical.NORTH_SHAPE[1]), Shapes.or(FramedCapitalSlabVertical.EAST_SHAPE[2], FramedCapitalSlabVertical.NORTH_SHAPE[2]), Shapes.or(FramedCapitalSlabVertical.EAST_SHAPE[3], FramedCapitalSlabVertical.NORTH_SHAPE[3])};
+    protected static final VoxelShape[] WEST_SHAPE = new VoxelShape[]{Shapes.or(FramedCapitalSlabVertical.WEST_SHAPE[0], FramedCapitalSlabVertical.SOUTH_SHAPE[0]), Shapes.or(FramedCapitalSlabVertical.WEST_SHAPE[1], FramedCapitalSlabVertical.SOUTH_SHAPE[1]), Shapes.or(FramedCapitalSlabVertical.WEST_SHAPE[2], FramedCapitalSlabVertical.SOUTH_SHAPE[2]), Shapes.or(FramedCapitalSlabVertical.WEST_SHAPE[3], FramedCapitalSlabVertical.SOUTH_SHAPE[3])};
+    protected static final VoxelShape[] NORTH_SHAPE = new VoxelShape[]{Shapes.or(FramedCapitalSlabVertical.NORTH_SHAPE[0], FramedCapitalSlabVertical.WEST_SHAPE[0]), Shapes.or(FramedCapitalSlabVertical.NORTH_SHAPE[1], FramedCapitalSlabVertical.WEST_SHAPE[1]), Shapes.or(FramedCapitalSlabVertical.NORTH_SHAPE[2], FramedCapitalSlabVertical.WEST_SHAPE[2]), Shapes.or(FramedCapitalSlabVertical.NORTH_SHAPE[3], FramedCapitalSlabVertical.WEST_SHAPE[3])};
+    protected static final VoxelShape[] SOUTH_SHAPE = new VoxelShape[]{Shapes.or(FramedCapitalSlabVertical.SOUTH_SHAPE[0], FramedCapitalSlabVertical.EAST_SHAPE[0]), Shapes.or(FramedCapitalSlabVertical.SOUTH_SHAPE[1], FramedCapitalSlabVertical.EAST_SHAPE[1]), Shapes.or(FramedCapitalSlabVertical.SOUTH_SHAPE[2], FramedCapitalSlabVertical.EAST_SHAPE[2]), Shapes.or(FramedCapitalSlabVertical.SOUTH_SHAPE[3], FramedCapitalSlabVertical.EAST_SHAPE[3])};
 
     /**
      * Layers count.
@@ -59,7 +55,7 @@ public class FramedCornerVertical extends CustomFramedBlock {
                 .craftingCount(MAX_LAYERS)
                 .isLayered(true)
                 .build());
-        this.registerDefaultState(this.stateDefinition.any()
+        this.registerDefaultState(this.defaultBlockState()
                 .setValue(FACING, Direction.NORTH)
                 .setValue(LAYERS, 1));
     }

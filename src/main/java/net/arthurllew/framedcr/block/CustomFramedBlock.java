@@ -29,6 +29,8 @@ public abstract class CustomFramedBlock extends AbstractFramedBlock {
      */
     protected CustomFramedBlock(CustomBlockType blockType) {
         super(blockType, IFramedBlock.createProperties(blockType));
+        this.registerDefaultState(this.defaultBlockState()
+                .setValue(BlockStateProperties.WATERLOGGED, false));
     }
 
     /**

@@ -140,37 +140,62 @@ public class FramedConquestBlocks {
     public static final DeferredBlock<FramedPillar> FRAMED_CAPITAL_DORIC_DOWN_PILLAR = registerDoubleBlock(
             "framed_capital_doric_down_pillar", FramedPillar.Bottom::new, FramedPillar.Top::new,
             FramedPillar.Double::new);
+    public static final DeferredBlock<FramedCapitalSlabVerticalConnecting> FRAMED_CAPITAL_DORIC_DOWN_VERTICAL_SLAB = registerDoubleBlock(
+            "framed_capital_doric_down_vertical_slab", FramedCapitalSlabVerticalConnecting.Bottom::new, FramedCapitalSlabVerticalConnecting.Top::new,
+            FramedCapitalSlabVerticalConnecting.Double::new);
     public static final DeferredBlock<FramedCapitalCornerVertical> FRAMED_CAPITAL_DORIC_DOWN_VERTICAL_CORNER = registerDoubleBlock(
             "framed_capital_doric_down_vertical_corner", FramedCapitalCornerVertical.Bottom::new, FramedCapitalCornerVertical.Top::new,
             FramedCapitalCornerVertical.Double::new);
+    public static final DeferredBlock<FramedCapitalQuarterVerticalConnecting> FRAMED_CAPITAL_DORIC_DOWN_VERTICAL_QUARTER = registerDoubleBlock(
+            "framed_capital_doric_down_vertical_quarter", FramedCapitalQuarterVerticalConnecting.Bottom::new, FramedCapitalQuarterVerticalConnecting.Top::new,
+            FramedCapitalQuarterVerticalConnecting.Double::new);
+
     public static final DeferredBlock<FramedCapital> FRAMED_CAPITAL_DORIC_UP = registerDoubleBlock(
             "framed_capital_doric_up", FramedCapital.DoricBottom::new, FramedCapital.DoricTop::new,
             FramedCapital.Doric::new);
     public static final DeferredBlock<FramedPillar> FRAMED_CAPITAL_DORIC_UP_PILLAR = registerDoubleBlock(
             "framed_capital_doric_up_pillar", FramedPillar.Bottom::new, FramedPillar.Top::new,
             FramedPillar.Double::new);
+    public static final DeferredBlock<FramedCapitalSlabVerticalConnecting> FRAMED_CAPITAL_DORIC_UP_VERTICAL_SLAB = registerDoubleBlock(
+            "framed_capital_doric_up_vertical_slab", FramedCapitalSlabVerticalConnecting.Bottom::new, FramedCapitalSlabVerticalConnecting.Top::new,
+            FramedCapitalSlabVerticalConnecting.Double::new);
     public static final DeferredBlock<FramedCapitalCornerVertical> FRAMED_CAPITAL_DORIC_UP_VERTICAL_CORNER = registerDoubleBlock(
             "framed_capital_doric_up_vertical_corner", FramedCapitalCornerVertical.Bottom::new, FramedCapitalCornerVertical.Top::new,
             FramedCapitalCornerVertical.Double::new);
+    public static final DeferredBlock<FramedCapitalQuarterVerticalConnecting> FRAMED_CAPITAL_DORIC_UP_VERTICAL_QUARTER = registerDoubleBlock(
+            "framed_capital_doric_up_vertical_quarter", FramedCapitalQuarterVerticalConnecting.Bottom::new, FramedCapitalQuarterVerticalConnecting.Top::new,
+            FramedCapitalQuarterVerticalConnecting.Double::new);
 
     public static final DeferredBlock<FramedBalustrade> FRAMED_CAPITAL_IONIAN = registerBlock(
             "framed_capital_ionian", FramedBalustrade::new);
+    public static final DeferredBlock<FramedCapitalSlabVertical> FRAMED_CAPITAL_IONIAN_VERTICAL_SLAB = registerBlock(
+            "framed_capital_ionian_vertical_slab", FramedCapitalSlabVertical::new);
     public static final DeferredBlock<FramedCapitalCornerVertical> FRAMED_CAPITAL_IONIAN_VERTICAL_CORNER = registerBlock(
             "framed_capital_ionian_vertical_corner", FramedCapitalCornerVertical::new);
+    public static final DeferredBlock<FramedCapitalQuarterVertical> FRAMED_CAPITAL_IONIAN_VERTICAL_QUARTER = registerBlock(
+            "framed_capital_ionian_vertical_quarter", FramedCapitalQuarterVertical::new);
 
     public static final DeferredBlock<FramedCapital> FRAMED_CAPITAL_CORINTHIAN = registerBlock(
             "framed_capital_corinthian", FramedCapital.Connected::new);
     public static final DeferredBlock<FramedPillar> FRAMED_CAPITAL_CORINTHIAN_PILLAR = registerBlock(
             "framed_capital_corinthian_pillar", FramedPillar::new);
+    public static final DeferredBlock<FramedCapitalSlabVerticalConnecting> FRAMED_CAPITAL_CORINTHIAN_VERTICAL_SLAB = registerBlock(
+            "framed_capital_corinthian_vertical_slab", FramedCapitalSlabVerticalConnecting::new);
     public static final DeferredBlock<FramedCapitalCornerVertical> FRAMED_CAPITAL_CORINTHIAN_VERTICAL_CORNER = registerBlock(
             "framed_capital_corinthian_vertical_corner", FramedCapitalCornerVertical::new);
+    public static final DeferredBlock<FramedCapitalQuarterVerticalConnecting> FRAMED_CAPITAL_CORINTHIAN_VERTICAL_QUARTER = registerBlock(
+            "framed_capital_corinthian_vertical_quarter", FramedCapitalQuarterVerticalConnecting::new);
 
     public static final DeferredBlock<FramedCapital> FRAMED_CORNICE = registerBlock(
             "framed_cornice", FramedCapital.Connected::new);
     public static final DeferredBlock<FramedPillar> FRAMED_CORNICE_PILLAR = registerBlock(
             "framed_cornice_pillar", FramedPillar::new);
+    public static final DeferredBlock<FramedCapitalSlabVerticalConnecting> FRAMED_CORNICE_VERTICAL_SLAB = registerBlock(
+            "framed_cornice_vertical_slab", FramedCapitalSlabVerticalConnecting::new);
     public static final DeferredBlock<FramedCapitalCornerVertical> FRAMED_CORNICE_VERTICAL_CORNER = registerBlock(
             "framed_cornice_vertical_corner", FramedCapitalCornerVertical::new);
+    public static final DeferredBlock<FramedCapitalQuarterVerticalConnecting> FRAMED_CORNICE_VERTICAL_QUARTER = registerBlock(
+            "framed_cornice_vertical_quarter", FramedCapitalQuarterVerticalConnecting::new);
 
     public static final DeferredBlock<FramedCapital> FRAMED_PLINTH = registerBlock(
             "framed_plinth", FramedCapital.Connected::new);
@@ -182,8 +207,12 @@ public class FramedConquestBlocks {
             "framed_plinth_stairs", FramedStairs.Plinth::new);
     public static final DeferredBlock<FramedPillar> FRAMED_PLINTH_PILLAR = registerBlock(
             "framed_plinth_pillar", FramedPillar::new);
+    public static final DeferredBlock<FramedCapitalSlabVerticalConnecting> FRAMED_PLINTH_VERTICAL_SLAB = registerBlock(
+            "framed_plinth_vertical_slab", FramedCapitalSlabVerticalConnecting::new);
     public static final DeferredBlock<FramedCapitalCornerVertical> FRAMED_PLINTH_VERTICAL_CORNER = registerBlock(
             "framed_plinth_vertical_corner", FramedCapitalCornerVertical::new);
+    public static final DeferredBlock<FramedCapitalQuarterVerticalConnecting> FRAMED_PLINTH_VERTICAL_QUARTER = registerBlock(
+            "framed_plinth_vertical_quarter", FramedCapitalQuarterVerticalConnecting::new);
 
     /**
      * Registers framed double block and its item.

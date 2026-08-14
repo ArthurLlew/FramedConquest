@@ -1,0 +1,172 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"all": "framedblocks:block/framed_block_alt",
+		"particle": "#all"
+	},
+	"elements": [
+		{
+			"name": "Box2",
+			"from": [
+				0,
+				9.5,
+				6
+			],
+			"to": [
+				16,
+				12,
+				8
+			],
+			"faces": {
+				"north": {
+					"uv": [
+						0,
+						4,
+						16,
+						6.5
+					],
+					"texture": "#all"
+				},
+				"east": {
+					"uv": [
+						8,
+						4,
+						10,
+						6.5
+					],
+					"texture": "#all"
+				},
+				"west": {
+					"uv": [
+						6,
+						4,
+						8,
+						6.5
+					],
+					"texture": "#all"
+				},
+				"down": {
+					"uv": [
+						0,
+						8,
+						16,
+						10
+					],
+					"texture": "#all"
+				}
+			}
+		},
+		{
+			"name": "Box2",
+			"from": [
+				0,
+				6,
+				7.5
+			],
+			"to": [
+				16,
+				9.5,
+				8
+			],
+			"faces": {
+				"north": {
+					"uv": [
+						0,
+						6.5,
+						16,
+						10
+					],
+					"texture": "#all"
+				},
+				"east": {
+					"uv": [
+						8,
+						6.5,
+						8.5,
+						10
+					],
+					"texture": "#all"
+				},
+				"west": {
+					"uv": [
+						7.5,
+						6.5,
+						8,
+						10
+					],
+					"texture": "#all"
+				},
+				"down": {
+					"uv": [
+						0,
+						8,
+						16,
+						8.5
+					],
+					"texture": "#all"
+				}
+			}
+		},
+		{
+			"name": "Box2",
+			"from": [
+				0,
+				11.999,
+				4.5
+			],
+			"to": [
+				16,
+				15.999,
+				8
+			],
+			"faces": {
+				"north": {
+					"uv": [
+						0,
+						0.001,
+						16,
+						4.001
+					],
+					"texture": "#all"
+				},
+				"east": {
+					"uv": [
+						8,
+						0.001,
+						11.5,
+						4.001
+					],
+					"texture": "#all"
+				},
+				"west": {
+					"uv": [
+						4.5,
+						0.001,
+						8,
+						4.001
+					],
+					"texture": "#all"
+				},
+				"up": {
+					"uv": [
+						0,
+						4.5,
+						16,
+						8
+					],
+					"texture": "#all"
+				},
+				"down": {
+					"uv": [
+						0,
+						8,
+						16,
+						11.5
+					],
+					"texture": "#all"
+				}
+			}
+		}
+	]
+}

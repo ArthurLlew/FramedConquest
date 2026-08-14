@@ -51,7 +51,7 @@ public class FramedArch extends CustomFramedBlock {
         super(new CustomBlockType.Builder(FramedArch::getShapeForState)
                 .modelVariantForItem("_1")
                 .build());
-        this.registerDefaultState(this.stateDefinition.any()
+        this.registerDefaultState(this.defaultBlockState()
                 .setValue(TYPE, ArchShape.ONE)
                 .setValue(FACING, Direction.NORTH));
     }

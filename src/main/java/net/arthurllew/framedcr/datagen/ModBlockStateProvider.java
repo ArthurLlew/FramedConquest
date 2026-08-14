@@ -75,9 +75,24 @@ public class ModBlockStateProvider extends BlockStateProvider {
             }
             // Capital vertical corner block
             else if (holder.get() instanceof FramedCapitalCornerVertical block) {
-                this.framedCornerVerticalCapital(block);
+                this.framedCapitalCornerVertical(block);
             }
-
+            // Capital vertical slab block
+            else if (holder.get() instanceof FramedCapitalSlabVertical block) {
+                this.framedCapitalSlabVertical(block);
+            }
+            // Connecting capital vertical slab block
+            else if (holder.get() instanceof FramedCapitalSlabVerticalConnecting block) {
+                this.framedCapitalSlabVerticalConnecting(block);
+            }
+            // Capital vertical quarter block
+            else if (holder.get() instanceof FramedCapitalQuarterVertical block) {
+                this.framedCapitalQuarterVertical(block);
+            }
+            // Connecting capital vertical quarter block
+            else if (holder.get() instanceof FramedCapitalQuarterVerticalConnecting block) {
+                this.framedCapitalQuarterVerticalConnecting(block);
+            }
         }
     }
 
@@ -362,7 +377,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
     /**
      * Generates block states for a capital vertical corner block.
      */
-    public void framedCornerVerticalCapital(FramedCapitalCornerVertical block) {
+    public void framedCapitalCornerVertical(FramedCapitalCornerVertical block) {
         String modelPath = getFramedCornerVerticalCapital(block);
         ModelFile model1 = this.models().getExistingFile(
                 ResourceLocation.fromNamespaceAndPath(FramedConquest.MODID,
@@ -401,6 +416,204 @@ public class ModBlockStateProvider extends BlockStateProvider {
                     .modelFile(model)
                     .rotationY(rotY)
                     .uvLock(true);
+
+            // Build
+            return builder.build();
+        }, IGNORED_PROPERTIES);
+    }
+
+    /**
+     * Generates block states for a capital vertical quarter block.
+     */
+    public void framedCapitalQuarterVertical(FramedCapitalQuarterVertical block) {
+        String modelPath = getBlockModelPath(block);
+        ModelFile model1 = this.models().getExistingFile(
+                ResourceLocation.fromNamespaceAndPath(FramedConquest.MODID,
+                        "block/" + modelPath.replace("vertical_quarter", "vertical_quarter_2")));
+        ModelFile model2 = this.models().getExistingFile(
+                ResourceLocation.fromNamespaceAndPath(FramedConquest.MODID,
+                        "block/" + modelPath.replace("vertical_quarter", "vertical_quarter_4")));
+        ModelFile model3 = this.models().getExistingFile(
+                ResourceLocation.fromNamespaceAndPath(FramedConquest.MODID,
+                        "block/" + modelPath.replace("vertical_quarter", "vertical_quarter_6")));
+
+        // Iterate main block properties
+        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
+            // Get block state properties
+            Direction dir = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
+            int layers = state.getValue(FramedCapitalQuarterVertical.LAYERS);
+
+            // Choose Y rotation
+            int rotY = switch (dir) {
+                case EAST -> 90;
+                case SOUTH -> 180;
+                case WEST -> 270;
+                default -> 0;
+            };
+
+            // Choose model
+            ModelFile model = switch (layers) {
+                case 2 -> model1;
+                case 3 -> model2;
+                case 4 -> model3;
+                default -> model1;
+            };
+
+            // Init builder
+            ConfiguredModel.Builder<?> builder = ConfiguredModel.builder()
+                    .modelFile(model)
+                    .rotationY(rotY)
+                    .uvLock(true);
+
+            // Build
+            return builder.build();
+        }, IGNORED_PROPERTIES);
+    }
+
+    /**
+     * Generates block states for a connecting capital vertical quarter block.
+     */
+    public void framedCapitalQuarterVerticalConnecting(FramedCapitalQuarterVerticalConnecting block) {
+        // Iterate main block properties
+        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
+            // Get block state properties
+            Direction dir = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
+            int layers = state.getValue(FramedCapitalQuarterVerticalConnecting.LAYERS);
+            boolean south = state.getValue(BlockStateProperties.SOUTH);
+            boolean east = state.getValue(BlockStateProperties.EAST);
+
+            // Choose Y rotation
+            int rotY = switch (dir) {
+                case EAST -> 90;
+                case SOUTH -> 180;
+                case WEST -> 270;
+                default -> 0; // NORTH
+            };
+
+            // Choose model based on layers and sides connections
+            String layerSuffix = switch (layers) {
+                case 2 -> "_2";
+                case 3 -> "_4";
+                case 4 -> "_6";
+                default -> "_2";
+            };
+            String connectionSuffix = (south && east) ? "_es" : south ? "_s" : east ? "_e" : "";
+            ModelFile model = this.models().getExistingFile(
+                    ResourceLocation.fromNamespaceAndPath(FramedConquest.MODID,
+                            "block/" + getFramedCapitalQuarterVerticalConnecting(block,
+                                    layerSuffix + connectionSuffix)));
+
+            // Init builder
+            ConfiguredModel.Builder<?> builder = ConfiguredModel.builder()
+                    .modelFile(model)
+                    .uvLock(true);
+
+            // Ignore 0 rotation
+            if (rotY != 0) {
+                builder.rotationY(rotY);
+            }
+
+            // Build
+            return builder.build();
+        }, IGNORED_PROPERTIES);
+    }
+
+    /**
+     * Generates block states for a capital vertical slab block.
+     */
+    public void framedCapitalSlabVertical(FramedCapitalSlabVertical block) {
+        String modelPath = getBlockModelPath(block);
+        ModelFile model1 = this.models().getExistingFile(
+                ResourceLocation.fromNamespaceAndPath(FramedConquest.MODID,
+                        "block/" + modelPath.replace("vertical_slab", "vertical_slab_2")));
+        ModelFile model2 = this.models().getExistingFile(
+                ResourceLocation.fromNamespaceAndPath(FramedConquest.MODID,
+                        "block/" + modelPath.replace("vertical_slab", "vertical_slab_4")));
+        ModelFile model3 = this.models().getExistingFile(
+                ResourceLocation.fromNamespaceAndPath(FramedConquest.MODID,
+                        "block/" + modelPath.replace("vertical_slab", "vertical_slab_6")));
+
+        // Iterate main block properties
+        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
+            // Get block state properties
+            Direction dir = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
+            int layers = state.getValue(FramedCapitalSlabVertical.LAYERS);
+
+            // Choose Y rotation
+            int rotY = switch (dir) {
+                case EAST -> 90;
+                case SOUTH -> 180;
+                case WEST -> 270;
+                default -> 0;
+            };
+
+            // Choose model
+            ModelFile model = switch (layers) {
+                case 2 -> model1;
+                case 3 -> model2;
+                case 4 -> model3;
+                default -> model1;
+            };
+
+            // Init builder
+            ConfiguredModel.Builder<?> builder = ConfiguredModel.builder()
+                    .modelFile(model)
+                    .rotationY(rotY)
+                    .uvLock(true);
+
+            // Build
+            return builder.build();
+        }, IGNORED_PROPERTIES);
+    }
+
+    /**
+     * Generates block states for a connecting capital vertical slab block.
+     */
+    public void framedCapitalSlabVerticalConnecting(FramedCapitalSlabVerticalConnecting block) {
+        // Iterate main block properties
+        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
+            // Get block state properties
+            Direction dir = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
+            int layers = state.getValue(FramedCapitalSlabVerticalConnecting.LAYERS);
+            boolean west = state.getValue(BlockStateProperties.WEST);
+            boolean south = state.getValue(BlockStateProperties.SOUTH);
+            boolean east = state.getValue(BlockStateProperties.EAST);
+
+            // Choose Y rotation
+            int rotY = switch (dir) {
+                case EAST -> 90;
+                case SOUTH -> 180;
+                case WEST -> 270;
+                default -> 0; // NORTH
+            };
+
+            // Choose model based on layers and sides connections
+            String layerSuffix = switch (layers) {
+                case 2 -> "_2";
+                case 3 -> "_4";
+                case 4 -> "_6";
+                default -> "_2";
+            };
+            StringBuilder connectionSuffixBuilder = new StringBuilder();
+            if (east) connectionSuffixBuilder.append("e");
+            if (south) connectionSuffixBuilder.append("s");
+            if (west) connectionSuffixBuilder.append("w");
+            String connectionSuffix = (connectionSuffixBuilder.isEmpty() ? "" : "_" + connectionSuffixBuilder);
+            ModelFile model = this.models().getExistingFile(
+                    ResourceLocation.fromNamespaceAndPath(FramedConquest.MODID,
+                            "block/" + getFramedCapitalSlabVerticalConnecting(block,
+                                    layerSuffix + connectionSuffix)));
+
+
+            // Init builder
+            ConfiguredModel.Builder<?> builder = ConfiguredModel.builder()
+                    .modelFile(model)
+                    .uvLock(true);
+
+            // Ignore 0 rotation
+            if (rotY != 0) {
+                builder.rotationY(rotY);
+            }
 
             // Build
             return builder.build();
@@ -511,6 +724,36 @@ public class ModBlockStateProvider extends BlockStateProvider {
         }
         else {
             return getBlockModelPath(block);
+        }
+    }
+
+    /**
+     * @return capital vertical quarter block model path
+     */
+    protected static String getFramedCapitalQuarterVerticalConnecting(FramedCapitalQuarterVerticalConnecting block,
+                                                                      String variant) {
+        if (block instanceof FramedCapitalQuarterVerticalConnecting.Bottom
+                || block instanceof FramedCapitalQuarterVerticalConnecting.Top
+                || block instanceof FramedCapitalQuarterVerticalConnecting.Double) {
+            return getDoubleBlockModelPath(block, variant);
+        }
+        else {
+            return getBlockModelPath(block) + variant;
+        }
+    }
+
+    /**
+     * @return capital vertical quarter block model path
+     */
+    protected static String getFramedCapitalSlabVerticalConnecting(FramedCapitalSlabVerticalConnecting block,
+                                                                   String variant) {
+        if (block instanceof FramedCapitalSlabVerticalConnecting.Bottom
+                || block instanceof FramedCapitalSlabVerticalConnecting.Top
+                || block instanceof FramedCapitalSlabVerticalConnecting.Double) {
+            return getDoubleBlockModelPath(block, variant);
+        }
+        else {
+            return getBlockModelPath(block) + variant;
         }
     }
 }
