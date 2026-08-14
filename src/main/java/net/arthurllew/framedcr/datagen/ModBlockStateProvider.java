@@ -45,38 +45,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
                     && !(block instanceof FramedCapital.Connected)) {
                 this.simpleBlockWithExistingModel(block, ModBlockStateProvider::getDoubleBlockModelPath);
             }
-            // Wall block
-            if (holder.get() instanceof FramedWall block) {
-                this.wall(block);
-            }
-            // Small arch block
-            else if (holder.get() instanceof FramedSmallArch block) {
-                this.smallArch(block);
-            }
-            // Small arch half block
-            else if (holder.get() instanceof FramedSmallArchHalf block) {
-                this.smallArchHalf(block);
-            }
-            // Two meters arch block
-            else if (holder.get() instanceof FramedTwoMeterArch block) {
-                this.twoMeterArch(block);
-            }
-            // Two meters arch half block
-            else if (holder.get() instanceof FramedTwoMeterArchHalf block) {
-                this.twoMeterArchHalf(block);
-            }
-            // Stairs block
-            else if ((holder.get() instanceof FramedStairs block)
-                    && !(block == FramedConquestBlocks.FRAMED_STEPS_7.get())
-                    && !(block == FramedConquestBlocks.FRAMED_STEPS_8.get())
-                    && !(block instanceof FramedStairs.Plinth)) {
-                this.stairs(block);
-            }
-            // Pillar block
-            else if ((holder.get() instanceof FramedPillar block)
-                    && !(block == FramedConquestBlocks.FRAMED_PILLAR.get())) {
-                this.pillar(block);
-            }
             // Capital vertical corner block
             else if (holder.get() instanceof FramedCapitalCornerVertical block) {
                 this.framedCapitalCornerVertical(block);
@@ -96,6 +64,43 @@ public class ModBlockStateProvider extends BlockStateProvider {
             // Connecting capital vertical quarter block
             else if (holder.get() instanceof FramedCapitalQuarterVerticalConnecting block) {
                 this.framedCapitalQuarterVerticalConnecting(block);
+            }
+            // Stairs block
+            else if ((holder.get() instanceof FramedStairs block)
+                    && !(block == FramedConquestBlocks.FRAMED_STEPS_7.get())
+                    && !(block == FramedConquestBlocks.FRAMED_STEPS_8.get())
+                    && !(block instanceof FramedStairs.Plinth)) {
+                this.stairs(block);
+            }
+            // Wall block
+            if (holder.get() instanceof FramedWall block) {
+                this.wall(block);
+            }
+            // Pillar block
+            else if ((holder.get() instanceof FramedPillar block)
+                    && !(block instanceof FramedPillar.WithAxis)
+                    && !(block == FramedConquestBlocks.FRAMED_PILLAR.get())) {
+                this.pillar(block);
+            }
+            // Axis directional pillar block
+            else if (holder.get() instanceof FramedPillar.WithAxis block) {
+                this.pillarWithAxis(block);
+            }
+            // Small arch block
+            else if (holder.get() instanceof FramedSmallArch block) {
+                this.smallArch(block);
+            }
+            // Small arch half block
+            else if (holder.get() instanceof FramedSmallArchHalf block) {
+                this.smallArchHalf(block);
+            }
+            // Two meters arch block
+            else if (holder.get() instanceof FramedTwoMeterArch block) {
+                this.twoMeterArch(block);
+            }
+            // Two meters arch half block
+            else if (holder.get() instanceof FramedTwoMeterArchHalf block) {
+                this.twoMeterArchHalf(block);
             }
         }
     }
@@ -183,6 +188,149 @@ public class ModBlockStateProvider extends BlockStateProvider {
                     rotY = 0;
                 }
             }
+
+            // Init builder
+            ConfiguredModel.Builder<?> builder = ConfiguredModel.builder()
+                    .modelFile(model)
+                    .uvLock(true);
+
+            // Ignore 0 rotation
+            if (rotY != 0) {
+                builder.rotationY(rotY);
+            }
+
+            // Build
+            return builder.build();
+        }, IGNORED_PROPERTIES);
+    }
+
+    /**
+     * Generates block state for a stairs block.
+     */
+    @SuppressWarnings("ExtractMethodRecommender")
+    public void stairs(FramedStairs block) {
+        String name = getBlockModelPath(block);
+        ModelFile modelStraight = this.models().getExistingFile(
+                ResourceLocation.fromNamespaceAndPath(FramedConquest.MODID, "block/" + name));
+        ModelFile modelOuter = this.models().getExistingFile(
+                ResourceLocation.fromNamespaceAndPath(FramedConquest.MODID, "block/" + name + "_outer"));
+        ModelFile modelInner = this.models().getExistingFile(
+                ResourceLocation.fromNamespaceAndPath(FramedConquest.MODID, "block/" + name + "_inner"));
+
+        // Iterate main block properties
+        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
+            // Get block state properties
+            Direction dir = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
+            Half half = state.getValue(BlockStateProperties.HALF);
+            StairsShape shape = state.getValue(BlockStateProperties.STAIRS_SHAPE);
+
+            // Whether is top
+            boolean top = half == Half.TOP;
+
+            // Choose Y rotation
+            int baseY = switch (dir) {
+                case EAST -> 0;
+                case SOUTH -> 90;
+                case WEST -> 180;
+                default -> 270;
+            };
+            // Left-handed shapes rotate one step counter-clockwise from the base facing rotation
+            int catRotY = ((shape == StairsShape.OUTER_LEFT) || (shape == StairsShape.INNER_LEFT))
+                    ? (baseY + 270) % 360 : baseY;
+
+            // Straight keeps the same Y when flipped upside-down
+            // outer/inner shapes rotate an extra 90 degrees when flipped, since the corner mirrors
+            int rotY = (top && shape != StairsShape.STRAIGHT) ? (catRotY + 90) % 360 : catRotY;
+
+            // Choose model
+            ModelFile model = switch (shape) {
+                case STRAIGHT -> modelStraight;
+                case OUTER_LEFT, OUTER_RIGHT -> modelOuter;
+                default -> modelInner; // INNER_LEFT, INNER_RIGHT
+            };
+
+            // Init builder
+            ConfiguredModel.Builder<?> builder = ConfiguredModel.builder()
+                    .modelFile(model)
+                    .uvLock(true);
+
+            // Ignore 0 rotation
+            if (rotY != 0) {
+                builder.rotationY(rotY);
+            }
+
+            // Flip X if top
+            if (top) {
+                builder.rotationX(180);
+            }
+
+            // Build
+            return builder.build();
+        }, IGNORED_PROPERTIES);
+    }
+
+    /**
+     * Generates block states for a pillar block.
+     */
+    public void pillar(FramedPillar block) {
+        String modelPath = getPillarModelPath(block);
+        ModelFile model1 = this.models().getExistingFile(
+                ResourceLocation.fromNamespaceAndPath(FramedConquest.MODID,
+                        "block/" + modelPath.replace("pillar", "pillar_2")));
+        ModelFile model2 = this.models().getExistingFile(
+                ResourceLocation.fromNamespaceAndPath(FramedConquest.MODID,
+                        "block/" + modelPath.replace("pillar", "wall_post")));
+        ModelFile model3 = this.models().getExistingFile(
+                ResourceLocation.fromNamespaceAndPath(FramedConquest.MODID,
+                        "block/" + modelPath.replace("pillar", "pillar_6")));
+
+        // Iterate main block properties
+        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
+            // Get block state properties
+            int layers = state.getValue(FramedPillar.LAYERS);
+
+            // Choose model
+            ModelFile model = switch (layers) {
+                case 1 -> model1;
+                case 2 -> model2;
+                case 3 -> model3;
+                default -> model1;
+            };
+
+            // Init builder
+            ConfiguredModel.Builder<?> builder = ConfiguredModel.builder()
+                    .modelFile(model)
+                    .uvLock(true);
+
+            // Build
+            return builder.build();
+        }, IGNORED_PROPERTIES);
+    }
+
+    /**
+     * Generates block states for an axis directional pillar block.
+     */
+    public void pillarWithAxis(FramedPillar.WithAxis block) {
+        // Iterate main block properties
+        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
+            // Get block state properties
+            int layers = state.getValue(FramedPillar.LAYERS);
+            Direction.Axis axis = state.getValue(BlockStateProperties.AXIS);
+
+            // Rotation from axis
+            int rotY = axis == Direction.Axis.X ? 90 : 0;
+
+            // Choose model based on layers and axis direction
+            String layerSuffix = switch (layers) {
+                case 1 -> "_2";
+                case 2 -> "_4";
+                case 3 -> "_6";
+                default -> "_2";
+            };
+            String axisSuffix = axis == Direction.Axis.Y ? "_y" : "_xz";
+            ModelFile model = this.models().getExistingFile(
+                    ResourceLocation.fromNamespaceAndPath(FramedConquest.MODID,
+                            "block/" + getBlockModelPath(block) + layerSuffix + axisSuffix));
 
             // Init builder
             ConfiguredModel.Builder<?> builder = ConfiguredModel.builder()
@@ -359,109 +507,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
             if (!top) {
                 builder.rotationX(180);
             }
-
-            // Build
-            return builder.build();
-        }, IGNORED_PROPERTIES);
-    }
-
-    /**
-     * Generates block state for a stairs block.
-     */
-    @SuppressWarnings("ExtractMethodRecommender")
-    public void stairs(FramedStairs block) {
-        String name = getBlockModelPath(block);
-        ModelFile modelStraight = this.models().getExistingFile(
-                ResourceLocation.fromNamespaceAndPath(FramedConquest.MODID, "block/" + name));
-        ModelFile modelOuter = this.models().getExistingFile(
-                ResourceLocation.fromNamespaceAndPath(FramedConquest.MODID, "block/" + name + "_outer"));
-        ModelFile modelInner = this.models().getExistingFile(
-                ResourceLocation.fromNamespaceAndPath(FramedConquest.MODID, "block/" + name + "_inner"));
-
-        // Iterate main block properties
-        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
-            // Get block state properties
-            Direction dir = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
-            Half half = state.getValue(BlockStateProperties.HALF);
-            StairsShape shape = state.getValue(BlockStateProperties.STAIRS_SHAPE);
-
-            // Whether is top
-            boolean top = half == Half.TOP;
-
-            // Choose Y rotation
-            int baseY = switch (dir) {
-                case EAST -> 0;
-                case SOUTH -> 90;
-                case WEST -> 180;
-                default -> 270;
-            };
-            // Left-handed shapes rotate one step counter-clockwise from the base facing rotation
-            int catRotY = ((shape == StairsShape.OUTER_LEFT) || (shape == StairsShape.INNER_LEFT))
-                    ? (baseY + 270) % 360 : baseY;
-
-            // Straight keeps the same Y when flipped upside-down
-            // outer/inner shapes rotate an extra 90 degrees when flipped, since the corner mirrors
-            int rotY = (top && shape != StairsShape.STRAIGHT) ? (catRotY + 90) % 360 : catRotY;
-
-            // Choose model
-            ModelFile model = switch (shape) {
-                case STRAIGHT -> modelStraight;
-                case OUTER_LEFT, OUTER_RIGHT -> modelOuter;
-                default -> modelInner; // INNER_LEFT, INNER_RIGHT
-            };
-
-            // Init builder
-            ConfiguredModel.Builder<?> builder = ConfiguredModel.builder()
-                    .modelFile(model)
-                    .uvLock(true);
-
-            // Ignore 0 rotation
-            if (rotY != 0) {
-                builder.rotationY(rotY);
-            }
-
-            // Flip X if top
-            if (top) {
-                builder.rotationX(180);
-            }
-
-            // Build
-            return builder.build();
-        }, IGNORED_PROPERTIES);
-    }
-
-    /**
-     * Generates block states for a pillar block.
-     */
-    public void pillar(FramedPillar block) {
-        String modelPath = getPillarModelPath(block);
-        ModelFile model1 = this.models().getExistingFile(
-                ResourceLocation.fromNamespaceAndPath(FramedConquest.MODID,
-                        "block/" + modelPath.replace("pillar", "pillar_2")));
-        ModelFile model2 = this.models().getExistingFile(
-                ResourceLocation.fromNamespaceAndPath(FramedConquest.MODID,
-                        "block/" + modelPath.replace("pillar", "wall_post")));
-        ModelFile model3 = this.models().getExistingFile(
-                ResourceLocation.fromNamespaceAndPath(FramedConquest.MODID,
-                        "block/" + modelPath.replace("pillar", "pillar_6")));
-
-        // Iterate main block properties
-        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
-            // Get block state properties
-            int layers = state.getValue(FramedPillar.LAYERS);
-
-            // Choose model
-            ModelFile model = switch (layers) {
-                case 1 -> model1;
-                case 2 -> model2;
-                case 3 -> model3;
-                default -> model1;
-            };
-
-            // Init builder
-            ConfiguredModel.Builder<?> builder = ConfiguredModel.builder()
-                    .modelFile(model)
-                    .uvLock(true);
 
             // Build
             return builder.build();
@@ -752,6 +797,20 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
 
     /**
+     * @return pillar block model path
+     */
+    protected static String getPillarModelPath(FramedPillar block) {
+        if (block instanceof FramedPillar.Bottom
+                || block instanceof FramedPillar.Top
+                || block instanceof FramedPillar.Double) {
+            return getDoubleBlockModelPath(block);
+        }
+        else {
+            return getBlockModelPath(block);
+        }
+    }
+
+    /**
      * @return small arch block model path
      */
     protected static String getSmallArchModelPath(FramedSmallArch block) {
@@ -804,20 +863,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
         }
         else {
             return getBlockModelPath(block) + variant;
-        }
-    }
-
-    /**
-     * @return pillar block model path
-     */
-    protected static String getPillarModelPath(FramedPillar block) {
-        if (block instanceof FramedPillar.Bottom
-                || block instanceof FramedPillar.Top
-                || block instanceof FramedPillar.Double) {
-            return getDoubleBlockModelPath(block);
-        }
-        else {
-            return getBlockModelPath(block);
         }
     }
 

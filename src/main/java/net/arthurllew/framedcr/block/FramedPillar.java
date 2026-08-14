@@ -12,9 +12,11 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.shapes.BooleanOp;
@@ -75,14 +77,18 @@ public class FramedPillar extends CustomFramedBlock {
         return state.getValue(LAYERS) - 1;
     }
 
-    /// See [FramedLayeredCubeBlock].
+    /**
+     * Appends block state attributes.
+     */
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
         builder.add(LAYERS);
     }
 
-    /// See [FramedLayeredCubeBlock].
+    /**
+     * @return whether a block can be replaced by the other one.
+     */
     @Override
     protected boolean canBeReplaced(BlockState state, BlockPlaceContext context) {
         return BlockUtils.canLayeredBlockBeReplaced(LAYERS, MAX_LAYERS, this, state, context,
@@ -92,7 +98,9 @@ public class FramedPillar extends CustomFramedBlock {
                 });
     }
 
-    /// See [FramedLayeredCubeBlock].
+    /**
+     * @return block state that should be placed in the world depending on provided context.
+     */
     @Override
     public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
         return BlockUtils.getLayeredBlockStateForPlacement(LAYERS, MAX_LAYERS, this, context,
@@ -122,6 +130,65 @@ public class FramedPillar extends CustomFramedBlock {
      */
     public static VoxelShape getShapeForState(BlockState state) {
         return SHAPE[state.getValue(LAYERS) - 1];
+    }
+
+    /**
+     * Axis directional variant.
+     */
+    public static class WithAxis extends FramedPillar {
+        /**
+         * Constructor.
+         */
+        public WithAxis() {
+            super(new CustomBlockType.Builder(FramedPillar::getShapeForState)
+                    .modelVariantForItem("_2_y")
+                    .craftingCount(MAX_LAYERS)
+                    .isLayered(true)
+                    .build());
+            this.registerDefaultState(this.defaultBlockState()
+                    .setValue(BlockStateProperties.AXIS, Direction.Axis.Y));
+        }
+
+        /**
+         * @return whether a block can be replaced by the other one.
+         */
+        @Override
+        protected boolean canBeReplaced(BlockState state, BlockPlaceContext context) {
+            return BlockUtils.canLayeredBlockBeReplaced(LAYERS, MAX_LAYERS, this, state, context,
+                    () -> {
+                        Direction dir = context.getClickedFace();
+                        return dir != Direction.UP && dir != Direction.DOWN;
+                    });
+        }
+
+        /**
+         * Appends block state attributes.
+         */
+        @Override
+        protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+            super.createBlockStateDefinition(builder);
+            builder.add(BlockStateProperties.AXIS);
+        }
+
+        /**
+         * @return block state that should be placed in the world depending on provided context.
+         */
+        @Override
+        public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
+            return BlockUtils.getLayeredBlockStateForPlacement(LAYERS, MAX_LAYERS, this, context,
+                    () -> CustomPlacementStateBuilder.of(this, context)
+                            .withClickedAxis()
+                            .withWater()
+                            .build());
+        }
+
+        /**
+         * @return rotated block state.
+         */
+        @Override
+        protected BlockState rotate(BlockState state, Rotation rotation) {
+            return BlockUtils.rotateAxis(state, rotation, BlockStateProperties.AXIS);
+        }
     }
 
     /**

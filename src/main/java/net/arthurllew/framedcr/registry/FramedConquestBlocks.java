@@ -176,6 +176,8 @@ public class FramedConquestBlocks {
             "framed_capital_ionian", FramedBalustrade::new);
     public static final DeferredBlock<FramedWall> FRAMED_CAPITAL_IONIAN_WALL = registerBlock(
             "framed_capital_ionian_wall", FramedWall::new);
+    public static final DeferredBlock<FramedPillar> FRAMED_CAPITAL_IONIAN_PILLAR = registerBlock(
+            "framed_capital_ionian_pillar", FramedPillar.WithAxis::new);
     public static final DeferredBlock<FramedCapitalSlabVertical> FRAMED_CAPITAL_IONIAN_VERTICAL_SLAB = registerBlock(
             "framed_capital_ionian_vertical_slab", FramedCapitalSlabVertical::new);
     public static final DeferredBlock<FramedCapitalCornerVertical> FRAMED_CAPITAL_IONIAN_VERTICAL_CORNER = registerBlock(

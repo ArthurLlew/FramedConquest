@@ -1,0 +1,43 @@
+{
+  "variants": {
+    "axis=x,layer=1": {
+      "model": "framedcr:block/framed_capital_ionian_pillar_2_xz",
+      "uvlock": true,
+      "y": 90
+    },
+    "axis=x,layer=2": {
+      "model": "framedcr:block/framed_capital_ionian_pillar_4_xz",
+      "uvlock": true,
+      "y": 90
+    },
+    "axis=x,layer=3": {
+      "model": "framedcr:block/framed_capital_ionian_pillar_6_xz",
+      "uvlock": true,
+      "y": 90
+    },
+    "axis=y,layer=1": {
+      "model": "framedcr:block/framed_capital_ionian_pillar_2_y",
+      "uvlock": true
+    },
+    "axis=y,layer=2": {
+      "model": "framedcr:block/framed_capital_ionian_pillar_4_y",
+      "uvlock": true
+    },
+    "axis=y,layer=3": {
+      "model": "framedcr:block/framed_capital_ionian_pillar_6_y",
+      "uvlock": true
+    },
+    "axis=z,layer=1": {
+      "model": "framedcr:block/framed_capital_ionian_pillar_2_xz",
+      "uvlock": true
+    },
+    "axis=z,layer=2": {
+      "model": "framedcr:block/framed_capital_ionian_pillar_4_xz",
+      "uvlock": true
+    },
+    "axis=z,layer=3": {
+      "model": "framedcr:block/framed_capital_ionian_pillar_6_xz",
+      "uvlock": true
+    }
+  }
+}
