@@ -137,6 +137,9 @@ public class FramedConquestBlocks {
     public static final DeferredBlock<FramedCapital> FRAMED_CAPITAL_DORIC_DOWN = registerDoubleBlock(
             "framed_capital_doric_down", FramedCapital.DoricBottom::new, FramedCapital.DoricTop::new,
             FramedCapital.Doric::new);
+    public static final DeferredBlock<FramedWall> FRAMED_CAPITAL_DORIC_DOWN_WALL = registerDoubleBlock(
+            "framed_capital_doric_down_wall", FramedWall.Bottom::new, FramedWall.Top::new,
+            FramedWall.Double::new);
     public static final DeferredBlock<FramedPillar> FRAMED_CAPITAL_DORIC_DOWN_PILLAR = registerDoubleBlock(
             "framed_capital_doric_down_pillar", FramedPillar.Bottom::new, FramedPillar.Top::new,
             FramedPillar.Double::new);
@@ -153,6 +156,9 @@ public class FramedConquestBlocks {
     public static final DeferredBlock<FramedCapital> FRAMED_CAPITAL_DORIC_UP = registerDoubleBlock(
             "framed_capital_doric_up", FramedCapital.DoricBottom::new, FramedCapital.DoricTop::new,
             FramedCapital.Doric::new);
+    public static final DeferredBlock<FramedWall> FRAMED_CAPITAL_DORIC_UP_WALL = registerDoubleBlock(
+            "framed_capital_doric_up_wall", FramedWall.Bottom::new, FramedWall.Top::new,
+            FramedWall.Double::new);
     public static final DeferredBlock<FramedPillar> FRAMED_CAPITAL_DORIC_UP_PILLAR = registerDoubleBlock(
             "framed_capital_doric_up_pillar", FramedPillar.Bottom::new, FramedPillar.Top::new,
             FramedPillar.Double::new);
@@ -168,6 +174,8 @@ public class FramedConquestBlocks {
 
     public static final DeferredBlock<FramedBalustrade> FRAMED_CAPITAL_IONIAN = registerBlock(
             "framed_capital_ionian", FramedBalustrade::new);
+    public static final DeferredBlock<FramedWall> FRAMED_CAPITAL_IONIAN_WALL = registerBlock(
+            "framed_capital_ionian_wall", FramedWall::new);
     public static final DeferredBlock<FramedCapitalSlabVertical> FRAMED_CAPITAL_IONIAN_VERTICAL_SLAB = registerBlock(
             "framed_capital_ionian_vertical_slab", FramedCapitalSlabVertical::new);
     public static final DeferredBlock<FramedCapitalCornerVertical> FRAMED_CAPITAL_IONIAN_VERTICAL_CORNER = registerBlock(
@@ -177,6 +185,8 @@ public class FramedConquestBlocks {
 
     public static final DeferredBlock<FramedCapital> FRAMED_CAPITAL_CORINTHIAN = registerBlock(
             "framed_capital_corinthian", FramedCapital.Connected::new);
+    public static final DeferredBlock<FramedWall> FRAMED_CAPITAL_CORINTHIAN_WALL = registerBlock(
+            "framed_capital_corinthian_wall", FramedWall::new);
     public static final DeferredBlock<FramedPillar> FRAMED_CAPITAL_CORINTHIAN_PILLAR = registerBlock(
             "framed_capital_corinthian_pillar", FramedPillar::new);
     public static final DeferredBlock<FramedCapitalSlabVerticalConnecting> FRAMED_CAPITAL_CORINTHIAN_VERTICAL_SLAB = registerBlock(
@@ -188,6 +198,8 @@ public class FramedConquestBlocks {
 
     public static final DeferredBlock<FramedCapital> FRAMED_CORNICE = registerBlock(
             "framed_cornice", FramedCapital.Connected::new);
+    public static final DeferredBlock<FramedWall> FRAMED_CORNICE_WALL = registerBlock(
+            "framed_cornice_wall", FramedWall::new);
     public static final DeferredBlock<FramedPillar> FRAMED_CORNICE_PILLAR = registerBlock(
             "framed_cornice_pillar", FramedPillar::new);
     public static final DeferredBlock<FramedCapitalSlabVerticalConnecting> FRAMED_CORNICE_VERTICAL_SLAB = registerBlock(
@@ -199,6 +211,8 @@ public class FramedConquestBlocks {
 
     public static final DeferredBlock<FramedCapital> FRAMED_PLINTH = registerBlock(
             "framed_plinth", FramedCapital.Connected::new);
+    public static final DeferredBlock<FramedWall> FRAMED_PLINTH_WALL = registerBlock(
+            "framed_plinth_wall", FramedWall::new);
     public static final DeferredBlock<FramedCapital> FRAMED_PLINTH_SLAB_BOTTOM = registerBlock(
             "framed_plinth_slab_bottom", FramedCapital.ConnectedSlab::new);
     public static final DeferredBlock<FramedCapital> FRAMED_PLINTH_SLAB_TOP = registerBlock(

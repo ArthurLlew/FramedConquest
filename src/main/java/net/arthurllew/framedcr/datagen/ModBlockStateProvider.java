@@ -45,6 +45,10 @@ public class ModBlockStateProvider extends BlockStateProvider {
                     && !(block instanceof FramedCapital.Connected)) {
                 this.simpleBlockWithExistingModel(block, ModBlockStateProvider::getDoubleBlockModelPath);
             }
+            // Wall block
+            if (holder.get() instanceof FramedWall block) {
+                this.wall(block);
+            }
             // Small arch block
             else if (holder.get() instanceof FramedSmallArch block) {
                 this.smallArch(block);
@@ -103,6 +107,96 @@ public class ModBlockStateProvider extends BlockStateProvider {
         String modelPath = nameGetter.apply(block);
         this.simpleBlock(block, this.models().getExistingFile(
                 ResourceLocation.fromNamespaceAndPath(FramedConquest.MODID, "block/" + modelPath)));
+    }
+
+    /**
+     * Generates block states for a wall block.
+     */
+    public void wall(FramedWall block) {
+        ModelFile modelPost = this.models().getExistingFile(
+                ResourceLocation.fromNamespaceAndPath(FramedConquest.MODID,
+                        "block/" + getFramedWallModelPath(block, "_post")));
+        ModelFile modelN = this.models().getExistingFile(
+                ResourceLocation.fromNamespaceAndPath(FramedConquest.MODID,
+                        "block/" + getFramedWallModelPath(block, "_n")));
+        ModelFile modelNE = this.models().getExistingFile(
+                ResourceLocation.fromNamespaceAndPath(FramedConquest.MODID,
+                        "block/" + getFramedWallModelPath(block, "_ne")));
+        ModelFile modelNS = this.models().getExistingFile(
+                ResourceLocation.fromNamespaceAndPath(FramedConquest.MODID,
+                        "block/" + getFramedWallModelPath(block, "_ns")));
+        ModelFile modelNSE = this.models().getExistingFile(
+                ResourceLocation.fromNamespaceAndPath(FramedConquest.MODID,
+                        "block/" + getFramedWallModelPath(block, "_nse")));
+        ModelFile modelNSEW = this.models().getExistingFile(
+                ResourceLocation.fromNamespaceAndPath(FramedConquest.MODID,
+                        "block/" + getFramedWallModelPath(block, "_nsew")));
+
+        // Iterate main block properties
+        this.getVariantBuilder(block).forAllStatesExcept((state) -> {
+            // Get block state properties
+            boolean north = state.getValue(BlockStateProperties.NORTH_WALL) != WallSide.NONE;
+            boolean west = state.getValue(BlockStateProperties.WEST_WALL) != WallSide.NONE;
+            boolean south = state.getValue(BlockStateProperties.SOUTH_WALL) != WallSide.NONE;
+            boolean east = state.getValue(BlockStateProperties.EAST_WALL) != WallSide.NONE;
+
+            // Count connected sides to determine shape
+            int connections = (north ? 1 : 0) + (east ? 1 : 0) + (south ? 1 : 0) + (west ? 1 : 0);
+
+            // Choose model and rotation from connections
+            ModelFile model;
+            int rotY;
+            switch (connections) {
+                case 0 -> {
+                    // No connections: post
+                    model = modelPost;
+                    rotY = 0;
+                }
+                case 1 -> {
+                    // Single connection: rotate the "north" model to face the connected side
+                    model = modelN;
+                    rotY = north ? 0 : east ? 90 : south ? 180 : 270;
+                }
+                case 2 -> {
+                    if (north && south) {
+                        // Opposite sides (N/S)
+                        model = modelNS;
+                        rotY = 0;
+                    } else if (east && west) {
+                        // Opposite sides (E/W)
+                        model = modelNS;
+                        rotY = 90;
+                    } else {
+                        // Adjacent corner, rotate the "north+east" model to match
+                        model = modelNE;
+                        rotY = (north && east) ? 0 : east ? 90 : south ? 180 : 270;
+                    }
+                }
+                case 3 -> {
+                    // Three connections, rotate the "north + south + east" model based on the missing side
+                    model = modelNSE;
+                    rotY = !west ? 0 : !north ? 90 : !east ? 180 : 270;
+                }
+                default -> {
+                    // All four sides are connected
+                    model = modelNSEW;
+                    rotY = 0;
+                }
+            }
+
+            // Init builder
+            ConfiguredModel.Builder<?> builder = ConfiguredModel.builder()
+                    .modelFile(model)
+                    .uvLock(true);
+
+            // Ignore 0 rotation
+            if (rotY != 0) {
+                builder.rotationY(rotY);
+            }
+
+            // Build
+            return builder.build();
+        }, IGNORED_PROPERTIES);
     }
 
     /**
@@ -641,6 +735,20 @@ public class ModBlockStateProvider extends BlockStateProvider {
     protected static String getDoubleBlockModelPath(Block block, String variant) {
         // Replace last underscore with slash
         return getBlockModelPath(block).replaceFirst("_(?!.*_)", variant + "/");
+    }
+
+    /**
+     * @return wall model path
+     */
+    protected static String getFramedWallModelPath(FramedWall block, String variant) {
+        if (block instanceof FramedWall.Bottom
+                || block instanceof FramedWall.Top
+                || block instanceof FramedWall.Double) {
+            return getDoubleBlockModelPath(block, variant);
+        }
+        else {
+            return getBlockModelPath(block) + variant;
+        }
     }
 
     /**

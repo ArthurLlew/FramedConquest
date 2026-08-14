@@ -1,8 +1,6 @@
 {
-	"format_version": "1.21.11",
-	"credit": "Designed by RomanCapitalist with Cubik Studio - https://cubik.studio",
+	"__comment": "Designed by RomanCapitalist with Cubik Studio - https://cubik.studio",
 	"parent": "block/block",
-	"render_type": "minecraft:cutout",
 	"textures": {
 		"all": "framedblocks:block/framed_block",
 		"particle": "#all"
@@ -20,16 +18,25 @@
 				12
 			],
 			"faces": {
-				"north": {
+				"down": {
 					"uv": [
 						4,
-						0,
+						4,
 						12,
-						16
+						12
 					],
 					"texture": "#all"
 				},
-				"east": {
+				"up": {
+					"uv": [
+						4,
+						4,
+						12,
+						12
+					],
+					"texture": "#all"
+				},
+				"north": {
 					"uv": [
 						4,
 						0,
@@ -56,25 +63,14 @@
 					],
 					"texture": "#all"
 				},
-				"up": {
+				"east": {
 					"uv": [
 						4,
-						4,
+						0,
 						12,
-						12
+						16
 					],
-					"texture": "#all",
-					"cullface": "up"
-				},
-				"down": {
-					"uv": [
-						4,
-						4,
-						12,
-						12
-					],
-					"texture": "#all",
-					"cullface": "down"
+					"texture": "#all"
 				}
 			}
 		}

@@ -1,0 +1,14 @@
+{
+  "values": [
+    "framedcr:framed_capital_doric_down_wall_bottom",
+    "framedcr:framed_capital_doric_down_wall_top",
+    "framedcr:framed_capital_doric_down_wall_double",
+    "framedcr:framed_capital_doric_up_wall_bottom",
+    "framedcr:framed_capital_doric_up_wall_top",
+    "framedcr:framed_capital_doric_up_wall_double",
+    "framedcr:framed_capital_ionian_wall",
+    "framedcr:framed_capital_corinthian_wall",
+    "framedcr:framed_cornice_wall",
+    "framedcr:framed_plinth_wall"
+  ]
+}

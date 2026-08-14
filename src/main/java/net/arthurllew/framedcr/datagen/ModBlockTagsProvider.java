@@ -1,6 +1,7 @@
 package net.arthurllew.framedcr.datagen;
 
 import net.arthurllew.framedcr.FramedConquest;
+import net.arthurllew.framedcr.block.FramedWall;
 import net.arthurllew.framedcr.registry.FramedConquestBlocks;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.HolderLookup;
@@ -26,9 +27,16 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider provider) {
         // Make all blocks mineable with axe
-        IntrinsicTagAppender<Block> tag = this.tag(BlockTags.MINEABLE_WITH_AXE);
+        IntrinsicTagAppender<Block> mineableWithAxe = this.tag(BlockTags.MINEABLE_WITH_AXE);
+        for (DeferredHolder<Block, ? extends Block> holder : FramedConquestBlocks.BLOCKS.getEntries()) {
+            mineableWithAxe.add(holder.get());
+        }
+        // Add walls to corresponding block tag
+        IntrinsicTagAppender<Block> walls = this.tag(BlockTags.WALLS);
         for (DeferredHolder<Block, ? extends Block> block : FramedConquestBlocks.BLOCKS.getEntries()) {
-            tag.add(block.get());
+            if (block.get() instanceof FramedWall wall) {
+                walls.add(wall);
+            }
         }
     }
 }
