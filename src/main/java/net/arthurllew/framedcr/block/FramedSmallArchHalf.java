@@ -124,17 +124,17 @@ public class FramedSmallArchHalf extends CustomFramedBlock {
      */
     public static class Double extends FramedSmallArchHalf implements ICustomFramedDoubleBlock {
         // Block pair
-        private final Block blockLeft, blockRight;
+        private final Block blockFirst, blockSecond;
 
         /**
          * Constructor.
          */
-        public Double(Block blockLeft, Block blockRight) {
+        public Double(Block blockFirst, Block blockSecond) {
             super(new CustomBlockType.Builder(FramedSmallArchHalf::getShapeForState)
                     .doubleBlock(true)
                     .build());
-            this.blockLeft = blockLeft;
-            this.blockRight = blockRight;
+            this.blockFirst = blockFirst;
+            this.blockSecond = blockSecond;
         }
 
         /**
@@ -151,8 +151,8 @@ public class FramedSmallArchHalf extends CustomFramedBlock {
         @Override
         public Tuple<BlockState, BlockState> calculateBlockPair(BlockState blockState) {
             // Copy block state properties
-            BlockState blockStateLeft = this.blockLeft.defaultBlockState();
-            BlockState blockStateRight = this.blockRight.defaultBlockState();
+            BlockState blockStateLeft = this.blockFirst.defaultBlockState();
+            BlockState blockStateRight = this.blockSecond.defaultBlockState();
             for (Property<?> property : blockState.getProperties()) {
                 blockStateLeft = applyProperty(blockStateLeft, blockState, property);
                 blockStateRight = applyProperty(blockStateRight, blockState, property);

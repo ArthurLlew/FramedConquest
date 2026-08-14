@@ -2,11 +2,12 @@ package net.arthurllew.framedcr.block;
 
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.Nullable;
 import xfacthd.framedblocks.common.block.IFramedDoubleBlock;
 import xfacthd.framedblocks.common.data.doubleblock.CamoGetter;
 import xfacthd.framedblocks.common.data.doubleblock.DoubleBlockTopInteractionMode;
 import xfacthd.framedblocks.common.data.doubleblock.SolidityCheck;
+
+import javax.annotation.Nullable;
 
 public interface ICustomFramedDoubleBlock extends IFramedDoubleBlock {
     /**
@@ -26,10 +27,10 @@ public interface ICustomFramedDoubleBlock extends IFramedDoubleBlock {
     }
 
     /**
-     * @return ?.
+     * @return camo getter from either first or second block for texture connections.
      */
     @Override
-    default CamoGetter calculateCamoGetter(BlockState blockState, Direction direction, @Nullable Direction direction1) {
+    default CamoGetter calculateCamoGetter(BlockState blockState, Direction dir1, @Nullable Direction dir2) {
         return CamoGetter.NONE;
     }
 }

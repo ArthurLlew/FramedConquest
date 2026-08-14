@@ -2,6 +2,7 @@ package net.arthurllew.framedcr.block;
 
 import com.google.common.collect.ImmutableMap;
 import net.arthurllew.framedcr.block.entity.FramedConquestDoubleBlockEntity;
+import net.arthurllew.framedcr.block.predicates.VerticalTextureConnectionPredicate;
 import net.arthurllew.framedcr.block.type.CustomBlockType;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
@@ -23,7 +24,9 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import xfacthd.framedblocks.common.data.doubleblock.CamoGetter;
 
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Map;
 
@@ -358,19 +361,25 @@ public class FramedWall extends CustomFramedBlock {
      */
     public static class Double extends FramedWall implements ICustomFramedDoubleBlock {
         // Block pair
-        private final Block blockLeft, blockRight;
+        private final Block blockFirst, blockSecond;
+        /**
+         * Which block camo should be used to connect textures.
+         */
+        private final CamoGetter camoGetter;
 
         /**
          * Constructor.
          */
-        public Double(Block blockLeft, Block blockRight) {
+        public Double(Block blockFirst, Block blockSecond, CamoGetter camoGetter) {
             super(new CustomBlockType.Builder(FramedWall::getShapeForState)
                     .doubleBlock(true)
+                    .textureConnectionPredicate(VerticalTextureConnectionPredicate.INSTANCE)
                     .modelVariantForItem("_ns")
                     .craftingCount(6)
                     .build());
-            this.blockLeft = blockLeft;
-            this.blockRight = blockRight;
+            this.blockFirst = blockFirst;
+            this.blockSecond = blockSecond;
+            this.camoGetter = camoGetter;
         }
 
         /**
@@ -387,14 +396,22 @@ public class FramedWall extends CustomFramedBlock {
         @Override
         public Tuple<BlockState, BlockState> calculateBlockPair(BlockState blockState) {
             // Copy block state properties
-            BlockState blockStateLeft = this.blockLeft.defaultBlockState();
-            BlockState blockStateRight = this.blockRight.defaultBlockState();
+            BlockState blockStateLeft = this.blockFirst.defaultBlockState();
+            BlockState blockStateRight = this.blockSecond.defaultBlockState();
             for (Property<?> property : blockState.getProperties()) {
                 blockStateLeft = applyProperty(blockStateLeft, blockState, property);
                 blockStateRight = applyProperty(blockStateRight, blockState, property);
             }
             // Return states pair
             return new Tuple<>(blockStateLeft, blockStateRight);
+        }
+
+        /**
+         * @return camo getter from either first or second block for texture connections.
+         */
+        @Override
+        public CamoGetter calculateCamoGetter(BlockState blockState, Direction dir1, @Nullable Direction dir2) {
+            return this.camoGetter;
         }
     }
 
@@ -410,6 +427,7 @@ public class FramedWall extends CustomFramedBlock {
         public Bottom() {
             super(new CustomBlockType.Builder(Bottom::getShapeForState)
                     .blockItem(false)
+                    .textureConnectionPredicate(VerticalTextureConnectionPredicate.INSTANCE)
                     .modelVariantForItem("_ns")
                     .craftingCount(6)
                     .build());
@@ -435,6 +453,7 @@ public class FramedWall extends CustomFramedBlock {
         public Top() {
             super(new CustomBlockType.Builder(Top::getShapeForState)
                     .blockItem(false)
+                    .textureConnectionPredicate(VerticalTextureConnectionPredicate.INSTANCE)
                     .modelVariantForItem("_ns")
                     .craftingCount(6)
                     .build());

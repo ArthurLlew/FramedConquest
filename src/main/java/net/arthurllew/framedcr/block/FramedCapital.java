@@ -1,6 +1,7 @@
 package net.arthurllew.framedcr.block;
 
 import net.arthurllew.framedcr.block.entity.FramedConquestDoubleBlockEntity;
+import net.arthurllew.framedcr.block.predicates.VerticalTextureConnectionPredicate;
 import net.arthurllew.framedcr.block.type.CustomBlockType;
 import net.arthurllew.framedcr.block.util.CustomPlacementStateBuilder;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -16,6 +17,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import xfacthd.framedblocks.api.predicate.fullface.FullFacePredicate;
+import xfacthd.framedblocks.common.data.doubleblock.CamoGetter;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -209,19 +211,25 @@ public class FramedCapital extends CustomFramedBlock {
      */
     public static class Doric extends FramedCapital implements ICustomFramedDoubleBlock {
         // Block pair
-        private final Block blockLeft, blockRight;
+        private final Block blockFirst, blockSecond;
+        /**
+         * Which block camo should be used to connect textures.
+         */
+        private final CamoGetter camoGetter;
 
         /**
          * Constructor.
          */
-        public Doric(Block blockLeft, Block blockRight) {
+        public Doric(Block blockFirst, Block blockSecond, CamoGetter camoGetter) {
             super(new CustomBlockType.Builder(FramedCapital::getShapeForState)
                     .waterloggable(false)
                     .fullFacePredicate(FullFacePredicate.TRUE)
+                    .textureConnectionPredicate(VerticalTextureConnectionPredicate.INSTANCE)
                     .doubleBlock(true)
                     .build());
-            this.blockLeft = blockLeft;
-            this.blockRight = blockRight;
+            this.blockFirst = blockFirst;
+            this.blockSecond = blockSecond;
+            this.camoGetter = camoGetter;
         }
 
         /**
@@ -238,14 +246,22 @@ public class FramedCapital extends CustomFramedBlock {
         @Override
         public Tuple<BlockState, BlockState> calculateBlockPair(BlockState blockState) {
             // Copy block state properties
-            BlockState blockStateLeft = this.blockLeft.defaultBlockState();
-            BlockState blockStateRight = this.blockRight.defaultBlockState();
+            BlockState blockStateLeft = this.blockFirst.defaultBlockState();
+            BlockState blockStateRight = this.blockSecond.defaultBlockState();
             for (Property<?> property : blockState.getProperties()) {
                 blockStateLeft = applyProperty(blockStateLeft, blockState, property);
                 blockStateRight = applyProperty(blockStateRight, blockState, property);
             }
             // Return states pair
             return new Tuple<>(blockStateLeft, blockStateRight);
+        }
+
+        /**
+         * @return camo getter from either first or second block for texture connections.
+         */
+        @Override
+        public CamoGetter calculateCamoGetter(BlockState blockState, Direction dir1, @Nullable Direction dir2) {
+            return this.camoGetter;
         }
     }
 
@@ -260,6 +276,7 @@ public class FramedCapital extends CustomFramedBlock {
             super(new CustomBlockType.Builder(DoricBottom::getShapeForState)
                     .waterloggable(false)
                     .fullFacePredicate(FullFacePredicate.TRUE)
+                    .textureConnectionPredicate(VerticalTextureConnectionPredicate.INSTANCE)
                     .blockItem(false)
                     .build());
         }
@@ -283,6 +300,7 @@ public class FramedCapital extends CustomFramedBlock {
             super(new CustomBlockType.Builder(DoricTop::getShapeForState)
                     .waterloggable(false)
                     .fullFacePredicate(FullFacePredicate.TRUE)
+                    .textureConnectionPredicate(VerticalTextureConnectionPredicate.INSTANCE)
                     .blockItem(false)
                     .build());
         }

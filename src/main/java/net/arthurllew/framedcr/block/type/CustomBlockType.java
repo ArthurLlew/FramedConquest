@@ -71,7 +71,7 @@ public class CustomBlockType implements IBlockType {
      */
     private final FullFacePredicate fullFacePredicate;
     private final SideSkipPredicate sideSkipPredicate;
-    private final ConnectionPredicate connectionPredicates;
+    private final ConnectionPredicate connectionPredicate;
     /**
      * Block model suffix (see {@link ModItemModelProvider}).
      */
@@ -93,7 +93,7 @@ public class CustomBlockType implements IBlockType {
                     ConTexMode minCTMode,
                     FullFacePredicate fullFacePredicate,
                     SideSkipPredicate sideSkipPredicate,
-                    ConnectionPredicate connectionPredicates,
+                    ConnectionPredicate connectionPredicate,
                     ShapeGenerator shapeGen,
                     String modelVariantForItem,
                     int craftingCount,
@@ -114,7 +114,7 @@ public class CustomBlockType implements IBlockType {
 
         this.fullFacePredicate = fullFacePredicate;
         this.sideSkipPredicate = sideSkipPredicate;
-        this.connectionPredicates = connectionPredicates;
+        this.connectionPredicate = connectionPredicate;
 
         this.modelVariantForItem = modelVariantForItem;
         this.craftingCount = craftingCount;
@@ -155,7 +155,7 @@ public class CustomBlockType implements IBlockType {
 
     @Override
     public ConnectionPredicate getConnectionPredicate() {
-        return connectionPredicates;
+        return connectionPredicate;
     }
 
     @Override
@@ -249,7 +249,7 @@ public class CustomBlockType implements IBlockType {
         private ConTexMode minCTMode = ConTexMode.FULL_EDGE;
         private FullFacePredicate fullFacePredicate = FullFacePredicate.FALSE;
         private SideSkipPredicate sideSkipPredicate = SideSkipPredicate.FALSE;
-        private ConnectionPredicate connectionPredicates = ConnectionPredicate.FULL_FACE;
+        private ConnectionPredicate connectionPredicate = ConnectionPredicate.FULL_FACE;
         private final ShapeGenerator shapeGen;
         private String modelVariantForItem = "";
         private int craftingCount = 1;
@@ -287,6 +287,12 @@ public class CustomBlockType implements IBlockType {
             return this;
         }
 
+        public Builder textureConnectionPredicate(ConnectionPredicate connectionPredicate) {
+            this.connectionPredicate = connectionPredicate;
+
+            return this;
+        }
+
         public Builder modelVariantForItem(String modelVariantForItem) {
             this.modelVariantForItem = modelVariantForItem;
 
@@ -308,7 +314,7 @@ public class CustomBlockType implements IBlockType {
         public CustomBlockType build() {
             return new CustomBlockType(this.canOcclude, this.specialHitbox, this.specialTile, this.waterloggable,
                     this.blockItem, this.allowIntangible, this.doubleBlock, this.lockable,
-                    this.minCTMode, this.fullFacePredicate, this.sideSkipPredicate, this.connectionPredicates,
+                    this.minCTMode, this.fullFacePredicate, this.sideSkipPredicate, this.connectionPredicate,
                     this.shapeGen, this.modelVariantForItem, this.craftingCount, this.isLayered);
         }
     }
