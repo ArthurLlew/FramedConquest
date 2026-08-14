@@ -14,7 +14,6 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 import xfacthd.framedblocks.api.block.PlacementStateBuilder;
-import xfacthd.framedblocks.common.block.pillar.FramedPillarBlock;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -47,14 +46,18 @@ public class FramedBalustrade extends CustomFramedBlock {
                 .setValue(BlockStateProperties.AXIS, Direction.Axis.Y));
     }
 
-    /// See [FramedPillarBlock].
+    /**
+     * Appends block state attributes.
+     */
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
         builder.add(BlockStateProperties.AXIS);
     }
 
-    /// See [FramedPillarBlock].
+    /**
+     * @return block state that should be placed in the world depending on provided context.
+     */
     @Override
     public @Nullable BlockState getStateForPlacement(BlockPlaceContext ctx) {
         return PlacementStateBuilder.of(this, ctx)
@@ -69,18 +72,6 @@ public class FramedBalustrade extends CustomFramedBlock {
     @Override
     protected BlockState rotate(BlockState state, Rotation rotation) {
         return BlockUtils.rotateAxis(state, rotation, BlockStateProperties.AXIS);
-    }
-
-    /// See [FramedPillarBlock].
-    @Override
-    public BlockState getItemModelSource() {
-        return this.defaultBlockState().setValue(BlockStateProperties.AXIS, Direction.Axis.Y);
-    }
-
-    /// See [FramedPillarBlock].
-    @Override
-    public BlockState getJadeRenderState(BlockState state) {
-        return this.defaultBlockState().setValue(BlockStateProperties.AXIS, Direction.Axis.Y);
     }
 
     /**
