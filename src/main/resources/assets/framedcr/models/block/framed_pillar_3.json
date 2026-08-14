@@ -1,25 +1,26 @@
 {
-  "credit": "Made with Blockbench",
-  "parent": "block/block",
-  "render_type": "minecraft:cutout",
-  "textures": {
-    "all": "framedblocks:block/framed_block",
-    "particle": "#all"
-  },
-  "elements": [
-    {
-      "name": "Center post",
-      "from": [2, 0, 2],
-      "to": [14, 16, 14],
-      "rotation": {"angle": 0, "axis": "y", "origin": [6, 8, 6]},
-      "faces": {
-        "north": {"uv": [2, 0, 14, 16], "texture": "#all"},
-        "east": {"uv": [2, 0, 14, 16], "texture": "#all"},
-        "south": {"uv": [2, 0, 14, 16], "texture": "#all"},
-        "west": {"uv": [2, 0, 14, 16], "texture": "#all"},
-        "up": {"uv": [2, 2, 14, 14], "texture": "#all", "cullface": "up"},
-        "down": {"uv": [2, 2, 14, 14], "texture": "#all", "cullface": "down"}
-      }
-    }
-  ]
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"render_type": "minecraft:cutout",
+	"textures": {
+		"particle": "framedblocks:block/framed_block",
+		"all": "framedblocks:block/framed_block"
+	},
+	"elements": [
+		{
+			"name": "Center post",
+			"from": [2, 0, 2],
+			"to": [14, 16, 14],
+			"rotation": {"angle": 0, "axis": "y", "origin": [6, 8, 6]},
+			"faces": {
+				"north": {"uv": [2, 0, 14, 16], "texture": "#all"},
+				"east": {"uv": [2, 0, 14, 16], "texture": "#all"},
+				"south": {"uv": [2, 0, 14, 16], "texture": "#all"},
+				"west": {"uv": [2, 0, 14, 16], "texture": "#all"},
+				"up": {"uv": [2, 2, 14, 14], "texture": "#all", "cullface": "up"},
+				"down": {"uv": [2, 2, 14, 14], "texture": "#all", "cullface": "down"}
+			}
+		}
+	]
 }

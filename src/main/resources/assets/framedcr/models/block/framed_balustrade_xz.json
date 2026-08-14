@@ -1,66 +1,67 @@
 {
-  "credit": "Made with Blockbench",
-  "parent": "block/block",
-  "render_type": "minecraft:cutout",
-  "textures": {
-    "particle": "framedblocks:block/framed_block",
-    "all": "framedblocks:block/framed_block"
-  },
-  "elements": [
-    {
-      "name": "Anvil base",
-      "from": [2, 0, 2],
-      "to": [14, 4, 14],
-      "faces": {
-        "north": {"uv": [2, 12, 14, 16], "texture": "#all"},
-        "east": {"uv": [2, 12, 14, 16], "texture": "#all"},
-        "south": {"uv": [2, 12, 14, 16], "texture": "#all"},
-        "west": {"uv": [2, 12, 14, 16], "texture": "#all"},
-        "up": {"uv": [2, 2, 14, 14], "texture": "#all"},
-        "down": {"uv": [2, 2, 14, 14], "texture": "#all", "cullface": "down"}
-      }
-    },
-    {
-      "name": "Lower narrow portion",
-      "from": [4, 4, 3],
-      "to": [12, 5, 13],
-      "faces": {
-        "north": {"uv": [4, 11, 12, 12], "texture": "#all"},
-        "east": {"uv": [3, 11, 13, 12], "texture": "#all"},
-        "south": {"uv": [4, 11, 12, 12], "texture": "#all"},
-        "west": {"uv": [3, 11, 13, 12], "texture": "#all"},
-        "up": {"uv": [4, 3, 12, 13], "texture": "#all"}
-      }
-    },
-    {
-      "name": "Wider section beneath top portion",
-      "from": [6, 5, 4],
-      "to": [10, 10, 12],
-      "faces": {
-        "north": {"uv": [6, 6, 10, 11], "texture": "#all"},
-        "east": {"uv": [4, 6, 12, 11], "texture": "#all"},
-        "south": {"uv": [6, 6, 10, 11], "texture": "#all"},
-        "west": {"uv": [4, 6, 12, 11], "texture": "#all"}
-      }
-    },
-    {
-      "name": "Anvil top",
-      "from": [3, 10, 0],
-      "to": [13, 16, 16],
-      "faces": {
-        "north": {"uv": [3, 0, 13, 6], "texture": "#all", "cullface": "north"},
-        "east": {"uv": [0, 0, 16, 6], "texture": "#all"},
-        "south": {"uv": [3, 0, 13, 6], "texture": "#all", "cullface": "south"},
-        "west": {"uv": [0, 0, 16, 6], "texture": "#all"},
-        "up": {"uv": [3, 0, 13, 16], "texture": "#all", "cullface": "up"},
-        "down": {"uv": [3, 0, 13, 16], "texture": "#all"}
-      }
-    }
-  ],
-  "display": {
-    "fixed": {
-      "rotation": [0, 90, 0],
-      "scale": [0.5, 0.5, 0.5]
-    }
-  }
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"render_type": "minecraft:cutout",
+	"textures": {
+		"particle": "framedblocks:block/framed_block",
+		"all": "framedblocks:block/framed_block"
+	},
+	"elements": [
+		{
+			"name": "Anvil base",
+			"from": [2, 0, 2],
+			"to": [14, 4, 14],
+			"faces": {
+				"north": {"uv": [2, 12, 14, 16], "texture": "#all"},
+				"east": {"uv": [2, 12, 14, 16], "texture": "#all"},
+				"south": {"uv": [2, 12, 14, 16], "texture": "#all"},
+				"west": {"uv": [2, 12, 14, 16], "texture": "#all"},
+				"up": {"uv": [2, 2, 14, 14], "texture": "#all"},
+				"down": {"uv": [2, 2, 14, 14], "texture": "#all", "cullface": "down"}
+			}
+		},
+		{
+			"name": "Lower narrow portion",
+			"from": [4, 4, 3],
+			"to": [12, 5, 13],
+			"faces": {
+				"north": {"uv": [4, 11, 12, 12], "texture": "#all"},
+				"east": {"uv": [3, 11, 13, 12], "texture": "#all"},
+				"south": {"uv": [4, 11, 12, 12], "texture": "#all"},
+				"west": {"uv": [3, 11, 13, 12], "texture": "#all"},
+				"up": {"uv": [4, 3, 12, 13], "texture": "#all"}
+			}
+		},
+		{
+			"name": "Wider section beneath top portion",
+			"from": [6, 5, 4],
+			"to": [10, 10, 12],
+			"faces": {
+				"north": {"uv": [6, 6, 10, 11], "texture": "#all"},
+				"east": {"uv": [4, 6, 12, 11], "texture": "#all"},
+				"south": {"uv": [6, 6, 10, 11], "texture": "#all"},
+				"west": {"uv": [4, 6, 12, 11], "texture": "#all"}
+			}
+		},
+		{
+			"name": "Anvil top",
+			"from": [3, 10, 0],
+			"to": [13, 16, 16],
+			"faces": {
+				"north": {"uv": [3, 0, 13, 6], "texture": "#all", "cullface": "north"},
+				"east": {"uv": [0, 0, 16, 6], "texture": "#all"},
+				"south": {"uv": [3, 0, 13, 6], "texture": "#all", "cullface": "south"},
+				"west": {"uv": [0, 0, 16, 6], "texture": "#all"},
+				"up": {"uv": [3, 0, 13, 16], "texture": "#all", "cullface": "up"},
+				"down": {"uv": [3, 0, 13, 16], "texture": "#all"}
+			}
+		}
+	],
+	"display": {
+		"fixed": {
+			"rotation": [0, 90, 0],
+			"scale": [0.5, 0.5, 0.5]
+		}
+	}
 }

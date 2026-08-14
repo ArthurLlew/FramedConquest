@@ -3,8 +3,8 @@
 	"credit": "Made with Blockbench",
 	"parent": "block/block",
 	"textures": {
-		"all": "framedblocks:block/framed_block",
-		"particle": "#all"
+		"particle": "framedblocks:block/framed_block",
+		"all": "framedblocks:block/framed_block"
 	},
 	"elements": [
 		{

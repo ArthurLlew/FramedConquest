@@ -4,8 +4,8 @@
 	"parent": "block/block",
 	"render_type": "minecraft:cutout",
 	"textures": {
-		"all": "framedblocks:block/framed_block",
-		"particle": "#all"
+		"particle": "framedblocks:block/framed_block",
+		"all": "framedblocks:block/framed_block"
 	},
 	"elements": [
 		{
