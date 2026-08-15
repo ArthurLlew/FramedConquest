@@ -4,7 +4,7 @@
       "model": "framedcr:block/framed_two_meter_arch/double",
       "uvlock": true,
       "x": 180,
-      "y": 90
+      "y": 270
     },
     "facing=east,half=top": {
       "model": "framedcr:block/framed_two_meter_arch/double",
@@ -14,7 +14,8 @@
     "facing=north,half=bottom": {
       "model": "framedcr:block/framed_two_meter_arch/double",
       "uvlock": true,
-      "x": 180
+      "x": 180,
+      "y": 180
     },
     "facing=north,half=top": {
       "model": "framedcr:block/framed_two_meter_arch/double",
@@ -23,8 +24,7 @@
     "facing=south,half=bottom": {
       "model": "framedcr:block/framed_two_meter_arch/double",
       "uvlock": true,
-      "x": 180,
-      "y": 180
+      "x": 180
     },
     "facing=south,half=top": {
       "model": "framedcr:block/framed_two_meter_arch/double",
@@ -35,7 +35,7 @@
       "model": "framedcr:block/framed_two_meter_arch/double",
       "uvlock": true,
       "x": 180,
-      "y": 270
+      "y": 90
     },
     "facing=west,half=top": {
       "model": "framedcr:block/framed_two_meter_arch/double",

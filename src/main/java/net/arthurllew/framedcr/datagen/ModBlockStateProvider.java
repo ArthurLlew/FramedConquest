@@ -441,12 +441,23 @@ public class ModBlockStateProvider extends BlockStateProvider {
             Half half = state.getValue(BlockStateProperties.HALF);
 
             // Choose Y rotation
-            int rotY = switch (dir) {
-                case NORTH -> 0;
-                case SOUTH -> 180;
-                case WEST -> 270;
-                default -> 90;
-            };
+            int rotY;
+            if (half == Half.BOTTOM) {
+                rotY = switch (dir) {
+                    case NORTH -> 180;
+                    case WEST -> 90;
+                    case SOUTH -> 0;
+                    default -> 270;
+                };
+            }
+            else {
+                rotY = switch (dir) {
+                    case NORTH -> 0;
+                    case SOUTH -> 180;
+                    case WEST -> 270;
+                    default -> 90;
+                };
+            }
 
             // Init builder
             ConfiguredModel.Builder<?> builder = ConfiguredModel.builder()
