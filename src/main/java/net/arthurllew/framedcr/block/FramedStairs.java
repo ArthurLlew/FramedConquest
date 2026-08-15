@@ -8,6 +8,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -123,6 +125,22 @@ public class FramedStairs extends CustomFramedBlock {
                 .withStairsShape()
                 .withWater()
                 .build();
+    }
+
+    /**
+     * @return rotated block state.
+     */
+    @Override
+    protected BlockState rotate(BlockState state, Rotation rotation) {
+        return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
+    }
+
+    /**
+     * @return mirrored block state.
+     */
+    @Override
+    protected BlockState mirror(BlockState state, Mirror mirror) {
+        return state.setValue(FACING, mirror.mirror(state.getValue(FACING)));
     }
 
     /**

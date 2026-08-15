@@ -22,6 +22,8 @@ public class FramedConquestBlocks {
 
     public static final DeferredBlock<FramedPillar> FRAMED_PILLAR = registerLayeredBlock(
             "framed_pillar", () -> new FramedPillar("_1"));
+    public static final DeferredBlock<FramedPillarSocket> FRAMED_PILLAR_SOCKET = registerLayeredBlock(
+            "framed_pillar_socket", FramedPillarSocket::new);
     public static final DeferredBlock<FramedBalustrade> FRAMED_BALUSTRADE = registerBlock(
             "framed_balustrade", FramedBalustrade::new);
     public static final DeferredBlock<FramedArrowslit> FRAMED_ARROWSLIT = registerBlock(

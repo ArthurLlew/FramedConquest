@@ -9,6 +9,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -35,9 +37,13 @@ public class FramedTwoMeterArch extends CustomFramedBlock {
     private static final VoxelShape TOP_OCTET_SW = Block.box(0.0F, 8.0F, 8.0F, 8.0F, 16.0F, 16.0F);
     private static final VoxelShape TOP_OCTET_SE = Block.box(8.0F, 8.0F, 8.0F, 16.0F, 16.0F, 16.0F);
 
-    /// See [StairBlock].
+    /**
+     * Horizontal direction property.
+     */
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
-    /// See [StairBlock].
+    /**
+     * Top/bottom half property.
+     */
     public static final EnumProperty<Half> HALF = BlockStateProperties.HALF;
 
     /**
@@ -74,6 +80,22 @@ public class FramedTwoMeterArch extends CustomFramedBlock {
                 .withTopBottom()
                 .withWater()
                 .build();
+    }
+
+    /**
+     * @return rotated block state.
+     */
+    @Override
+    protected BlockState rotate(BlockState state, Rotation rotation) {
+        return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
+    }
+
+    /**
+     * @return mirrored block state.
+     */
+    @Override
+    protected BlockState mirror(BlockState state, Mirror mirror) {
+        return state.setValue(FACING, mirror.mirror(state.getValue(FACING)));
     }
 
     /**

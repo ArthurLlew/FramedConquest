@@ -1,6 +1,7 @@
 {
   "values": [
     "framedcr:framed_pillar",
+    "framedcr:framed_pillar_socket",
     "framedcr:framed_balustrade",
     "framedcr:framed_arrowslit",
     "framedcr:framed_sphere",
