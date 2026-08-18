@@ -64,6 +64,7 @@ public class FramedCapitalCornerVertical extends CustomFramedBlock {
      */
     public FramedCapitalCornerVertical() {
         this(new CustomBlockType.Builder(FramedCapitalCornerVertical::getShapeForState)
+                .textureConnectionPredicate(VerticalTextureConnectionPredicate.INSTANCE)
                 .modelVariantForItem("_2")
                 .craftingCount(MAX_LAYERS)
                 .isLayered(true)
