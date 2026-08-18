@@ -19,7 +19,10 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.*;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -268,19 +271,11 @@ public class FramedCapitalSlabVerticalConnecting extends CustomFramedBlock {
         }
 
         /**
-         * @return two blocks used to shape double block.
+         * {@inheritDoc}
          */
         @Override
-        public Tuple<BlockState, BlockState> calculateBlockPair(BlockState blockState) {
-            // Copy block state properties
-            BlockState blockStateLeft = this.blockFirst.defaultBlockState();
-            BlockState blockStateRight = this.blockSecond.defaultBlockState();
-            for (Property<?> property : blockState.getProperties()) {
-                blockStateLeft = applyProperty(blockStateLeft, blockState, property);
-                blockStateRight = applyProperty(blockStateRight, blockState, property);
-            }
-            // Return states pair
-            return new Tuple<>(blockStateLeft, blockStateRight);
+        public Tuple<Block, Block> calculateBlockPair() {
+            return new Tuple<>(this.blockFirst, this.blockSecond);
         }
 
         /**

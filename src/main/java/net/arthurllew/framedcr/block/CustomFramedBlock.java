@@ -9,7 +9,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.Property;
 import xfacthd.framedblocks.api.block.AbstractFramedBlock;
 import xfacthd.framedblocks.api.block.FramedProperties;
 import xfacthd.framedblocks.api.block.IFramedBlock;
@@ -78,14 +77,5 @@ public abstract class CustomFramedBlock extends AbstractFramedBlock {
      */
     public float getLootCount(BlockState state) {
         return 1;
-    }
-
-    /**
-     * Helper method for transferring block state property.
-     */
-    protected static <T extends Comparable<T>> BlockState applyProperty(BlockState target,
-                                                                BlockState source,
-                                                                Property<T> property) {
-        return target.setValue(property, source.getValue(property));
     }
 }

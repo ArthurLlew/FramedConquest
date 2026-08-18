@@ -392,19 +392,11 @@ public class FramedWall extends CustomFramedBlock {
         }
 
         /**
-         * @return two blocks used to shape double block.
+         * {@inheritDoc}
          */
         @Override
-        public Tuple<BlockState, BlockState> calculateBlockPair(BlockState blockState) {
-            // Copy block state properties
-            BlockState blockStateLeft = this.blockFirst.defaultBlockState();
-            BlockState blockStateRight = this.blockSecond.defaultBlockState();
-            for (Property<?> property : blockState.getProperties()) {
-                blockStateLeft = applyProperty(blockStateLeft, blockState, property);
-                blockStateRight = applyProperty(blockStateRight, blockState, property);
-            }
-            // Return states pair
-            return new Tuple<>(blockStateLeft, blockStateRight);
+        public Tuple<Block, Block> calculateBlockPair() {
+            return new Tuple<>(this.blockFirst, this.blockSecond);
         }
 
         /**
