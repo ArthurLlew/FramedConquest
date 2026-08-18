@@ -43,6 +43,7 @@ public class FramedCapital extends CustomFramedBlock {
     public FramedCapital() {
         this(new CustomBlockType.Builder(FramedCapital::getShapeForState)
                 .waterloggable(false)
+                .textureConnectionPredicate(VerticalTextureConnectionPredicate.INSTANCE)
                 .build());
     }
 
@@ -89,6 +90,7 @@ public class FramedCapital extends CustomFramedBlock {
         public Connected() {
             this(new CustomBlockType.Builder(FramedCapital::getShapeForState)
                     .waterloggable(false)
+                    .textureConnectionPredicate(VerticalTextureConnectionPredicate.INSTANCE)
                     .build());
         }
 
