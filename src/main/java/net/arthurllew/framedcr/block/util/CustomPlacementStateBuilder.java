@@ -1,5 +1,6 @@
 package net.arthurllew.framedcr.block.util;
 
+import com.mojang.datafixers.util.Function3;
 import net.arthurllew.framedcr.block.FramedStairs;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -159,7 +160,30 @@ public class CustomPlacementStateBuilder<T extends CustomPlacementStateBuilder<T
     /**
      * Calculates capital horizontal connections.
      */
-    public final T withCapitalHorizontalConnection(BiFunction<BlockState, BlockState, Boolean> canConnectTo) {
+    public final T withCapitalHorizontalConnection(Function3<BlockState, Direction, BlockState, Boolean> canConnectTo) {
+        // Avoid null state
+        if (this.state != null) {
+            // Check horizontal connections
+            BlockGetter level = this.ctx.getLevel();
+            BlockPos blockpos = this.ctx.getClickedPos();
+            BlockState BlockStateNorth = level.getBlockState(blockpos.north());
+            BlockState BlockStateWest = level.getBlockState(blockpos.west());
+            BlockState BlockStateSouth = level.getBlockState(blockpos.south());
+            BlockState BlockStateEast = level.getBlockState(blockpos.east());
+            this.state = state
+                    .setValue(BlockStateProperties.NORTH, canConnectTo.apply(this.state, Direction.NORTH, BlockStateNorth))
+                    .setValue(BlockStateProperties.WEST, canConnectTo.apply(this.state, Direction.WEST, BlockStateWest))
+                    .setValue(BlockStateProperties.SOUTH, canConnectTo.apply(this.state, Direction.SOUTH, BlockStateSouth))
+                    .setValue(BlockStateProperties.EAST, canConnectTo.apply(this.state, Direction.EAST, BlockStateEast));
+        }
+
+        return this.self();
+    }
+
+    /**
+     * Calculates capital slab horizontal connections.
+     */
+    public final T withCapitalSlabHorizontalConnection(BiFunction<BlockState, BlockState, Boolean> canConnectTo) {
         // Avoid null state
         if (this.state != null) {
             // Check horizontal connections

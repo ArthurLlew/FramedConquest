@@ -4,6 +4,7 @@ import net.arthurllew.framedcr.block.entity.FramedConquestDoubleBlockEntity;
 import net.arthurllew.framedcr.block.predicates.VerticalTextureConnectionPredicate;
 import net.arthurllew.framedcr.block.type.CustomBlockType;
 import net.arthurllew.framedcr.block.util.CustomPlacementStateBuilder;
+import net.arthurllew.framedcr.registry.FramedConquestBlocks;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -124,10 +125,10 @@ public class FramedCapital extends CustomFramedBlock {
             // On horizontal axis
             if ((dir.getAxis() == Direction.Axis.X) || (dir.getAxis() == Direction.Axis.Z)) {
                 return switch (dir) {
-                    case NORTH -> base.setValue(NORTH, this.canConnectTo(state, neighborState));
-                    case WEST -> base.setValue(WEST, this.canConnectTo(state, neighborState));
-                    case SOUTH -> base.setValue(SOUTH, this.canConnectTo(state, neighborState));
-                    default -> base.setValue(EAST, this.canConnectTo(state, neighborState));
+                    case NORTH -> base.setValue(NORTH, this.canConnectTo(state, dir, neighborState));
+                    case WEST -> base.setValue(WEST, this.canConnectTo(state, dir, neighborState));
+                    case SOUTH -> base.setValue(SOUTH, this.canConnectTo(state, dir, neighborState));
+                    default -> base.setValue(EAST, this.canConnectTo(state, dir, neighborState));
                 };
             }
             // Return base state otherwise
@@ -139,9 +140,20 @@ public class FramedCapital extends CustomFramedBlock {
         /**
          * @return whether provided block state can connect to provided neighbor block state.
          */
-        protected boolean canConnectTo(BlockState state, BlockState neighborState) {
-            return neighborState.is(this)
-                    || (neighborState.getBlock() instanceof FramedCapitalSlabVerticalConnecting);
+        protected boolean canConnectTo(BlockState state, Direction dir, BlockState neighborState) {
+            if (neighborState.is(this)) {
+                return true;
+            }
+            else if (neighborState.getBlock() instanceof FramedCapitalSlabVerticalConnecting) {
+                return neighborState.getValue(BlockStateProperties.HORIZONTAL_FACING) == dir;
+            }
+            else if (neighborState.getBlock() instanceof FramedCapitalCornerVertical) {
+                Direction neighborDir = neighborState.getValue(BlockStateProperties.HORIZONTAL_FACING);
+                return neighborDir == dir || neighborDir == dir.getClockWise();
+            }
+            else {
+                return false;
+            }
         }
     }
 
@@ -180,18 +192,22 @@ public class FramedCapital extends CustomFramedBlock {
         @Override
         public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
             return CustomPlacementStateBuilder.of(this, context)
-                    .withCapitalHorizontalConnection(this::canConnectTo)
-                    .withTopBottom()
+                    .withTopBottom() // Top/bottom must be resolved first for the next function to work properly
+                    .withCapitalSlabHorizontalConnection(this::canConnectTo)
                     .build();
         }
 
         /**
          * @return whether this block can connect to provided block state.
          */
-        @Override
         protected boolean canConnectTo(BlockState state, BlockState neighborState) {
+            // Connect to self if top/bottom match
             if (neighborState.is(this)) {
                 return (state.getValue(HALF) == neighborState.getValue(HALF));
+            }
+            // Connect to Plinth if top
+            else if (neighborState.is(FramedConquestBlocks.FRAMED_PLINTH)) {
+                return state.getValue(HALF) == Half.TOP;
             }
             else {
                 return false;
