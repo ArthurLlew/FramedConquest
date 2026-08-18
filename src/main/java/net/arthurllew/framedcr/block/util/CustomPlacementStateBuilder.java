@@ -160,7 +160,7 @@ public class CustomPlacementStateBuilder<T extends CustomPlacementStateBuilder<T
     /**
      * Calculates capital horizontal connections.
      */
-    public final T withCapitalHorizontalConnection(Function3<BlockState, Direction, BlockState, Boolean> canConnectTo) {
+    public final T withCapitalConnection(Function3<BlockState, Direction, BlockState, Boolean> canConnectTo) {
         // Avoid null state
         if (this.state != null) {
             // Check horizontal connections
@@ -183,7 +183,7 @@ public class CustomPlacementStateBuilder<T extends CustomPlacementStateBuilder<T
     /**
      * Calculates capital slab horizontal connections.
      */
-    public final T withCapitalSlabHorizontalConnection(BiFunction<BlockState, BlockState, Boolean> canConnectTo) {
+    public final T withCapitalSlabConnection(BiFunction<BlockState, BlockState, Boolean> canConnectTo) {
         // Avoid null state
         if (this.state != null) {
             // Check horizontal connections
@@ -206,7 +206,7 @@ public class CustomPlacementStateBuilder<T extends CustomPlacementStateBuilder<T
     /**
      * Calculates capital vertical slab horizontal connections.
      */
-    public final T withCapitalSlabVerticalConnection(BiFunction<BlockState, BlockState, Boolean> canConnectTo) {
+    public final T withCapitalVerticalSlabConnection(Function3<BlockState, Direction, BlockState, Boolean> canConnectTo) {
         // Avoid null state
         if (this.state != null) {
             // Current direction
@@ -219,9 +219,9 @@ public class CustomPlacementStateBuilder<T extends CustomPlacementStateBuilder<T
             BlockState BlockStateBehind = level.getBlockState(blockpos.relative(dir.getOpposite()));
             BlockState BlockStateRight = level.getBlockState(blockpos.relative(dir.getClockWise()));
             this.state = state
-                    .setValue(BlockStateProperties.WEST, canConnectTo.apply(this.state, BlockStateLeft))
-                    .setValue(BlockStateProperties.SOUTH, canConnectTo.apply(this.state, BlockStateBehind))
-                    .setValue(BlockStateProperties.EAST, canConnectTo.apply(this.state, BlockStateRight));
+                    .setValue(BlockStateProperties.WEST, canConnectTo.apply(this.state, Direction.WEST, BlockStateLeft))
+                    .setValue(BlockStateProperties.SOUTH, canConnectTo.apply(this.state, Direction.SOUTH, BlockStateBehind))
+                    .setValue(BlockStateProperties.EAST, canConnectTo.apply(this.state, Direction.EAST, BlockStateRight));
         }
 
         return this.self();
@@ -230,7 +230,7 @@ public class CustomPlacementStateBuilder<T extends CustomPlacementStateBuilder<T
     /**
      * Calculates capital vertical quarter horizontal connections.
      */
-    public final T withCapitalQuarterVerticalConnection(BiFunction<BlockState, BlockState, Boolean> canConnectTo) {
+    public final T withCapitalVerticalQuarterConnection(Function3<BlockState, Direction, BlockState, Boolean> canConnectTo) {
         // Avoid null state
         if (this.state != null) {
             // Current direction
@@ -242,8 +242,8 @@ public class CustomPlacementStateBuilder<T extends CustomPlacementStateBuilder<T
             BlockState BlockStateBehind = level.getBlockState(blockpos.relative(dir.getOpposite()));
             BlockState BlockStateRight = level.getBlockState(blockpos.relative(dir.getClockWise()));
             this.state = state
-                    .setValue(BlockStateProperties.SOUTH, canConnectTo.apply(this.state, BlockStateBehind))
-                    .setValue(BlockStateProperties.EAST, canConnectTo.apply(this.state, BlockStateRight));
+                    .setValue(BlockStateProperties.SOUTH, canConnectTo.apply(this.state, Direction.SOUTH, BlockStateBehind))
+                    .setValue(BlockStateProperties.EAST, canConnectTo.apply(this.state, Direction.EAST, BlockStateRight));
         }
 
         return this.self();

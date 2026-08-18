@@ -115,7 +115,7 @@ public class FramedCapitalSlabVerticalConnecting extends CustomFramedBlock {
         return BlockUtils.getLayeredBlockStateForPlacement(LAYERS, MAX_LAYERS, this, context,
                 () -> CustomPlacementStateBuilder.of(this, context)
                         .withHorizontalFacing(true)
-                        .withCapitalSlabVerticalConnection(this::canConnectTo)
+                        .withCapitalVerticalSlabConnection(this::canConnectTo)
                         .withWater()
                         .build());
     }
@@ -131,13 +131,13 @@ public class FramedCapitalSlabVerticalConnecting extends CustomFramedBlock {
         // On horizontal axis
         if ((dir.getAxis() == Direction.Axis.X) || (dir.getAxis() == Direction.Axis.Z)) {
             if (dir == base.getValue(FACING).getCounterClockWise()) {
-                return base.setValue(WEST, this.canConnectTo(state, neighborState));
+                return base.setValue(WEST, this.canConnectTo(state, dir, neighborState));
             }
             else if (dir == base.getValue(FACING).getOpposite()) {
-                return base.setValue(SOUTH, this.canConnectTo(state, neighborState));
+                return base.setValue(SOUTH, this.canConnectTo(state, dir, neighborState));
             }
             else if (dir == base.getValue(FACING).getClockWise()) {
-                return base.setValue(EAST, this.canConnectTo(state, neighborState));
+                return base.setValue(EAST, this.canConnectTo(state, dir, neighborState));
             }
         }
         // Return base state otherwise
@@ -147,10 +147,44 @@ public class FramedCapitalSlabVerticalConnecting extends CustomFramedBlock {
     /**
      * @return whether provided block state can connect to provided neighbor block state.
      */
-    protected boolean canConnectTo(BlockState state, BlockState neighborState) {
-        return neighborState.is(this)
-                || (neighborState.getBlock() instanceof FramedCapital.Connected)
-                || (neighborState.getBlock() instanceof FramedCapitalQuarterVerticalConnecting);
+    protected boolean canConnectTo(BlockState state, Direction dir, BlockState neighborState) {
+        // Self
+        if (neighborState.is(this)) {
+            // Only if it is
+            Direction stateDir = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
+            Direction neighborDir = neighborState.getValue(BlockStateProperties.HORIZONTAL_FACING);
+            // facing in the check direction
+            return (neighborDir == dir)
+                    // to the left/right and is facing as self
+                    || (neighborDir == stateDir
+                            && (stateDir.getCounterClockWise() == dir || stateDir.getClockWise() == dir));
+        }
+        // Vertical corner
+        else if (neighborState.getBlock() instanceof FramedCapitalCornerVertical) {
+            // Only if it is
+            Direction stateDir = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
+            Direction neighborDir = neighborState.getValue(BlockStateProperties.HORIZONTAL_FACING);
+            // behind and is facing in the check direction or to the left from it
+            return (stateDir == dir.getOpposite() && (neighborDir == dir || neighborDir == dir.getClockWise()))
+                    // to the left and is not facing in the counter clock wise check direction
+                    || (stateDir.getCounterClockWise() == dir && neighborDir != dir.getCounterClockWise())
+                    // to the right and is not facing in the opposite check direction
+                    || (stateDir.getClockWise() == dir && neighborDir != dir.getOpposite());
+        }
+        // Vertical quarter
+        else if (neighborState.getBlock() instanceof FramedCapitalQuarterVerticalConnecting) {
+            // Only if it is
+            Direction stateDir = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
+            Direction neighborDir = neighborState.getValue(BlockStateProperties.HORIZONTAL_FACING);
+            // to the left and is facing self
+            return (neighborDir == stateDir && neighborDir.getCounterClockWise() == dir)
+                    // to the right and is facing clock wise self
+                    || (neighborDir == dir && neighborDir == stateDir.getClockWise());
+        }
+        // Always connect to connecting full capital block
+        else {
+            return neighborState.getBlock() instanceof FramedCapital.Connected;
+        }
     }
 
     /**

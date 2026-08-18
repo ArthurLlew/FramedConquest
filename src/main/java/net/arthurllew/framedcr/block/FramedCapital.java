@@ -110,7 +110,7 @@ public class FramedCapital extends CustomFramedBlock {
         @Override
         public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
             return CustomPlacementStateBuilder.of(this, context)
-                    .withCapitalHorizontalConnection(this::canConnectTo)
+                    .withCapitalConnection(this::canConnectTo)
                     .build();
         }
 
@@ -141,18 +141,20 @@ public class FramedCapital extends CustomFramedBlock {
          * @return whether provided block state can connect to provided neighbor block state.
          */
         protected boolean canConnectTo(BlockState state, Direction dir, BlockState neighborState) {
-            if (neighborState.is(this)) {
-                return true;
-            }
-            else if (neighborState.getBlock() instanceof FramedCapitalSlabVerticalConnecting) {
+            // Vertical slab
+            if (neighborState.getBlock() instanceof FramedCapitalSlabVerticalConnecting) {
+                // Only if it is facing in the check direction
                 return neighborState.getValue(BlockStateProperties.HORIZONTAL_FACING) == dir;
             }
+            // Vertical corner
             else if (neighborState.getBlock() instanceof FramedCapitalCornerVertical) {
+                // Only if it is facing in the check direction or to the left from it
                 Direction neighborDir = neighborState.getValue(BlockStateProperties.HORIZONTAL_FACING);
                 return neighborDir == dir || neighborDir == dir.getClockWise();
             }
+            // Always connect to self
             else {
-                return false;
+                return neighborState.is(this);
             }
         }
     }
@@ -193,7 +195,7 @@ public class FramedCapital extends CustomFramedBlock {
         public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
             return CustomPlacementStateBuilder.of(this, context)
                     .withTopBottom() // Top/bottom must be resolved first for the next function to work properly
-                    .withCapitalSlabHorizontalConnection(this::canConnectTo)
+                    .withCapitalSlabConnection(this::canConnectTo)
                     .build();
         }
 

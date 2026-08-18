@@ -112,7 +112,7 @@ public class FramedCapitalQuarterVerticalConnecting extends CustomFramedBlock {
         return BlockUtils.getLayeredBlockStateForPlacement(LAYERS, MAX_LAYERS, this, context,
                 () -> CustomPlacementStateBuilder.of(this, context)
                         .withQuarterDirection()
-                        .withCapitalQuarterVerticalConnection(this::canConnectTo)
+                        .withCapitalVerticalQuarterConnection(this::canConnectTo)
                         .withWater()
                         .build());
     }
@@ -128,10 +128,10 @@ public class FramedCapitalQuarterVerticalConnecting extends CustomFramedBlock {
         // On horizontal axis
         if ((dir.getAxis() == Direction.Axis.X) || (dir.getAxis() == Direction.Axis.Z)) {
             if (dir == base.getValue(FACING).getOpposite()) {
-                return base.setValue(SOUTH, this.canConnectTo(state, neighborState));
+                return base.setValue(SOUTH, this.canConnectTo(state, dir, neighborState));
             }
             else if (dir == base.getValue(FACING).getClockWise()) {
-                return base.setValue(EAST, this.canConnectTo(state, neighborState));
+                return base.setValue(EAST, this.canConnectTo(state, dir, neighborState));
             }
         }
         // Return base state otherwise
@@ -141,10 +141,33 @@ public class FramedCapitalQuarterVerticalConnecting extends CustomFramedBlock {
     /**
      * @return whether provided block state can connect to provided neighbor block state.
      */
-    protected boolean canConnectTo(BlockState state, BlockState neighborState) {
-        return neighborState.is(this)
-                || (neighborState.getBlock() instanceof FramedCapital.Connected)
-                || (neighborState.getBlock() instanceof FramedCapitalSlabVerticalConnecting);
+    protected boolean canConnectTo(BlockState state, Direction dir, BlockState neighborState) {
+        // Self
+        if (neighborState.is(this)) {
+            Direction stateDir = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
+            Direction neighborDir = neighborState.getValue(BlockStateProperties.HORIZONTAL_FACING);
+            return (neighborDir == stateDir.getCounterClockWise() && neighborDir == dir.getClockWise())
+                    || (neighborDir == stateDir.getClockWise() && neighborDir == dir);
+        }
+        // Vertical slab
+        else if (neighborState.getBlock() instanceof FramedCapitalSlabVerticalConnecting) {
+            Direction stateDir = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
+            Direction neighborDir = neighborState.getValue(BlockStateProperties.HORIZONTAL_FACING);
+            return (neighborDir == dir)
+                    || (neighborDir == stateDir.getCounterClockWise() && neighborDir == dir.getClockWise())
+                    || (neighborDir == stateDir && neighborDir == dir.getCounterClockWise());
+        }
+        // Vertical corner
+        else if (neighborState.getBlock() instanceof FramedCapitalCornerVertical) {
+            Direction stateDir = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
+            Direction neighborDir = neighborState.getValue(BlockStateProperties.HORIZONTAL_FACING);
+            return !((neighborDir == stateDir.getClockWise() && neighborDir == dir.getCounterClockWise())
+                    || (neighborDir == stateDir.getCounterClockWise() && neighborDir == dir.getOpposite()));
+        }
+        // Always connect to connecting full capital block
+        else {
+            return neighborState.getBlock() instanceof FramedCapital.Connected;
+        }
     }
 
     /**
