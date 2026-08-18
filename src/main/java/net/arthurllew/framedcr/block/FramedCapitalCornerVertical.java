@@ -64,7 +64,6 @@ public class FramedCapitalCornerVertical extends CustomFramedBlock {
      */
     public FramedCapitalCornerVertical() {
         this(new CustomBlockType.Builder(FramedCapitalCornerVertical::getShapeForState)
-                .fullFacePredicate(FramedCornerVertical::fullFacePredicate)
                 .modelVariantForItem("_2")
                 .craftingCount(MAX_LAYERS)
                 .isLayered(true)
@@ -171,7 +170,6 @@ public class FramedCapitalCornerVertical extends CustomFramedBlock {
         public Double(Block blockFirst, Block blockSecond, CamoGetter camoGetter) {
             super(new CustomBlockType.Builder(FramedCapitalCornerVertical::getShapeForState)
                     .doubleBlock(true)
-                    .fullFacePredicate(FramedCornerVertical::fullFacePredicate)
                     .textureConnectionPredicate(VerticalTextureConnectionPredicate.INSTANCE)
                     .modelVariantForItem("_2")
                     .craftingCount(MAX_LAYERS)
@@ -227,7 +225,6 @@ public class FramedCapitalCornerVertical extends CustomFramedBlock {
         public Bottom() {
             super(new CustomBlockType.Builder(Bottom::getShapeForState)
                     .blockItem(false)
-                    .fullFacePredicate(FramedCornerVertical::fullFacePredicate)
                     .textureConnectionPredicate(VerticalTextureConnectionPredicate.INSTANCE)
                     .modelVariantForItem("_2")
                     .craftingCount(MAX_LAYERS)
@@ -255,7 +252,6 @@ public class FramedCapitalCornerVertical extends CustomFramedBlock {
         public Top() {
             super(new CustomBlockType.Builder(Top::getShapeForState)
                     .blockItem(false)
-                    .fullFacePredicate(FramedCornerVertical::fullFacePredicate)
                     .textureConnectionPredicate(VerticalTextureConnectionPredicate.INSTANCE)
                     .modelVariantForItem("_2")
                     .craftingCount(MAX_LAYERS)

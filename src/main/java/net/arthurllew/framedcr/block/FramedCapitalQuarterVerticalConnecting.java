@@ -68,6 +68,7 @@ public class FramedCapitalQuarterVerticalConnecting extends CustomFramedBlock {
      */
     public FramedCapitalQuarterVerticalConnecting() {
         this(new CustomBlockType.Builder(FramedCapitalQuarterVerticalConnecting::getShapeForState)
+                .textureConnectionPredicate(VerticalTextureConnectionPredicate.INSTANCE)
                 .modelVariantForItem("_2")
                 .craftingCount(MAX_LAYERS)
                 .isLayered(true)

@@ -1,5 +1,6 @@
 package net.arthurllew.framedcr.block;
 
+import net.arthurllew.framedcr.block.predicates.VerticalTextureConnectionPredicate;
 import net.arthurllew.framedcr.block.type.CustomBlockType;
 import net.arthurllew.framedcr.block.util.CustomPlacementStateBuilder;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -44,6 +45,7 @@ private static final VoxelShape UP = Shapes.or(
      */
     public FramedPillarSocket() {
         super(new CustomBlockType.Builder(FramedPillarSocket::getShapeForState)
+                .textureConnectionPredicate(VerticalTextureConnectionPredicate.INSTANCE)
                 .modelVariantForItem("_down_flat")
                 .build());
         this.registerDefaultState(this.defaultBlockState()

@@ -1,5 +1,6 @@
 package net.arthurllew.framedcr.block;
 
+import net.arthurllew.framedcr.block.predicates.VerticalTextureConnectionPredicate;
 import net.arthurllew.framedcr.block.type.CustomBlockType;
 import net.arthurllew.framedcr.block.util.BlockUtils;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -45,6 +46,7 @@ public class FramedCapitalQuarterVertical extends CustomFramedBlock {
      */
     public FramedCapitalQuarterVertical() {
         super(new CustomBlockType.Builder(FramedCapitalQuarterVertical::getShapeForState)
+                .textureConnectionPredicate(VerticalTextureConnectionPredicate.INSTANCE)
                 .modelVariantForItem("_2")
                 .craftingCount(MAX_LAYERS)
                 .isLayered(true)

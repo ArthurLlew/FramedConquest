@@ -281,12 +281,6 @@ public class CustomBlockType implements IBlockType {
             return this;
         }
 
-        public Builder fullFacePredicate(FullFacePredicate fullFacePredicate) {
-            this.fullFacePredicate = fullFacePredicate;
-
-            return this;
-        }
-
         public Builder textureConnectionPredicate(ConnectionPredicate connectionPredicate) {
             this.connectionPredicate = connectionPredicate;
 

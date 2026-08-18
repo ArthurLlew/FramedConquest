@@ -1,5 +1,6 @@
 package net.arthurllew.framedcr.block;
 
+import net.arthurllew.framedcr.block.predicates.VerticalTextureConnectionPredicate;
 import net.arthurllew.framedcr.block.type.CustomBlockType;
 import net.arthurllew.framedcr.block.util.CustomPlacementStateBuilder;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -56,7 +57,9 @@ public class FramedSmallWindow extends CustomFramedBlock {
      * Constructor.
      */
     public FramedSmallWindow() {
-        super(new CustomBlockType.Builder(FramedSmallWindow::getShapeForState).build());
+        super(new CustomBlockType.Builder(FramedSmallWindow::getShapeForState)
+                .textureConnectionPredicate(VerticalTextureConnectionPredicate.INSTANCE)
+                .build());
         this.registerDefaultState(this.defaultBlockState()
                 .setValue(UP, false)
                 .setValue(DOWN, false));

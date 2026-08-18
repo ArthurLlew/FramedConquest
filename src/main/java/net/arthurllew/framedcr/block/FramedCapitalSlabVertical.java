@@ -1,5 +1,6 @@
 package net.arthurllew.framedcr.block;
 
+import net.arthurllew.framedcr.block.predicates.VerticalTextureConnectionPredicate;
 import net.arthurllew.framedcr.block.type.CustomBlockType;
 import net.arthurllew.framedcr.block.util.BlockUtils;
 import net.arthurllew.framedcr.block.util.CustomPlacementStateBuilder;
@@ -51,7 +52,7 @@ public class FramedCapitalSlabVertical extends CustomFramedBlock {
      */
     public FramedCapitalSlabVertical() {
         super(new CustomBlockType.Builder(FramedCapitalSlabVertical::getShapeForState)
-                .fullFacePredicate(FramedCapitalSlabVertical::fullFacePredicate)
+                .textureConnectionPredicate(VerticalTextureConnectionPredicate.INSTANCE)
                 .modelVariantForItem("_2")
                 .craftingCount(MAX_LAYERS)
                 .isLayered(true)
@@ -146,12 +147,5 @@ public class FramedCapitalSlabVertical extends CustomFramedBlock {
             case EAST -> EAST_SHAPE[state.getValue(LAYERS) - 1];
             default -> throw new IllegalStateException();
         };
-    }
-
-    /**
-     * @return whether this block face in given direction is considered full.
-     */
-    public static boolean fullFacePredicate(BlockState state, Direction dir) {
-        return state.getValue(FACING) == dir.getOpposite();
     }
 }

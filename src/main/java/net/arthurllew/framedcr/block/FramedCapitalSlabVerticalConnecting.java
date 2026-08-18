@@ -70,7 +70,7 @@ public class FramedCapitalSlabVerticalConnecting extends CustomFramedBlock {
      */
     public FramedCapitalSlabVerticalConnecting() {
         this(new CustomBlockType.Builder(FramedCapitalSlabVerticalConnecting::getShapeForState)
-                .fullFacePredicate(FramedCapitalSlabVertical::fullFacePredicate)
+                .textureConnectionPredicate(VerticalTextureConnectionPredicate.INSTANCE)
                 .modelVariantForItem("_2")
                 .craftingCount(MAX_LAYERS)
                 .isLayered(true)
@@ -249,7 +249,6 @@ public class FramedCapitalSlabVerticalConnecting extends CustomFramedBlock {
         public Double(Block blockFirst, Block blockSecond, CamoGetter camoGetter) {
             super(new CustomBlockType.Builder(FramedCapitalSlabVerticalConnecting::getShapeForState)
                     .doubleBlock(true)
-                    .fullFacePredicate(FramedCapitalSlabVertical::fullFacePredicate)
                     .textureConnectionPredicate(VerticalTextureConnectionPredicate.INSTANCE)
                     .modelVariantForItem("_2")
                     .craftingCount(MAX_LAYERS)
@@ -305,7 +304,6 @@ public class FramedCapitalSlabVerticalConnecting extends CustomFramedBlock {
         public Bottom() {
             super(new CustomBlockType.Builder(Bottom::getShapeForState)
                     .blockItem(false)
-                    .fullFacePredicate(FramedCapitalSlabVertical::fullFacePredicate)
                     .textureConnectionPredicate(VerticalTextureConnectionPredicate.INSTANCE)
                     .modelVariantForItem("_2")
                     .craftingCount(MAX_LAYERS)
@@ -333,7 +331,6 @@ public class FramedCapitalSlabVerticalConnecting extends CustomFramedBlock {
         public Top() {
             super(new CustomBlockType.Builder(Top::getShapeForState)
                     .blockItem(false)
-                    .fullFacePredicate(FramedCapitalSlabVertical::fullFacePredicate)
                     .textureConnectionPredicate(VerticalTextureConnectionPredicate.INSTANCE)
                     .modelVariantForItem("_2")
                     .craftingCount(MAX_LAYERS)

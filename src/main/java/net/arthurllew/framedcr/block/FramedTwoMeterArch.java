@@ -61,7 +61,6 @@ public class FramedTwoMeterArch extends CustomFramedBlock {
      */
     public FramedTwoMeterArch() {
         this(new CustomBlockType.Builder(FramedTwoMeterArch::getShapeForState)
-                .fullFacePredicate(FramedTwoMeterArch::fullFacePredicate)
                 .build());
     }
 
@@ -121,19 +120,6 @@ public class FramedTwoMeterArch extends CustomFramedBlock {
     }
 
     /**
-     * @return whether this block face in given direction is considered full.
-     */
-    public static boolean fullFacePredicate(BlockState state, Direction dir) {
-        if (dir == Direction.UP) {
-            return state.getValue(HALF) == Half.TOP;
-        } else if (dir == Direction.DOWN) {
-            return state.getValue(HALF) == Half.BOTTOM;
-        } else {
-            return state.getValue(FACING) == dir;
-        }
-    }
-
-    /**
      * Double part variant.
      */
     public static class Double extends FramedTwoMeterArch implements ICustomFramedDoubleBlock {
@@ -146,7 +132,6 @@ public class FramedTwoMeterArch extends CustomFramedBlock {
         public Double(Block blockFirst, Block blockSecond) {
             super(new CustomBlockType.Builder(FramedTwoMeterArch::getShapeForState)
                     .doubleBlock(true)
-                    .fullFacePredicate(FramedTwoMeterArch::fullFacePredicate)
                     .build());
             this.blockFirst = blockFirst;
             this.blockSecond = blockSecond;
@@ -189,7 +174,6 @@ public class FramedTwoMeterArch extends CustomFramedBlock {
         public Bottom() {
             super(new CustomBlockType.Builder(Bottom::getShapeForState)
                     .blockItem(false)
-                    .fullFacePredicate(FramedTwoMeterArch::fullFacePredicate)
                     .build());
         }
 
@@ -213,7 +197,6 @@ public class FramedTwoMeterArch extends CustomFramedBlock {
         public Top() {
             super(new CustomBlockType.Builder(Top::getShapeForState)
                     .blockItem(false)
-                    .fullFacePredicate(FramedTwoMeterArch::fullFacePredicate)
                     .build());
         }
 

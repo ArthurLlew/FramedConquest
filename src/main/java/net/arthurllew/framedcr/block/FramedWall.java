@@ -69,6 +69,7 @@ public class FramedWall extends CustomFramedBlock {
      */
     public FramedWall() {
         this(new CustomBlockType.Builder(FramedWall::getShapeForState)
+                .textureConnectionPredicate(VerticalTextureConnectionPredicate.INSTANCE)
                 .modelVariantForItem("_ns")
                 .craftingCount(6)
                 .build());

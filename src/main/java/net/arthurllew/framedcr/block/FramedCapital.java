@@ -17,7 +17,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import xfacthd.framedblocks.api.predicate.fullface.FullFacePredicate;
 import xfacthd.framedblocks.common.data.doubleblock.CamoGetter;
 
 import javax.annotation.Nullable;
@@ -44,7 +43,6 @@ public class FramedCapital extends CustomFramedBlock {
     public FramedCapital() {
         this(new CustomBlockType.Builder(FramedCapital::getShapeForState)
                 .waterloggable(false)
-                .fullFacePredicate(FullFacePredicate.TRUE)
                 .build());
     }
 
@@ -91,7 +89,6 @@ public class FramedCapital extends CustomFramedBlock {
         public Connected() {
             this(new CustomBlockType.Builder(FramedCapital::getShapeForState)
                     .waterloggable(false)
-                    .fullFacePredicate(FullFacePredicate.TRUE)
                     .build());
         }
 
@@ -241,7 +238,6 @@ public class FramedCapital extends CustomFramedBlock {
         public Doric(Block blockFirst, Block blockSecond, CamoGetter camoGetter) {
             super(new CustomBlockType.Builder(FramedCapital::getShapeForState)
                     .waterloggable(false)
-                    .fullFacePredicate(FullFacePredicate.TRUE)
                     .textureConnectionPredicate(VerticalTextureConnectionPredicate.INSTANCE)
                     .doubleBlock(true)
                     .build());
@@ -293,7 +289,6 @@ public class FramedCapital extends CustomFramedBlock {
         public DoricBottom() {
             super(new CustomBlockType.Builder(DoricBottom::getShapeForState)
                     .waterloggable(false)
-                    .fullFacePredicate(FullFacePredicate.TRUE)
                     .textureConnectionPredicate(VerticalTextureConnectionPredicate.INSTANCE)
                     .blockItem(false)
                     .build());
@@ -317,7 +312,6 @@ public class FramedCapital extends CustomFramedBlock {
         public DoricTop() {
             super(new CustomBlockType.Builder(DoricTop::getShapeForState)
                     .waterloggable(false)
-                    .fullFacePredicate(FullFacePredicate.TRUE)
                     .textureConnectionPredicate(VerticalTextureConnectionPredicate.INSTANCE)
                     .blockItem(false)
                     .build());
