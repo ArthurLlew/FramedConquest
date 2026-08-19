@@ -1,6 +1,7 @@
 package net.arthurllew.framedcr.block;
 
 import net.arthurllew.framedcr.block.entity.FramedConquestDoubleBlockEntity;
+import net.arthurllew.framedcr.block.family.ConnectingCapital;
 import net.arthurllew.framedcr.block.predicates.VerticalTextureConnectionPredicate;
 import net.arthurllew.framedcr.block.type.CustomBlockType;
 import net.arthurllew.framedcr.block.util.BlockUtils;
@@ -56,9 +57,14 @@ public class FramedCapitalSlabVerticalConnecting extends CustomFramedBlock {
     private static final BooleanProperty EAST = BlockStateProperties.EAST;
 
     /**
+     * Connections block family.
+     */
+    protected final ConnectingCapital blockFamily;
+
+    /**
      * Base constructor.
      */
-    public FramedCapitalSlabVerticalConnecting(CustomBlockType blockType) {
+    public FramedCapitalSlabVerticalConnecting(CustomBlockType blockType, ConnectingCapital blockFamily) {
         super(blockType);
         this.registerDefaultState(this.defaultBlockState()
                 .setValue(FACING, Direction.NORTH)
@@ -66,18 +72,20 @@ public class FramedCapitalSlabVerticalConnecting extends CustomFramedBlock {
                 .setValue(WEST, false)
                 .setValue(SOUTH, false)
                 .setValue(EAST, false));
+        this.blockFamily = blockFamily;
     }
 
     /**
      * Constructor.
      */
-    public FramedCapitalSlabVerticalConnecting() {
+    public FramedCapitalSlabVerticalConnecting(ConnectingCapital blockFamily) {
         this(new CustomBlockType.Builder(FramedCapitalSlabVerticalConnecting::getShapeForState)
-                .textureConnectionPredicate(VerticalTextureConnectionPredicate.INSTANCE)
-                .modelVariantForItem("_2")
-                .craftingCount(MAX_LAYERS)
-                .isLayered(true)
-                .build());
+                        .textureConnectionPredicate(VerticalTextureConnectionPredicate.INSTANCE)
+                        .modelVariantForItem("_2")
+                        .craftingCount(MAX_LAYERS)
+                        .isLayered(true)
+                        .build(),
+                blockFamily);
     }
 
     /**
@@ -163,7 +171,7 @@ public class FramedCapitalSlabVerticalConnecting extends CustomFramedBlock {
                             && (stateDir.getCounterClockWise() == dir || stateDir.getClockWise() == dir));
         }
         // Vertical corner
-        else if (neighborState.getBlock() instanceof FramedCapitalCornerVertical) {
+        else if (neighborState.is(blockFamily.verticalCorner())) {
             // Only if it is
             Direction stateDir = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
             Direction neighborDir = neighborState.getValue(BlockStateProperties.HORIZONTAL_FACING);
@@ -175,7 +183,7 @@ public class FramedCapitalSlabVerticalConnecting extends CustomFramedBlock {
                     || (stateDir.getClockWise() == dir && neighborDir != dir.getOpposite());
         }
         // Vertical quarter
-        else if (neighborState.getBlock() instanceof FramedCapitalQuarterVerticalConnecting) {
+        else if (neighborState.is(blockFamily.verticalQuarter())) {
             // Only if it is
             Direction stateDir = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
             Direction neighborDir = neighborState.getValue(BlockStateProperties.HORIZONTAL_FACING);
@@ -186,7 +194,7 @@ public class FramedCapitalSlabVerticalConnecting extends CustomFramedBlock {
         }
         // Always connect to connecting full capital block
         else {
-            return neighborState.getBlock() instanceof FramedCapital.Connected;
+            return neighborState.is(blockFamily.fullBlock());
         }
     }
 
@@ -249,14 +257,15 @@ public class FramedCapitalSlabVerticalConnecting extends CustomFramedBlock {
         /**
          * Constructor.
          */
-        public Double(Block blockFirst, Block blockSecond, CamoGetter camoGetter) {
+        public Double(Block blockFirst, Block blockSecond, CamoGetter camoGetter, ConnectingCapital blockFamily) {
             super(new CustomBlockType.Builder(FramedCapitalSlabVerticalConnecting::getShapeForState)
-                    .doubleBlock(true)
-                    .textureConnectionPredicate(VerticalTextureConnectionPredicate.INSTANCE)
-                    .modelVariantForItem("_2")
-                    .craftingCount(MAX_LAYERS)
-                    .isLayered(true)
-                    .build());
+                            .doubleBlock(true)
+                            .textureConnectionPredicate(VerticalTextureConnectionPredicate.INSTANCE)
+                            .modelVariantForItem("_2")
+                            .craftingCount(MAX_LAYERS)
+                            .isLayered(true)
+                            .build(),
+                    blockFamily);
             this.blockFirst = blockFirst;
             this.blockSecond = blockSecond;
             this.camoGetter = camoGetter;
@@ -296,14 +305,15 @@ public class FramedCapitalSlabVerticalConnecting extends CustomFramedBlock {
         /**
          * Constructor.
          */
-        public Bottom() {
+        public Bottom(ConnectingCapital blockFamily) {
             super(new CustomBlockType.Builder(Bottom::getShapeForState)
-                    .blockItem(false)
-                    .textureConnectionPredicate(VerticalTextureConnectionPredicate.INSTANCE)
-                    .modelVariantForItem("_2")
-                    .craftingCount(MAX_LAYERS)
-                    .isLayered(true)
-                    .build());
+                            .blockItem(false)
+                            .textureConnectionPredicate(VerticalTextureConnectionPredicate.INSTANCE)
+                            .modelVariantForItem("_2")
+                            .craftingCount(MAX_LAYERS)
+                            .isLayered(true)
+                            .build(),
+                    blockFamily);
         }
 
         /**
@@ -323,14 +333,15 @@ public class FramedCapitalSlabVerticalConnecting extends CustomFramedBlock {
         /**
          * Constructor.
          */
-        public Top() {
+        public Top(ConnectingCapital blockFamily) {
             super(new CustomBlockType.Builder(Top::getShapeForState)
-                    .blockItem(false)
-                    .textureConnectionPredicate(VerticalTextureConnectionPredicate.INSTANCE)
-                    .modelVariantForItem("_2")
-                    .craftingCount(MAX_LAYERS)
-                    .isLayered(true)
-                    .build());
+                            .blockItem(false)
+                            .textureConnectionPredicate(VerticalTextureConnectionPredicate.INSTANCE)
+                            .modelVariantForItem("_2")
+                            .craftingCount(MAX_LAYERS)
+                            .isLayered(true)
+                            .build(),
+                    blockFamily);
         }
 
         /**

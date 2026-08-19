@@ -1,10 +1,10 @@
 package net.arthurllew.framedcr.block;
 
 import net.arthurllew.framedcr.block.entity.FramedConquestDoubleBlockEntity;
+import net.arthurllew.framedcr.block.family.ConnectingCapital;
 import net.arthurllew.framedcr.block.predicates.VerticalTextureConnectionPredicate;
 import net.arthurllew.framedcr.block.type.CustomBlockType;
 import net.arthurllew.framedcr.block.util.CustomPlacementStateBuilder;
-import net.arthurllew.framedcr.registry.FramedConquestBlocks;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -73,25 +73,32 @@ public class FramedCapital extends CustomFramedBlock {
         private static final BooleanProperty EAST = BlockStateProperties.EAST;
 
         /**
+         * Connections block family.
+         */
+        protected final ConnectingCapital blockFamily;
+
+        /**
          * Base constructor.
          */
-        public Connected(CustomBlockType blockType) {
+        public Connected(CustomBlockType blockType, ConnectingCapital blockFamily) {
             super(blockType);
             this.registerDefaultState(this.defaultBlockState()
                     .setValue(NORTH, false)
                     .setValue(WEST, false)
                     .setValue(SOUTH, false)
                     .setValue(EAST, false));
+            this.blockFamily = blockFamily;
         }
 
         /**
          * Constructor.
          */
-        public Connected() {
+        public Connected(ConnectingCapital blockFamily) {
             this(new CustomBlockType.Builder(FramedCapital::getShapeForState)
-                    .waterloggable(false)
-                    .textureConnectionPredicate(VerticalTextureConnectionPredicate.INSTANCE)
-                    .build());
+                            .waterloggable(false)
+                            .textureConnectionPredicate(VerticalTextureConnectionPredicate.INSTANCE)
+                            .build(),
+                    blockFamily);
         }
 
         /**
@@ -141,12 +148,12 @@ public class FramedCapital extends CustomFramedBlock {
          */
         protected boolean canConnectTo(BlockState state, Direction dir, BlockState neighborState) {
             // Vertical slab
-            if (neighborState.getBlock() instanceof FramedCapitalSlabVerticalConnecting) {
+            if (neighborState.is(blockFamily.verticalSlab())) {
                 // Only if it is facing in the check direction
                 return neighborState.getValue(BlockStateProperties.HORIZONTAL_FACING) == dir;
             }
             // Vertical corner
-            else if (neighborState.getBlock() instanceof FramedCapitalCornerVertical) {
+            else if (neighborState.is(blockFamily.verticalCorner())) {
                 // Only if it is facing in the check direction or to the left from it
                 Direction neighborDir = neighborState.getValue(BlockStateProperties.HORIZONTAL_FACING);
                 return neighborDir == dir || neighborDir == dir.getClockWise();
@@ -170,10 +177,11 @@ public class FramedCapital extends CustomFramedBlock {
         /**
          * Constructor.
          */
-        public ConnectedSlab() {
+        public ConnectedSlab(ConnectingCapital blockFamily) {
             super(new CustomBlockType.Builder(ConnectedSlab::getShapeForState)
-                    .modelVariantForItem("_lower")
-                    .build());
+                            .modelVariantForItem("_lower")
+                            .build(),
+                    blockFamily);
             this.registerDefaultState(this.defaultBlockState()
                     .setValue(HALF, Half.TOP));
         }
@@ -194,24 +202,32 @@ public class FramedCapital extends CustomFramedBlock {
         public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
             return CustomPlacementStateBuilder.of(this, context)
                     .withTopBottom() // Top/bottom must be resolved first for the next function to work properly
-                    .withCapitalSlabConnection(this::canConnectTo)
+                    .withCapitalConnection(this::canConnectTo)
                     .build();
         }
 
         /**
          * @return whether this block can connect to provided block state.
          */
-        protected boolean canConnectTo(BlockState state, BlockState neighborState) {
+        @Override
+        protected boolean canConnectTo(BlockState state, Direction dir, BlockState neighborState) {
             // Connect to self if top/bottom match
             if (neighborState.is(this)) {
                 return (state.getValue(HALF) == neighborState.getValue(HALF));
             }
-            // Connect to Plinth if top
-            else if (neighborState.is(FramedConquestBlocks.FRAMED_PLINTH)) {
-                return state.getValue(HALF) == Half.TOP;
+            // Vertical slab
+            if (neighborState.is(blockFamily.verticalSlab())) {
+                // Only if it is facing in the check direction
+                return neighborState.getValue(BlockStateProperties.HORIZONTAL_FACING) == dir;
+            }
+            // Vertical corner
+            else if (neighborState.is(blockFamily.verticalCorner())) {
+                // Only if it is facing in the check direction or to the left from it
+                Direction neighborDir = neighborState.getValue(BlockStateProperties.HORIZONTAL_FACING);
+                return neighborDir == dir || neighborDir == dir.getClockWise();
             }
             else {
-                return false;
+                return neighborState.is(blockFamily.fullBlock());
             }
         }
 

@@ -15,7 +15,6 @@ import net.minecraft.world.level.block.state.properties.StairsShape;
 import org.jetbrains.annotations.Nullable;
 import xfacthd.framedblocks.api.block.PlacementStateBuilder;
 
-import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class CustomPlacementStateBuilder<T extends CustomPlacementStateBuilder<T>> extends PlacementStateBuilder<T> {
@@ -175,29 +174,6 @@ public class CustomPlacementStateBuilder<T extends CustomPlacementStateBuilder<T
                     .setValue(BlockStateProperties.WEST, canConnectTo.apply(this.state, Direction.WEST, BlockStateWest))
                     .setValue(BlockStateProperties.SOUTH, canConnectTo.apply(this.state, Direction.SOUTH, BlockStateSouth))
                     .setValue(BlockStateProperties.EAST, canConnectTo.apply(this.state, Direction.EAST, BlockStateEast));
-        }
-
-        return this.self();
-    }
-
-    /**
-     * Calculates capital slab horizontal connections.
-     */
-    public final T withCapitalSlabConnection(BiFunction<BlockState, BlockState, Boolean> canConnectTo) {
-        // Avoid null state
-        if (this.state != null) {
-            // Check horizontal connections
-            BlockGetter level = this.ctx.getLevel();
-            BlockPos blockpos = this.ctx.getClickedPos();
-            BlockState BlockStateNorth = level.getBlockState(blockpos.north());
-            BlockState BlockStateWest = level.getBlockState(blockpos.west());
-            BlockState BlockStateSouth = level.getBlockState(blockpos.south());
-            BlockState BlockStateEast = level.getBlockState(blockpos.east());
-            this.state = state
-                    .setValue(BlockStateProperties.NORTH, canConnectTo.apply(this.state, BlockStateNorth))
-                    .setValue(BlockStateProperties.WEST, canConnectTo.apply(this.state, BlockStateWest))
-                    .setValue(BlockStateProperties.SOUTH, canConnectTo.apply(this.state, BlockStateSouth))
-                    .setValue(BlockStateProperties.EAST, canConnectTo.apply(this.state, BlockStateEast));
         }
 
         return this.self();

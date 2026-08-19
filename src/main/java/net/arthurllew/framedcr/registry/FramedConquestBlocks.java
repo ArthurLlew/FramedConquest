@@ -1,8 +1,10 @@
 package net.arthurllew.framedcr.registry;
 
 import com.mojang.datafixers.util.Function3;
+import com.mojang.datafixers.util.Function4;
 import net.arthurllew.framedcr.FramedConquest;
 import net.arthurllew.framedcr.block.*;
+import net.arthurllew.framedcr.block.family.ConnectingCapital;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -11,6 +13,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import xfacthd.framedblocks.common.data.doubleblock.CamoGetter;
 
 import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
@@ -147,15 +150,22 @@ public class FramedConquestBlocks {
     public static final DeferredBlock<FramedPillar> FRAMED_CAPITAL_DORIC_DOWN_PILLAR = registerDoubleBlock(
             "framed_capital_doric_down_pillar", FramedPillar.Bottom::new, FramedPillar.Top::new,
             CamoGetter.SECOND, FramedPillar.Double::new);
-    public static final DeferredBlock<FramedCapitalSlabVerticalConnecting> FRAMED_CAPITAL_DORIC_DOWN_VERTICAL_SLAB = registerDoubleBlock(
+    public static final DeferredBlock<FramedCapitalSlabVerticalConnecting> FRAMED_CAPITAL_DORIC_DOWN_VERTICAL_SLAB = registerConnectingDoubleBlock(
             "framed_capital_doric_down_vertical_slab", FramedCapitalSlabVerticalConnecting.Bottom::new, FramedCapitalSlabVerticalConnecting.Top::new,
-            CamoGetter.SECOND, FramedCapitalSlabVerticalConnecting.Double::new);
+            CamoGetter.SECOND, ConnectingCapital.CAPITAL_DORIC_DOWN, FramedCapitalSlabVerticalConnecting.Double::new);
     public static final DeferredBlock<FramedCapitalCornerVertical> FRAMED_CAPITAL_DORIC_DOWN_VERTICAL_CORNER = registerDoubleBlock(
             "framed_capital_doric_down_vertical_corner", FramedCapitalCornerVertical.Bottom::new, FramedCapitalCornerVertical.Top::new,
             CamoGetter.SECOND, FramedCapitalCornerVertical.Double::new);
-    public static final DeferredBlock<FramedCapitalQuarterVerticalConnecting> FRAMED_CAPITAL_DORIC_DOWN_VERTICAL_QUARTER = registerDoubleBlock(
+    public static final DeferredBlock<FramedCapitalQuarterVerticalConnecting> FRAMED_CAPITAL_DORIC_DOWN_VERTICAL_QUARTER = registerConnectingDoubleBlock(
             "framed_capital_doric_down_vertical_quarter", FramedCapitalQuarterVerticalConnecting.Bottom::new, FramedCapitalQuarterVerticalConnecting.Top::new,
-            CamoGetter.SECOND, FramedCapitalQuarterVerticalConnecting.Double::new);
+            CamoGetter.SECOND, ConnectingCapital.CAPITAL_DORIC_DOWN, FramedCapitalQuarterVerticalConnecting.Double::new);
+    static {
+        ConnectingCapital.bind(ConnectingCapital.CAPITAL_DORIC_DOWN,
+                FRAMED_CAPITAL_DORIC_DOWN,
+                FRAMED_CAPITAL_DORIC_DOWN_VERTICAL_CORNER,
+                FRAMED_CAPITAL_DORIC_DOWN_VERTICAL_SLAB,
+                FRAMED_CAPITAL_DORIC_DOWN_VERTICAL_QUARTER);
+    }
 
     public static final DeferredBlock<FramedCapital> FRAMED_CAPITAL_DORIC_UP = registerDoubleBlock(
             "framed_capital_doric_up", FramedCapital.DoricBottom::new, FramedCapital.DoricTop::new,
@@ -166,15 +176,22 @@ public class FramedConquestBlocks {
     public static final DeferredBlock<FramedPillar> FRAMED_CAPITAL_DORIC_UP_PILLAR = registerDoubleBlock(
             "framed_capital_doric_up_pillar", FramedPillar.Bottom::new, FramedPillar.Top::new,
             CamoGetter.FIRST, FramedPillar.Double::new);
-    public static final DeferredBlock<FramedCapitalSlabVerticalConnecting> FRAMED_CAPITAL_DORIC_UP_VERTICAL_SLAB = registerDoubleBlock(
+    public static final DeferredBlock<FramedCapitalSlabVerticalConnecting> FRAMED_CAPITAL_DORIC_UP_VERTICAL_SLAB = registerConnectingDoubleBlock(
             "framed_capital_doric_up_vertical_slab", FramedCapitalSlabVerticalConnecting.Bottom::new, FramedCapitalSlabVerticalConnecting.Top::new,
-            CamoGetter.FIRST, FramedCapitalSlabVerticalConnecting.Double::new);
+            CamoGetter.FIRST, ConnectingCapital.CAPITAL_DORIC_UP, FramedCapitalSlabVerticalConnecting.Double::new);
     public static final DeferredBlock<FramedCapitalCornerVertical> FRAMED_CAPITAL_DORIC_UP_VERTICAL_CORNER = registerDoubleBlock(
             "framed_capital_doric_up_vertical_corner", FramedCapitalCornerVertical.Bottom::new, FramedCapitalCornerVertical.Top::new,
             CamoGetter.FIRST, FramedCapitalCornerVertical.Double::new);
-    public static final DeferredBlock<FramedCapitalQuarterVerticalConnecting> FRAMED_CAPITAL_DORIC_UP_VERTICAL_QUARTER = registerDoubleBlock(
+    public static final DeferredBlock<FramedCapitalQuarterVerticalConnecting> FRAMED_CAPITAL_DORIC_UP_VERTICAL_QUARTER = registerConnectingDoubleBlock(
             "framed_capital_doric_up_vertical_quarter", FramedCapitalQuarterVerticalConnecting.Bottom::new, FramedCapitalQuarterVerticalConnecting.Top::new,
-            CamoGetter.FIRST, FramedCapitalQuarterVerticalConnecting.Double::new);
+            CamoGetter.FIRST, ConnectingCapital.CAPITAL_DORIC_UP, FramedCapitalQuarterVerticalConnecting.Double::new);
+    static {
+        ConnectingCapital.bind(ConnectingCapital.CAPITAL_DORIC_UP,
+                FRAMED_CAPITAL_DORIC_UP,
+                FRAMED_CAPITAL_DORIC_UP_VERTICAL_CORNER,
+                FRAMED_CAPITAL_DORIC_UP_VERTICAL_SLAB,
+                FRAMED_CAPITAL_DORIC_UP_VERTICAL_QUARTER);
+    }
 
     public static final DeferredBlock<FramedBalustrade> FRAMED_CAPITAL_IONIAN = registerBlock(
             "framed_capital_ionian", FramedBalustrade::new);
@@ -189,71 +206,106 @@ public class FramedConquestBlocks {
     public static final DeferredBlock<FramedCapitalQuarterVertical> FRAMED_CAPITAL_IONIAN_VERTICAL_QUARTER = registerBlock(
             "framed_capital_ionian_vertical_quarter", FramedCapitalQuarterVertical::new);
 
-    public static final DeferredBlock<FramedCapital> FRAMED_CAPITAL_CORINTHIAN = registerBlock(
-            "framed_capital_corinthian", FramedCapital.Connected::new);
+    public static final DeferredBlock<FramedCapital> FRAMED_CAPITAL_CORINTHIAN = registerConnectingBlock(
+            "framed_capital_corinthian", FramedCapital.Connected::new,
+            ConnectingCapital.CAPITAL_CORINTHIAN);
     public static final DeferredBlock<FramedWall> FRAMED_CAPITAL_CORINTHIAN_WALL = registerBlock(
             "framed_capital_corinthian_wall", FramedWall::new);
     public static final DeferredBlock<FramedPillar> FRAMED_CAPITAL_CORINTHIAN_PILLAR = registerBlock(
             "framed_capital_corinthian_pillar", () -> new FramedPillar("_2"));
-    public static final DeferredBlock<FramedCapitalSlabVerticalConnecting> FRAMED_CAPITAL_CORINTHIAN_VERTICAL_SLAB = registerBlock(
-            "framed_capital_corinthian_vertical_slab", FramedCapitalSlabVerticalConnecting::new);
+    public static final DeferredBlock<FramedCapitalSlabVerticalConnecting> FRAMED_CAPITAL_CORINTHIAN_VERTICAL_SLAB = registerConnectingBlock(
+            "framed_capital_corinthian_vertical_slab", FramedCapitalSlabVerticalConnecting::new,
+            ConnectingCapital.CAPITAL_CORINTHIAN);
     public static final DeferredBlock<FramedCapitalCornerVertical> FRAMED_CAPITAL_CORINTHIAN_VERTICAL_CORNER = registerBlock(
             "framed_capital_corinthian_vertical_corner", FramedCapitalCornerVertical::new);
-    public static final DeferredBlock<FramedCapitalQuarterVerticalConnecting> FRAMED_CAPITAL_CORINTHIAN_VERTICAL_QUARTER = registerBlock(
-            "framed_capital_corinthian_vertical_quarter", FramedCapitalQuarterVerticalConnecting::new);
+    public static final DeferredBlock<FramedCapitalQuarterVerticalConnecting> FRAMED_CAPITAL_CORINTHIAN_VERTICAL_QUARTER = registerConnectingBlock(
+            "framed_capital_corinthian_vertical_quarter", FramedCapitalQuarterVerticalConnecting::new,
+            ConnectingCapital.CAPITAL_CORINTHIAN);
+    static {
+        ConnectingCapital.bind(ConnectingCapital.CAPITAL_CORINTHIAN,
+                FRAMED_CAPITAL_CORINTHIAN,
+                FRAMED_CAPITAL_CORINTHIAN_VERTICAL_CORNER,
+                FRAMED_CAPITAL_CORINTHIAN_VERTICAL_SLAB,
+                FRAMED_CAPITAL_CORINTHIAN_VERTICAL_QUARTER);
+    }
 
-    public static final DeferredBlock<FramedCapital> FRAMED_CORNICE = registerBlock(
-            "framed_cornice", FramedCapital.Connected::new);
+    public static final DeferredBlock<FramedCapital> FRAMED_CORNICE = registerConnectingBlock(
+            "framed_cornice", FramedCapital.Connected::new,
+            ConnectingCapital.CORNICE);
     public static final DeferredBlock<FramedWall> FRAMED_CORNICE_WALL = registerBlock(
             "framed_cornice_wall", FramedWall::new);
     public static final DeferredBlock<FramedPillar> FRAMED_CORNICE_PILLAR = registerBlock(
             "framed_cornice_pillar", () -> new FramedPillar("_2"));
-    public static final DeferredBlock<FramedCapitalSlabVerticalConnecting> FRAMED_CORNICE_VERTICAL_SLAB = registerBlock(
-            "framed_cornice_vertical_slab", FramedCapitalSlabVerticalConnecting::new);
+    public static final DeferredBlock<FramedCapitalSlabVerticalConnecting> FRAMED_CORNICE_VERTICAL_SLAB = registerConnectingBlock(
+            "framed_cornice_vertical_slab", FramedCapitalSlabVerticalConnecting::new,
+            ConnectingCapital.CORNICE);
     public static final DeferredBlock<FramedCapitalCornerVertical> FRAMED_CORNICE_VERTICAL_CORNER = registerBlock(
             "framed_cornice_vertical_corner", FramedCapitalCornerVertical::new);
-    public static final DeferredBlock<FramedCapitalQuarterVerticalConnecting> FRAMED_CORNICE_VERTICAL_QUARTER = registerBlock(
-            "framed_cornice_vertical_quarter", FramedCapitalQuarterVerticalConnecting::new);
+    public static final DeferredBlock<FramedCapitalQuarterVerticalConnecting> FRAMED_CORNICE_VERTICAL_QUARTER = registerConnectingBlock(
+            "framed_cornice_vertical_quarter", FramedCapitalQuarterVerticalConnecting::new,
+            ConnectingCapital.CORNICE);
+    static {
+        ConnectingCapital.bind(ConnectingCapital.CORNICE,
+                FRAMED_CORNICE,
+                FRAMED_CORNICE_VERTICAL_CORNER,
+                FRAMED_CORNICE_VERTICAL_SLAB,
+                FRAMED_CORNICE_VERTICAL_QUARTER);
+    }
 
-    public static final DeferredBlock<FramedCapital> FRAMED_PLINTH = registerBlock(
-            "framed_plinth", FramedCapital.Connected::new);
+    public static final DeferredBlock<FramedCapital> FRAMED_PLINTH = registerConnectingBlock(
+            "framed_plinth", FramedCapital.Connected::new,
+            ConnectingCapital.PLINTH);
     public static final DeferredBlock<FramedWall> FRAMED_PLINTH_WALL = registerBlock(
             "framed_plinth_wall", FramedWall::new);
-    public static final DeferredBlock<FramedCapital> FRAMED_PLINTH_SLAB_BOTTOM = registerBlock(
-            "framed_plinth_slab_bottom", FramedCapital.ConnectedSlab::new);
-    public static final DeferredBlock<FramedCapital> FRAMED_PLINTH_SLAB_TOP = registerBlock(
-            "framed_plinth_slab_top", FramedCapital.ConnectedSlab::new);
+    public static final DeferredBlock<FramedCapital> FRAMED_PLINTH_SLAB_BOTTOM = registerConnectingBlock(
+            "framed_plinth_slab_bottom", FramedCapital.ConnectedSlab::new,
+            ConnectingCapital.PLINTH);
+    public static final DeferredBlock<FramedCapital> FRAMED_PLINTH_SLAB_TOP = registerConnectingBlock(
+            "framed_plinth_slab_top", FramedCapital.ConnectedSlab::new,
+            ConnectingCapital.PLINTH);
     public static final DeferredBlock<FramedStairs> FRAMED_PLINTH_STAIRS = registerBlock(
             "framed_plinth_stairs", FramedStairs.Plinth::new);
     public static final DeferredBlock<FramedPillar> FRAMED_PLINTH_PILLAR = registerBlock(
             "framed_plinth_pillar", () -> new FramedPillar("_2"));
-    public static final DeferredBlock<FramedCapitalSlabVerticalConnecting> FRAMED_PLINTH_VERTICAL_SLAB = registerBlock(
-            "framed_plinth_vertical_slab", FramedCapitalSlabVerticalConnecting::new);
+    public static final DeferredBlock<FramedCapitalSlabVerticalConnecting> FRAMED_PLINTH_VERTICAL_SLAB = registerConnectingBlock(
+            "framed_plinth_vertical_slab", FramedCapitalSlabVerticalConnecting::new,
+            ConnectingCapital.PLINTH);
     public static final DeferredBlock<FramedCapitalCornerVertical> FRAMED_PLINTH_VERTICAL_CORNER = registerBlock(
             "framed_plinth_vertical_corner", FramedCapitalCornerVertical::new);
-    public static final DeferredBlock<FramedCapitalQuarterVerticalConnecting> FRAMED_PLINTH_VERTICAL_QUARTER = registerBlock(
-            "framed_plinth_vertical_quarter", FramedCapitalQuarterVerticalConnecting::new);
+    public static final DeferredBlock<FramedCapitalQuarterVerticalConnecting> FRAMED_PLINTH_VERTICAL_QUARTER = registerConnectingBlock(
+            "framed_plinth_vertical_quarter", FramedCapitalQuarterVerticalConnecting::new,
+            ConnectingCapital.PLINTH);
+    static {
+        ConnectingCapital.bind(ConnectingCapital.PLINTH,
+                FRAMED_PLINTH,
+                FRAMED_PLINTH_VERTICAL_CORNER,
+                FRAMED_PLINTH_VERTICAL_SLAB,
+                FRAMED_PLINTH_VERTICAL_QUARTER);
+    }
 
     /**
-     * Registers framed block, its double variant and its item.
+     * Registers framed connecting double block and its item.
      * @param name        block id
-     * @param block       block supplier
      * @param blockBottom block bottom supplier
      * @param blockTop    block top supplier
+     * @param camoGetter  double block camo resolver
      * @param blockDouble double block supplier
      * @return registered block
      * @param <T> block type
      */
-    private static <T extends Block> DeferredBlock<T> registerBlockWithDouble(String name, Supplier<T> block,
-                                                                              Supplier<T> blockBottom,
-                                                                              Supplier<T> blockTop,
-                                                                              BiFunction<T, T, T> blockDouble) {
-        // Register base block
-        DeferredBlock<T> reg = registerBlock(name, block);
-        // Register double block
-        DeferredBlock<T> regDouble = registerDoubleBlock(name, blockBottom, blockTop, blockDouble);
-        // Return registered block
-        return reg;
+    private static <T extends Block, C extends CamoGetter, F extends ConnectingCapital>
+    DeferredBlock<T> registerConnectingDoubleBlock(String name,
+                                                   Function<F, T> blockBottom,
+                                                   Function<F, T> blockTop,
+                                                   C camoGetter,
+                                                   F blockFamily,
+                                                   Function4<T, T, C, F, T> blockDouble) {
+        // Register double block parts
+        DeferredBlock<T> regBottom = BLOCKS.register(name + "_bottom", () -> blockBottom.apply(blockFamily));
+        DeferredBlock<T> regTop = BLOCKS.register(name + "_top", () -> blockTop.apply(blockFamily));
+        // Register and return double block
+        return registerBlock(name + "_double",
+                () -> blockDouble.apply(regBottom.get(), regTop.get(), camoGetter, blockFamily));
     }
 
     /**
@@ -280,6 +332,28 @@ public class FramedConquestBlocks {
     }
 
     /**
+     * Registers framed block, its double variant and their items.
+     * @param name        block id
+     * @param block       block supplier
+     * @param blockBottom block bottom supplier
+     * @param blockTop    block top supplier
+     * @param blockDouble double block supplier
+     * @return registered block
+     * @param <T> block type
+     */
+    private static <T extends Block> DeferredBlock<T> registerBlockWithDouble(String name, Supplier<T> block,
+                                                                              Supplier<T> blockBottom,
+                                                                              Supplier<T> blockTop,
+                                                                              BiFunction<T, T, T> blockDouble) {
+        // Register base block
+        DeferredBlock<T> reg = registerBlock(name, block);
+        // Register double block
+        DeferredBlock<T> regDouble = registerDoubleBlock(name, blockBottom, blockTop, blockDouble);
+        // Return registered block
+        return reg;
+    }
+
+    /**
      * Registers framed double block and its item.
      * @param name        block id
      * @param blockBottom block bottom supplier
@@ -300,6 +374,21 @@ public class FramedConquestBlocks {
     }
 
     /**
+     * Registers connecting block and its item.
+     * @param name  block id
+     * @param block block supplier
+     * @return registered block
+     * @param <T> block type
+     */
+    private static <T extends Block, F extends ConnectingCapital>
+    DeferredBlock<T> registerConnectingBlock(String name, Function<F, T> block, F blockFamily) {
+        DeferredBlock<T> reg = BLOCKS.register(name, () -> block.apply(blockFamily));
+        // Default block item
+        FramedConquestItems.ITEMS.register(name, () -> new BlockItem(reg.get(), new Item.Properties()));
+        return reg;
+    }
+
+    /**
      * Registers block and its item.
      * @param name  block id
      * @param block block supplier
@@ -314,7 +403,7 @@ public class FramedConquestBlocks {
     }
 
     /**
-     * Registers block and its item.
+     * Registers framed layered block and its item.
      * @param name  block id
      * @param block block supplier
      * @return registered block
