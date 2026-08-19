@@ -7,6 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
@@ -107,7 +108,7 @@ public class FramedStairs extends CustomFramedBlock {
     }
 
     /**
-     * @return empty shape.
+     * @return empty shape
      */
     @Override
     public VoxelShape getOcclusionShape(BlockState state, BlockGetter world, BlockPos pos) {
@@ -125,6 +126,18 @@ public class FramedStairs extends CustomFramedBlock {
                 .withStairsShape()
                 .withWater()
                 .build();
+    }
+
+    /**
+     * @return new block state after the neighbor was updated.
+     */
+    @Override
+    public BlockState updateShape(BlockState state, Direction dir, BlockState neighborState,
+                                  LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
+        // Base block state
+        BlockState base = super.updateShape(state, dir, neighborState, level, pos, neighborPos);
+        // Update stair shape
+        return base.setValue(SHAPE, CustomPlacementStateBuilder.getStairsShape(base, level, pos));
     }
 
     /**

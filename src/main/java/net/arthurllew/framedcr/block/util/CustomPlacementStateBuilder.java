@@ -255,7 +255,7 @@ public class CustomPlacementStateBuilder<T extends CustomPlacementStateBuilder<T
     /**
      * @return stairs shape.
      */
-    private static StairsShape getStairsShape(BlockState state, BlockGetter level, BlockPos pos) {
+    public static StairsShape getStairsShape(BlockState state, BlockGetter level, BlockPos pos) {
         Direction direction = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
         BlockState blockstate = level.getBlockState(pos.relative(direction));
         if (isFramedStairs(blockstate)
