@@ -5,9 +5,6 @@ import com.mojang.datafixers.util.Function4;
 import net.arthurllew.framedcr.FramedConquest;
 import net.arthurllew.framedcr.block.*;
 import net.arthurllew.framedcr.block.family.ConnectingCapital;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import xfacthd.framedblocks.common.data.doubleblock.CamoGetter;
@@ -23,9 +20,9 @@ public class FramedConquestBlocks {
      */
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(FramedConquest.MODID);
 
-    public static final DeferredBlock<FramedPillar> FRAMED_PILLAR = registerLayeredBlock(
+    public static final DeferredBlock<FramedPillar> FRAMED_PILLAR = registerBlock(
             "framed_pillar", () -> new FramedPillar("_1"));
-    public static final DeferredBlock<FramedPillarSocket> FRAMED_PILLAR_SOCKET = registerLayeredBlock(
+    public static final DeferredBlock<FramedPillarSocket> FRAMED_PILLAR_SOCKET = registerBlock(
             "framed_pillar_socket", FramedPillarSocket::new);
     public static final DeferredBlock<FramedBalustrade> FRAMED_BALUSTRADE = registerBlock(
             "framed_balustrade", FramedBalustrade::new);
@@ -56,11 +53,11 @@ public class FramedConquestBlocks {
     public static final DeferredBlock<FramedSmallWindowHalf> FRAMED_SMALL_WINDOW_HALF = registerBlock(
             "framed_small_window_half", FramedSmallWindowHalf::new);
 
-    public static final DeferredBlock<FramedCornerVertical> FRAMED_CORNER_VERTICAL = registerLayeredBlock(
+    public static final DeferredBlock<FramedCornerVertical> FRAMED_CORNER_VERTICAL = registerBlock(
             "framed_corner_vertical", FramedCornerVertical::new);
-    public static final DeferredBlock<FramedQuarterHorizontal> FRAMED_QUARTER_HORIZONTAL = registerLayeredBlock(
+    public static final DeferredBlock<FramedQuarterHorizontal> FRAMED_QUARTER_HORIZONTAL = registerBlock(
             "framed_quarter_horizontal", FramedQuarterHorizontal::new);
-    public static final DeferredBlock<FramedQuarterVertical> FRAMED_QUARTER_VERTICAL = registerLayeredBlock(
+    public static final DeferredBlock<FramedQuarterVertical> FRAMED_QUARTER_VERTICAL = registerBlock(
             "framed_quarter_vertical", FramedQuarterVertical::new);
 
     public static final DeferredBlock<FramedArch> FRAMED_GOTHIC_ARCH = registerBlock(
@@ -293,7 +290,7 @@ public class FramedConquestBlocks {
      * @return registered block
      * @param <T> block type
      */
-    private static <T extends Block, C extends CamoGetter, F extends ConnectingCapital>
+    private static <T extends CustomFramedBlock, C extends CamoGetter, F extends ConnectingCapital>
     DeferredBlock<T> registerConnectingDoubleBlock(String name,
                                                    Function<F, T> blockBottom,
                                                    Function<F, T> blockTop,
@@ -318,7 +315,7 @@ public class FramedConquestBlocks {
      * @return registered block
      * @param <T> block type
      */
-    private static <T extends Block, C extends CamoGetter>
+    private static <T extends CustomFramedBlock, C extends CamoGetter>
     DeferredBlock<T> registerDoubleBlock(String name,
                                          Supplier<T> blockBottom,
                                          Supplier<T> blockTop,
@@ -341,10 +338,12 @@ public class FramedConquestBlocks {
      * @return registered block
      * @param <T> block type
      */
-    private static <T extends Block> DeferredBlock<T> registerBlockWithDouble(String name, Supplier<T> block,
-                                                                              Supplier<T> blockBottom,
-                                                                              Supplier<T> blockTop,
-                                                                              BiFunction<T, T, T> blockDouble) {
+    private static <T extends CustomFramedBlock>
+    DeferredBlock<T> registerBlockWithDouble(String name,
+                                             Supplier<T> block,
+                                             Supplier<T> blockBottom,
+                                             Supplier<T> blockTop,
+                                             BiFunction<T, T, T> blockDouble) {
         // Register base block
         DeferredBlock<T> reg = registerBlock(name, block);
         // Register double block
@@ -362,10 +361,11 @@ public class FramedConquestBlocks {
      * @return registered block
      * @param <T> block type
      */
-    private static <T extends Block> DeferredBlock<T> registerDoubleBlock(String name,
-                                                                          Supplier<T> blockBottom,
-                                                                          Supplier<T> blockTop,
-                                                                          BiFunction<T, T, T> blockDouble) {
+    private static <T extends CustomFramedBlock>
+    DeferredBlock<T> registerDoubleBlock(String name,
+                                         Supplier<T> blockBottom,
+                                         Supplier<T> blockTop,
+                                         BiFunction<T, T, T> blockDouble) {
         // Register double block parts
         DeferredBlock<T> regBottom = BLOCKS.register(name + "_bottom", blockBottom);
         DeferredBlock<T> regTop = BLOCKS.register(name + "_top", blockTop);
@@ -380,11 +380,11 @@ public class FramedConquestBlocks {
      * @return registered block
      * @param <T> block type
      */
-    private static <T extends Block, F extends ConnectingCapital>
+    private static <T extends CustomFramedBlock, F extends ConnectingCapital>
     DeferredBlock<T> registerConnectingBlock(String name, Function<F, T> block, F blockFamily) {
         DeferredBlock<T> reg = BLOCKS.register(name, () -> block.apply(blockFamily));
-        // Default block item
-        FramedConquestItems.ITEMS.register(name, () -> new BlockItem(reg.get(), new Item.Properties()));
+        // Get block item from the supplier inside class
+        FramedConquestItems.ITEMS.register(name, () -> reg.get().createBlockItem());
         return reg;
     }
 
@@ -395,24 +395,11 @@ public class FramedConquestBlocks {
      * @return registered block
      * @param <T> block type
      */
-    private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block) {
+    private static <T extends CustomFramedBlock>
+    DeferredBlock<T> registerBlock(String name, Supplier<T> block) {
         DeferredBlock<T> reg = BLOCKS.register(name, block);
-        // Default block item
-        FramedConquestItems.ITEMS.register(name, () -> new BlockItem(reg.get(), new Item.Properties()));
+        // Get block item from the supplier inside class
+        FramedConquestItems.ITEMS.register(name, () -> reg.get().createBlockItem());
         return reg;
-    }
-
-    /**
-     * Registers framed layered block and its item.
-     * @param name  block id
-     * @param block block supplier
-     * @return registered block
-     * @param <T> block child
-     */
-    private static <T extends CustomFramedBlock> DeferredBlock<T> registerLayeredBlock(String name, Supplier<T> block) {
-        DeferredBlock<T> regBlock = BLOCKS.register(name, block);
-        // Block item is created in block class
-        FramedConquestItems.ITEMS.register(name, () -> regBlock.get().createBlockItem());
-        return regBlock;
     }
 }
