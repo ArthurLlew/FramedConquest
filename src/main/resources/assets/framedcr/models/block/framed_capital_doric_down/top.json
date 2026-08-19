@@ -68,16 +68,6 @@
 					],
 					"texture": "#all",
 					"cullface": "up"
-				},
-				"down": {
-					"uv": [
-						0,
-						0,
-						16,
-						16
-					],
-					"texture": "#all",
-					"cullface": "down"
 				}
 			}
 		}

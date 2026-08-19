@@ -71,7 +71,7 @@
 						4,
 						12
 					],
-					"texture": "#top"
+					"texture": "#bottom"
 				}
 			}
 		},
@@ -1829,7 +1829,7 @@
 						16,
 						16
 					],
-					"texture": "#top"
+					"texture": "#bottom"
 				}
 			}
 		},

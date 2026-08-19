@@ -63,7 +63,7 @@
 						16,
 						16
 					],
-					"texture": "#bottom"
+					"texture": "#top"
 				},
 				"down": {
 					"uv": [
@@ -1256,7 +1256,7 @@
 						4,
 						16
 					],
-					"texture": "#bottom"
+					"texture": "#top"
 				},
 				"down": {
 					"uv": [

@@ -27,15 +27,6 @@
 					],
 					"texture": "#all"
 				},
-				"up": {
-					"uv": [
-						4,
-						0,
-						12,
-						16
-					],
-					"texture": "#all"
-				},
 				"north": {
 					"uv": [
 						4,

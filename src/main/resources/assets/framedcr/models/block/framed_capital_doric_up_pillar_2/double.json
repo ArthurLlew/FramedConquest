@@ -73,7 +73,7 @@
 						10,
 						10
 					],
-					"texture": "#bottom",
+					"texture": "#top",
 					"cullface": "up"
 				},
 				"down": {

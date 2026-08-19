@@ -74,16 +74,6 @@
 					],
 					"texture": "#all",
 					"cullface": "up"
-				},
-				"down": {
-					"uv": [
-						2,
-						2,
-						14,
-						14
-					],
-					"texture": "#all",
-					"cullface": "down"
 				}
 			}
 		}

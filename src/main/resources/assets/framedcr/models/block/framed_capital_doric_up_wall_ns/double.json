@@ -308,7 +308,7 @@
 						12,
 						16
 					],
-					"texture": "#bottom"
+					"texture": "#top"
 				},
 				"north": {
 					"uv": [

@@ -9,6 +9,39 @@
 	},
 	"elements": [
 		{
+			"from": [
+				2,
+				0,
+				2
+			],
+			"to": [
+				14,
+				16,
+				14
+			],
+			"rotation": {
+				"angle": 0,
+				"axis": "y",
+				"origin": [
+					6,
+					8,
+					10
+				]
+			},
+			"faces": {
+				"down": {
+					"uv": [
+						2,
+						2,
+						14,
+						14
+					],
+					"texture": "#all",
+					"cullface": "down"
+				}
+			}
+		},
+		{
 			"name": "Box2",
 			"from": [
 				1.5,

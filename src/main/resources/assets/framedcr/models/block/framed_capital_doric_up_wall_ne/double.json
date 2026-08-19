@@ -263,7 +263,7 @@
 						12,
 						12
 					],
-					"texture": "#bottom"
+					"texture": "#top"
 				},
 				"north": {
 					"uv": [
@@ -559,7 +559,7 @@
 						16,
 						12
 					],
-					"texture": "#bottom"
+					"texture": "#top"
 				},
 				"north": {
 					"uv": [
